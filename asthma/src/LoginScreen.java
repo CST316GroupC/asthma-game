@@ -1,35 +1,71 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 
 public class LoginScreen extends Screen
 {
-
+	String username;
+	char[] password;
+	
+	String testUser = "test";
+	char[] testPass = {'p','a','s','s'};
+	
+	int butPressed = 0; //0 is none, 1 is login
+	
+	JTextField txtf1;
+	JPasswordField txtf2;
+	JPanel pnl;
+	
 	public LoginScreen(Runner run) {
 		super(run);
 		run.frame.setTitle("Login");
 		run.frame.setSize(run.SCR_WIDTH, run.SCR_HEIGHT);
 		run.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel pnl = new JPanel();
+		pnl = new JPanel();
 		
-		JButton login = new JButton();
-		login.setSize(50, 50);
-		login.setLocation(250, 250);
+		JLabel lbl1 = new JLabel("Username");
+		lbl1.setSize(100, 20);
+		lbl1.setLocation(200, 200);
+		
+		JLabel lbl2 = new JLabel("Password");
+		lbl2.setSize(100, 20);
+		lbl2.setLocation(200, 240);
+		
+		txtf1 = new JTextField();
+		txtf1.setSize(100, 20);
+		txtf1.setLocation(200, 220);
+		
+		
+		txtf2 = new JPasswordField();
+		txtf2.setSize(100, 20);
+		txtf2.setLocation(200, 260);
+		
+		JButton login = new JButton("Login");
+		login.setSize(75, 20);
+		login.setLocation(225, 280);
 		
 		login.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				isClosing = true;				
+				butPressed = 1;				
 			}
 		});
 		
+		pnl.add(lbl1);
+		pnl.add(lbl2);
+		pnl.add(txtf1);
+		pnl.add(txtf2);
 		pnl.add(login);
 		pnl.setLayout(null);		
 		run.frame.setContentPane(pnl);
@@ -39,10 +75,27 @@ public class LoginScreen extends Screen
 	@Override
 	public void update(float deltaTime)
 	{
-		if(isClosing)
+		if(butPressed == 1)
 		{
-			run.setScreen(new TutorialScreen(run));
+			username = txtf1.getText();
+			password = txtf2.getPassword();
+
+			if(username.equals(testUser) && Arrays.equals(password, testPass))
+			{
+				run.setScreen(new TutorialScreen(run));
+			}
+			else
+			{
+				JLabel err = new JLabel("Incorrect User/Password");
+				err.setSize(150, 20);
+				err.setLocation(200, 180);
+				pnl.add(err);
+				run.frame.repaint();
+			}
+			
 		}
+		
+		butPressed = 0;
 	}
 
 	@Override
