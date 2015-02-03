@@ -13,11 +13,13 @@ import javax.swing.JTextField;
 
 public class LoginScreen extends Screen
 {
+	//this for testing purposes
+	String[] testUser = {"test" , "doctor"};
+	char[] testPass = {'p','a','s','s'};
+	//testing stuff done
+	
 	String username;
 	char[] password;
-	
-	String testUser = "test";
-	char[] testPass = {'p','a','s','s'};
 	
 	int butPressed = 0; //0 is none, 1 is login
 	
@@ -79,11 +81,16 @@ public class LoginScreen extends Screen
 		{
 			username = txtf1.getText();
 			password = txtf2.getPassword();
-
-			if(username.equals(testUser) && Arrays.equals(password, testPass))
+//testing
+			if(username.equals(testUser[0]) && Arrays.equals(password, testPass))
 			{
 				run.setScreen(new TutorialScreen(run));
 			}
+			if(username.equals(testUser[1]) && Arrays.equals(password, testPass))
+			{
+				run.setScreen(new DoctorScreen(run));
+			}
+			//testing ends
 			else
 			{
 				JLabel err = new JLabel("Incorrect User/Password");
@@ -92,10 +99,9 @@ public class LoginScreen extends Screen
 				pnl.add(err);
 				run.frame.repaint();
 			}
-			
+					
+			butPressed = 0;
 		}
-		
-		butPressed = 0;
 	}
 
 	@Override

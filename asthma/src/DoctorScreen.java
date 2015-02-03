@@ -1,36 +1,41 @@
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class TutorialScreen extends Screen
+public class DoctorScreen extends Screen
 {
 
-	JButton logi;
+	JButton addPatient;
+	ArrayList<Patient> patients;
 	JLabel lbl;
 	JPanel pnl;
-	public TutorialScreen(Runner run) {
+	
+	int butPressed = 0; //0 is none, 1 is add patient
+	
+	public DoctorScreen(Runner run) 
+	{
 		super(run);
-		run.frame.setTitle("Tutorial");
+		run.frame.setTitle("Doctor");
 		pnl = new JPanel();
 		
-		logi = new JButton();
-		logi.setSize(50, 50);
-		logi.setLocation(250, 50);
+		addPatient = new JButton("Add Patient");
+		addPatient.setSize(150, 50);
+		addPatient.setLocation(250, 50);
 		
-		logi.addActionListener(new ActionListener()
+		addPatient.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				isClosing = true;				
+				butPressed = 1;				
 			}
 		});
 		
-		pnl.add(logi);
+		pnl.add(addPatient);
 		pnl.setLayout(null);		
 		run.frame.setContentPane(pnl);
 		run.frame.setVisible(true);
@@ -39,15 +44,9 @@ public class TutorialScreen extends Screen
 	@Override
 	public void update(float deltaTime)
 	{
-		if(isClosing)
+		if(butPressed == 1)
 		{
-			pnl.remove(logi);
-			lbl = new JLabel("hello");
-			lbl.setSize(50, 50);
-			lbl.setLocation(250, 50);
-			pnl.add(lbl);
-			
-			run.frame.repaint();
+			run.setScreen(new AccountCreationScreen(run));
 		}
 	}
 
@@ -70,8 +69,9 @@ public class TutorialScreen extends Screen
 	}
 
 	@Override
-	public void dispose() 
-	{
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
