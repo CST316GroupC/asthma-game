@@ -138,12 +138,12 @@ public class LoginScreen extends Screen
 		{
 			//Use variable type at the top to switch between doctor login and patient login
 			//Doctors
-			if(type = 0)
+			if(type == 0)
 			{
 				run.setScreen(new DoctorScreen(run));
 			}
 			//Patients
-			if(type = 1)
+			if(type == 1)
 			{
 				run.setScreen(new TutorialScreen(run));
 			}
