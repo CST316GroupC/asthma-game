@@ -20,14 +20,15 @@ public class LoginScreen extends Screen
 	private String testUser = "test";
 	private char[] testPass = {'p','a','s','s'};
 	
-	private int loginButtonPressed = 0; //0 is none, 1 is login
-	
-	private JTextField userNameTF;
-	private JPasswordField passwordTF;
-	private JPanel loginPanel;
+	//Display Elements
+	JPanel loginPanel;
+	JTextField userNameTF;
+	JPasswordField passwordTF;
+	JLabel loginErrorMessage = new JLabel("Incorrect Username/Password");
 	
 	public LoginScreen(Runner run) 
 	{
+		//Basic Frame Settings
 		super(run);
 		run.frame.setTitle("Login");
 		run.frame.setSize(run.SCR_WIDTH, run.SCR_HEIGHT);
@@ -35,6 +36,7 @@ public class LoginScreen extends Screen
 		
 		loginPanel = new JPanel();
 		
+		//Set up display properties for elements
 		JLabel userNameLabel = new JLabel("Username");
 		userNameLabel.setSize(100, 20);
 		userNameLabel.setLocation(200, 200);
@@ -47,7 +49,6 @@ public class LoginScreen extends Screen
 		userNameTF.setSize(100, 20);
 		userNameTF.setLocation(200, 220);
 		
-		
 		passwordTF = new JPasswordField();
 		passwordTF.setSize(100, 20);
 		passwordTF.setLocation(200, 260);
@@ -56,17 +57,17 @@ public class LoginScreen extends Screen
 		loginButton.setSize(75, 20);
 		loginButton.setLocation(225, 280);
 		
+		//Test if Login Button is pushed
 		loginButton.addActionListener(new ActionListener()
 		{
-			
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				checkLogin();
-				//loginButtonPressed = 1;				
+				checkLogin();			
 			}
 		});
 		
+		//add things to the panel
 		loginPanel.add(userNameLabel);
 		loginPanel.add(passwordLabel);
 		loginPanel.add(userNameTF);
@@ -80,7 +81,7 @@ public class LoginScreen extends Screen
 	@Override
 	public void update(float deltaTime)
 	{
-		//checkLogin();
+		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -116,7 +117,6 @@ public class LoginScreen extends Screen
 		}
 		else
 		{
-			JLabel loginErrorMessage = new JLabel("Incorrect Username/Password");
 			loginErrorMessage.setSize(150, 20);
 			loginErrorMessage.setLocation(200, 180);
 			loginPanel.add(loginErrorMessage);
