@@ -23,7 +23,7 @@ public class LoginScreen extends Screen
 	//Variables
 	String testUser = "test";
 	char[] testPass = {'p','a','s','s'};
-	int type = 0;
+	int type = 1;
 	boolean loginErrorDrawn = false;
 	
 	//Display Elements
