@@ -44,11 +44,30 @@ public class AccountCreationScreen extends Screen
 		lname.setSize(100, 20);
 		lname.setLocation(125, 82);
 		
+		lblage = new JLabel("Age");
+		lblage.setSize(100, 20);
+		lblage.setLocation(50, 110);
+		
+		age = new JTextField();
+		age.setSize(100, 20);
+		age.setLocation(125, 112);
+		
+		lblcinfo = new JLabel("Contact Info");
+		lblcinfo.setSize(100, 20);
+		lblcinfo.setLocation(50, 140);
+		
+		cinfo = new JTextArea();
+		cinfo.setSize(100, 100);
+		cinfo.setLocation(125, 142);
+		
 		pnl.add(lblfname);
 		pnl.add(lbllname);
-		
+		pnl.add(lblage);
+		pnl.add(lblcinfo);
 		pnl.add(fname);
 		pnl.add(lname);
+		pnl.add(age);
+		pnl.add(cinfo);
 		
 		pnl.setLayout(null);		
 		run.frame.setContentPane(pnl);

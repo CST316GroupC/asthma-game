@@ -2,10 +2,12 @@
  * LoginScreen.java
  * displays and runs elements for the login screen
  */
-import java.awt.BorderLayout;
-import java.awt.Container;
+
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.Arrays;
 
 import javax.swing.BorderFactory;
@@ -23,8 +25,11 @@ public class LoginScreen extends Screen
 	//Variables
 	String testUser = "test";
 	char[] testPass = {'p','a','s','s'};
-	int type = 1;
+	int type = 0;
 	boolean loginErrorDrawn = false;
+	boolean redraw = false;
+	double wratio = 1.0;
+	double hratio = 1.0;
 	
 	//Display Elements
 	JPanel loginPanel;
@@ -37,6 +42,16 @@ public class LoginScreen extends Screen
 	public LoginScreen(Runner run) 
 	{
 		super(run);
+		
+		//resize stuff
+		run.frame.addComponentListener(new ComponentAdapter()
+		{
+			public void componentResized(ComponentEvent e)
+			{
+				redraw = true;
+			}
+		});
+		
 		// Set layout manager
 				
 		//Basic Frame Settings
@@ -69,8 +84,9 @@ public class LoginScreen extends Screen
 		
 		//Radio
 		saveLoginRadio = new JRadioButton("Remember Password");
-		saveLoginRadio.setSize(200,20);
+		saveLoginRadio.setSize((int)(200 * wratio), (int)(20 * hratio));
 		saveLoginRadio.setLocation(200, 280);
+		
 		
 		//Login Button
 		JButton loginButton = new JButton("Login");
@@ -103,14 +119,26 @@ public class LoginScreen extends Screen
 	public void update(float deltaTime)
 	{
 
-		// TODO Auto-generated method stub
-
+		if(redraw)
+		{
+			wratio = (double)run.frame.getWidth() / run.SCR_WIDTH;
+			hratio = (double)run.frame.getHeight() / run.SCR_HEIGHT;
+			
+			//Radio
+			saveLoginRadio.setSize((int)(200 * wratio), (int)(20 * hratio));	
+			saveLoginRadio.setFont(new Font(saveLoginRadio.getFont().getFontName(), saveLoginRadio.getFont().getStyle(), saveLoginRadio.getFont().getSize() + 1));
+			saveLoginRadio.setLocation(200, 280);
+			
+			run.frame.repaint();
+			redraw = false;
+		}
 	}
 
 	@Override
 	public void present(float deltaTime) 
 	{
-		// TODO Auto-generated method stub
+		
+		
 	}
 
 	@Override
