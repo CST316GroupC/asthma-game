@@ -1,6 +1,7 @@
 import javax.swing.JFrame;
 
 import org.newdawn.slick.openal.Audio;
+import org.newdawn.slick.openal.SoundStore;
 
 
 public class Runner 
@@ -8,6 +9,7 @@ public class Runner
 	JFrame frame;
 	Screen screen;
 	long startTime = System.nanoTime();
+	AudioPlayer player;
 	
 	public final int SCR_WIDTH = 500;
 	public final int SCR_HEIGHT = 500;
@@ -17,11 +19,14 @@ public class Runner
 	public Runner()
 	{
 		frame = new JFrame();
+		player = new AudioPlayer();
 		screen = new LoginScreen(this);
+		
 	}
 	
 	public void run()
 	{
+		SoundStore.get().poll(0);
 		float deltaTime = (System.nanoTime()-startTime) / 1000000000.0f;
 		startTime = System.nanoTime();
 		screen.update(deltaTime);

@@ -20,6 +20,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 
+
 public class LoginScreen extends Screen
 {
 	//Variables
@@ -113,21 +114,24 @@ public class LoginScreen extends Screen
 		loginPanel.setLayout(null);
 		run.frame.setContentPane(loginPanel);
 		run.frame.setVisible(true);
+		
+		//music stuff
+		run.player.loadSong("AMemoryAway.ogg");
+		run.player.playMusic(true);
 	}
 
 	@Override
 	public void update(float deltaTime)
 	{
-
 		if(redraw)
 		{
 			wratio = (double)run.frame.getWidth() / run.SCR_WIDTH;
 			hratio = (double)run.frame.getHeight() / run.SCR_HEIGHT;
-			
+			 
 			//Radio
 			saveLoginRadio.setSize((int)(200 * wratio), (int)(20 * hratio));	
 			saveLoginRadio.setFont(new Font(saveLoginRadio.getFont().getFontName(), saveLoginRadio.getFont().getStyle(), saveLoginRadio.getFont().getSize() + 1));
-			saveLoginRadio.setLocation(200, 280);
+			saveLoginRadio.setLocation((int)(200 *wratio), (int)(280*hratio));
 			
 			run.frame.repaint();
 			redraw = false;
@@ -162,6 +166,8 @@ public class LoginScreen extends Screen
 	//Private Methods
 	public void checkLogin()
 	{
+
+		//JOptionPane.showMessageDialog(run.frame, "Click");
 		if(userNameTF.getText().equals(testUser) && Arrays.equals(passwordTF.getPassword(), testPass))
 		{
 			//Use variable type at the top to switch between doctor login and patient login
