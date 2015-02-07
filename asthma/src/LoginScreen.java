@@ -3,6 +3,7 @@
  * displays and runs elements for the login screen
  */
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +32,7 @@ public class LoginScreen extends Screen
 	boolean redraw = false;
 	double wratio = 1.0;
 	double hratio = 1.0;
+	Resize resize = new Resize(run);
 	
 	//Display Elements
 	JPanel loginPanel;
@@ -38,7 +40,8 @@ public class LoginScreen extends Screen
 	JPasswordField passwordTF;
 	JLabel loginErrorMessage = new JLabel("Incorrect Username/Password");
 	JRadioButton saveLoginRadio;
-
+	JButton loginButton = new JButton("Login");
+	JPanel box = new JPanel();
 	
 	public LoginScreen(Runner run) 
 	{
@@ -54,6 +57,9 @@ public class LoginScreen extends Screen
 		});
 		
 		// Set layout manager
+		//Test Box
+		box.setBackground(Color.GREEN);
+		box.setBounds(0, 0, 500, 500);
 				
 		//Basic Frame Settings
 		run.frame.setTitle("Login");
@@ -87,10 +93,10 @@ public class LoginScreen extends Screen
 		saveLoginRadio = new JRadioButton("Remember Password");
 		saveLoginRadio.setSize((int)(200 * wratio), (int)(20 * hratio));
 		saveLoginRadio.setLocation(200, 280);
-		
+		saveLoginRadio.setBackground(Color.GREEN);
 		
 		//Login Button
-		JButton loginButton = new JButton("Login");
+		//JButton loginButton = new JButton("Login");
 		loginButton.setSize(100, 20);
 		loginButton.setLocation(200, 300);
 		
@@ -111,27 +117,34 @@ public class LoginScreen extends Screen
 		loginPanel.add(passwordTF);
 		loginPanel.add(saveLoginRadio);
 		loginPanel.add(loginButton);
+		loginPanel.add(box);
+		box.setLayout(null);
 		loginPanel.setLayout(null);
 		run.frame.setContentPane(loginPanel);
 		run.frame.setVisible(true);
 		
 		//music stuff
 		run.player.loadSong("AMemoryAway.ogg");
-		run.player.playMusic(true);
+		//run.player.playMusic(true);
 	}
 
 	@Override
 	public void update(float deltaTime)
 	{
 		if(redraw)
-		{
-			wratio = (double)run.frame.getWidth() / run.SCR_WIDTH;
-			hratio = (double)run.frame.getHeight() / run.SCR_HEIGHT;
-			 
-			//Radio
-			saveLoginRadio.setSize((int)(200 * wratio), (int)(20 * hratio));	
-			saveLoginRadio.setFont(new Font(saveLoginRadio.getFont().getFontName(), saveLoginRadio.getFont().getStyle(), saveLoginRadio.getFont().getSize() + 1));
-			saveLoginRadio.setLocation((int)(200 *wratio), (int)(280*hratio));
+		{	 
+			System.out.println("Width"+run.frame.getContentPane().getWidth());
+			System.out.println("Height"+run.frame.getContentPane().getHeight());
+			//Box test
+			box.setBounds(resize.locationX(0), resize.locationY(0), resize.width(500), resize.height(500));
+			
+			//Radio			
+			saveLoginRadio.setBounds(resize.locationX(200), resize.locationY(280), resize.width(200), resize.height(20));		
+			saveLoginRadio.setFont(new Font(saveLoginRadio.getFont().getFontName(), saveLoginRadio.getFont().getStyle(), resize.font(12)));
+			
+			//loginButton
+			loginButton.setBounds(resize.locationX(200), resize.locationY(300), resize.width(100), resize.height(20));
+			loginButton.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
 			
 			run.frame.repaint();
 			redraw = false;
@@ -194,4 +207,5 @@ public class LoginScreen extends Screen
 			}
 		}
 	}
+	
 }
