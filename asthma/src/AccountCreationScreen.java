@@ -1,3 +1,4 @@
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,9 +23,9 @@ public class AccountCreationScreen extends Screen
 	
 	public AccountCreationScreen(Runner run) {
 		super(run);
-		run.frame.setTitle("Account Creation");
-		run.frame.setSize(run.SCR_WIDTH, run.SCR_HEIGHT);
-		run.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		run.setTitle("Account Creation");
+		run.setSize(run.SCR_WIDTH, run.SCR_HEIGHT);
+		run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		pnl = new JPanel();
 		
@@ -70,8 +71,8 @@ public class AccountCreationScreen extends Screen
 		pnl.add(cinfo);
 		
 		pnl.setLayout(null);		
-		run.frame.setContentPane(pnl);
-		run.frame.setVisible(true);
+		run.setContentPane(pnl);
+		run.setVisible(true);
 	}
 
 	@Override

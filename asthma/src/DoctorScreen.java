@@ -20,7 +20,7 @@ public class DoctorScreen extends Screen
 	public DoctorScreen(Runner run) 
 	{
 		super(run);
-		run.frame.setTitle("Doctor");
+		run.setTitle("Doctor");
 		pnl = new JPanel();
 		
 		addPatient = new JButton("Add Patient");
@@ -37,8 +37,8 @@ public class DoctorScreen extends Screen
 		
 		pnl.add(addPatient);
 		pnl.setLayout(null);		
-		run.frame.setContentPane(pnl);
-		run.frame.setVisible(true);
+		run.setContentPane(pnl);
+		run.setVisible(true);
 	}
 
 	@Override

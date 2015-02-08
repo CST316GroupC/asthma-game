@@ -45,7 +45,7 @@ public class LoginScreen extends Screen
 		super(run);
 		
 		//resize stuff
-		run.frame.addComponentListener(new ComponentAdapter()
+		run.addComponentListener(new ComponentAdapter()
 		{
 			public void componentResized(ComponentEvent e)
 			{
@@ -56,9 +56,9 @@ public class LoginScreen extends Screen
 		// Set layout manager
 				
 		//Basic Frame Settings
-		run.frame.setTitle("Login");
-		run.frame.setSize(run.SCR_WIDTH, run.SCR_HEIGHT);
-		run.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		run.setTitle("Login");
+		run.setSize(run.SCR_WIDTH, run.SCR_HEIGHT);
+		run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		loginPanel = new JPanel();
 		//loginPanel.setLayout(new BorderLayout());
@@ -112,8 +112,8 @@ public class LoginScreen extends Screen
 		loginPanel.add(saveLoginRadio);
 		loginPanel.add(loginButton);
 		loginPanel.setLayout(null);
-		run.frame.setContentPane(loginPanel);
-		run.frame.setVisible(true);
+		run.setContentPane(loginPanel);
+		run.setVisible(true);
 		
 		//music stuff
 		run.player.loadSong("AMemoryAway.ogg");
@@ -125,15 +125,15 @@ public class LoginScreen extends Screen
 	{
 		if(redraw)
 		{
-			wratio = (double)run.frame.getWidth() / run.SCR_WIDTH;
-			hratio = (double)run.frame.getHeight() / run.SCR_HEIGHT;
+			wratio = (double)run.getWidth() / run.SCR_WIDTH;
+			hratio = (double)run.getHeight() / run.SCR_HEIGHT;
 			 
 			//Radio
 			saveLoginRadio.setSize((int)(200 * wratio), (int)(20 * hratio));	
 			saveLoginRadio.setFont(new Font(saveLoginRadio.getFont().getFontName(), saveLoginRadio.getFont().getStyle(), saveLoginRadio.getFont().getSize() + 1));
 			saveLoginRadio.setLocation((int)(200 *wratio), (int)(280*hratio));
 			
-			run.frame.repaint();
+			run.repaint();
 			redraw = false;
 		}
 	}
@@ -167,7 +167,7 @@ public class LoginScreen extends Screen
 	public void checkLogin()
 	{
 
-		//JOptionPane.showMessageDialog(run.frame, "Click");
+		//JOptionPane.showMessageDialog(run, "Click");
 		if(userNameTF.getText().equals(testUser) && Arrays.equals(passwordTF.getPassword(), testPass))
 		{
 			//Use variable type at the top to switch between doctor login and patient login
@@ -189,7 +189,7 @@ public class LoginScreen extends Screen
 				loginErrorMessage.setSize(200, 20);
 				loginErrorMessage.setLocation(150, 180);
 				loginPanel.add(loginErrorMessage);
-				run.frame.repaint();
+				run.repaint();
 				loginErrorDrawn = true;
 			}
 		}

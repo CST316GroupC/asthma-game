@@ -15,7 +15,7 @@ public class TutorialScreen extends Screen
 	JPanel pnl;
 	public TutorialScreen(Runner run) {
 		super(run);
-		run.frame.setTitle("Tutorial");
+		run.setTitle("Tutorial");
 		pnl = new JPanel();
 		
 		logi = new JButton();
@@ -32,8 +32,8 @@ public class TutorialScreen extends Screen
 		
 		pnl.add(logi);
 		pnl.setLayout(null);		
-		run.frame.setContentPane(pnl);
-		run.frame.setVisible(true);
+		run.setContentPane(pnl);
+		run.setVisible(true);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class TutorialScreen extends Screen
 			lbl.setLocation(250, 50);
 			pnl.add(lbl);
 			
-			run.frame.repaint();
+			run.repaint();
 		}
 	}
 

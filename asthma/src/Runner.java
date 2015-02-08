@@ -1,12 +1,12 @@
+import java.awt.Frame;
+
 import javax.swing.JFrame;
 
-import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.SoundStore;
 
 
-public class Runner 
+public class Runner extends JFrame
 {
-	JFrame frame;
 	Screen screen;
 	long startTime = System.nanoTime();
 	AudioPlayer player;
@@ -18,7 +18,6 @@ public class Runner
 	
 	public Runner()
 	{
-		frame = new JFrame();
 		player = new AudioPlayer();
 		screen = new LoginScreen(this);
 		
