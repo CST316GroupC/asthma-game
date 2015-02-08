@@ -66,7 +66,6 @@ public class LoginScreen extends Screen
 			public void componentResized(ComponentEvent e)
 			{
 				redraw = true;
-				System.out.println("redraw");
 			}
 		});
 		
@@ -219,8 +218,8 @@ public class LoginScreen extends Screen
 	public void checkLogin()
 	{
 
-		//JOptionPane.showMessageDialog(run.frame, "Click");
-		if(userNameTF.getText().equals(testUser) && Arrays.equals(passwordTF.getPassword(), testPass))
+		//Temp testing for doctor
+		if((userNameTF.getText().equals(testUser) || userNameTF.getText().equals("doctor") || userNameTF.getText().equals("doc"))&& Arrays.equals(passwordTF.getPassword(), testPass))
 		{
 			//Use variable type at the top to switch between doctor login and patient login
 			//Doctors
@@ -234,13 +233,16 @@ public class LoginScreen extends Screen
 				run.setScreen(new TutorialScreen(run));
 			}
 		}
+		
+		//Temp testing for user
+		else if(userNameTF.getText().equals("user") && Arrays.equals(passwordTF.getPassword(), testPass))
+		{
+			run.setScreen(new TutorialScreen(run));
+		}
 		else
 		{
 			if(!loginErrorDrawn)
 			{
-				//loginErrorMessage.setSize(200, 20);
-				//loginErrorMessage.setLocation(150, 180);
-				//loginPanel.add(loginErrorMessage);
 				loginErrorMessage.setVisible(true);
 				run.frame.repaint();
 				loginErrorDrawn = true;
