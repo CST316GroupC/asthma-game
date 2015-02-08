@@ -3,6 +3,7 @@
  * displays and runs elements for the login screen
  */
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
@@ -31,23 +32,33 @@ public class LoginScreen extends Screen
 	int type = 0;
 	boolean loginErrorDrawn = false;
 	boolean redraw = false;
-	double wratio = 1.0;
-	double hratio = 1.0;
+	boolean elementMoved = false;
 	Resize resize = new Resize(run);
 	
-	
 	//Display Elements
-	JPanel loginPanel;
-	JTextField userNameTF;
-	JPasswordField passwordTF;
-	JLabel loginErrorMessage = new JLabel("Incorrect Username/Password");
-	JRadioButton saveLoginRadio;
+	JPanel loginPanel = new JPanel();
+	JPanel testBox = new JPanel();
+	JLabel title = new JLabel("Team C's Asthma Game");
+	JPanel loginBox = new JPanel();
+	JPanel loginBoxBorder = new JPanel();
+	JLabel userNameLabel = new JLabel("Username");
+	JTextField userNameTF = new JTextField();
+	JLabel passwordLabel = new JLabel("Password");
+	JPasswordField passwordTF = new JPasswordField();
+	JRadioButton saveLoginRadio = new JRadioButton("Remember Password");
 	JButton loginButton = new JButton("Login");
-	JPanel box = new JPanel();
+	JLabel passRetrievalLabel = new JLabel("");
+	JButton passRetrievalButton = new JButton("Forgot Password?");
+	JLabel loginErrorMessage = new JLabel("Incorrect Username/Password");
 	
 	public LoginScreen(Runner run) 
 	{
 		super(run);
+		
+		//Basic Frame Settings
+		run.frame.setTitle("Login");
+		run.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		run.frame.setMinimumSize(new Dimension(run.SCR_WIDTH, run.SCR_HEIGHT));
 		
 		//resize stuff
 		run.frame.addComponentListener(new ComponentAdapter()
@@ -55,69 +66,23 @@ public class LoginScreen extends Screen
 			public void componentResized(ComponentEvent e)
 			{
 				redraw = true;
+				System.out.println("redraw");
 			}
 		});
 		
-		// Set layout manager
-		//Test Box
-		box.setBackground(Color.GREEN);
-		box.setBounds(0, 0, 500, 500);
-				
-		//Basic Frame Settings
-		run.frame.setTitle("Login");
-		run.frame.setSize(run.SCR_WIDTH, run.SCR_HEIGHT);
-		run.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		run.frame.setMinimumSize(new Dimension(500, 500));
 		
-		loginPanel = new JPanel();
-		//loginPanel.setLayout(new BorderLayout());
-		loginPanel.setBorder(BorderFactory.createTitledBorder("Login"));
+		//Set colors
+		loginPanel.setBackground(Color.LIGHT_GRAY);
+		testBox.setBackground(Color.WHITE);
+		loginBox.setBackground(Color.LIGHT_GRAY);
+		loginBoxBorder.setBackground(Color.BLACK);
+		saveLoginRadio.setBackground(Color.LIGHT_GRAY);
 		
-		////Set up display properties for elements
-		
-		//Title
-		JLabel title = new JLabel("Title of Game");
+		//Set fonts
 		title.setFont(new Font("Serif", Font.BOLD, 40));
-		title.setSize(500, 50);
-		title.setLocation(130, 80);
+		loginErrorMessage.setForeground(Color.RED);
+				
 		
-		
-		//UserName
-		JLabel userNameLabel = new JLabel("Username");
-		userNameLabel.setSize(100, 20);
-		userNameLabel.setLocation(170, 200);
-		
-		userNameTF = new JTextField();
-		userNameTF.setSize(150, 20);
-		userNameTF.setLocation(170, 220);
-		
-		
-		//Password
-		JLabel passwordLabel = new JLabel("Password");
-		passwordLabel.setSize(100, 20);
-		passwordLabel.setLocation(170, 240);
-		
-		passwordTF = new JPasswordField();
-		passwordTF.setSize(150, 20);
-		passwordTF.setLocation(170, 260);
-		
-		//Radio
-		saveLoginRadio = new JRadioButton("Remember Password");
-		saveLoginRadio.setSize(50, 50);
-		saveLoginRadio.setLocation(170, 280);
-		
-		
-		//Login Button
-		loginButton.setBounds(200, 310, 80, 30);
-		
-		
-		//Password Retrieval Button
-		JButton passwordRetrievalButton = new JButton("Password Retrieval");
-		passwordRetrievalButton.setBounds(165, 400, 150, 20);
-
-		JLabel forgotPass = new JLabel("Forgot Password?");
-		forgotPass.setSize(120, 20);
-		forgotPass.setLocation(190, 370);
 		
 		//Test if Login Button is pushed
 		loginButton.addActionListener(new ActionListener()
@@ -127,7 +92,26 @@ public class LoginScreen extends Screen
 			{
 				checkLogin();			
 			}
-		});		
+		});	
+		
+		//Enter Key is Pressed
+		userNameTF.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				userNameTF.transferFocus();
+			}
+		});
+		
+		passwordTF.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				checkLogin();
+			}
+		});
+		
+		loginErrorMessage.setVisible(false);
 		
 		//add things to the panel
 		loginPanel.add(title);
@@ -137,10 +121,12 @@ public class LoginScreen extends Screen
 		loginPanel.add(passwordTF);
 		loginPanel.add(saveLoginRadio);
 		loginPanel.add(loginButton);
-		loginPanel.add(passwordRetrievalButton);
-		loginPanel.add(forgotPass);
-		loginPanel.add(box);
-		box.setLayout(null);
+		loginPanel.add(passRetrievalLabel);
+		loginPanel.add(passRetrievalButton);
+		loginPanel.add(loginErrorMessage);
+		loginPanel.add(loginBox);
+		loginPanel.add(loginBoxBorder);
+		loginPanel.add(testBox);
 		loginPanel.setLayout(null);
 		run.frame.setContentPane(loginPanel);
 		run.frame.setVisible(true);
@@ -155,21 +141,50 @@ public class LoginScreen extends Screen
 	public void update(float deltaTime)
 	{
 		if(redraw)
-		{	 
-			System.out.println("Width"+run.frame.getContentPane().getWidth());
-			System.out.println("Height"+run.frame.getContentPane().getHeight());
-			//Box test
-			box.setBounds(resize.locationX(0), resize.locationY(0), resize.width(500), resize.height(500));
+		{
+			//test Box
+			testBox.setBounds(resize.locationX(0), resize.locationY(0), resize.width(500), resize.height(500));
+			
+			//title
+			title.setBounds(resize.locationX(25), resize.locationY(80), resize.width(500), resize.height(50));
+			title.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(40)));
+			
+			//loginBox
+			loginBox.setBounds(resize.locationX(100), resize.locationY(200), resize.width(300), resize.height(200));
+			
+			//loginBoxBorder
+			loginBoxBorder.setBounds(resize.locationX(99), resize.locationY(199), resize.width(302), resize.height(202));
+			
+			//UserName
+			userNameLabel.setBounds(resize.locationX(170), resize.locationY(220), resize.width(160), resize.height(20));
+			userNameLabel.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
+			userNameTF.setBounds(resize.locationX(170), resize.locationY(240), resize.width(160), resize.height(20));
+			userNameTF.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
+			
+			//Password
+			passwordLabel.setBounds(resize.locationX(170), resize.locationY(260), resize.width(160), resize.height(20));
+			passwordLabel.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
+			passwordTF.setBounds(resize.locationX(170), resize.locationY(280), resize.width(160), resize.height(20));
+			passwordTF.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
 			
 			//Radio			
-			saveLoginRadio.setBounds(resize.locationX(200), resize.locationY(280), resize.width(200), resize.height(20));		
+			saveLoginRadio.setBounds(resize.locationX(170), resize.locationY(300), resize.width(160), resize.height(20));		
 			saveLoginRadio.setFont(new Font(saveLoginRadio.getFont().getFontName(), saveLoginRadio.getFont().getStyle(), resize.font(12)));
 			
 			//loginButton
-			loginButton.setBounds(resize.locationX(200), resize.locationY(300), resize.width(100), resize.height(20));
+			loginButton.setBounds(resize.locationX(170), resize.locationY(320), resize.width(160), resize.height(30));
 			loginButton.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
 			
-			//hi
+			//Password Retrieval
+			passRetrievalLabel.setBounds(resize.locationX(190), resize.locationY(370), resize.width(120), resize.height(20));
+			passRetrievalLabel.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
+			passRetrievalButton.setBounds(resize.locationX(170), resize.locationY(360), resize.width(160), resize.height(20));
+			passRetrievalButton.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
+			
+			//login Error Message
+			loginErrorMessage.setBounds(resize.locationX(160), resize.locationY(200), resize.width(200), resize.height(20));
+			loginErrorMessage.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
+			
 			run.frame.repaint();
 			redraw = false;
 		}
@@ -223,9 +238,10 @@ public class LoginScreen extends Screen
 		{
 			if(!loginErrorDrawn)
 			{
-				loginErrorMessage.setSize(200, 20);
-				loginErrorMessage.setLocation(150, 180);
-				loginPanel.add(loginErrorMessage);
+				//loginErrorMessage.setSize(200, 20);
+				//loginErrorMessage.setLocation(150, 180);
+				//loginPanel.add(loginErrorMessage);
+				loginErrorMessage.setVisible(true);
 				run.frame.repaint();
 				loginErrorDrawn = true;
 			}
