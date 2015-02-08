@@ -2,34 +2,18 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="C:/Users/ChrisC/git_workspace/CST316/lwjgl-2.9.3/lwjgl-2.9.3/jar/lwjgl.jar">
+	<classpathentry kind="lib" path="C:/Users/Edwin Avalos/Desktop/lwjgl-2.9.1/jar/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/ChrisC/git_workspace/CST316/lwjgl-2.9.3/lwjgl-2.9.3/native/windows"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/Edwin Avalos/Desktop/lwjgl-2.9.1/native/windows"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ChrisC/git_workspace/CST316/lwjgl-2.9.3/lwjgl-2.9.3/jar/lwjgl_util.jar">
+	<classpathentry kind="lib" path="C:/Users/Edwin Avalos/Desktop/lwjgl-2.9.1/jar/lwjgl_util.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/ChrisC/git_workspace/CST316/lwjgl-2.9.3/lwjgl-2.9.3/jar"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/Edwin Avalos/Desktop/lwjgl-2.9.1/jar"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ChrisC/git_workspace/CST316/slick-util/lib/slick-util.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ChrisC/git_workspace/CST316/slick-util/lib/jogg-0.0.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ChrisC/git_workspace/CST316/slick-util/lib/jorbis-0.0.15.jar"/>
-=======
-	<classpathentry kind="lib" path="C:/Users/Derek/Desktop/lwjgl-2.9.3/lwjgl-2.9.3/jar/lwjgl.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/Derek/Desktop/lwjgl-2.9.3/lwjgl-2.9.3/native/windows"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Derek/Desktop/lwjgl-2.9.3/lwjgl-2.9.3/jar/lwjgl_util.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/Derek/Desktop/lwjgl-2.9.3/lwjgl-2.9.3/jar"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Derek/Desktop/lwjgl-2.9.3/slick-util/lib/slick-util.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Derek/Desktop/lwjgl-2.9.3/slick-util/lib/jogg-0.0.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Derek/Desktop/lwjgl-2.9.3/slick-util/lib/jorbis-0.0.15.jar"/>
->>>>>>> origin/Derek
+	<classpathentry kind="lib" path="C:/Users/Edwin Avalos/Desktop/lwjgl-2.9.1/jar/slick-util.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Edwin Avalos/Desktop/lwjgl-2.9.1/jar/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Edwin Avalos/Desktop/lwjgl-2.9.1/jar/jorbis-0.0.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

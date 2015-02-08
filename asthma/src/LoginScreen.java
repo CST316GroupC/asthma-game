@@ -3,7 +3,6 @@
  * displays and runs elements for the login screen
  */
 
-import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,7 +13,6 @@ import java.util.Arrays;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -145,7 +143,7 @@ public class LoginScreen extends Screen
 		
 		//music stuff
 		run.player.loadSong("AMemoryAway.ogg");
-		//run.player.playMusic(true);
+		run.player.playMusic(true);
 	}
 
 	@Override
@@ -154,8 +152,8 @@ public class LoginScreen extends Screen
 		if(redraw)
 
 		{	 
-			System.out.println("Width"+run.frame.getContentPane().getWidth());
-			System.out.println("Height"+run.frame.getContentPane().getHeight());
+			System.out.println("Width"+run.getContentPane().getWidth());
+			System.out.println("Height"+run.getContentPane().getHeight());
 			//Box test
 			box.setBounds(resize.locationX(0), resize.locationY(0), resize.width(500), resize.height(500));
 			
@@ -168,7 +166,7 @@ public class LoginScreen extends Screen
 			loginButton.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
 			
 			//hi
-			run.frame.repaint();
+			run.repaint();
 			redraw = false;
 		}
 	}

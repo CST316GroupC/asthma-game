@@ -8,12 +8,12 @@ public class Resize
 	}
 	public int locationX(int value)
 	{
-		double ratioX = (double)run.frame.getContentPane().getWidth() / (double)run.SCR_WIDTH;
-		double ratioY =(double)run.frame.getContentPane().getHeight() / (double)run.SCR_HEIGHT;
+		double ratioX = (double)run.getContentPane().getWidth() / (double)run.SCR_WIDTH;
+		double ratioY =(double)run.getContentPane().getHeight() / (double)run.SCR_HEIGHT;
 		
 		if(ratioY<ratioX)
 		{
-			int screenXPosition = (int)((run.frame.getContentPane().getWidth()-(ratioY*run.SCR_WIDTH))/2.0);
+			int screenXPosition = (int)((run.getContentPane().getWidth()-(ratioY*run.SCR_WIDTH))/2.0);
 			return (int)(((double)value*ratioY)+screenXPosition);
 		}
 		else
@@ -24,12 +24,12 @@ public class Resize
 	
 	public int locationY(int value)
 	{
-		double ratioX = (double)run.frame.getContentPane().getWidth() / (double)run.SCR_WIDTH;
-		double ratioY =(double)run.frame.getContentPane().getHeight() / (double)run.SCR_HEIGHT;
+		double ratioX = (double)run.getContentPane().getWidth() / (double)run.SCR_WIDTH;
+		double ratioY =(double)run.getContentPane().getHeight() / (double)run.SCR_HEIGHT;
 		
 		if(ratioX<ratioY)
 		{
-			int screenYPosition = (int)((run.frame.getContentPane().getHeight()-(ratioX*run.SCR_HEIGHT))/2.0);
+			int screenYPosition = (int)((run.getContentPane().getHeight()-(ratioX*run.SCR_HEIGHT))/2.0);
 			return (int)((double)value*ratioX)+screenYPosition;
 		}
 		else
@@ -40,8 +40,8 @@ public class Resize
 	
 	public int width(int value)
 	{
-		double ratioX = (double)run.frame.getContentPane().getWidth() / (double)run.SCR_WIDTH;
-		double ratioY =(double)run.frame.getContentPane().getHeight() / (double)run.SCR_HEIGHT;
+		double ratioX = (double)run.getContentPane().getWidth() / (double)run.SCR_WIDTH;
+		double ratioY =(double)run.getContentPane().getHeight() / (double)run.SCR_HEIGHT;
 		
 		if(ratioY<ratioX)
 		{
@@ -55,8 +55,8 @@ public class Resize
 	
 	public int height(int value)
 	{
-		double ratioX = (double)run.frame.getContentPane().getWidth() / (double)run.SCR_WIDTH;
-		double ratioY =(double)run.frame.getContentPane().getHeight() / (double)run.SCR_HEIGHT;
+		double ratioX = (double)run.getContentPane().getWidth() / (double)run.SCR_WIDTH;
+		double ratioY =(double)run.getContentPane().getHeight() / (double)run.SCR_HEIGHT;
 		
 		if(ratioX<ratioY)
 		{
@@ -69,8 +69,8 @@ public class Resize
 	}
 	public int font(int value)
 	{
-		double ratioX = (double)run.frame.getContentPane().getWidth() / (double)run.SCR_WIDTH;
-		double ratioY =(double)run.frame.getContentPane().getHeight() / (double)run.SCR_HEIGHT;
+		double ratioX = (double)run.getContentPane().getWidth() / (double)run.SCR_WIDTH;
+		double ratioY =(double)run.getContentPane().getHeight() / (double)run.SCR_HEIGHT;
 		
 		if(ratioX<ratioY)
 		{

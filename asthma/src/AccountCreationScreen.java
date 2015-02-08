@@ -115,7 +115,7 @@ public class AccountCreationScreen extends Screen
 			error.setSize(150, 20);
 			error.setLocation(125, 280);
 			pnl.add(error);
-			run.frame.repaint();
+			run.repaint();
 			
 		}else  //assumes a database will be implemented but for now will just use a text file
 		{
