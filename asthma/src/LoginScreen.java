@@ -31,7 +31,7 @@ public class LoginScreen extends Screen
 	char[] testPass = {'p','a','s','s'};
 	int type = 0;
 	boolean loginErrorDrawn = false;
-	boolean redraw = false;
+	boolean redraw = true;
 	boolean elementMoved = false;
 	Resize resize = new Resize(run);
 	
@@ -41,9 +41,9 @@ public class LoginScreen extends Screen
 	JLabel title = new JLabel("Team C's Asthma Game");
 	JPanel loginBox = new JPanel();
 	JPanel loginBoxBorder = new JPanel();
-	JLabel userNameLabel = new JLabel("Username");
+	JLabel userNameLabel = new JLabel("Username:");
 	JTextField userNameTF = new JTextField();
-	JLabel passwordLabel = new JLabel("Password");
+	JLabel passwordLabel = new JLabel("Password:");
 	JPasswordField passwordTF = new JPasswordField();
 	JRadioButton saveLoginRadio = new JRadioButton("Remember Password");
 	JButton loginButton = new JButton("Login");
