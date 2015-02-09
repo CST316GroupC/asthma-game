@@ -30,6 +30,7 @@ public class AccountCreationScreen extends Screen
 	JTextField age;
 	JTextArea cinfo;
 	JButton submitButton;
+	int type = 1;
 	public AccountCreationScreen(Runner run) {
 		super(run);
 		run.setTitle("Account Creation");
@@ -38,7 +39,7 @@ public class AccountCreationScreen extends Screen
 		
 		pnl = new JPanel();
 		
-		lblfname = new JLabel("First Name");
+		lblfname = new JLabel("First Name*");
 		lblfname.setSize(100, 20);
 		lblfname.setLocation(50, 50);
 		
@@ -46,7 +47,7 @@ public class AccountCreationScreen extends Screen
 		fname.setSize(100, 20);
 		fname.setLocation(125, 52);
 		
-		lbllname = new JLabel("Last Name");
+		lbllname = new JLabel("Last Name*");
 		lbllname.setSize(100, 20);
 		lbllname.setLocation(50, 80);
 		
@@ -66,7 +67,7 @@ public class AccountCreationScreen extends Screen
 		password.setSize(100, 20);
 		password.setLocation(125, 142);
 		
-		preferredPassword = new JLabel("Password");
+		preferredPassword = new JLabel("Password*");
 		preferredPassword.setSize(100, 20);
 		preferredPassword.setLocation(50, 140);
 		
@@ -107,11 +108,11 @@ public class AccountCreationScreen extends Screen
 		run.setVisible(true);
 	}
 
-	protected void addCurrentPatient() 
+	private void addCurrentPatient() 
 	{
 		if(fname.getText().isEmpty()  || lname.getText().isEmpty()  || password.getText().isEmpty())  //required basic information
 		{
-			JLabel error = new JLabel("Missing Information");
+			JLabel error = new JLabel("Missing Information*");
 			error.setSize(150, 20);
 			error.setLocation(125, 280);
 			pnl.add(error);
@@ -119,13 +120,17 @@ public class AccountCreationScreen extends Screen
 			
 		}else  //assumes a database will be implemented but for now will just use a text file
 		{
-			try {
+			try 
+			{
 				FileWriter fWriter = new FileWriter("login_information.txt", true);
 				BufferedWriter bWriter = new BufferedWriter(fWriter);
-				bWriter.write(fname.getText() + " | " + lname.getText() + " | " + age.getText() + " | " + password.getText() + " | " + cinfo.getText() + "\n");
+				bWriter.write(fname.getText() + " | " + lname.getText() + " | " + age.getText() +
+							  " | " + password.getText() + " | " + cinfo.getText() + " | " + type + 
+							  "\n"); //all patients created from doctor screen will be 0
 				bWriter.newLine();
 				bWriter.close();
-			} catch (IOException e) {
+			} catch (IOException e)
+			{
 				e.printStackTrace();
 			}
 			run.setScreen(new LoginScreen(run));
