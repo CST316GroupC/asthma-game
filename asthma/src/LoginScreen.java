@@ -248,6 +248,7 @@ public class LoginScreen extends Screen
 
 		{
 			st = new StringTokenizer(line, " | ");
+			System.out.println(st.nextToken());
 			firstNames[counter] = st.nextToken();
 			st.nextToken();
 			st.nextToken();
