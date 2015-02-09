@@ -6,6 +6,8 @@ public class Resize
 	{
 		this.run=run;
 	}
+	
+	//Gets the exact X location on the screen were it should be drawn
 	public int locationX(int value)
 	{
 		double ratioX = (double)run.getContentPane().getWidth() / (double)run.SCR_WIDTH;
@@ -22,6 +24,7 @@ public class Resize
 		}
 	}
 	
+	//Gets the exact Y location on the screen were it should be drawn
 	public int locationY(int value)
 	{
 		double ratioX = (double)run.getContentPane().getWidth() / (double)run.SCR_WIDTH;
@@ -38,6 +41,7 @@ public class Resize
 		}
 	}
 	
+	//Gets the width it should be drawn at
 	public int width(int value)
 	{
 		double ratioX = (double)run.getContentPane().getWidth() / (double)run.SCR_WIDTH;
@@ -53,6 +57,7 @@ public class Resize
 		}
 	}
 	
+	//Gets the height it should be drawn at
 	public int height(int value)
 	{
 		double ratioX = (double)run.getContentPane().getWidth() / (double)run.SCR_WIDTH;
@@ -67,6 +72,8 @@ public class Resize
 			return (int)((double)value*ratioY);
 		}
 	}
+	
+	//Gets the fonts height it should be drawn at
 	public int font(int value)
 	{
 		double ratioX = (double)run.getContentPane().getWidth() / (double)run.SCR_WIDTH;
