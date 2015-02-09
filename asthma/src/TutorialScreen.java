@@ -1,53 +1,98 @@
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
 public class TutorialScreen extends Screen
 {
-
-	JButton logi;
-	JLabel lbl;
-	JPanel pnl;
-	public TutorialScreen(Runner run) {
+	//Variables
+	boolean redraw = true;
+	Resize resize = new Resize(run);
+	boolean logout = false;
+	
+	//Display Elements
+	JPanel tutorialPanel = new JPanel();
+	JPanel testBox = new JPanel();
+	JPanel menuBar = new JPanel();
+	JButton logoutButton = new JButton("Logout");
+	
+	
+	public TutorialScreen(Runner run) 
+	{
 		super(run);
+		
+		//Basic Frame Settings
 		run.frame.setTitle("Tutorial");
-		pnl = new JPanel();
+		run.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		logi = new JButton();
-		logi.setSize(50, 50);
-		logi.setLocation(250, 50);
-		
-		logi.addActionListener(new ActionListener()
+		//resize stuff
+		run.frame.addComponentListener(new ComponentAdapter()
 		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				isClosing = true;				
+			public void componentResized(ComponentEvent e)
+			{
+				redraw = true;
 			}
 		});
 		
-		pnl.add(logi);
-		pnl.setLayout(null);		
-		run.frame.setContentPane(pnl);
+		//Set colors
+		tutorialPanel.setBackground(Color.LIGHT_GRAY);
+		testBox.setBackground(Color.WHITE);
+		menuBar.setBackground(Color.LIGHT_GRAY);
+		
+		//Set fonts
+		
+		//logoutButton is pushed
+		logoutButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				logout = true;	
+			}
+		});
+		
+		//add things to the panel
+		tutorialPanel.add(logoutButton);
+		tutorialPanel.add(menuBar);
+		tutorialPanel.add(testBox);
+		tutorialPanel.setLayout(null);		
+		run.frame.setContentPane(tutorialPanel);
 		run.frame.setVisible(true);
 	}
 
 	@Override
 	public void update(float deltaTime)
 	{
-		if(isClosing)
+		if(redraw)
 		{
-			pnl.remove(logi);
-			lbl = new JLabel("hello");
-			lbl.setSize(50, 50);
-			lbl.setLocation(250, 50);
-			pnl.add(lbl);
+			//test Box
+			testBox.setBounds(resize.locationX(0), resize.locationY(0), resize.width(500), resize.height(500));
+			
+			//menuBar
+			menuBar.setBounds(resize.locationX(10), resize.locationY(0), resize.width(480), resize.height(50));
+			
+			//logoutButton
+			logoutButton.setBounds(resize.locationX(380), resize.locationY(10), resize.width(100), resize.height(30));
+			logoutButton.setFont(new Font(logoutButton.getFont().getFontName(),logoutButton.getFont().getStyle(), resize.font(12)));
 			
 			run.frame.repaint();
+			redraw = false;
+		}
+		
+		if(logout)
+		{
+			run.setScreen(new LoginScreen(run));
+			logout = false;
 		}
 	}
 
@@ -72,6 +117,7 @@ public class TutorialScreen extends Screen
 	@Override
 	public void dispose() 
 	{
+		
 	}
 
 }

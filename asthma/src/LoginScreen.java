@@ -31,7 +31,7 @@ public class LoginScreen extends Screen
 	char[] testPass = {'p','a','s','s'};
 	int type = 0;
 	boolean loginErrorDrawn = false;
-	boolean redraw = false;
+	boolean redraw = true;
 	boolean elementMoved = false;
 	Resize resize = new Resize(run);
 	
