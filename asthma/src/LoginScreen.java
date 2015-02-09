@@ -8,7 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -24,8 +29,6 @@ import javax.swing.JTextField;
 public class LoginScreen extends Screen
 {
 	//Variables
-	String testUser = "test";
-	char[] testPass = {'p','a','s','s'};
 	int type = 0;
 	boolean loginErrorDrawn = false;
 	boolean redraw = false;
@@ -100,7 +103,11 @@ public class LoginScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				checkLogin();			
+				try {
+					checkLogin();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}			
 			}
 		});		
 		
@@ -164,26 +171,55 @@ public class LoginScreen extends Screen
 	}
 	
 	//Private Methods
-	public void checkLogin()
+	public void checkLogin() throws IOException
 	{
-
-		//JOptionPane.showMessageDialog(run.frame, "Click");
-		if(userNameTF.getText().equals(testUser) && Arrays.equals(passwordTF.getPassword(), testPass))
+		String line = null;
+		String[] firstNames = new String [10];
+		char[][] passWords = new char[10][30];
+		int counter = 0;
+		String tempString;
+		char tempChar;
+		
+		FileReader fr = new FileReader("login_information.txt");  //maybe create an 'onStart()' function for runner
+		BufferedReader br = new BufferedReader(fr);
+		StringTokenizer st;
+		
+		
+		while((line = br.readLine()) != null)
 		{
-			//Use variable type at the top to switch between doctor login and patient login
-			//Doctors
-			if(type == 0)
+			st = new StringTokenizer(line, " | ");
+			firstNames[counter] = st.nextToken();
+			st.nextToken();
+			st.nextToken();
+			tempString = st.nextToken();
+			for(int i = 0; i < tempString.length(); ++i)
 			{
-				run.setScreen(new DoctorScreen(run));
+				 passWords[counter][i] = tempString.charAt(i);
 			}
-			//Patients
-			if(type == 1)
-			{
-				run.setScreen(new TutorialScreen(run));
-			}
+			counter += 1;
 		}
-		else
+		br.close();
+		for(int i = 0; i < 10; ++i)
 		{
+			tempString = new String (passWords[i]);
+			tempString = tempString.trim();
+			passWords[i] = tempString.toCharArray();
+			
+			if(userNameTF.getText().equals(firstNames[i]) && Arrays.equals(passwordTF.getPassword(),passWords[i]))
+			{
+				//Use variable type at the top to switch between doctor login and patient login
+				//Doctors
+				if(type == 0)
+				{
+					run.setScreen(new DoctorScreen(run));
+				}
+				//Patients
+				if(type == 1)
+				{
+					run.setScreen(new TutorialScreen(run));
+				}
+		}
+		
 			if(!loginErrorDrawn)
 			{
 				loginErrorMessage.setSize(200, 20);
