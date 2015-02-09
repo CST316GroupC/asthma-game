@@ -5,7 +5,6 @@
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -32,7 +31,7 @@ public class LoginScreen extends Screen
 	char[] testPass = {'p','a','s','s'};
 	int type = 0;
 	boolean loginErrorDrawn = false;
-	boolean redraw = false;
+	boolean redraw = true;
 	boolean elementMoved = false;
 	Resize resize = new Resize(run);
 	
@@ -67,9 +66,9 @@ public class LoginScreen extends Screen
 			public void componentResized(ComponentEvent e)
 			{
 				redraw = true;
-				System.out.println("redraw");
 			}
 		});
+		
 		
 		//Set colors
 		loginPanel.setBackground(Color.LIGHT_GRAY);
@@ -166,7 +165,6 @@ public class LoginScreen extends Screen
 			passwordLabel.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
 			passwordTF.setBounds(resize.locationX(170), resize.locationY(280), resize.width(160), resize.height(20));
 			passwordTF.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
-
 			
 			//Radio			
 			saveLoginRadio.setBounds(resize.locationX(170), resize.locationY(300), resize.width(160), resize.height(20));		
@@ -220,8 +218,8 @@ public class LoginScreen extends Screen
 	public void checkLogin()
 	{
 
-		//JOptionPane.showMessageDialog(run, "Click");
-		if(userNameTF.getText().equals(testUser) && Arrays.equals(passwordTF.getPassword(), testPass))
+		//Temp testing for doctor
+		if((userNameTF.getText().equals(testUser) || userNameTF.getText().equals("doctor") || userNameTF.getText().equals("doc"))&& Arrays.equals(passwordTF.getPassword(), testPass))
 		{
 			//Use variable type at the top to switch between doctor login and patient login
 			//Doctors
@@ -235,13 +233,16 @@ public class LoginScreen extends Screen
 				run.setScreen(new TutorialScreen(run));
 			}
 		}
+		
+		//Temp testing for user
+		else if(userNameTF.getText().equals("user") && Arrays.equals(passwordTF.getPassword(), testPass))
+		{
+			run.setScreen(new TutorialScreen(run));
+		}
 		else
 		{
 			if(!loginErrorDrawn)
 			{
-				//loginErrorMessage.setSize(200, 20);
-				//loginErrorMessage.setLocation(150, 180);
-				//loginPanel.add(loginErrorMessage);
 				loginErrorMessage.setVisible(true);
 				run.repaint();
 				loginErrorDrawn = true;

@@ -1,1 +1,5 @@
-/AccountCreationScreen$1.class
+# Built sources #
+#################
+*.class
+.classpath
+.gitignore
