@@ -1,2 +1,3 @@
 Derek | Hoffman | 20 | myPass | dev | 0
 Test | Patient | 4 | testPatient | this is a test | 1
+Edwin | Avalos | 19 | password | hello | 1
