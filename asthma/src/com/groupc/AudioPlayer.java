@@ -12,7 +12,7 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class AudioPlayer 
 {
-	Audio music;
+	public Audio music;
 	public ArrayList<Audio> sounds;
 	
 	public AudioPlayer()

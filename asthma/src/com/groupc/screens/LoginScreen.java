@@ -6,7 +6,6 @@ package com.groupc.screens;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -29,6 +28,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import com.groupc.Database;
 import com.groupc.Runner;
 import com.groupc.math.Resize;
 
@@ -235,7 +235,9 @@ public class LoginScreen extends Screen
 
 	public void checkLogin() throws IOException
 	{
-
+		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText())){
+			run.setScreen(new DoctorScreen(run));
+		}
 		String line = null;
 		String[] firstNames = new String [10];
 		char[][] passWords = new char[10][30];
@@ -250,7 +252,6 @@ public class LoginScreen extends Screen
 		
 		
 		while((line = br.readLine()) != null)
-
 		{
 			st = new StringTokenizer(line, " | ");
 			firstNames[counter] = st.nextToken();

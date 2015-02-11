@@ -67,6 +67,14 @@ public class DoctorScreen extends Screen
 		mute = new JButton("Mute");
 		mute.setBounds(300, 24, 70, 25);
 		
+		mute.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				butPressed = 3;				
+			}
+		});
+		
 		// Add patient button listener
 		addPatient.addActionListener(new ActionListener()
 		{

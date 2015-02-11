@@ -19,9 +19,9 @@ public class TutorialScreen extends Screen
 		super(run);
 		run.setTitle("Tutorial");
 		
-		logi = new JButton();
+		logi = new JButton("Back");
 		logi.setSize(50, 50);
-		logi.setLocation(250, 50);
+		logi.setLocation(0, 0);
 		
 		logi.addActionListener(new ActionListener()
 		{
