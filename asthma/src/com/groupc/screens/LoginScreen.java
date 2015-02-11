@@ -233,6 +233,7 @@ public class LoginScreen extends Screen
 	}
 	
 	//Private Methods
+]
 	public void checkLogin() throws IOException
 	{
 
@@ -259,6 +260,7 @@ public class LoginScreen extends Screen
 			for(int i = 0; i < tempString.length(); ++i)
 			{
 				 passWords[counter][i] = tempString.charAt(i);
+
 			}
 			counter += 1;
 		}
@@ -292,8 +294,10 @@ public class LoginScreen extends Screen
 				loginErrorMessage.setVisible(true);
 				run.repaint();
 				loginErrorDrawn = true;
+				return false;
 			}
 		}
+		return false;
 	}
 	
 }
