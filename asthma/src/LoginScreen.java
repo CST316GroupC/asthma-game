@@ -42,9 +42,9 @@ public class LoginScreen extends Screen
 	JPanel loginBox = new JPanel();
 	JPanel loginBoxBorder = new JPanel();
 	JLabel userNameLabel = new JLabel("Username:");
-	JTextField userNameTF = new JTextField();
+	static JTextField userNameTF = new JTextField();
 	JLabel passwordLabel = new JLabel("Password:");
-	JPasswordField passwordTF = new JPasswordField();
+	static JPasswordField passwordTF = new JPasswordField();
 	JRadioButton saveLoginRadio = new JRadioButton("Remember Password");
 	JButton loginButton = new JButton("Login");
 	JLabel passRetrievalLabel = new JLabel("");
@@ -216,7 +216,7 @@ public class LoginScreen extends Screen
 	}
 	
 	//Private Methods
-	public void checkLogin()
+	public boolean checkLogin()
 	{
 
 		//JOptionPane.showMessageDialog(run.frame, "Click");
@@ -227,11 +227,13 @@ public class LoginScreen extends Screen
 			if(type == 0)
 			{
 				run.setScreen(new DoctorScreen(run));
+				return false;
 			}
 			//Patients
 			if(type == 1)
 			{
 				run.setScreen(new TutorialScreen(run));
+				return false;
 			}
 		}
 		else
@@ -244,8 +246,10 @@ public class LoginScreen extends Screen
 				loginErrorMessage.setVisible(true);
 				run.frame.repaint();
 				loginErrorDrawn = true;
+				return false;
 			}
 		}
+		return true;
 	}
 	
 }
