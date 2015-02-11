@@ -1,1 +1,2 @@
-Edwin | Avalos | 19 | password | 0 | hello
+edwin | avalos | 19 | password | 0 | hello
+bob@bob.com | bob | 12 | blh | 0 | bob
