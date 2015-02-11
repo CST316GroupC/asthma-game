@@ -25,7 +25,7 @@ public class DoctorScreen extends Screen
 		
 		addPatient = new JButton("Add Patient");
 		addPatient.setSize(150, 50);
-		addPatient.setLocation(250, 50);
+		addPatient.setLocation(175, 350);
 		
 		addPatient.addActionListener(new ActionListener()
 		{
