@@ -25,6 +25,7 @@ public class AccountCreationScreen extends Screen
 	JPanel boxBorder;
 	JButton back;
 	JButton logout;
+	JButton mute;
 	
 	JTextField fname;
 	JTextField lname;
@@ -90,6 +91,10 @@ public class AccountCreationScreen extends Screen
 		logout = new JButton("Logout");
 		logout.setBounds(380, 20, 80, 35);
 		
+		// Add mute button
+		mute = new JButton("Mute");
+		mute.setBounds(300, 24, 70, 25);
+		
 		
 		// Add back button listener
 		back.addActionListener(new ActionListener()
@@ -121,6 +126,7 @@ public class AccountCreationScreen extends Screen
 		pnl.add(cinfo);
 		pnl.add(back);
 		pnl.add(logout);
+		pnl.add(mute);
 		pnl.add(box);
 		pnl.add(boxBorder);
 		

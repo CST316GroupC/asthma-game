@@ -21,6 +21,7 @@ public class DoctorScreen extends Screen
 	JPanel boxBorder;
 	JButton back;
 	JButton logout;
+	JButton mute;
 	
 	int butPressed = 0; //0 is none, 1 is add patient, 2 is back and logout for now
 	
@@ -59,6 +60,10 @@ public class DoctorScreen extends Screen
 		logout = new JButton("Logout");
 		logout.setBounds(380, 20, 80, 35);
 		
+		// Add mute button
+		mute = new JButton("Mute");
+		mute.setBounds(300, 24, 70, 25);
+		
 		// Add patient button listener
 		addPatient.addActionListener(new ActionListener()
 		{
@@ -92,8 +97,10 @@ public class DoctorScreen extends Screen
 		pnl.add(addPatient);
 		pnl.add(back);
 		pnl.add(logout);
+		pnl.add(mute);
 		pnl.add(box);
 		pnl.add(boxBorder);
+		
 		pnl.setLayout(null);		
 		run.frame.setContentPane(pnl);
 		run.frame.setVisible(true);

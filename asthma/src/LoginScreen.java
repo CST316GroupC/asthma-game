@@ -216,7 +216,7 @@ public class LoginScreen extends Screen
 	}
 	
 	//Private Methods
-	public void checkLogin()
+	public boolean checkLogin()
 	{
 
 		//JOptionPane.showMessageDialog(run.frame, "Click");
@@ -227,11 +227,13 @@ public class LoginScreen extends Screen
 			if(type == 0)
 			{
 				run.setScreen(new DoctorScreen(run));
+				return true;
 			}
 			//Patients
 			if(type == 1)
 			{
 				run.setScreen(new TutorialScreen(run));
+				return true;
 			}
 		}
 		else
@@ -244,8 +246,10 @@ public class LoginScreen extends Screen
 				loginErrorMessage.setVisible(true);
 				run.frame.repaint();
 				loginErrorDrawn = true;
+				return false;
 			}
 		}
+		return false;
 	}
 	
 }
