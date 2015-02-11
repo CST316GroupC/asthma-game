@@ -5,7 +5,6 @@
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -90,7 +89,7 @@ public class LoginScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				checkLogin();			
+				checkLogin();
 			}
 		});	
 		
@@ -221,6 +220,9 @@ public class LoginScreen extends Screen
 	{
 
 		//JOptionPane.showMessageDialog(run, "Click");
+		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText())){
+			run.setScreen(new DoctorScreen(run));
+		}
 		if(userNameTF.getText().equals(testUser) && Arrays.equals(passwordTF.getPassword(), testPass))
 		{
 			//Use variable type at the top to switch between doctor login and patient login
