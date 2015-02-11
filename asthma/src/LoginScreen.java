@@ -239,6 +239,8 @@ public class LoginScreen extends Screen
 		{
 			run.setScreen(new TutorialScreen(run));
 		}
+		
+		//Incorrect Login
 		else
 		{
 			if(!loginErrorDrawn)
