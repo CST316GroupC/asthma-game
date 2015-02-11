@@ -20,7 +20,6 @@ public class DoctorScreen extends Screen
 	JButton addPatient;
 	ArrayList<Patient> patients;
 	JLabel lbl;
-	JPanel pnl;
 	JLabel pageTitle;
 	JPanel box;
 	JPanel boxBorder;
@@ -34,7 +33,6 @@ public class DoctorScreen extends Screen
 	{
 		super(run);
 		run.setTitle("Doctor");
-		pnl = new JPanel();
 		
 		// Box display for title
 		box = new JPanel();
@@ -98,16 +96,16 @@ public class DoctorScreen extends Screen
 		});
 		
 		
-		pnl.add(pageTitle);
-		pnl.add(addPatient);
-		pnl.add(back);
-		pnl.add(logout);
-		pnl.add(mute);
-		pnl.add(box);
-		pnl.add(boxBorder);
+		this.add(pageTitle);
+		this.add(addPatient);
+		this.add(back);
+		this.add(logout);
+		this.add(mute);
+		this.add(box);
+		this.add(boxBorder);
 		
-		pnl.setLayout(null);		
-		run.setContentPane(pnl);
+		this.setLayout(null);		
+		run.setContentPane(this);
 		run.setVisible(true);
 	}
 

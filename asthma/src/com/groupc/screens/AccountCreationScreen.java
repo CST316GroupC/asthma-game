@@ -18,8 +18,6 @@ import com.groupc.Runner;
 
 public class AccountCreationScreen extends Screen
 {
-
-	JPanel pnl;
 	
 	JLabel lblfname;
 	JLabel lbllname;
@@ -40,7 +38,6 @@ public class AccountCreationScreen extends Screen
 		run.setSize(run.SCR_WIDTH, run.SCR_HEIGHT);
 		run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		pnl = new JPanel();
 		
 		lblfname = new JLabel("First Name*");
 		lblfname.setSize(100, 20);
@@ -94,20 +91,20 @@ public class AccountCreationScreen extends Screen
 			}
 		});
 		
-		pnl.add(lblfname);
-		pnl.add(lbllname);
-		pnl.add(lblage);
-		pnl.add(lblcinfo);
-		pnl.add(fname);
-		pnl.add(lname);
-		pnl.add(age);
-		pnl.add(cinfo);
-		pnl.add(password);
-		pnl.add(preferredPassword);
-		pnl.add(submitButton);
+		this.add(lblfname);
+		this.add(lbllname);
+		this.add(lblage);
+		this.add(lblcinfo);
+		this.add(fname);
+		this.add(lname);
+		this.add(age);
+		this.add(cinfo);
+		this.add(password);
+		this.add(preferredPassword);
+		this.add(submitButton);
 		
-		pnl.setLayout(null);		
-		run.setContentPane(pnl);
+		this.setLayout(null);		
+		run.setContentPane(this);
 		run.setVisible(true);
 	}
 
@@ -118,7 +115,7 @@ public class AccountCreationScreen extends Screen
 			JLabel error = new JLabel("Missing Information*");
 			error.setSize(150, 20);
 			error.setLocation(125, 280);
-			pnl.add(error);
+			this.add(error);
 			run.repaint();
 			
 		}else  //assumes a database will be implemented but for now will just use a text file

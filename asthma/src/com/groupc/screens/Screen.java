@@ -1,9 +1,11 @@
 package com.groupc.screens;
 
+import javax.swing.JPanel;
+
 import com.groupc.Runner;
 
 
-public abstract class Screen
+public abstract class Screen extends JPanel
 {	
 	protected final Runner run;
 	

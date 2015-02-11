@@ -44,7 +44,6 @@ public class LoginScreen extends Screen
 	Resize resize = new Resize(run);
 	
 	//Display Elements
-	JPanel loginPanel = new JPanel();
 	JPanel testBox = new JPanel();
 	JLabel title = new JLabel("Team C's Asthma Game");
 	JPanel loginBox = new JPanel();
@@ -79,7 +78,7 @@ public class LoginScreen extends Screen
 		});
 		
 		//Set colors
-		loginPanel.setBackground(Color.LIGHT_GRAY);
+		this.setBackground(Color.LIGHT_GRAY);
 		testBox.setBackground(Color.WHITE);
 		loginBox.setBackground(Color.LIGHT_GRAY);
 		loginBoxBorder.setBackground(Color.BLACK);
@@ -130,21 +129,21 @@ public class LoginScreen extends Screen
 		loginErrorMessage.setVisible(false);
 		
 		//add things to the panel
-		loginPanel.add(title);
-		loginPanel.add(userNameLabel);
-		loginPanel.add(userNameTF);
-		loginPanel.add(passwordLabel);
-		loginPanel.add(passwordTF);
-		loginPanel.add(saveLoginRadio);
-		loginPanel.add(loginButton);
-		loginPanel.add(passRetrievalLabel);
-		loginPanel.add(passRetrievalButton);
-		loginPanel.add(loginErrorMessage);
-		loginPanel.add(loginBox);
-		loginPanel.add(loginBoxBorder);
-		loginPanel.add(testBox);
-		loginPanel.setLayout(null);
-		run.setContentPane(loginPanel);
+		this.add(title);
+		this.add(userNameLabel);
+		this.add(userNameTF);
+		this.add(passwordLabel);
+		this.add(passwordTF);
+		this.add(saveLoginRadio);
+		this.add(loginButton);
+		this.add(passRetrievalLabel);
+		this.add(passRetrievalButton);
+		this.add(loginErrorMessage);
+		this.add(loginBox);
+		this.add(loginBoxBorder);
+		this.add(testBox);
+		this.setLayout(null);
+		run.setContentPane(this);
 		run.setVisible(true);
 		
 		
@@ -292,7 +291,7 @@ public class LoginScreen extends Screen
 			{
 				//loginErrorMessage.setSize(200, 20);
 				//loginErrorMessage.setLocation(150, 180);
-				//loginPanel.add(loginErrorMessage);
+				//this.add(loginErrorMessage);
 				loginErrorMessage.setVisible(true);
 				run.repaint();
 				loginErrorDrawn = true;
