@@ -128,16 +128,15 @@ public class AccountCreationScreen extends Screen
 				FileWriter fWriter = new FileWriter("login_information.txt", true);
 				BufferedWriter bWriter = new BufferedWriter(fWriter);
 				bWriter.write(fname.getText() + " | " + lname.getText() + " | " + age.getText() +
-							  " | " + password.getText() + " | " + cinfo.getText() + " | " + type + 
+							  " | " + password.getText() + " | " + type + " | " + cinfo.getText() +
 							  "\n"); //all patients created from doctor screen will be 0
-				bWriter.newLine();
 				bWriter.close();
 			} catch (IOException e)
 			{
 				e.printStackTrace();
 			}
-			run.setScreen(new LoginScreen(run));
 		}
+		run.setScreen(new LoginScreen(run));
 		
 	}
 

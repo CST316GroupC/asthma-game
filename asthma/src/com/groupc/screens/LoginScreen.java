@@ -233,13 +233,14 @@ public class LoginScreen extends Screen
 	}
 	
 	//Private Methods
-]
+
 	public void checkLogin() throws IOException
 	{
 
 		String line = null;
 		String[] firstNames = new String [10];
 		char[][] passWords = new char[10][30];
+		String[] types = new String[10];
 		int counter = 0;
 		String tempString;
 		char tempChar;
@@ -254,9 +255,10 @@ public class LoginScreen extends Screen
 		{
 			st = new StringTokenizer(line, " | ");
 			firstNames[counter] = st.nextToken();
-			st.nextToken();
-			st.nextToken();
-			tempString = st.nextToken();
+			st.nextToken();  //last name
+			st.nextToken();  // age
+			tempString = st.nextToken();  //password
+			types[counter] = st.nextToken(); //type
 			for(int i = 0; i < tempString.length(); ++i)
 			{
 				 passWords[counter][i] = tempString.charAt(i);
@@ -275,12 +277,12 @@ public class LoginScreen extends Screen
 			{
 				//Use variable type at the top to switch between doctor login and patient login
 				//Doctors
-				if(type == 0)
+				if(types[i].equals("0"))
 				{
 					run.setScreen(new DoctorScreen(run));
 				}
 				//Patients
-				if(type == 1)
+				if(types[i].equals("1"))
 				{
 					run.setScreen(new TutorialScreen(run));
 				}
@@ -294,10 +296,8 @@ public class LoginScreen extends Screen
 				loginErrorMessage.setVisible(true);
 				run.repaint();
 				loginErrorDrawn = true;
-				return false;
 			}
 		}
-		return false;
 	}
 	
 }
