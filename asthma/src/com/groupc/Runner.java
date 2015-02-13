@@ -1,14 +1,18 @@
+package com.groupc;
 
 import javax.swing.JFrame;
 
 import org.newdawn.slick.openal.SoundStore;
+
+import com.groupc.screens.LoginScreen;
+import com.groupc.screens.Screen;
 
 
 public class Runner extends JFrame
 {
 	Screen screen;
 	long startTime = System.nanoTime();
-	AudioPlayer player;
+	public AudioPlayer player;
 	
 	public final int SCR_WIDTH = 500;
 	public final int SCR_HEIGHT = 500;

@@ -1,3 +1,4 @@
+package com.groupc.screens;
 /*
  * LoginScreen.java
  * displays and runs elements for the login screen
@@ -27,6 +28,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import com.groupc.Database;
+import com.groupc.Runner;
+import com.groupc.math.Resize;
+
 
 
 public class LoginScreen extends Screen
@@ -39,14 +44,13 @@ public class LoginScreen extends Screen
 	Resize resize = new Resize(run);
 	
 	//Display Elements
-	JPanel loginPanel = new JPanel();
 	JPanel testBox = new JPanel();
 	JLabel title = new JLabel("Team C's Asthma Game");
 	JPanel loginBox = new JPanel();
 	JPanel loginBoxBorder = new JPanel();
-	JLabel userNameLabel = new JLabel("Username");
+	JLabel userNameLabel = new JLabel("Username:");
 	JTextField userNameTF = new JTextField();
-	JLabel passwordLabel = new JLabel("Password");
+	JLabel passwordLabel = new JLabel("Password:");
 	JPasswordField passwordTF = new JPasswordField();
 	JRadioButton saveLoginRadio = new JRadioButton("Remember Password");
 	JButton loginButton = new JButton("Login");
@@ -74,7 +78,7 @@ public class LoginScreen extends Screen
 		
 		
 		//Set colors
-		loginPanel.setBackground(Color.LIGHT_GRAY);
+		this.setBackground(Color.LIGHT_GRAY);
 		testBox.setBackground(Color.WHITE);
 		loginBox.setBackground(Color.LIGHT_GRAY);
 		loginBoxBorder.setBackground(Color.BLACK);
@@ -125,21 +129,21 @@ public class LoginScreen extends Screen
 		loginErrorMessage.setVisible(false);
 		
 		//add things to the panel
-		loginPanel.add(title);
-		loginPanel.add(userNameLabel);
-		loginPanel.add(userNameTF);
-		loginPanel.add(passwordLabel);
-		loginPanel.add(passwordTF);
-		loginPanel.add(saveLoginRadio);
-		loginPanel.add(loginButton);
-		loginPanel.add(passRetrievalLabel);
-		loginPanel.add(passRetrievalButton);
-		loginPanel.add(loginErrorMessage);
-		loginPanel.add(loginBox);
-		loginPanel.add(loginBoxBorder);
-		loginPanel.add(testBox);
-		loginPanel.setLayout(null);
-		run.setContentPane(loginPanel);
+		this.add(title);
+		this.add(userNameLabel);
+		this.add(userNameTF);
+		this.add(passwordLabel);
+		this.add(passwordTF);
+		this.add(saveLoginRadio);
+		this.add(loginButton);
+		this.add(passRetrievalLabel);
+		this.add(passRetrievalButton);
+		this.add(loginErrorMessage);
+		this.add(loginBox);
+		this.add(loginBoxBorder);
+		this.add(testBox);
+		this.setLayout(null);
+		run.setContentPane(this);
 		run.setVisible(true);
 		
 		
@@ -227,11 +231,16 @@ public class LoginScreen extends Screen
 	}
 	
 	//Private Methods
+
 	public void checkLogin() throws IOException
 	{
+		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText())){
+			run.setScreen(new DoctorScreen(run));
+		}
 		String line = null;
 		String[] firstNames = new String [10];
 		char[][] passWords = new char[10][30];
+		String[] types = new String[10];
 		int counter = 0;
 		String tempString;
 		char tempChar;
@@ -245,12 +254,14 @@ public class LoginScreen extends Screen
 		{
 			st = new StringTokenizer(line, " | ");
 			firstNames[counter] = st.nextToken();
-			st.nextToken();
-			st.nextToken();
-			tempString = st.nextToken();
+			st.nextToken();  //last name
+			st.nextToken();  // age
+			tempString = st.nextToken();  //password
+			types[counter] = st.nextToken(); //type
 			for(int i = 0; i < tempString.length(); ++i)
 			{
 				 passWords[counter][i] = tempString.charAt(i);
+
 			}
 			counter += 1;
 		}
@@ -265,12 +276,12 @@ public class LoginScreen extends Screen
 			{
 				//Use variable type at the top to switch between doctor login and patient login
 				//Doctors
-				if(type == 0)
+				if(types[i].equals("0"))
 				{
 					run.setScreen(new DoctorScreen(run));
 				}
 				//Patients
-				if(type == 1)
+				if(types[i].equals("1"))
 				{
 					run.setScreen(new TutorialScreen(run));
 				}

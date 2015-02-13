@@ -1,3 +1,6 @@
+package com.groupc.math;
+
+import com.groupc.Runner;
 
 public class Resize 
 {
