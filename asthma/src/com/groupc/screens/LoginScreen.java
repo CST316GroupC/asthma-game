@@ -37,18 +37,19 @@ import com.groupc.math.Resize;
 public class LoginScreen extends Screen
 {
 	//Variables
+	boolean redraw = true;
+	Resize resize = new Resize(run);
 	int type = 0;
 	boolean loginErrorDrawn = false;
-	boolean redraw = true;
 	boolean elementMoved = false;
-	Resize resize = new Resize(run);
+	
 	
 	//Display Elements
 	JPanel testBox = new JPanel();
 	JLabel title = new JLabel("Team C's Asthma Game");
 	JPanel loginBox = new JPanel();
 	JPanel loginBoxBorder = new JPanel();
-	JLabel userNameLabel = new JLabel("Username:");
+	JLabel userNameLabel = new JLabel("Email:");
 	JTextField userNameTF = new JTextField();
 	JLabel passwordLabel = new JLabel("Password:");
 	JPasswordField passwordTF = new JPasswordField();
@@ -83,13 +84,12 @@ public class LoginScreen extends Screen
 		loginBox.setBackground(Color.LIGHT_GRAY);
 		loginBoxBorder.setBackground(Color.BLACK);
 		saveLoginRadio.setBackground(Color.LIGHT_GRAY);
+		loginErrorMessage.setForeground(Color.RED);
 		
 		//Set fonts
-		title.setFont(new Font("Serif", Font.BOLD, 40));
-		loginErrorMessage.setForeground(Color.RED);
-				
+		title.setFont(new Font("Serif", Font.BOLD, 40));		
 		
-		
+		////Buttons////
 		//Test if Login Button is pushed
 		loginButton.addActionListener(new ActionListener()
 		{
@@ -140,8 +140,9 @@ public class LoginScreen extends Screen
 		this.add(passRetrievalButton);
 		this.add(loginErrorMessage);
 		this.add(loginBox);
-		this.add(loginBoxBorder);
+		//this.add(loginBoxBorder);
 		this.add(testBox);
+		
 		this.setLayout(null);
 		run.setContentPane(this);
 		run.setVisible(true);
