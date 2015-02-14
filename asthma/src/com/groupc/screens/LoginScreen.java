@@ -49,9 +49,9 @@ public class LoginScreen extends Screen
 	JPanel loginBox = new JPanel();
 	JPanel loginBoxBorder = new JPanel();
 	JLabel userNameLabel = new JLabel("Username:");
-	static JTextField userNameTF = new JTextField();
+	public static JTextField userNameTF = new JTextField();
 	JLabel passwordLabel = new JLabel("Password:");
-	static JPasswordField passwordTF = new JPasswordField();
+	public static JPasswordField passwordTF = new JPasswordField();
 	JRadioButton saveLoginRadio = new JRadioButton("Remember Password");
 	JButton loginButton = new JButton("Login");
 	JLabel passRetrievalLabel = new JLabel("");
@@ -148,8 +148,8 @@ public class LoginScreen extends Screen
 		
 		
 		//music stuff
-		run.player.loadSong("AMemoryAway.ogg");
-		run.player.playMusic(true);
+		//run.player.loadSong("AMemoryAway.ogg");
+		//run.player.playMusic(true);
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class DoctorScreen extends Screen
 		super(run);
 		run.setTitle("Doctor");
 		
-		// Box display for title
+		// Box display and border for title and buttons
 		box = new JPanel();
 		boxBorder = new JPanel();
 		
@@ -57,23 +57,17 @@ public class DoctorScreen extends Screen
 		
 		// Add back button
 		back = new JButton("Back");
-		back.setBounds(25, 20, 80, 35);
+		back.setBounds(25, 14, 80, 35);
 		
 		// Add logout button
 		logout = new JButton("Logout");
-		logout.setBounds(380, 20, 80, 35);
+		logout.setBounds(380, 14, 80, 35);
 		
 		// Add mute button
 		mute = new JButton("Mute");
-		mute.setBounds(300, 24, 70, 25);
+		mute.setBounds(300, 18, 70, 25);
 		
-		mute.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 3;				
-			}
-		});
+		
 		
 		// Add patient button listener
 		addPatient.addActionListener(new ActionListener()
@@ -93,13 +87,20 @@ public class DoctorScreen extends Screen
 			}
 		});
 		
-		
 		// Add logout button listener
 		logout.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				butPressed = 2;				
+			}
+		});
+		
+		mute.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				butPressed = 3;				
 			}
 		});
 		

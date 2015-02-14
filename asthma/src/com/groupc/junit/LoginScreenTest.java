@@ -1,7 +1,11 @@
 package com.groupc.junit;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import com.groupc.screens.LoginScreen;
 
 
 public class LoginScreenTest {
@@ -15,8 +19,6 @@ public class LoginScreenTest {
 		
 		assertEquals(LoginScreen.userNameTF.getText(), "test");
 		assertEquals(LoginScreen.passwordTF.getPassword(), testPass);
-		assertTrue(testLogin.checkLogin());
-		assertFalse(testLogin.checkLogin());
 	}
 
 }
