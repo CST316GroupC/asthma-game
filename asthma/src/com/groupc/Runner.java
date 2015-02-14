@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 import org.newdawn.slick.openal.SoundStore;
 
-import com.groupc.screens.GameScreen;
+import com.groupc.screens.Game1Screen;
 import com.groupc.screens.LoginScreen;
 import com.groupc.screens.Screen;
 
@@ -24,7 +24,7 @@ public class Runner extends JFrame
 	{
 		player = new AudioPlayer();
 		//screen = new LoginScreen(this);
-		screen = new GameScreen(this);
+		screen = new Game1Screen(this);
 		
 	}
 	
