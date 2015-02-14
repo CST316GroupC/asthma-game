@@ -46,7 +46,7 @@ public class AccountCreationScreen extends Screen
 		run.setSize(run.SCR_WIDTH, run.SCR_HEIGHT);
 		run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 
-		// Box display and border for title and buttons
+		// Box display and border for buttons
 		box = new JPanel();
 		boxBorder = new JPanel();
 		box.setBackground(Color.LIGHT_GRAY);

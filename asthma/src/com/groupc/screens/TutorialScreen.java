@@ -14,9 +14,8 @@ import com.groupc.Runner;
 
 public class TutorialScreen extends Screen
 {
-
-	JLabel lbl;
 	JLabel pageTitle;
+	JLabel text;
 	
 	JPanel box;
 	JPanel boxBorder;
@@ -26,6 +25,8 @@ public class TutorialScreen extends Screen
 	JPanel stepsBox;
 	JPanel stepsBorder;
 	
+	
+	
 	JButton back;
 	JButton logout;
 	JButton mute;
@@ -34,6 +35,7 @@ public class TutorialScreen extends Screen
 	JButton step3;
 	JButton step4;
 	JButton step5;
+	JButton start;
 	
 	
 	int butPressed = 0;
@@ -42,7 +44,7 @@ public class TutorialScreen extends Screen
 		super(run);
 		run.setTitle("Tutorial");
 		
-		// Box display and border for title and buttons
+		// Box display and border for buttons
 		box = new JPanel();
 		boxBorder = new JPanel();
 		
@@ -58,7 +60,7 @@ public class TutorialScreen extends Screen
 
 		videoBorder.setBackground(Color.BLACK);
 		
-		videoBorder.setBounds(30, 120, 250, 220);
+		videoBorder.setBounds(30, 120, 250, 180);
 		
 		
 		// Tutorial description box and border
@@ -68,8 +70,8 @@ public class TutorialScreen extends Screen
 		descriptionBox.setBackground(Color.LIGHT_GRAY);
 		descriptionBorder.setBackground(Color.BLACK);
 		
-		descriptionBox.setBounds(30, 350, 250, 60);
-		descriptionBorder.setBounds(29, 349, 252, 62);
+		descriptionBox.setBounds(30, 320, 250, 60);
+		descriptionBorder.setBounds(29, 319, 252, 62);
 		
 		
 		// Steps box and border
@@ -79,8 +81,8 @@ public class TutorialScreen extends Screen
 		stepsBox.setBackground(Color.GRAY);
 		stepsBorder.setBackground(Color.BLACK);
 		
-		stepsBox.setBounds(310, 120, 150, 290);
-		stepsBorder.setBounds(309, 119, 152, 292);
+		stepsBox.setBounds(310, 120, 150, 260);
+		stepsBorder.setBounds(309, 119, 152, 262);
 		
 		
 		
@@ -104,6 +106,7 @@ public class TutorialScreen extends Screen
 		mute = new JButton("Mute");
 		mute.setBounds(300, 18, 70, 25);
 		
+		
 		// Add Steps button
 		step1 = new JButton("Step 1");
 		step2 = new JButton("Step 2");
@@ -111,11 +114,25 @@ public class TutorialScreen extends Screen
 		step4 = new JButton("Step 4");
 		step5 = new JButton("Step 5");
 		
-		step1.setBounds(345, 150, 80, 25);
-		step2.setBounds(345, 200, 80, 25);
-		step3.setBounds(345, 250, 80, 25);
-		step4.setBounds(345, 300, 80, 25);
-		step5.setBounds(345, 350, 80, 25);
+		step1.setBounds(345, 140, 80, 25);
+		step2.setBounds(345, 190, 80, 25);
+		step3.setBounds(345, 240, 80, 25);
+		step4.setBounds(345, 290, 80, 25);
+		step5.setBounds(345, 340, 80, 25);
+		
+		
+		// Add start button
+		start = new JButton("Start");
+		
+		start.setBounds(200, 420, 80, 25 );
+		
+		
+		// Add text above Start button
+		text = new JLabel("* To skip, press Start");
+		
+		text.setForeground(Color.RED);
+		text.setBounds(180, 395, 120, 25);
+		
 		
 		// Add back button listener
 		back.addActionListener(new ActionListener()
@@ -143,7 +160,16 @@ public class TutorialScreen extends Screen
 			}
 		});
 		
+		start.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				butPressed = 4;
+			}
+		})
+		;
 		this.add(pageTitle);
+		this.add(text);
 		this.add(back);
 		this.add(logout);
 		this.add(mute);
@@ -152,6 +178,7 @@ public class TutorialScreen extends Screen
 		this.add(step3);
 		this.add(step4);
 		this.add(step5);
+		this.add(start);
 		
 		// Panels have to be added last for it to show 
 		this.add(box);
@@ -173,6 +200,10 @@ public class TutorialScreen extends Screen
 		if(butPressed == 2)
 		{
 			run.setScreen(new LoginScreen(run));
+		}
+		else if(butPressed == 4)
+		{
+			run.setScreen(new RewardScreen(run));
 		}
 	}
 
@@ -197,6 +228,7 @@ public class TutorialScreen extends Screen
 	@Override
 	public void dispose() 
 	{
+		// TODO Auto-generated method stub
 	}
 
 }

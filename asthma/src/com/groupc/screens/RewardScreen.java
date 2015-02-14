@@ -4,35 +4,55 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.groupc.Patient;
 import com.groupc.Runner;
 
-
-public class DoctorScreen extends Screen
+public class RewardScreen extends Screen
 {
 
-	JButton addPatient;
-	ArrayList<Patient> patients;
-	JLabel lbl;
 	JLabel pageTitle;
+	
 	JPanel box;
 	JPanel boxBorder;
+	JPanel rewardBox;
+	JPanel rewardBorder;
+	
 	JButton back;
 	JButton logout;
 	JButton mute;
+	JButton continueButton;
 	
-	int butPressed = 0; //0 is none, 1 is add patient, 2 is back and logout for now
+	int butPressed = 0;
 	
-	public DoctorScreen(Runner run) 
-	{
+	public RewardScreen(Runner run) {
 		super(run);
-		run.setTitle("Doctor");
+		run.setTitle("Rewards");
+		
+		
+		// Page title
+		pageTitle = new JLabel("Rewards Page");
+		pageTitle.setFont(new Font("Serif", Font.BOLD, 25));
+		pageTitle.setBounds(180, 60, 350, 40);
+		
+		
+		// Add back button
+		back = new JButton("Back");
+		back.setBounds(25, 14, 80, 35);
+		
+		
+		// Add logout button
+		logout = new JButton("Logout");
+		logout.setBounds(380, 14, 80, 35);
+		
+		
+		// Add mute button
+		mute = new JButton("Mute");
+		mute.setBounds(300, 18, 70, 25);		
+		
 		
 		// Box display and border for buttons
 		box = new JPanel();
@@ -45,48 +65,45 @@ public class DoctorScreen extends Screen
 		boxBorder.setBounds(17, 0, 452, 61);
 		
 		
-		// Page title
-		pageTitle = new JLabel("Doctor Page");
-		pageTitle.setFont(new Font("Serif", Font.BOLD, 25));
-		pageTitle.setBounds(180, 60, 350, 40);
+		// Reward display and border
+		rewardBox = new JPanel();
+		rewardBorder = new JPanel();
+		
+		rewardBox.setBackground(Color.LIGHT_GRAY);
+		rewardBorder.setBackground(Color.BLACK);
+		
+		rewardBox.setBounds(100, 110, 285, 250);
+		rewardBorder.setBounds(99, 109, 287, 252);
 		
 		
-		// Add patient button
-		addPatient = new JButton("Add Patient");
-		addPatient.setBounds(180, 200, 120, 40);
-		
-		// Add back button
-		back = new JButton("Back");
-		back.setBounds(25, 14, 80, 35);
-		
-		// Add logout button
-		logout = new JButton("Logout");
-		logout.setBounds(380, 14, 80, 35);
-		
-		// Add mute button
-		mute = new JButton("Mute");
-		mute.setBounds(300, 18, 70, 25);
+		// Add continue button
+		continueButton = new JButton("Continue");
+		continueButton.setBounds(195, 420, 90, 25);
 		
 		
 		
-		// Add patient button listener
-		addPatient.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 1;				
-			}
-		});
+		this.add(pageTitle);
+		this.add(back);
+		this.add(logout);
+		this.add(mute);
+		this.add(continueButton);
+		
+		// Panels have to be added last for it to show 
+		this.add(box);
+		this.add(boxBorder);
+		this.add(rewardBox);
+		this.add(rewardBorder);
+		
 		
 		// Add back button listener
 		back.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 2;				
+				butPressed = 1;				
 			}
-		});
-		
+		});		
+
 		// Add logout button listener
 		logout.addActionListener(new ActionListener()
 		{
@@ -94,26 +111,9 @@ public class DoctorScreen extends Screen
 			public void actionPerformed(ActionEvent arg0) {
 				butPressed = 2;				
 			}
-		});
+		});		
 		
-		mute.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 3;				
-			}
-		});
-		
-		
-		this.add(pageTitle);
-		this.add(addPatient);
-		this.add(back);
-		this.add(logout);
-		this.add(mute);
-		this.add(box);
-		this.add(boxBorder);
-		
-		this.setLayout(null);		
+		this.setLayout(null);
 		run.setContentPane(this);
 		run.setVisible(true);
 	}
@@ -121,13 +121,13 @@ public class DoctorScreen extends Screen
 	@Override
 	public void update(float deltaTime)
 	{
-		if(butPressed == 1)
-		{
-			run.setScreen(new AccountCreationScreen(run));
-		}
-		else if(butPressed == 2)
+		if(butPressed == 2)
 		{
 			run.setScreen(new LoginScreen(run));
+		}
+		else if(butPressed == 1)
+		{
+			run.setScreen(new TutorialScreen(run));
 		}
 	}
 
@@ -150,9 +150,8 @@ public class DoctorScreen extends Screen
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose() 
+	{
 		// TODO Auto-generated method stub
-		
 	}
-
 }
