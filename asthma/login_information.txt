@@ -3,3 +3,4 @@ test | test | test | test | 1 | default test
 test2 | test2 | test2 | tesT2 | 1 | test for case sensative password
 TeSt3 | test3 | 1093809 | test3 | 1 | testing username case-sensative
 test4 | bob | bill | joe | 1 | testing all entries different
+bill | bob | joe | fish | 1 | cat
