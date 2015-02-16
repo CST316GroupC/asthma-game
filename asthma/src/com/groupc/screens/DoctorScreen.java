@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import com.groupc.Patient;
 import com.groupc.Runner;
@@ -32,7 +33,7 @@ public class DoctorScreen extends Screen
 	JButton navBackButton    = new JButton("Back");
 	JButton navLogoutButton  = new JButton("Logout");
 	JButton navMuteButton    = new JButton("Mute");
-	JLabel  pageTitle        = new JLabel("Doctor Page");
+	JLabel  pageTitle        = new JLabel("Doctor Page",SwingConstants.CENTER);
 	JButton addPatientButton = new JButton("Add Patient");
 	
 	public DoctorScreen(Runner run) 
@@ -135,7 +136,7 @@ public class DoctorScreen extends Screen
 			navBackButton.setFont(new Font(navBackButton.getFont().getFontName(),navBackButton.getFont().getStyle(), resize.font(12)));
 			
 			//pageTitle
-			pageTitle.setBounds(resize.locationX(180), resize.locationY(55), resize.width(350), resize.height(40));
+			pageTitle.setBounds(resize.locationX(0), resize.locationY(55), resize.width(500), resize.height(40));
 			pageTitle.setFont(new Font(pageTitle.getFont().getFontName(),pageTitle.getFont().getStyle(), resize.font(25)));
 			
 			//add patientButton
