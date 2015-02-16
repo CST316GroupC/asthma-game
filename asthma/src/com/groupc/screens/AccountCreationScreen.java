@@ -46,8 +46,7 @@ public class AccountCreationScreen extends Screen
 		run.setSize(run.SCR_WIDTH, run.SCR_HEIGHT);
 		run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 
-		// Box display for title
-		
+		// Box display and border for buttons
 		box = new JPanel();
 		boxBorder = new JPanel();
 		box.setBackground(Color.LIGHT_GRAY);
@@ -105,47 +104,46 @@ public class AccountCreationScreen extends Screen
 		});
 		
 		// Add back button
-				back = new JButton("Back");
-				back.setBounds(25, 20, 80, 35);
-						
-				// Add logout button
-				logout = new JButton("Logout");
-				logout.setBounds(380, 20, 80, 35);
+		back = new JButton("Back");
+		back.setBounds(25, 14, 80, 35);
 				
-				// Add mute button
-				mute = new JButton("Mute");
-				mute.setBounds(300, 24, 70, 25);
+		// Add logout button
+		logout = new JButton("Logout");
+		logout.setBounds(380, 14, 80, 35);
 				
-				
-				// Add back button listener
-				back.addActionListener(new ActionListener()
-				{
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						butPressed = 1;				
-					}
-				});
-				
-				mute.addActionListener(new ActionListener()
-				{
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						butPressed = 3;				
-					}
-				});
-				
-				// Add logout button listener
-				logout.addActionListener(new ActionListener()
-				{
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						butPressed = 2;				
-					}
-				});
+		// Add mute button
+		mute = new JButton("Mute");
+		mute.setBounds(300, 18, 70, 25);
 				
 				
-				this.add(pageTitle);
-		
+		// Add back button listener
+		back.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				butPressed = 1;				
+			}
+		});
+				
+		mute.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				butPressed = 3;				
+			}
+		});
+				
+		// Add logout button listener
+		logout.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				butPressed = 2;				
+			}
+		});
+				
+				
+		this.add(pageTitle);
 		this.add(lblfname);
 		this.add(lbllname);
 		this.add(lblage);
