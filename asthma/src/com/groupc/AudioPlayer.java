@@ -1,8 +1,11 @@
 package com.groupc;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
+
+import org.newdawn.slick.openal.Audio;
+import org.newdawn.slick.openal.AudioImpl;
+import org.newdawn.slick.openal.AudioLoader;
+import org.newdawn.slick.util.ResourceLoader;
 
 
 public class AudioPlayer 

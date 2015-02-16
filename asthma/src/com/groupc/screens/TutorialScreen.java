@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import com.groupc.Runner;
 
 
@@ -40,6 +42,8 @@ public class TutorialScreen extends Screen
 	
 	public TutorialScreen(Runner run) {
 		super(run);
+		
+		//Basic Frame Settings
 		run.setTitle("Tutorial");
 		
 		// Box display and border for buttons
@@ -118,7 +122,7 @@ public class TutorialScreen extends Screen
 		step4.setBounds(345, 290, 80, 25);
 		step5.setBounds(345, 340, 80, 25);
 		
-		
+
 		// Add start button
 		start = new JButton("Start");
 		
