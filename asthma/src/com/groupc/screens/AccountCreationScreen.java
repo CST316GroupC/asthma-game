@@ -25,32 +25,32 @@ import com.groupc.math.Resize;
 public class AccountCreationScreen extends Screen
 {
 	//Variables
-	boolean redraw = true;
-	Resize resize = new Resize(run);
-	int butPressed = 0;
-	int type = 1;
+	boolean redraw     = true;
+	Resize  resize     = new Resize(run);
+	int     butPressed = 0;
+	int     type       = 1;
 	
 	//Display Elements
-	JPanel testBox = new JPanel();
-	JPanel navBox = new JPanel();
-	JPanel navBoxBorder = new JPanel();
-	JPanel pageBox = new JPanel();
-	JButton navBackButton = new JButton("Back");
-	JButton navLogoutButton = new JButton("Logout");
-	JButton navMuteButton = new JButton("Mute");
-	JLabel pageTitle = new JLabel("Account Creation Page");
-	JLabel firstNameLabel = new JLabel("First Name*:");
-	JLabel lastNameLabel = new JLabel("Last Name*:");
-	JLabel ageLabel = new JLabel("Age:");
-	JLabel infoLabel = new JLabel("Contact Info:");
-	JLabel passwordLabel = new JLabel("Password*");
-	JTextField firstNameTF = new JTextField();
-	JTextField passwordTF = new JTextField();
-	JTextField lastNameTF = new JTextField();
-	JTextField ageTF = new JTextField();
-	JTextArea infoTA = new JTextArea();
-	JButton submitButton = new JButton("Submit");
-	JLabel errorMessage = new JLabel("Missing Information*");
+	JPanel     testBox         = new JPanel();
+	JPanel     navBox          = new JPanel();
+	JPanel     navBoxBorder    = new JPanel();
+	JPanel     pageBox         = new JPanel();
+	JButton    navBackButton   = new JButton("Back");
+	JButton    navLogoutButton = new JButton("Logout");
+	JButton    navMuteButton   = new JButton("Mute");
+	JLabel     pageTitle       = new JLabel("Account Creation Page");
+	JLabel     firstNameLabel  = new JLabel("First Name*:");
+	JLabel     lastNameLabel   = new JLabel("Last Name*:");
+	JLabel     ageLabel        = new JLabel("Age:");
+	JLabel     infoLabel       = new JLabel("Contact Info:");
+	JLabel     passwordLabel   = new JLabel("Password*");
+	JTextField firstNameTF     = new JTextField();
+	JTextField passwordTF      = new JTextField();
+	JTextField lastNameTF      = new JTextField();
+	JTextField ageTF           = new JTextField();
+	JTextArea  infoTA          = new JTextArea();
+	JButton    submitButton    = new JButton("Submit");
+	JLabel     errorMessage    = new JLabel("Missing Information*");
 	
 	public AccountCreationScreen(Runner run) 
 	{

@@ -20,19 +20,19 @@ import com.groupc.math.Resize;
 public class DoctorScreen extends Screen
 {
 	//Variables
-	boolean redraw = true;
-	Resize resize = new Resize(run);
+	boolean redraw     = true;
+	Resize  resize     = new Resize(run);
+	int     butPressed = 0; //0 is none, 1 is add patient, 2 is back and logout for now
 	ArrayList<Patient> patients;
-	int butPressed = 0; //0 is none, 1 is add patient, 2 is back and logout for now
 	
 	//Display Elements
-	JPanel testBox = new JPanel();
-	JPanel navBox = new JPanel();
-	JPanel navBoxBorder = new JPanel();
-	JButton navBackButton = new JButton("Back");
-	JButton navLogoutButton = new JButton("Logout");
-	JButton navMuteButton = new JButton("Mute");
-	JLabel pageTitle = new JLabel("Doctor Page");
+	JPanel  testBox          = new JPanel();
+	JPanel  navBox           = new JPanel();
+	JPanel  navBoxBorder     = new JPanel();
+	JButton navBackButton    = new JButton("Back");
+	JButton navLogoutButton  = new JButton("Logout");
+	JButton navMuteButton    = new JButton("Mute");
+	JLabel  pageTitle        = new JLabel("Doctor Page");
 	JButton addPatientButton = new JButton("Add Patient");
 	
 	public DoctorScreen(Runner run) 

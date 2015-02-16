@@ -37,27 +37,27 @@ import com.groupc.math.Resize;
 public class LoginScreen extends Screen
 {
 	//Variables
-	boolean redraw = true;
-	Resize resize = new Resize(run);
-	int type = 0;
+	boolean redraw          = true;
+	Resize  resize          = new Resize(run);
+	int     type            = 0;
 	boolean loginErrorDrawn = false;
-	boolean elementMoved = false;
+	boolean elementMoved    = false;
 	
 	
 	//Display Elements
-	JPanel testBox = new JPanel();
-	JLabel title = new JLabel("Team C's Asthma Game");
-	JPanel loginBox = new JPanel();
-	JPanel loginBoxBorder = new JPanel();
-	JLabel userNameLabel = new JLabel("Email:");
-	JTextField userNameTF = new JTextField();
-	JLabel passwordLabel = new JLabel("Password:");
-	JPasswordField passwordTF = new JPasswordField();
-	JRadioButton saveLoginRadio = new JRadioButton("Remember Password");
-	JButton loginButton = new JButton("Login");
-	JLabel passRetrievalLabel = new JLabel("");
-	JButton passRetrievalButton = new JButton("Forgot Password?");
-	JLabel loginErrorMessage = new JLabel("Incorrect Username/Password");
+	JPanel         testBox             = new JPanel();
+	JLabel         title               = new JLabel("Team C's Asthma Game");
+	JPanel         loginBox            = new JPanel();
+	JPanel         loginBoxBorder      = new JPanel();
+	JLabel         userNameLabel       = new JLabel("Email:");
+	JTextField     userNameTF          = new JTextField();
+	JLabel         passwordLabel       = new JLabel("Password:");
+	JPasswordField passwordTF          = new JPasswordField();
+	JRadioButton   saveLoginRadio      = new JRadioButton("Remember Password");
+	JButton        loginButton         = new JButton("Login");
+	JLabel         passRetrievalLabel  = new JLabel("");
+	JButton        passRetrievalButton = new JButton("Forgot Password?");
+	JLabel         loginErrorMessage   = new JLabel("Incorrect Username/Password");
 	
 	public LoginScreen(Runner run) 
 	{
