@@ -2,7 +2,3 @@ user | test | 10 | pass | 1 | hello
 doctor | test | 10 | pass | 0 | hello
 edwin | avalos | 19 | password | 0 | hello
 bob@bob.com | bob | 12 | blh | 0 | bob
-<<<<<<< HEAD
-=======
-chris | carpenter | 576 | pass | 0 | hi
->>>>>>> 03a9545bd34ec7a6bad632d73402ff2b28d5bdef

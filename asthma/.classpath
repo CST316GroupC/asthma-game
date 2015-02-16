@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="C:/ASU/Eclipse Projects/lwjgl-2.9.3/jar/slick-util.jar"/>
 	<classpathentry kind="lib" path="C:/ASU/Eclipse Projects/lwjgl-2.9.3/jar/jogg-0.0.7.jar"/>
 	<classpathentry kind="lib" path="C:/ASU/Eclipse Projects/lwjgl-2.9.3/jar/jorbis-0.0.15.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
