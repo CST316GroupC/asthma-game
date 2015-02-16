@@ -19,11 +19,11 @@ public class Resize
 		if(ratioY<ratioX)
 		{
 			int screenXPosition = (int)((run.getContentPane().getWidth()-(ratioY*run.SCR_WIDTH))/2.0);
-			return (int)(((double)value*ratioY)+screenXPosition);
+			return (int)((value*ratioY)+screenXPosition);
 		}
 		else
 		{
-			return (int)((double)value*ratioX);
+			return (int)(value*ratioX);
 		}
 	}
 	
@@ -36,11 +36,11 @@ public class Resize
 		if(ratioX<ratioY)
 		{
 			int screenYPosition = (int)((run.getContentPane().getHeight()-(ratioX*run.SCR_HEIGHT))/2.0);
-			return (int)((double)value*ratioX)+screenYPosition;
+			return (int)(value*ratioX)+screenYPosition;
 		}
 		else
 		{
-			return (int)((double)value*ratioY);
+			return (int)(value*ratioY);
 		}
 	}
 	
@@ -52,11 +52,11 @@ public class Resize
 		
 		if(ratioY<ratioX)
 		{
-			return (int)((double)value*ratioY);
+			return (int)(value*ratioY);
 		}
 		else
 		{
-			return (int)((double)value*ratioX);
+			return (int)(value*ratioX);
 		}
 	}
 	
@@ -68,11 +68,11 @@ public class Resize
 		
 		if(ratioX<ratioY)
 		{
-			return (int)((double)value*ratioX);
+			return (int)(value*ratioX);
 		}
 		else
 		{
-			return (int)((double)value*ratioY);
+			return (int)(value*ratioY);
 		}
 	}
 	
@@ -84,11 +84,11 @@ public class Resize
 		
 		if(ratioX<ratioY)
 		{
-			return (int)((double)value*ratioX);
+			return (int)(value*ratioX);
 		}
 		else
 		{
-			return (int)((double)value*ratioY);
+			return (int)(value*ratioY);
 		}
 	}
 }
