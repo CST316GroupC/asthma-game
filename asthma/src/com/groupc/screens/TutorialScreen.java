@@ -25,8 +25,6 @@ public class TutorialScreen extends Screen
 	JPanel stepsBox;
 	JPanel stepsBorder;
 	
-	
-	
 	JButton back;
 	JButton logout;
 	JButton mute;
@@ -37,10 +35,10 @@ public class TutorialScreen extends Screen
 	JButton step5;
 	JButton start;
 	
-	
 	int butPressed = 0;
 	
-	public TutorialScreen(Runner run) {
+	public TutorialScreen(Runner run)
+	{
 		super(run);
 		run.setTitle("Tutorial");
 		
@@ -152,6 +150,7 @@ public class TutorialScreen extends Screen
 			}
 		});
 		
+		// Add mute button listener
 		mute.addActionListener(new ActionListener()
 		{
 			@Override
@@ -160,14 +159,16 @@ public class TutorialScreen extends Screen
 			}
 		});
 		
+		// Add start button listener
 		start.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				butPressed = 4;
 			}
-		})
-		;
+		});
+		
+		
 		this.add(pageTitle);
 		this.add(text);
 		this.add(back);
@@ -203,7 +204,7 @@ public class TutorialScreen extends Screen
 		}
 		else if(butPressed == 4)
 		{
-			run.setScreen(new RewardScreen(run));
+			run.setScreen(new RecordingScreen(run));
 		}
 	}
 

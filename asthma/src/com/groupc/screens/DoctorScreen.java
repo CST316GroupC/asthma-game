@@ -96,6 +96,7 @@ public class DoctorScreen extends Screen
 			}
 		});
 		
+		// Add mute button listener
 		mute.addActionListener(new ActionListener()
 		{
 			@Override

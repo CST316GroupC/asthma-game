@@ -127,7 +127,7 @@ public class RewardScreen extends Screen
 		}
 		else if(butPressed == 1)
 		{
-			run.setScreen(new TutorialScreen(run));
+			run.setScreen(new RecordingScreen(run));
 		}
 	}
 
