@@ -1,36 +1,31 @@
 package com.groupc.game;
 
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.opengl.Texture;
 
+import com.groupc.math.Rectangle;
+
+/**
+ * An object that has a position and size but generally 
+ * will not move
+ * @author Edwin Avalos
+ *
+ */
 public class GameObject
 {
-	public Texture texture;
-	public float x;
-	public float y;
-	public float width;
-	public float height;
+	//Variables
+	public Rectangle rect;
 	
-	public GameObject(float x, float y, int width, int height, Texture text)
+	//Constructors
+	/**
+	 * Creates a new GameObject from the values passed
+	 * @param x - x coordinate of lowerleft
+	 * @param y - y coordinate of lowerleft
+	 * @param width - width of object
+	 * @param height - width of object
+	 */
+	public GameObject(float x, float y, int width, int height)
 	{
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.texture = text;
-	}
-	
-	public void draw()
-	{
-		GL11.glColor3f(0.5f,0.5f,1.0f);
-        
-        // draw quad
-        GL11.glBegin(GL11.GL_QUADS);
-            GL11.glVertex2f(x,y);
-            GL11.glVertex2f(x+width, y);
-            GL11.glVertex2f(x+width, y+height);
-            GL11.glVertex2f(x,y+height);
-        GL11.glEnd();
+		rect = new Rectangle(x, y, width, height);
 	}
 }
 

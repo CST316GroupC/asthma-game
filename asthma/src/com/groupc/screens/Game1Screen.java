@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 import com.groupc.Runner;
@@ -45,7 +46,6 @@ public class Game1Screen extends Screen
 		try {			
 			
             //Display.setDisplayMode(new DisplayMode(400, 400));
-			
 			Display.create();
 			Display.setParent(canvas);
 		} catch (LWJGLException e) {
@@ -58,13 +58,17 @@ public class Game1Screen extends Screen
 		
 		//OpenGL INIT                    
 	      GL11.glClearColor(0.0f,0.0f,0.0f,0.0f); //black backround           
-
+	               
+	      
+      	// enable alpha blending
+      	  GL11.glEnable(GL11.GL_BLEND);
+      	  GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	      GL11.glMatrixMode(GL_PROJECTION);                                 
 	      GL11.glLoadIdentity();                                            
 	      GL11.glOrtho(0, 400, 0, 400, 1, -1);      
 	      GL11.glViewport(0, 0, 400, 400 );
-	      GL11.glMatrixMode(GL_MODELVIEW);
-		
+	      GL11.glMatrixMode(GL_MODELVIEW);	
+	      GL11.glLoadIdentity(); 
 	}
 
 	@Override
