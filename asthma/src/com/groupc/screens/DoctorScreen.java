@@ -89,7 +89,6 @@ public class DoctorScreen extends Screen
 			}
 		});
 		
-		
 		// Add logout button listener
 		navLogoutButton.addActionListener(new ActionListener()
 		{

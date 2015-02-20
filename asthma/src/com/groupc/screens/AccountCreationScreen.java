@@ -57,6 +57,8 @@ public class AccountCreationScreen extends Screen
 	{
 		super(run);
 		
+		run.setTitle("Account Creation");
+		
 		//Basic Frame Settings
 		run.setTitle("Account Creation");
 		
@@ -89,8 +91,7 @@ public class AccountCreationScreen extends Screen
 				addCurrentPatient();				
 			}
 		});
-		
-		// Add back button
+
 				
 		//navBackButton listener
 		navBackButton.addActionListener(new ActionListener()
