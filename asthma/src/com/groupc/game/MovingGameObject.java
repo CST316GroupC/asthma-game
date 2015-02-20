@@ -13,7 +13,7 @@ public class MovingGameObject extends GameObject
 	//Variables
 	public Vector velocity;
 	public Vector accel;
-	public final Vector max;
+	public Vector max;
 	
 	//Constructors
 	/**

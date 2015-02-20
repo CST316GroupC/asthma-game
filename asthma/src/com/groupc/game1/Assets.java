@@ -20,7 +20,7 @@ public class Assets
 			cannonandball = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("cannonandball.png"));
 			mainmenu = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("mainmenu.png"));
 			
-			ball = new TextureRegion(cannonandball, 32, 0, 32, 32);
+			ball = new TextureRegion(cannonandball, 39, 7, 20, 20);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

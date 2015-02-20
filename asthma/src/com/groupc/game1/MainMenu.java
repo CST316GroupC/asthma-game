@@ -4,18 +4,26 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
-import com.groupc.game.GameObject;
 import com.groupc.game.GameScreen;
+import com.groupc.math.CollisionChecker;
 
 public class MainMenu extends GameScreen
 {
-	Ball player;
+	Ball[] balls;
 	
 	public MainMenu()
 	{
 		Assets.load();
-		player = new Ball(50, 100, 32, 32);
+		balls = new Ball[]{new Ball(50, 100, 32, 32),new Ball(100, 100, 32, 32),new Ball(50, 50, 32, 32),
+				new Ball(0, 100, 32, 32),new Ball(300, 100, 32, 32),new Ball(250, 100, 32, 32),
+				new Ball(50, 0, 32, 32),new Ball(5, 10, 32, 32),new Ball(200, 100, 32, 32),
+				new Ball(150, 0, 32, 32),new Ball(50, 10, 32, 32)};
 		//player = new ObjectTest(50, 50, 50, 50, 0, 0, 0, 0, 50, 50);
+		for(int i = 0; i < 10; i++)
+		{
+			balls[i].velocity.set(50, 25);
+		}
+		
 	}
 
 	@Override
@@ -25,7 +33,7 @@ public class MainMenu extends GameScreen
 		        if (Keyboard.getEventKey() == Keyboard.KEY_W) {
 		        System.out.println("A Key Pressed");
 		        //player.angle++;
-		        player.velocity.set(0, 50);
+		        //player.velocity.set(0, 50);
 		        }
 		    }
 		    else {
@@ -37,7 +45,7 @@ public class MainMenu extends GameScreen
 		        if (Keyboard.getEventKey() == Keyboard.KEY_A) {
 		        System.out.println("A Key Pressed");
 		        //player.angle++;
-		        player.velocity.set(-50, 0);
+		        //player.velocity.set(-50, 0);
 		        }
 		    }
 		    else {
@@ -49,7 +57,7 @@ public class MainMenu extends GameScreen
 		        if (Keyboard.getEventKey() == Keyboard.KEY_S) {
 		        System.out.println("A Key Pressed");
 		        //player.angle--;
-		        player.velocity.set(0, -50);
+		        //player.velocity.set(0, -50);
 		        }
 		    }
 		    else {
@@ -61,7 +69,7 @@ public class MainMenu extends GameScreen
 		        if (Keyboard.getEventKey() == Keyboard.KEY_D) {
 		        System.out.println("A Key Pressed");
 		        //player.angle--;
-		        player.velocity.set(50, 0);
+		        //player.velocity.set(50, 0);
 		        }
 		    }
 		    else {
@@ -70,7 +78,28 @@ public class MainMenu extends GameScreen
 		        }
 		    }
 		}
-		player.update(deltaTime);
+		//player.update(deltaTime);
+		for(int i = 0; i < 10; i++)
+		{
+			balls[i].update(deltaTime);
+			if(!(CollisionChecker.RectInside(balls[i].bounds, Display.getWidth(), Display.getHeight())))
+			{
+				if(balls[i].bounds.lowerLeft.x < 0 || balls[i].bounds.lowerLeft.x + balls[i].bounds.width > Display.getWidth())
+					balls[i].velocity.set(balls[i].velocity.x * -1, balls[i].velocity.y);
+				if(balls[i].bounds.lowerLeft.y < 0 || balls[i].bounds.lowerLeft.y + balls[i].bounds.height > Display.getHeight())
+					balls[i].velocity.set(balls[i].velocity.x, balls[i].velocity.y * -1);
+			}
+			for(int j = 0; j < 10; j++)
+			{
+				if(i != j)
+				{
+					if((CollisionChecker.RectToRect(balls[i].bounds, balls[j].bounds)))
+					{
+						balls[i].velocity.set(balls[i].velocity.x * -1, balls[i].velocity.y);
+					}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -97,7 +126,11 @@ public class MainMenu extends GameScreen
 
 	public void drawBall()
 	{
-		Assets.ball.draw(player.rect);
+		for(int i = 0; i < 10; i++)
+		{
+			Assets.ball.draw(balls[i].bounds);
+		}
+		
 	}
 	@Override
 	public void pause() {

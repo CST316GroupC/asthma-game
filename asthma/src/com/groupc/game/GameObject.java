@@ -1,8 +1,7 @@
 package com.groupc.game;
 
-import org.lwjgl.opengl.GL11;
-
 import com.groupc.math.Rectangle;
+import com.groupc.math.Vector;
 
 /**
  * An object that has a position and size but generally 
@@ -13,7 +12,8 @@ import com.groupc.math.Rectangle;
 public class GameObject
 {
 	//Variables
-	public Rectangle rect;
+	public Rectangle bounds;
+	public Vector position;
 	
 	//Constructors
 	/**
@@ -25,7 +25,13 @@ public class GameObject
 	 */
 	public GameObject(float x, float y, int width, int height)
 	{
-		rect = new Rectangle(x, y, width, height);
+		position = new Vector(x, y);
+		bounds = new Rectangle(x - width/2, y - height/2, width, height);
+	}
+	
+	public Rectangle getBounds()
+	{
+		return new Rectangle(0,0,0,0);
 	}
 }
 
