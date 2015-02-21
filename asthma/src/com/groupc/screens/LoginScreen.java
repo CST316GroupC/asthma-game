@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import com.groupc.Database;
 import com.groupc.Runner;
@@ -42,10 +44,8 @@ public class LoginScreen extends Screen
 	
 	
 	//Display Elements
-	JPanel         testBox             = new JPanel();
-	JLabel         title               = new JLabel("Team C's Asthma Game");
+	JLabel         title               = new JLabel("Team C's Asthma Game",SwingConstants.CENTER);
 	JPanel         loginBox            = new JPanel();
-	JPanel         loginBoxBorder      = new JPanel();
 	JLabel         userNameLabel       = new JLabel("Email:");
 	JTextField     userNameTF          = new JTextField();
 	JLabel         passwordLabel       = new JLabel("Password:");
@@ -64,6 +64,7 @@ public class LoginScreen extends Screen
 		run.setTitle("Login");
 		run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		run.setMinimumSize(new Dimension(run.SCR_WIDTH, run.SCR_HEIGHT));
+		run.setLocationRelativeTo(null);
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -77,10 +78,8 @@ public class LoginScreen extends Screen
 		
 		
 		//Set colors
-		this.setBackground(Color.LIGHT_GRAY);
-		testBox.setBackground(Color.WHITE);
+		this.setBackground(Color.WHITE);
 		loginBox.setBackground(Color.LIGHT_GRAY);
-		loginBoxBorder.setBackground(Color.BLACK);
 		saveLoginRadio.setBackground(Color.LIGHT_GRAY);
 		loginErrorMessage.setForeground(Color.RED);
 		
@@ -138,8 +137,6 @@ public class LoginScreen extends Screen
 		this.add(passRetrievalButton);
 		this.add(loginErrorMessage);
 		this.add(loginBox);
-		//this.add(loginBoxBorder);
-		this.add(testBox);
 		
 		this.setLayout(null);
 		run.setContentPane(this);
@@ -156,18 +153,13 @@ public class LoginScreen extends Screen
 	{
 		if(redraw)
 		{
-			//test Box
-			testBox.setBounds(resize.locationX(0), resize.locationY(0), resize.width(500), resize.height(500));
-			
 			//title
-			title.setBounds(resize.locationX(25), resize.locationY(80), resize.width(500), resize.height(50));
+			title.setBounds(resize.locationX(0), resize.locationY(80), resize.width(500), resize.height(50));
 			title.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(40)));
 			
 			//loginBox
 			loginBox.setBounds(resize.locationX(100), resize.locationY(200), resize.width(300), resize.height(200));
-			
-			//loginBoxBorder
-			loginBoxBorder.setBounds(resize.locationX(99), resize.locationY(199), resize.width(302), resize.height(202));
+			loginBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
 			
 			//UserName
 			userNameLabel.setBounds(resize.locationX(170), resize.locationY(220), resize.width(160), resize.height(20));

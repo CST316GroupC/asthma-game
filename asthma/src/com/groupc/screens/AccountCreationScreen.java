@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,14 +33,8 @@ public class AccountCreationScreen extends Screen
 	int     type       = 1;
 	
 	//Display Elements
-	JPanel     testBox         = new JPanel();
-	JPanel     navBox          = new JPanel();
-	JPanel     navBoxBorder    = new JPanel();
+	NavigationBar navBar       = new NavigationBar(run,true,false,"Account Creation Page");
 	JPanel     pageBox         = new JPanel();
-	JButton    navBackButton   = new JButton("Back");
-	JButton    navLogoutButton = new JButton("Logout");
-	JButton    navMuteButton   = new JButton("Mute");
-	JLabel     pageTitle       = new JLabel("Account Creation Page",SwingConstants.CENTER);
 	JLabel     firstNameLabel  = new JLabel("First Name*:",SwingConstants.RIGHT);
 	JLabel     lastNameLabel   = new JLabel("Last Name*:",SwingConstants.RIGHT);
 	JLabel     ageLabel        = new JLabel("Age:",SwingConstants.RIGHT);
@@ -57,8 +52,6 @@ public class AccountCreationScreen extends Screen
 	{
 		super(run);
 		
-		run.setTitle("Account Creation");
-		
 		//Basic Frame Settings
 		run.setTitle("Account Creation");
 		
@@ -72,15 +65,11 @@ public class AccountCreationScreen extends Screen
 		});
 		
 		//Set colors
-		this.setBackground(Color.LIGHT_GRAY);
-		testBox.setBackground(Color.WHITE);
-		navBox.setBackground(Color.LIGHT_GRAY);
-		navBoxBorder.setBackground(Color.BLACK);
+		this.setBackground(Color.WHITE);
 		pageBox.setBackground(Color.LIGHT_GRAY);
 		errorMessage.setForeground(Color.RED);
 		
 		//Set fonts
-		pageTitle.setFont(new Font("Serif", Font.BOLD, 25));
 		
 		////Buttons////
 		
@@ -91,39 +80,10 @@ public class AccountCreationScreen extends Screen
 				addCurrentPatient();				
 			}
 		});
-
-				
-		//navBackButton listener
-		navBackButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 1;				
-			}
-		});
-		
-		//navLogoutButton listener
-		navLogoutButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 2;				
-			}
-		});
-		
-		//navMuteButton listener
-		navMuteButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 3;				
-			}
-		});
 		
 		errorMessage.setVisible(false);
 		
 		//add things to the panel
-		this.add(pageTitle);
 		this.add(firstNameLabel);
 		this.add(firstNameTF);
 		this.add(lastNameLabel);
@@ -137,12 +97,7 @@ public class AccountCreationScreen extends Screen
 		this.add(errorMessage);
 		this.add(submitButton);
 		this.add(pageBox);
-		this.add(navBackButton);
-		this.add(navLogoutButton);
-		this.add(navMuteButton);
-		this.add(navBox);
-		//this.add(navBoxBorder);
-		this.add(testBox);
+		this.add(navBar);
 		
 		this.setLayout(null);		
 		run.setContentPane(this);
@@ -156,28 +111,12 @@ public class AccountCreationScreen extends Screen
 	{
 		if(redraw)
 		{	
-			//test Box
-			testBox.setBounds(resize.locationX(0), resize.locationY(0), resize.width(500), resize.height(500));
-			
-			////Nav Box Elements////
-			navBox.setBounds(resize.locationX(20), resize.locationY(0), resize.width(460), resize.height(50));
-			navBoxBorder.setBounds(resize.locationX(17), resize.locationY(0), resize.width(452), resize.height(61));
-			
-			navLogoutButton.setBounds(resize.locationX(390), resize.locationY(10), resize.width(80), resize.height(30));
-			navLogoutButton.setFont(new Font(navLogoutButton.getFont().getFontName(),navLogoutButton.getFont().getStyle(), resize.font(12)));
-			
-			navMuteButton.setBounds(resize.locationX(300), resize.locationY(10), resize.width(80), resize.height(30));
-			navMuteButton.setFont(new Font(navMuteButton.getFont().getFontName(),navMuteButton.getFont().getStyle(), resize.font(12)));
-			
-			navBackButton.setBounds(resize.locationX(30), resize.locationY(10), resize.width(80), resize.height(30));
-			navBackButton.setFont(new Font(navBackButton.getFont().getFontName(),navBackButton.getFont().getStyle(), resize.font(12)));
-			
-			//pageTitle
-			pageTitle.setBounds(resize.locationX(0), resize.locationY(55), resize.width(500), resize.height(40));
-			pageTitle.setFont(new Font(pageTitle.getFont().getFontName(),pageTitle.getFont().getStyle(), resize.font(25)));
+			//navBar
+			navBar.redrawUpdate();
 			
 			//pageBox
 			pageBox.setBounds(resize.locationX(80), resize.locationY(100), resize.width(340), resize.height(360));
+			pageBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
 			
 			//firstName
 			firstNameLabel.setBounds(resize.locationX(80), resize.locationY(150), resize.width(165), resize.height(20));
@@ -220,27 +159,11 @@ public class AccountCreationScreen extends Screen
 			run.repaint();
 			redraw = false;
 		}
-		if(butPressed == 1)
+		if(navBar.backButtonPressed)
 		{
 			run.setScreen(new DoctorScreen(run));
 		}
-		else if(butPressed == 2)
-		{
-			run.setScreen(new LoginScreen(run));
-		}
-		else if(butPressed == 3)
-		{
-			if(run.player.music.isPlaying())
-			{
-				run.player.pauseMusic();
-			}
-			else
-			{
-				run.player.resume();
-				
-			}
-			butPressed = 0;
-		}
+		navBar.update();
 	}
 
 	@Override

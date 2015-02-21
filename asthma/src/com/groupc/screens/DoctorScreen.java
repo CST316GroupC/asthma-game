@@ -17,7 +17,6 @@ import com.groupc.Patient;
 import com.groupc.Runner;
 import com.groupc.math.Resize;
 
-
 public class DoctorScreen extends Screen
 {
 	//Variables
@@ -27,14 +26,8 @@ public class DoctorScreen extends Screen
 	ArrayList<Patient> patients;
 	
 	//Display Elements
-	JPanel  testBox          = new JPanel();
-	JPanel  navBox           = new JPanel();
-	JPanel  navBoxBorder     = new JPanel();
-	JButton navBackButton    = new JButton("Back");
-	JButton navLogoutButton  = new JButton("Logout");
-	JButton navMuteButton    = new JButton("Mute");
-	JLabel  pageTitle        = new JLabel("Doctor Page",SwingConstants.CENTER);
-	JButton addPatientButton = new JButton("Add Patient");
+	NavigationBar navBar           = new NavigationBar(run,false,false,"Doctor Page");
+	JButton       addPatientButton = new JButton("Add Patient");
 	
 	public DoctorScreen(Runner run) 
 	{
@@ -53,24 +46,11 @@ public class DoctorScreen extends Screen
 		});
 		
 		//Set colors
-		this.setBackground(Color.LIGHT_GRAY);
-		testBox.setBackground(Color.WHITE);
-		navBox.setBackground(Color.LIGHT_GRAY);
-		navBoxBorder.setBackground(Color.BLACK);
+		this.setBackground(Color.WHITE);
 		
 		//Set fonts
-		pageTitle.setFont(new Font("Serif", Font.BOLD, 25));
 		
 		////Buttons////
-		
-		navMuteButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 3;				
-			}
-		});
-		
 		// Add patient button listener
 		addPatientButton.addActionListener(new ActionListener()
 		{
@@ -80,33 +60,9 @@ public class DoctorScreen extends Screen
 			}
 		});
 		
-		// Add back button listener
-		navBackButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 2;				
-			}
-		});
-		
-		// Add logout button listener
-		navLogoutButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 2;				
-			}
-		});
-		
 		//add things to the panel
-		this.add(pageTitle);
 		this.add(addPatientButton);
-		this.add(navBackButton);
-		this.add(navLogoutButton);
-		this.add(navMuteButton);
-		this.add(navBox);
-		//this.add(navBoxBorder);
-		this.add(testBox);
+		this.add(navBar);
 		
 		this.setLayout(null);		
 		run.setContentPane(this);
@@ -118,25 +74,8 @@ public class DoctorScreen extends Screen
 	{
 		if(redraw)
 		{	
-			//test Box
-			testBox.setBounds(resize.locationX(0), resize.locationY(0), resize.width(500), resize.height(500));
-			
-			////Nav Box Elements////
-			navBox.setBounds(resize.locationX(20), resize.locationY(0), resize.width(460), resize.height(50));
-			navBoxBorder.setBounds(resize.locationX(17), resize.locationY(0), resize.width(452), resize.height(61));
-			
-			navLogoutButton.setBounds(resize.locationX(390), resize.locationY(10), resize.width(80), resize.height(30));
-			navLogoutButton.setFont(new Font(navLogoutButton.getFont().getFontName(),navLogoutButton.getFont().getStyle(), resize.font(12)));
-			
-			navMuteButton.setBounds(resize.locationX(300), resize.locationY(10), resize.width(80), resize.height(30));
-			navMuteButton.setFont(new Font(navMuteButton.getFont().getFontName(),navMuteButton.getFont().getStyle(), resize.font(12)));
-			
-			navBackButton.setBounds(resize.locationX(30), resize.locationY(10), resize.width(80), resize.height(30));
-			navBackButton.setFont(new Font(navBackButton.getFont().getFontName(),navBackButton.getFont().getStyle(), resize.font(12)));
-			
-			//pageTitle
-			pageTitle.setBounds(resize.locationX(0), resize.locationY(55), resize.width(500), resize.height(40));
-			pageTitle.setFont(new Font(pageTitle.getFont().getFontName(),pageTitle.getFont().getStyle(), resize.font(25)));
+			//navBar
+			navBar.redrawUpdate();
 			
 			//add patientButton
 			addPatientButton.setBounds(resize.locationX(180), resize.locationY(200), resize.width(120), resize.height(40));
@@ -150,22 +89,7 @@ public class DoctorScreen extends Screen
 		{
 			run.setScreen(new AccountCreationScreen(run));
 		}
-		else if(butPressed == 2)
-		{
-			run.setScreen(new LoginScreen(run));
-		}
-		else if(butPressed == 3)
-		{
-			if(run.player.music.isPlaying())
-			{
-				run.player.pauseMusic();
-			}
-			else
-			{
-				run.player.resume();
-			}
-			butPressed = 0;
-		}
+		navBar.update();
 	}
 
 	@Override
