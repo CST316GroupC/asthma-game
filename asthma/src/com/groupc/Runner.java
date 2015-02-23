@@ -23,8 +23,8 @@ public class Runner extends JFrame
 	public Runner()
 	{
 		player = new AudioPlayer();
-		//screen = new LoginScreen(this);
-		screen = new Game1Screen(this);
+		screen = new LoginScreen(this);
+		//screen = new Game1Screen(this);
 		
 	}
 	
