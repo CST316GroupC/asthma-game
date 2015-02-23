@@ -4,12 +4,14 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
+import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
 import com.groupc.math.CollisionChecker;
 
 public class MainMenu extends GameScreen
 {
 	Ball[] balls;
+	Camera camera;
 	
 	public MainMenu()
 	{
@@ -24,6 +26,8 @@ public class MainMenu extends GameScreen
 			balls[i].velocity.set(50, 25);
 		}
 		
+		camera = new Camera(400, 400);
+		camera.setCamera();
 	}
 
 	@Override
@@ -34,6 +38,7 @@ public class MainMenu extends GameScreen
 		        System.out.println("A Key Pressed");
 		        //player.angle++;
 		        //player.velocity.set(0, 50);
+		        camera.zoom *= 2;
 		        }
 		    }
 		    else {
@@ -46,6 +51,7 @@ public class MainMenu extends GameScreen
 		        System.out.println("A Key Pressed");
 		        //player.angle++;
 		        //player.velocity.set(-50, 0);
+		        camera.zoom /= 2;
 		        }
 		    }
 		    else {
@@ -105,6 +111,7 @@ public class MainMenu extends GameScreen
 	@Override
 	public void present(float deltaTime)
 	{
+		camera.setCamera();
 		Assets.mainmenu.bind();
 		 // set the color of the quad (R,G,B,A)
              
