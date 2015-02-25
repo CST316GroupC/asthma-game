@@ -5,9 +5,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 import com.groupc.Runner;
 
@@ -23,12 +25,13 @@ public class RecordingScreen extends Screen
 	
 	JButton back;
 	JButton logout;
-	JButton mute;
+	JToggleButton mute;
 	JButton start;
 	JButton airQualityInfo;
 	JButton manualInput;
 	
 	int butPressed = 0;
+	boolean played = true;
 	
 	public RecordingScreen(Runner run)
 	{
@@ -96,8 +99,10 @@ public class RecordingScreen extends Screen
 		
 		
 		// Add mute button
-		mute = new JButton("Mute");
-		mute.setBounds(300, 18, 70, 25);	
+		mute = new JToggleButton();
+		mute.setSelectedIcon(new ImageIcon("UnMuteIcon.png"));
+		mute.setIcon(new ImageIcon("MuteIcon.png"));
+		mute.setBounds(340, 18, 30, 25);
 		
 		
 		// Add back button listener
@@ -114,7 +119,7 @@ public class RecordingScreen extends Screen
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 3;				
+				butPressed = 1;				
 			}
 		});
 		
@@ -123,7 +128,7 @@ public class RecordingScreen extends Screen
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 9;				
+				butPressed = 3;				
 			}
 		});
 		
@@ -161,18 +166,33 @@ public class RecordingScreen extends Screen
 	@Override
 	public void update(float deltaTime)
 	{
-		if(butPressed == 2)
-		{
-			run.setScreen(new TutorialScreen(run));
-		}
-		else if(butPressed == 3)
+		if(butPressed == 1)
 		{
 			run.setScreen(new LoginScreen(run));
+			
+		}
+		else if(butPressed == 2)
+		{
+			run.setScreen(new TutorialScreen(run));
 		}
 		else if(butPressed == 4)
 		{
 			run.setScreen(new RewardScreen(run));
 		}
+		else if(butPressed == 3)
+		{
+			if(run.player.music.isPlaying() && played == true)
+			{
+				run.player.pauseMusic();
+				played = false;
+			}
+			else
+			{
+				run.player.resume();
+				played = true;
+			}
+		}
+		butPressed = 0;
 	}
 
 	@Override

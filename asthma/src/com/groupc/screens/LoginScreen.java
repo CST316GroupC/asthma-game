@@ -148,8 +148,8 @@ public class LoginScreen extends Screen
 		
 		
 		//music stuff
-		//run.player.loadSong("AMemoryAway.ogg");
-		//run.player.playMusic(true);
+		run.player.loadSong("AMemoryAway.ogg");
+		run.player.playMusic(true);
 	}
 
 	@Override

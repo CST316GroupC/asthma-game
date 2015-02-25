@@ -5,9 +5,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 import com.groupc.Runner;
 
@@ -27,7 +29,7 @@ public class TutorialScreen extends Screen
 	
 	JButton back;
 	JButton logout;
-	JButton mute;
+	JToggleButton mute;
 	JButton step1;
 	JButton step2;
 	JButton step3;
@@ -36,6 +38,7 @@ public class TutorialScreen extends Screen
 	JButton start;
 	
 	int butPressed = 0;
+	boolean played = true;
 	
 	public TutorialScreen(Runner run)
 	{
@@ -101,8 +104,10 @@ public class TutorialScreen extends Screen
 		
 		
 		// Add mute button
-		mute = new JButton("Mute");
-		mute.setBounds(300, 18, 70, 25);
+		mute = new JToggleButton();
+		mute.setSelectedIcon(new ImageIcon("UnMuteIcon.png"));
+		mute.setIcon(new ImageIcon("MuteIcon.png"));
+		mute.setBounds(340, 18, 30, 25);
 		
 		
 		// Add Steps button
@@ -206,6 +211,20 @@ public class TutorialScreen extends Screen
 		{
 			run.setScreen(new RecordingScreen(run));
 		}
+		else if(butPressed == 3)
+		{
+			if(run.player.music.isPlaying() && played == true)
+			{
+				run.player.pauseMusic();
+				played = false;
+			}
+			else
+			{
+				run.player.resume();
+				played = true;
+			}
+		}
+		butPressed = 0;
 	}
 
 	@Override

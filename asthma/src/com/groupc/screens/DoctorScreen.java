@@ -6,10 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+import javax.swing.JToggleButton;
 import com.groupc.Patient;
 import com.groupc.Runner;
 
@@ -25,9 +26,10 @@ public class DoctorScreen extends Screen
 	JPanel boxBorder;
 	JButton back;
 	JButton logout;
-	JButton mute;
+	JToggleButton mute;
 	
 	int butPressed = 0; //0 is none, 1 is add patient, 2 is back and logout for now
+	boolean played = true;
 	
 	public DoctorScreen(Runner run) 
 	{
@@ -64,8 +66,10 @@ public class DoctorScreen extends Screen
 		logout.setBounds(380, 14, 80, 35);
 		
 		// Add mute button
-		mute = new JButton("Mute");
-		mute.setBounds(300, 18, 70, 25);
+		mute = new JToggleButton();
+		mute.setSelectedIcon(new ImageIcon("UnMuteIcon.png"));
+		mute.setIcon(new ImageIcon("MuteIcon.png"));
+		mute.setBounds(340, 18, 30, 25);
 		
 		
 		
@@ -101,7 +105,7 @@ public class DoctorScreen extends Screen
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 3;				
+				butPressed = 3;		
 			}
 		});
 		
@@ -130,6 +134,20 @@ public class DoctorScreen extends Screen
 		{
 			run.setScreen(new LoginScreen(run));
 		}
+		else if(butPressed == 3)
+		{
+			if(run.player.music.isPlaying() && played == true)
+			{
+				run.player.pauseMusic();
+				played = false;
+			}
+			else
+			{
+				run.player.resume();
+				played = true;
+			}
+		}
+		butPressed = 0;
 	}
 
 	@Override
