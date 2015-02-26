@@ -29,6 +29,7 @@ public class AccountCreationScreen extends Screen
 	Resize  resize     = new Resize(run);
 	int     butPressed = 0;
 	int     type       = 1;
+	String newPatientDoctor;
 	
 	//Display Elements
 	JPanel     testBox         = new JPanel();
@@ -43,7 +44,7 @@ public class AccountCreationScreen extends Screen
 	JLabel     lastNameLabel   = new JLabel("Last Name*:");
 	JLabel     ageLabel        = new JLabel("Age:");
 	JLabel     infoLabel       = new JLabel("Contact Info:");
-	JLabel     passwordLabel   = new JLabel("Password*");
+	JLabel     passwordLabel   = new JLabel("Password*:");
 	JTextField firstNameTF     = new JTextField();
 	JTextField passwordTF      = new JTextField();
 	JTextField lastNameTF      = new JTextField();
@@ -56,10 +57,10 @@ public class AccountCreationScreen extends Screen
 	{
 		super(run);
 		
-		run.setTitle("Account Creation");
-		
 		//Basic Frame Settings
-		run.setTitle("Account Creation");
+		//run.setTitle("Account Creation");
+
+		
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -146,6 +147,19 @@ public class AccountCreationScreen extends Screen
 		this.setLayout(null);		
 		run.setContentPane(this);
 		run.setVisible(true);
+	}
+	
+	public void setPatientDoctor(String patientDoctor) //new patients doctor
+	{
+		if(patientDoctor != null)
+		{
+			newPatientDoctor = patientDoctor;
+			run.setTitle("Account Creation " + newPatientDoctor);
+		}else
+		{
+			run.setTitle("Account Creation");
+			System.out.println("null doctor for new patient");
+		}
 	}
 
 	
@@ -280,7 +294,7 @@ public class AccountCreationScreen extends Screen
 				FileWriter fWriter = new FileWriter("login_information.txt", true);
 				BufferedWriter bWriter = new BufferedWriter(fWriter);
 				bWriter.write(firstNameTF.getText() + " | " + lastNameTF.getText() + " | " + ageTF.getText() +
-							  " | " + passwordTF.getText() + " | " + type + " | " + infoTA.getText() +
+							  " | " + passwordTF.getText() + " | " + type + " | " + newPatientDoctor + " | " + infoTA.getText() +
 							  "\n"); //all patients created from doctor screen will be 0
 				bWriter.close();
 			} catch (IOException e)
