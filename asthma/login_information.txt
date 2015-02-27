@@ -1,4 +1,2 @@
-user | test | 10 | pass | 1 | hello
-doctor | test | 10 | pass | 0 | hello
 edwin | avalos | 19 | password | 0 | hello
-bob@bob.com | bob | 12 | blh | 0 | bob
+bob@bob.com | bob | 12 | blh | 0 | bobds | nkk | knk | kkn | 1 | kn

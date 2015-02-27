@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,72 +14,87 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 import com.groupc.Runner;
-import com.groupc.math.Resize;
 
 
 public class AccountCreationScreen extends Screen
 {
-	//Variables
-	boolean redraw     = true;
-	Resize  resize     = new Resize(run);
-	int     butPressed = 0;
-	int     type       = 1;
+	int butPressed = 0;
+	JLabel lblfname;
+	JLabel lbllname;
+	JLabel lblage;
+	JLabel lblcinfo;
+	JLabel preferredPassword;
+	JLabel pageTitle;
+	JPanel box;
+	JPanel boxBorder;
+	JButton back;
+	JButton logout;
+	JButton mute;
+	JTextField fname;
+	JTextField password;
+	JTextField lname;
+	JTextField age;
+	JTextArea cinfo;
+	JButton submitButton;
+	int type = 1;
 	
-	//Display Elements
-	JPanel     testBox         = new JPanel();
-	JPanel     navBox          = new JPanel();
-	JPanel     navBoxBorder    = new JPanel();
-	JPanel     pageBox         = new JPanel();
-	JButton    navBackButton   = new JButton("Back");
-	JButton    navLogoutButton = new JButton("Logout");
-	JButton    navMuteButton   = new JButton("Mute");
-	JLabel     pageTitle       = new JLabel("Account Creation Page");
-	JLabel     firstNameLabel  = new JLabel("First Name*:");
-	JLabel     lastNameLabel   = new JLabel("Last Name*:");
-	JLabel     ageLabel        = new JLabel("Age:");
-	JLabel     infoLabel       = new JLabel("Contact Info:");
-	JLabel     passwordLabel   = new JLabel("Password*");
-	JTextField firstNameTF     = new JTextField();
-	JTextField passwordTF      = new JTextField();
-	JTextField lastNameTF      = new JTextField();
-	JTextField ageTF           = new JTextField();
-	JTextArea  infoTA          = new JTextArea();
-	JButton    submitButton    = new JButton("Submit");
-	JLabel     errorMessage    = new JLabel("Missing Information*");
-	
-	public AccountCreationScreen(Runner run) 
-	{
+	public AccountCreationScreen(Runner run) {
 		super(run);
-		
 		run.setTitle("Account Creation");
+		run.setSize(run.SCR_WIDTH, run.SCR_HEIGHT);
+		run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 
+		// Box display for title
 		
-		//Basic Frame Settings
-		run.setTitle("Account Creation");
-		
-		//resize stuff
-		run.addComponentListener(new ComponentAdapter()
-		{
-			public void componentResized(ComponentEvent e)
-			{
-				redraw = true;
-			}
-		});
-		
-		//Set colors
-		this.setBackground(Color.LIGHT_GRAY);
-		testBox.setBackground(Color.WHITE);
-		navBox.setBackground(Color.LIGHT_GRAY);
-		navBoxBorder.setBackground(Color.BLACK);
-		pageBox.setBackground(Color.LIGHT_GRAY);
-		errorMessage.setForeground(Color.RED);
-		
-		//Set fonts
+		box = new JPanel();
+		boxBorder = new JPanel();
+		box.setBackground(Color.LIGHT_GRAY);
+		boxBorder.setBackground(Color.BLACK);
+						
+		box.setBounds(18, 0, 450, 60);
+		boxBorder.setBounds(17, 0, 452, 61);
+				
+				
+		// Page title
+		pageTitle = new JLabel("Account Creation Page");
 		pageTitle.setFont(new Font("Serif", Font.BOLD, 25));
+		pageTitle.setBounds(120, 60, 350, 40);
 		
-		////Buttons////
+		lblfname = new JLabel("First Name*:");
+		lblfname.setBounds(125, 150, 100, 20);
+		
+		fname = new JTextField();
+		fname.setBounds(200, 150, 100, 20);
+		
+		lbllname = new JLabel("Last Name*:");
+		lbllname.setBounds(125, 180, 100, 20);
+		
+		lname = new JTextField();
+		lname.setBounds(200, 180, 100, 20);
+		
+		lblage = new JLabel("Age:");
+		lblage.setBounds(125, 240, 100, 20);
+		
+		age = new JTextField();
+		age.setBounds(200, 240, 100, 20);
+		
+		lblcinfo = new JLabel("Contact Info:");
+		lblcinfo.setBounds(125, 270, 100, 20);
+		
+		cinfo = new JTextArea();
+		cinfo.setBounds(200, 270, 100, 100);
+		
+		password = new JTextField();
+		password.setBounds(200,210, 100, 20);
+		
+		preferredPassword = new JLabel("Password*");
+		preferredPassword.setBounds(125, 210, 100, 20);
+		
+		submitButton = new JButton("Submit");
+		submitButton.setSize(75, 20);
+		submitButton.setLocation(200, 402);
 		
 		submitButton.addActionListener(new ActionListener()
 		{
@@ -90,135 +103,104 @@ public class AccountCreationScreen extends Screen
 				addCurrentPatient();				
 			}
 		});
-
+		
+		// Add back button
+				back = new JButton("Back");
+				back.setBounds(25, 20, 80, 35);
+						
+				// Add logout button
+				logout = new JButton("Logout");
+				logout.setBounds(380, 20, 80, 35);
 				
-		//navBackButton listener
-		navBackButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 1;				
-			}
-		});
+				// Add mute button
+				mute = new JButton("Mute");
+				mute.setBounds(300, 24, 70, 25);
+				
+				
+				// Add back button listener
+				back.addActionListener(new ActionListener()
+				{
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						butPressed = 1;				
+					}
+				});
+				
+				mute.addActionListener(new ActionListener()
+				{
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						butPressed = 3;				
+					}
+				});
+				
+				// Add logout button listener
+				logout.addActionListener(new ActionListener()
+				{
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						butPressed = 2;				
+					}
+				});
+				
+				
+				this.add(pageTitle);
 		
-		//navLogoutButton listener
-		navLogoutButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 2;				
-			}
-		});
-		
-		//navMuteButton listener
-		navMuteButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 3;				
-			}
-		});
-		
-		errorMessage.setVisible(false);
-		
-		//add things to the panel
-		this.add(pageTitle);
-		this.add(firstNameLabel);
-		this.add(firstNameTF);
-		this.add(lastNameLabel);
-		this.add(lastNameTF);
-		this.add(ageLabel);
-		this.add(ageTF);
-		this.add(passwordLabel);
-		this.add(passwordTF);
-		this.add(infoLabel);
-		this.add(infoTA);
-		this.add(errorMessage);
+		this.add(lblfname);
+		this.add(lbllname);
+		this.add(lblage);
+		this.add(lblcinfo);
+		this.add(fname);
+		this.add(lname);
+		this.add(age);
+		this.add(cinfo);
+		this.add(password);
+		this.add(preferredPassword);
 		this.add(submitButton);
-		this.add(pageBox);
-		this.add(navBackButton);
-		this.add(navLogoutButton);
-		this.add(navMuteButton);
-		this.add(navBox);
-		//this.add(navBoxBorder);
-		this.add(testBox);
+		this.add(back);
+		this.add(logout);
+		this.add(mute);
+		this.add(box);
+		this.add(boxBorder);
 		
 		this.setLayout(null);		
 		run.setContentPane(this);
 		run.setVisible(true);
 	}
 
-	
+	private void addCurrentPatient() 
+	{
+		if(fname.getText().isEmpty()  || lname.getText().isEmpty()  || password.getText().isEmpty())  //required basic information
+		{
+			JLabel error = new JLabel("Missing Information*");
+			error.setSize(150, 20);
+			error.setLocation(200, 380);
+			this.add(error);
+			run.repaint();
+			
+		}else  //assumes a database will be implemented but for now will just use a text file
+		{
+			try 
+			{
+				FileWriter fWriter = new FileWriter("login_information.txt", true);
+				BufferedWriter bWriter = new BufferedWriter(fWriter);
+				bWriter.write(fname.getText() + " | " + lname.getText() + " | " + age.getText() +
+							  " | " + password.getText() + " | " + type + " | " + cinfo.getText() +
+							  "\n"); //all patients created from doctor screen will be 0
+				bWriter.close();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+			run.setScreen(new LoginScreen(run));
+		}
+		
+		
+	}
 
 	@Override
 	public void update(float deltaTime) 
 	{
-		if(redraw)
-		{	
-			//test Box
-			testBox.setBounds(resize.locationX(0), resize.locationY(0), resize.width(500), resize.height(500));
-			
-			////Nav Box Elements////
-			navBox.setBounds(resize.locationX(20), resize.locationY(0), resize.width(460), resize.height(50));
-			navBoxBorder.setBounds(resize.locationX(17), resize.locationY(0), resize.width(452), resize.height(61));
-			
-			navLogoutButton.setBounds(resize.locationX(390), resize.locationY(10), resize.width(80), resize.height(30));
-			navLogoutButton.setFont(new Font(navLogoutButton.getFont().getFontName(),navLogoutButton.getFont().getStyle(), resize.font(12)));
-			
-			navMuteButton.setBounds(resize.locationX(300), resize.locationY(10), resize.width(80), resize.height(30));
-			navMuteButton.setFont(new Font(navMuteButton.getFont().getFontName(),navMuteButton.getFont().getStyle(), resize.font(12)));
-			
-			navBackButton.setBounds(resize.locationX(30), resize.locationY(10), resize.width(80), resize.height(30));
-			navBackButton.setFont(new Font(navBackButton.getFont().getFontName(),navBackButton.getFont().getStyle(), resize.font(12)));
-			
-			//pageTitle
-			pageTitle.setBounds(resize.locationX(120), resize.locationY(55), resize.width(350), resize.height(40));
-			pageTitle.setFont(new Font(pageTitle.getFont().getFontName(),pageTitle.getFont().getStyle(), resize.font(25)));
-			
-			//pageBox
-			pageBox.setBounds(resize.locationX(80), resize.locationY(100), resize.width(340), resize.height(360));
-			
-			//firstName
-			firstNameLabel.setBounds(resize.locationX(125), resize.locationY(150), resize.width(100), resize.height(20));
-			firstNameLabel.setFont(new Font(firstNameLabel.getFont().getFontName(),firstNameLabel.getFont().getStyle(), resize.font(12)));
-			firstNameTF.setBounds(resize.locationX(200), resize.locationY(150), resize.width(100), resize.height(20));
-			firstNameTF.setFont(new Font(firstNameTF.getFont().getFontName(),firstNameTF.getFont().getStyle(), resize.font(12)));
-			
-			//lastName
-			lastNameLabel.setBounds(resize.locationX(125), resize.locationY(180), resize.width(100), resize.height(20));
-			lastNameLabel.setFont(new Font(lastNameLabel.getFont().getFontName(),lastNameLabel.getFont().getStyle(), resize.font(12)));
-			lastNameTF.setBounds(resize.locationX(200), resize.locationY(180), resize.width(100), resize.height(20));
-			lastNameTF.setFont(new Font(lastNameTF.getFont().getFontName(),lastNameTF.getFont().getStyle(), resize.font(12)));
-			
-			//age
-			ageLabel.setBounds(resize.locationX(125), resize.locationY(240), resize.width(100), resize.height(20));
-			ageLabel.setFont(new Font(ageLabel.getFont().getFontName(),ageLabel.getFont().getStyle(), resize.font(12)));
-			ageTF.setBounds(resize.locationX(200), resize.locationY(240), resize.width(100), resize.height(20));
-			ageTF.setFont(new Font(ageTF.getFont().getFontName(),ageTF.getFont().getStyle(), resize.font(12)));
-			
-			//password
-			passwordLabel.setBounds(resize.locationX(125), resize.locationY(210), resize.width(100), resize.height(20));
-			passwordLabel.setFont(new Font(passwordLabel.getFont().getFontName(),passwordLabel.getFont().getStyle(), resize.font(12)));
-			passwordTF.setBounds(resize.locationX(200), resize.locationY(210), resize.width(100), resize.height(20));
-			passwordTF.setFont(new Font(passwordTF.getFont().getFontName(),passwordTF.getFont().getStyle(), resize.font(12)));
-			
-			//info
-			infoLabel.setBounds(resize.locationX(125), resize.locationY(270), resize.width(100), resize.height(20));
-			infoLabel.setFont(new Font(infoLabel.getFont().getFontName(),infoLabel.getFont().getStyle(), resize.font(12)));
-			infoTA.setBounds(resize.locationX(200), resize.locationY(270), resize.width(100), resize.height(100));
-			infoTA.setFont(new Font(infoTA.getFont().getFontName(),infoTA.getFont().getStyle(), resize.font(12)));
-			
-			//submitButton
-			submitButton.setBounds(resize.locationX(200), resize.locationY(400), resize.width(100), resize.height(30));
-			submitButton.setFont(new Font(submitButton.getFont().getFontName(),submitButton.getFont().getStyle(), resize.font(12)));
-			
-			//errorMessage
-			errorMessage.setBounds(resize.locationX(200), resize.locationY(380), resize.width(150), resize.height(20));
-			errorMessage.setFont(new Font(errorMessage.getFont().getFontName(),errorMessage.getFont().getStyle(), resize.font(12)));
-			
-			run.repaint();
-			redraw = false;
-		}
 		if(butPressed == 1)
 		{
 			run.setScreen(new DoctorScreen(run));
@@ -236,10 +218,9 @@ public class AccountCreationScreen extends Screen
 			else
 			{
 				run.player.resume();
-				
 			}
-			butPressed = 0;
 		}
+		butPressed = 0;
 	}
 
 	@Override
@@ -265,31 +246,5 @@ public class AccountCreationScreen extends Screen
 		// TODO Auto-generated method stub
 		
 	}
-	
-	private void addCurrentPatient() 
-	{
-		if(firstNameTF.getText().isEmpty()  || lastNameTF.getText().isEmpty()  || passwordTF.getText().isEmpty())  //required basic information
-		{
-			errorMessage.setVisible(true);
-			run.repaint();
-			
-		}else  //assumes a database will be implemented but for now will just use a text file
-		{
-			try 
-			{
-				FileWriter fWriter = new FileWriter("login_information.txt", true);
-				BufferedWriter bWriter = new BufferedWriter(fWriter);
-				bWriter.write(firstNameTF.getText() + " | " + lastNameTF.getText() + " | " + ageTF.getText() +
-							  " | " + passwordTF.getText() + " | " + type + " | " + infoTA.getText() +
-							  "\n"); //all patients created from doctor screen will be 0
-				bWriter.close();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-			run.setScreen(new LoginScreen(run));
-		}
-		
-		
-	}
+
 }

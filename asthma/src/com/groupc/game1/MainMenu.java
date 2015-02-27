@@ -95,17 +95,12 @@ public class MainMenu extends GameScreen
 				if(balls[i].bounds.lowerLeft.y < 0 || balls[i].bounds.lowerLeft.y + balls[i].bounds.height > Display.getHeight())
 					balls[i].velocity.set(balls[i].velocity.x, balls[i].velocity.y * -1);
 			}
-			for(int j = 0; j < 10; j++)
-			{
-				if(i != j)
-				{
-					if((CollisionChecker.RectToRect(balls[i].bounds, balls[j].bounds)))
-					{
-						balls[i].velocity.set(balls[i].velocity.x * -1, balls[i].velocity.y);
-					}
-				}
-			}
+			
 		}
+		
+		camera.position.x = balls[0].bounds.lowerLeft.x;
+		camera.position.y = balls[0].bounds.lowerLeft.y;		
+		
 	}
 
 	@Override
