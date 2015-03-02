@@ -13,6 +13,7 @@ public class Options extends GameScreen
 	Camera cam;
 	Rectangle soundLabel;
 	Rectangle soundOnOff;
+	Rectangle back;
 	boolean sound;
 	Vector mouseClick;
 	
@@ -22,6 +23,7 @@ public class Options extends GameScreen
 		this.cam.setCamera();
 		soundLabel = new Rectangle(50, 250, 200, 100);
 		soundOnOff = new Rectangle(250, 250, 100, 100);
+		back = new Rectangle(180, 50, 100, 100);
 		sound = true;
 		mouseClick = new Vector();
 	}
@@ -43,6 +45,11 @@ public class Options extends GameScreen
 					{
 						sound = !sound;
 					}
+					if(CollisionChecker.PointToRect(mouseClick, back))
+					{
+						this.dispose();
+						System.out.println("back");
+					}
 				}
 			}
 		}
@@ -52,7 +59,7 @@ public class Options extends GameScreen
 	public void present(float deltaTime)
 	{
 		cam.setCamera();
-		Assets.buttons.bind();
+		Assets.sheet.bind();
 		Assets.soundLbl.draw(soundLabel);
 		if(sound)
 		{
@@ -62,6 +69,9 @@ public class Options extends GameScreen
 		{
 			Assets.soundOff.draw(soundOnOff);
 		}
+		
+		Rectangle temp = new Rectangle(back.lowerLeft.x + back.width, back.lowerLeft.y, -1*back.width, back.height);
+		Assets.arrowBut.draw(temp);
 	}
 
 	@Override

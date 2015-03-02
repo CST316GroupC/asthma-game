@@ -105,7 +105,8 @@ public class LoginScreen extends Screen
 		});	
 		
 		//Enter Key is Pressed
-		userNameTF.addActionListener(new ActionListener(){
+		userNameTF.addActionListener(new ActionListener()
+		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
