@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="asthma-game">
+
+  <property name="src.dir" value="src" />
+  <property name="build.dir" value="bin"/>
+  <property name="lwjgl_jars.dir" value="lib"/>
+  <property name="lwjgl_natives.dir" value="natives/windows"/>
+  <property name="build.sysclasspath" value="last"/>
+
+  <path id="my_cp">
+    <fileset dir="${lwjgl_jars.dir}" includes="lwjgl.jar"/>
+    <fileset dir="${lwjgl_jars.dir}" includes="lwjgl_util.jar"/>
+  	<fileset dir="${lwjgl_jars.dir}" includes="jogg-0.0.7.jar"/>
+  	<fileset dir="${lwjgl_jars.dir}" includes="jorbis-0.0.15.jar"/>
+    <fileset dir="${lwjgl_jars.dir}" includes="slick-util.jar"/>
+  </path>
+	
+  <fileset dir="${scr.dir}">
+	<include name="com"/>
+  	<exclude name="com/groupc/junit"/>
+  </fileset>
+
+  <target name="compile">
+    <mkdir dir="${build.dir}"/>
+    <javac source="1.8" target="1.8" srcdir="${src.dir}" destdir="${build.dir}" classpathref="my_cp"/>
+  </target>
+
+  <target name="clean">
+    <delete dir="${build.dir}"/>
+  </target>
+
+  <target name="run" depends="compile">
+    <!--
+      fork="true" seems to be absolutely
+      necessary for the setting of java.library.path
+      to be effective. -->
+
+    <java fork="true" classname="com.groupc.Tester">
+      <classpath>
+        <path refid="my_cp"/>
+        <path location="${build.dir}"/>
+      </classpath>
+      <sysproperty key="java.library.path"
+                   value="${lwjgl_natives.dir}"/>
+    </java>
+  </target>	
+</project>

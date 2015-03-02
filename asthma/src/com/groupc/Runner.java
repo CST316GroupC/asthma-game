@@ -17,6 +17,7 @@ public class Runner extends JFrame
 	
 	public final int SCR_WIDTH = 500;
 	public final int SCR_HEIGHT = 500;
+	public final long FPS = (long) (1.0/60.0);
 	
 	boolean isClosing = false;
 	
@@ -28,11 +29,15 @@ public class Runner extends JFrame
 		
 	}
 	
-	public void run()
+	public void run() throws InterruptedException
 	{
 		SoundStore.get().poll(0);
 		float deltaTime = (System.nanoTime()-startTime) / 1000000000.0f;
 		startTime = System.nanoTime();
+		if(deltaTime < FPS)
+		{
+			Thread.sleep((long) (FPS - deltaTime));
+		}
 		screen.update(deltaTime);
 		screen.present(deltaTime);
 	}

@@ -1,94 +1,72 @@
 package com.groupc.game1;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.input.Mouse;
 
-import com.groupc.game.GameObject;
+import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
+import com.groupc.math.CollisionChecker;
+import com.groupc.math.Rectangle;
+import com.groupc.math.Vector;
 
 public class MainMenu extends GameScreen
-{
-	Cannon player;
+{	
+	Camera cam;
+	Rectangle title;
+	Rectangle play;
+	Rectangle options;
+	Rectangle upgrade;
+	Vector mouseClick;
+	int next;
 	
 	public MainMenu()
 	{
 		Assets.load();
-		player = new Cannon(5, 100, 50, 50, Assets.cannonandball);
+		cam = new Camera(400, 400);
+		cam.setCamera();
+		title = new Rectangle(50, 300, 300, 100);
+		play = new Rectangle(25, 200, 150, 75);
+		options = new Rectangle(200, 200, 150, 75);
+		upgrade = new Rectangle(25, 100, 150, 75);
+		mouseClick = new Vector();
 	}
 
 	@Override
-	public void update(float deltaTime) {		
-		while (Keyboard.next()) {
-		    if (Keyboard.getEventKeyState()) {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_W) {
-		        System.out.println("A Key Pressed");
-		        player.angle++;
-		        }
-		    }
-		    else {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_W) {
-		        System.out.println("A Key Released");
-		        }
-		    }
-		    if (Keyboard.getEventKeyState()) {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_A) {
-		        System.out.println("A Key Pressed");
-		        player.angle++;
-		        }
-		    }
-		    else {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_A) {
-		        System.out.println("A Key Released");
-		        }
-		    }
-		    if (Keyboard.getEventKeyState()) {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_S) {
-		        System.out.println("A Key Pressed");
-		        player.angle--;
-		        }
-		    }
-		    else {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_S) {
-		        System.out.println("A Key Released");
-		        }
-		    }
-		    if (Keyboard.getEventKeyState()) {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_D) {
-		        System.out.println("A Key Pressed");
-		        player.angle--;
-		        
-		        }
-		    }
-		    else {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_D) {
-		        System.out.println("A Key Released");
-		        }
-		    }
+	public void update(float deltaTime) {	
+		if(Mouse.isButtonDown(0))
+		{
+			mouseClick.set(Mouse.getX(), Mouse.getY());
+			
+			if(CollisionChecker.PointToRect(mouseClick, play))
+			{
+				System.out.println("play");
+			}
+			if(CollisionChecker.PointToRect(mouseClick, options))
+			{
+				System.out.println("options");
+				this.dispose();
+				next = 2;
+				
+			}
+			if(CollisionChecker.PointToRect(mouseClick, upgrade))
+			{
+				System.out.println("upgrade");
+			}
 		}
-		player.update(deltaTime);
+		
 	}
 
 	@Override
 	public void present(float deltaTime)
 	{
-		Assets.mainmenu.bind();
-		 // set the color of the quad (R,G,B,A)
-             
-        // draw quad
-        GL11.glBegin(GL11.GL_QUADS);
-        	GL11.glTexCoord2f(0, 1);
-            GL11.glVertex2f(0, 0);
-            GL11.glTexCoord2f(1, 1);
-            GL11.glVertex2f(400, 0);
-            GL11.glTexCoord2f(1,0);
-            GL11.glVertex2f(400, 400);
-            GL11.glTexCoord2f(0,0);
-            GL11.glVertex2f(0, 400);
-        GL11.glEnd();
-        
-        player.draw();
+		cam.setCamera();
+		Assets.sheet.bind();
+		Assets.title.draw(title);
+		Assets.playBut.draw(play);
+		Assets.optionsBut.draw(options);
+		Assets.upgradeBut.draw(upgrade);
 	}
 
+	
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
@@ -102,8 +80,16 @@ public class MainMenu extends GameScreen
 	}
 
 	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
+	public void dispose() 
+	{
+		isClosing = true;
+	}
+
+	@Override
+	public GameScreen getNext() 
+	{
+		if(next == 2)
+			return new Options(this.cam);
+		return null;
 	}
 }
