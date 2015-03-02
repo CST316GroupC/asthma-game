@@ -1,139 +1,72 @@
 package com.groupc.game1;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.input.Mouse;
 
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
 import com.groupc.math.CollisionChecker;
+import com.groupc.math.Rectangle;
+import com.groupc.math.Vector;
 
 public class MainMenu extends GameScreen
-{
-	Ball[] balls;
-	Camera camera;
+{	
+	Camera cam;
+	Rectangle title;
+	Rectangle play;
+	Rectangle options;
+	Rectangle upgrade;
+	Vector mouseClick;
+	int next;
 	
 	public MainMenu()
 	{
 		Assets.load();
-		balls = new Ball[]{new Ball(50, 100, 32, 32),new Ball(100, 100, 32, 32),new Ball(50, 50, 32, 32),
-				new Ball(0, 100, 32, 32),new Ball(300, 100, 32, 32),new Ball(250, 100, 32, 32),
-				new Ball(50, 0, 32, 32),new Ball(5, 10, 32, 32),new Ball(200, 100, 32, 32),
-				new Ball(150, 0, 32, 32),new Ball(50, 10, 32, 32)};
-		//player = new ObjectTest(50, 50, 50, 50, 0, 0, 0, 0, 50, 50);
-		for(int i = 0; i < 10; i++)
-		{
-			balls[i].velocity.set(50, 25);
-		}
-		
-		camera = new Camera(400, 400);
-		camera.setCamera();
+		cam = new Camera(400, 400);
+		cam.setCamera();
+		title = new Rectangle(50, 300, 300, 100);
+		play = new Rectangle(25, 200, 150, 75);
+		options = new Rectangle(200, 200, 150, 75);
+		upgrade = new Rectangle(25, 100, 150, 75);
+		mouseClick = new Vector();
 	}
 
 	@Override
-	public void update(float deltaTime) {		
-		while (Keyboard.next()) {
-		    if (Keyboard.getEventKeyState()) {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_W) {
-		        System.out.println("A Key Pressed");
-		        //player.angle++;
-		        //player.velocity.set(0, 50);
-		        camera.zoom *= 2;
-		        }
-		    }
-		    else {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_W) {
-		        System.out.println("A Key Released");
-		        }
-		    }
-		    if (Keyboard.getEventKeyState()) {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_A) {
-		        System.out.println("A Key Pressed");
-		        //player.angle++;
-		        //player.velocity.set(-50, 0);
-		        camera.zoom /= 2;
-		        }
-		    }
-		    else {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_A) {
-		        System.out.println("A Key Released");
-		        }
-		    }
-		    if (Keyboard.getEventKeyState()) {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_S) {
-		        System.out.println("A Key Pressed");
-		        //player.angle--;
-		        //player.velocity.set(0, -50);
-		        }
-		    }
-		    else {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_S) {
-		        System.out.println("A Key Released");
-		        }
-		    }
-		    if (Keyboard.getEventKeyState()) {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_D) {
-		        System.out.println("A Key Pressed");
-		        //player.angle--;
-		        //player.velocity.set(50, 0);
-		        }
-		    }
-		    else {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_D) {
-		        System.out.println("A Key Released");
-		        }
-		    }
-		}
-		//player.update(deltaTime);
-		for(int i = 0; i < 10; i++)
+	public void update(float deltaTime) {	
+		if(Mouse.isButtonDown(0))
 		{
-			balls[i].update(deltaTime);
-			if(!(CollisionChecker.RectInside(balls[i].bounds, Display.getWidth(), Display.getHeight())))
-			{
-				if(balls[i].bounds.lowerLeft.x < 0 || balls[i].bounds.lowerLeft.x + balls[i].bounds.width > Display.getWidth())
-					balls[i].velocity.set(balls[i].velocity.x * -1, balls[i].velocity.y);
-				if(balls[i].bounds.lowerLeft.y < 0 || balls[i].bounds.lowerLeft.y + balls[i].bounds.height > Display.getHeight())
-					balls[i].velocity.set(balls[i].velocity.x, balls[i].velocity.y * -1);
-			}
+			mouseClick.set(Mouse.getX(), Mouse.getY());
 			
+			if(CollisionChecker.PointToRect(mouseClick, play))
+			{
+				System.out.println("play");
+			}
+			if(CollisionChecker.PointToRect(mouseClick, options))
+			{
+				System.out.println("options");
+				this.dispose();
+				next = 2;
+				
+			}
+			if(CollisionChecker.PointToRect(mouseClick, upgrade))
+			{
+				System.out.println("upgrade");
+			}
 		}
-		
-		camera.position.x = balls[0].bounds.lowerLeft.x;
-		camera.position.y = balls[0].bounds.lowerLeft.y;		
 		
 	}
 
 	@Override
 	public void present(float deltaTime)
 	{
-		camera.setCamera();
-		Assets.mainmenu.bind();
-		 // set the color of the quad (R,G,B,A)
-             
-        // draw quad
-        GL11.glBegin(GL11.GL_QUADS);
-        	GL11.glTexCoord2f(0, 1);
-            GL11.glVertex2f(0, 0);
-            GL11.glTexCoord2f(1, 1);
-            GL11.glVertex2f(Display.getWidth(), 0);
-            GL11.glTexCoord2f(1,0);
-            GL11.glVertex2f(Display.getWidth(), Display.getHeight());
-            GL11.glTexCoord2f(0,0);
-            GL11.glVertex2f(0, Display.getHeight());
-        GL11.glEnd();
-        
-        //player.draw();
-        drawBall();
+		cam.setCamera();
+		Assets.buttons.bind();
+		Assets.title.draw(title);
+		Assets.playBut.draw(play);
+		Assets.optionsBut.draw(options);
+		Assets.upgradeBut.draw(upgrade);
 	}
 
-	public void drawBall()
-	{
-		for(int i = 0; i < 10; i++)
-		{
-			Assets.ball.draw(balls[i].bounds);
-		}
-		
-	}
+	
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
@@ -147,8 +80,16 @@ public class MainMenu extends GameScreen
 	}
 
 	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
+	public void dispose() 
+	{
+		isClosing = true;
+	}
+
+	@Override
+	public GameScreen getNext() 
+	{
+		if(next == 2)
+			return new Options(this.cam);
+		return null;
 	}
 }

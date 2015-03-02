@@ -56,19 +56,7 @@ public class Game1Screen extends Screen
 		
 		scr = new MainMenu();
 		
-		//OpenGL INIT                    
-	      GL11.glClearColor(0.0f,0.0f,0.0f,0.0f); //black backround           
-	               
-	      
-      	// enable alpha blending
-      	  GL11.glEnable(GL11.GL_BLEND);
-      	  GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-	      GL11.glMatrixMode(GL_PROJECTION);                                 
-	      GL11.glLoadIdentity();                                            
-	      GL11.glOrtho(0, 400, 0, 400, 1, -1);      
-	      GL11.glViewport(0, 0, 400, 400 );
-	      GL11.glMatrixMode(GL_MODELVIEW);	
-	      GL11.glLoadIdentity(); 
+		         
 	}
 
 	@Override
@@ -76,11 +64,14 @@ public class Game1Screen extends Screen
 	{
 		Display.update();
 		scr.update(deltaTime);
-		Display.sync(60);  
-		testx++;
+		Display.sync(60); 
 		if(Display.isCloseRequested())
 		{
 			Display.destroy();
+		}
+		if(scr.isClosing)
+		{
+			scr = scr.getNext();
 		}
 	}
 
