@@ -8,10 +8,11 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+import javax.swing.JToggleButton;
 import com.groupc.Patient;
 import com.groupc.Runner;
 import com.groupc.math.Resize;
@@ -24,6 +25,7 @@ public class DoctorScreen extends Screen
 	Resize  resize     = new Resize(run);
 	int     butPressed = 0; //0 is none, 1 is add patient, 2 is back and logout for now
 	ArrayList<Patient> patients;
+	boolean played = true;
 	
 	//Display Elements
 	JPanel  testBox          = new JPanel();
@@ -31,7 +33,7 @@ public class DoctorScreen extends Screen
 	JPanel  navBoxBorder     = new JPanel();
 	JButton navBackButton    = new JButton("Back");
 	JButton navLogoutButton  = new JButton("Logout");
-	JButton navMuteButton    = new JButton("Mute");
+	JToggleButton navMuteButton    = new JToggleButton();
 	JLabel  pageTitle        = new JLabel("Doctor Page");
 	JButton addPatientButton = new JButton("Add Patient");
 	
@@ -61,7 +63,14 @@ public class DoctorScreen extends Screen
 		pageTitle.setFont(new Font("Serif", Font.BOLD, 25));
 		
 		////Buttons////
+
+		// Add mute button
+		navMuteButton.setSelectedIcon(new ImageIcon("UnMuteIcon.png"));
+		navMuteButton.setIcon(new ImageIcon("MuteIcon.png"));
+		navMuteButton.setBounds(340, 18, 30, 25);
 		
+		
+		// Add patient button listener
 		navMuteButton.addActionListener(new ActionListener()
 		{
 			@Override
@@ -87,7 +96,7 @@ public class DoctorScreen extends Screen
 				butPressed = 2;				
 			}
 		});
-		
+
 		// Add logout button listener
 		navLogoutButton.addActionListener(new ActionListener()
 		{
@@ -155,16 +164,18 @@ public class DoctorScreen extends Screen
 		}
 		else if(butPressed == 3)
 		{
-			if(run.player.music.isPlaying())
+			if(run.player.music.isPlaying() && played == true)
 			{
 				run.player.pauseMusic();
+				played = false;
 			}
 			else
 			{
 				run.player.resume();
+				played = true;
 			}
-			butPressed = 0;
 		}
+		butPressed = 0;
 	}
 
 	@Override

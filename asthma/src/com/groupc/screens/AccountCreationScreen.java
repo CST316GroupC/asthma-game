@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.JToggleButton;
 
 import com.groupc.Runner;
 import com.groupc.math.Resize;
@@ -29,7 +31,8 @@ public class AccountCreationScreen extends Screen
 	Resize  resize     = new Resize(run);
 	int     butPressed = 0;
 	int     type       = 1;
-	
+	boolean played = true;
+
 	//Display Elements
 	JPanel     testBox         = new JPanel();
 	JPanel     navBox          = new JPanel();
@@ -37,7 +40,7 @@ public class AccountCreationScreen extends Screen
 	JPanel     pageBox         = new JPanel();
 	JButton    navBackButton   = new JButton("Back");
 	JButton    navLogoutButton = new JButton("Logout");
-	JButton    navMuteButton   = new JButton("Mute");
+	JToggleButton    navMuteButton   = new JToggleButton();
 	JLabel     pageTitle       = new JLabel("Account Creation Page");
 	JLabel     firstNameLabel  = new JLabel("First Name*:");
 	JLabel     lastNameLabel   = new JLabel("Last Name*:");
@@ -90,8 +93,12 @@ public class AccountCreationScreen extends Screen
 				addCurrentPatient();				
 			}
 		});
-
 				
+		// Add mute button
+		navMuteButton.setSelectedIcon(new ImageIcon("UnMuteIcon.png"));
+		navMuteButton.setIcon(new ImageIcon("MuteIcon.png"));
+		navMuteButton.setBounds(340, 18, 30, 25);
+
 		//navBackButton listener
 		navBackButton.addActionListener(new ActionListener()
 		{
@@ -229,14 +236,16 @@ public class AccountCreationScreen extends Screen
 		}
 		else if(butPressed == 3)
 		{
-			if(run.player.music.isPlaying())
+			if(run.player.music.isPlaying() && played == true)
 			{
 				run.player.pauseMusic();
+				played = false;
 			}
 			else
 			{
 				run.player.resume();
-				
+
+				played = true;
 			}
 			butPressed = 0;
 		}

@@ -5,9 +5,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 import com.groupc.Runner;
 
@@ -23,10 +25,11 @@ public class RewardScreen extends Screen
 	
 	JButton back;
 	JButton logout;
-	JButton mute;
+	JToggleButton mute;
 	JButton continueButton;
 	
 	int butPressed = 0;
+	boolean played = true;
 	
 	public RewardScreen(Runner run) {
 		super(run);
@@ -50,8 +53,10 @@ public class RewardScreen extends Screen
 		
 		
 		// Add mute button
-		mute = new JButton("Mute");
-		mute.setBounds(300, 18, 70, 25);		
+		mute = new JToggleButton();
+		mute.setSelectedIcon(new ImageIcon("UnMuteIcon.png"));
+		mute.setIcon(new ImageIcon("MuteIcon.png"));
+		mute.setBounds(340, 18, 30, 25);	
 		
 		
 		// Box display and border for buttons
@@ -113,6 +118,15 @@ public class RewardScreen extends Screen
 			}
 		});		
 		
+		// Add mute button listener
+		mute.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				butPressed = 3;				
+			}
+		});
+		
 		this.setLayout(null);
 		run.setContentPane(this);
 		run.setVisible(true);
@@ -121,14 +135,29 @@ public class RewardScreen extends Screen
 	@Override
 	public void update(float deltaTime)
 	{
-		if(butPressed == 2)
+		if(butPressed == 1)
+		{
+			run.setScreen(new RecordingScreen(run));
+		}
+		else if(butPressed == 2)
 		{
 			run.setScreen(new LoginScreen(run));
+			
 		}
-		else if(butPressed == 1)
+		else if(butPressed == 3)
 		{
-			run.setScreen(new TutorialScreen(run));
+			if(run.player.music.isPlaying() && played == true)
+			{
+				run.player.pauseMusic();
+				played = false;
+			}
+			else
+			{
+				run.player.resume();
+				played = true;
+			}
 		}
+		butPressed = 0;
 	}
 
 	@Override

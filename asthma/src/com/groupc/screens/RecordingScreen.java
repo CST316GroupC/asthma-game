@@ -13,39 +13,30 @@ import javax.swing.JToggleButton;
 
 import com.groupc.Runner;
 
-
-public class TutorialScreen extends Screen
+public class RecordingScreen extends Screen
 {
 	JLabel pageTitle;
-	JLabel text;
+	JLabel text1;
+	JLabel text2;
+	JLabel text3;
 	
 	JPanel box;
 	JPanel boxBorder;
-	JPanel videoBorder;
-	JPanel descriptionBox;
-	JPanel descriptionBorder;
-	JPanel stepsBox;
-	JPanel stepsBorder;
 	
 	JButton back;
 	JButton logout;
 	JToggleButton mute;
-	JButton step1;
-	JButton step2;
-	JButton step3;
-	JButton step4;
-	JButton step5;
 	JButton start;
+	JButton airQualityInfo;
+	JButton manualInput;
 	
 	int butPressed = 0;
 	boolean played = true;
 	
-	public TutorialScreen(Runner run)
+	public RecordingScreen(Runner run)
 	{
 		super(run);
-		
-		//Basic Frame Settings
-		run.setTitle("Tutorial");
+		run.setTitle("Recording");
 		
 		// Box display and border for buttons
 		box = new JPanel();
@@ -57,42 +48,44 @@ public class TutorialScreen extends Screen
 		box.setBounds(18, 0, 450, 60);
 		boxBorder.setBounds(17, 0, 452, 61);
 		
-		
-		// Border display for embedded video
-		videoBorder = new JPanel();
-
-		videoBorder.setBackground(Color.BLACK);
-		
-		videoBorder.setBounds(30, 120, 250, 180);
-		
-		
-		// Tutorial description box and border
-		descriptionBox = new JPanel();
-		descriptionBorder = new JPanel();
-	
-		descriptionBox.setBackground(Color.LIGHT_GRAY);
-		descriptionBorder.setBackground(Color.BLACK);
-		
-		descriptionBox.setBounds(30, 320, 250, 60);
-		descriptionBorder.setBounds(29, 319, 252, 62);
-		
-		
-		// Steps box and border
-		stepsBox = new JPanel();
-		stepsBorder = new JPanel();
-		
-		stepsBox.setBackground(Color.GRAY);
-		stepsBorder.setBackground(Color.BLACK);
-		
-		stepsBox.setBounds(310, 120, 150, 260);
-		stepsBorder.setBounds(309, 119, 152, 262);
-		
-		
-		
 		// Page title
-		pageTitle = new JLabel("Tutorial Page");
+		pageTitle = new JLabel("Recording Page");
 		pageTitle.setFont(new Font("Serif", Font.BOLD, 25));
 		pageTitle.setBounds(180, 60, 350, 40);
+		
+		
+		// Add text for Start button
+		text1 = new JLabel("* Air quality readings auto taken during test");
+		text1.setFont(new Font("Normal", Font.ITALIC, 13));
+		text1.setForeground(Color.RED);
+		text1.setBounds(200, 160, 250, 25);
+		
+		// Add text for detecting Spirometer
+		text2 = new JLabel("No Spirometer detected");
+		text2.setFont(new Font("Normal", Font.ITALIC, 13));
+		text2.setForeground(Color.RED);
+		text2.setBounds(200, 270, 150, 25);
+		
+		// Add text for detecting Spirometer
+		text3 = new JLabel("Check connection or click manual input");
+		text3.setFont(new Font("Normal", Font.ITALIC, 13));
+		text3.setForeground(Color.RED);
+		text3.setBounds(200, 290, 250, 25);
+		
+		
+		// Add Start button
+		start = new JButton("Start");
+		start.setBounds(250, 190, 75, 25);
+		
+		
+		// Add Air Quality Info Button
+		airQualityInfo = new JButton("Air Quality Info");
+		airQualityInfo.setBounds(250, 220, 120, 25);
+		
+		
+		// Add Manual Input
+		manualInput = new JButton("Manual Input");
+		manualInput.setBounds(250, 320, 110, 25);;
 		
 		
 		// Add back button
@@ -112,33 +105,6 @@ public class TutorialScreen extends Screen
 		mute.setBounds(340, 18, 30, 25);
 		
 		
-		// Add Steps button
-		step1 = new JButton("Step 1");
-		step2 = new JButton("Step 2");
-		step3 = new JButton("Step 3");
-		step4 = new JButton("Step 4");
-		step5 = new JButton("Step 5");
-		
-		step1.setBounds(345, 140, 80, 25);
-		step2.setBounds(345, 190, 80, 25);
-		step3.setBounds(345, 240, 80, 25);
-		step4.setBounds(345, 290, 80, 25);
-		step5.setBounds(345, 340, 80, 25);
-		
-
-		// Add start button
-		start = new JButton("Start");
-		
-		start.setBounds(200, 420, 80, 25 );
-		
-		
-		// Add text above Start button
-		text = new JLabel("* To skip, press Start");
-		
-		text.setForeground(Color.RED);
-		text.setBounds(180, 395, 120, 25);
-		
-		
 		// Add back button listener
 		back.addActionListener(new ActionListener()
 		{
@@ -153,7 +119,7 @@ public class TutorialScreen extends Screen
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 2;				
+				butPressed = 1;				
 			}
 		});
 		
@@ -173,45 +139,45 @@ public class TutorialScreen extends Screen
 			public void actionPerformed(ActionEvent arg0) {
 				butPressed = 4;
 			}
-		});
+		});		
+		
 		
 		
 		this.add(pageTitle);
-		this.add(text);
+		this.add(text1);
+		this.add(text2);
+		this.add(text3);
 		this.add(back);
 		this.add(logout);
 		this.add(mute);
-		this.add(step1);
-		this.add(step2);
-		this.add(step3);
-		this.add(step4);
-		this.add(step5);
 		this.add(start);
+		this.add(airQualityInfo);
+		this.add(manualInput);
 		
 		// Panels have to be added last for it to show 
 		this.add(box);
-		this.add(boxBorder);
-		this.add(videoBorder);
-		this.add(descriptionBox);
-		this.add(descriptionBorder);
-		this.add(stepsBox);
-		this.add(stepsBorder);
-
+		this.add(boxBorder);	
+		
 		this.setLayout(null);		
 		run.setContentPane(this);
-		run.setVisible(true);
+		run.setVisible(true);		
 	}
-
+	
 	@Override
 	public void update(float deltaTime)
 	{
-		if(butPressed == 2)
+		if(butPressed == 1)
 		{
 			run.setScreen(new LoginScreen(run));
+			
+		}
+		else if(butPressed == 2)
+		{
+			run.setScreen(new TutorialScreen(run));
 		}
 		else if(butPressed == 4)
 		{
-			run.setScreen(new RecordingScreen(run));
+			run.setScreen(new RewardScreen(run));
 		}
 		else if(butPressed == 3)
 		{
@@ -252,5 +218,5 @@ public class TutorialScreen extends Screen
 	{
 		// TODO Auto-generated method stub
 	}
-
+	
 }
