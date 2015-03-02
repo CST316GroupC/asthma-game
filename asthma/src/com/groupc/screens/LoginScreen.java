@@ -4,8 +4,8 @@ package com.groupc.screens;
  * displays and runs elements for the login screen
  */
 
-import java.awt.Dimension;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.StringTokenizer;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -233,16 +234,19 @@ public class LoginScreen extends Screen
 
 	public void checkLogin() throws IOException
 	{
-		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText())){
-			run.setScreen(new DoctorScreen(run));
-		}
+		//if(Database.getDoctor(userNameTF.getText(), passwordTF.getText())){
+		//	run.setScreen(new DoctorScreen(run));
+		//}
 		String line = null;
-		String[] firstNames = new String [10];
 		char[][] passWords = new char[10][30];
-		String[] types = new String[10];
 		int counter = 0;
 		String tempString;
 		char tempChar;
+		//can create a patients' doctor with new text file
+		
+		Vector<String> firstNames = new Vector<String>(11);
+		Vector<String> types = new Vector<String>(11);
+		
 		
 		FileReader fr = new FileReader("login_information.txt");  //maybe create an 'onStart()' function for runner
 		BufferedReader br = new BufferedReader(fr);
@@ -252,11 +256,11 @@ public class LoginScreen extends Screen
 		while((line = br.readLine()) != null)
 		{
 			st = new StringTokenizer(line, " | ");
-			firstNames[counter] = st.nextToken();
+			firstNames.add(counter, st.nextToken());
 			st.nextToken();  //last name
 			st.nextToken();  // age
 			tempString = st.nextToken();  //password
-			types[counter] = st.nextToken(); //type
+			types.add(counter, st.nextToken()); //type
 			for(int i = 0; i < tempString.length(); ++i)
 			{
 				 passWords[counter][i] = tempString.charAt(i);
@@ -265,22 +269,24 @@ public class LoginScreen extends Screen
 			counter += 1;
 		}
 		br.close();
-		for(int i = 0; i < 10; ++i)
+		for(int i = 0; i < firstNames.size(); ++i)
 		{
 			tempString = new String (passWords[i]);
 			tempString = tempString.trim();
 			passWords[i] = tempString.toCharArray();
 			
-			if(userNameTF.getText().equals(firstNames[i]) && Arrays.equals(passwordTF.getPassword(),passWords[i]))
+			if(userNameTF.getText().equals(firstNames.elementAt(i)) && Arrays.equals(passwordTF.getPassword(),passWords[i]))
 			{
 				//Use variable type at the top to switch between doctor login and patient login
 				//Doctors
-				if(types[i].equals("0"))
+				if(types.elementAt(i).equals("0"))
 				{
-					run.setScreen(new DoctorScreen(run));
+					DoctorScreen ds = new DoctorScreen(run);
+					ds.setDoctor(userNameTF.getText());
+					run.setScreen(ds);
 				}
 				//Patients
-				if(types[i].equals("1"))
+				if(types.elementAt(i).equals("1"))
 				{
 					run.setScreen(new TutorialScreen(run));
 				}
