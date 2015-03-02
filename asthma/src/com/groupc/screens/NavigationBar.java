@@ -138,7 +138,7 @@ public class NavigationBar extends JPanel
 			run.setScreen(new LoginScreen(run));
 		}
 		//mute
-		else if(buttonPressed == 3)
+		else if(buttonPressed == 2)
 		{
 			if(run.player.music.isPlaying())
 			{
@@ -153,7 +153,7 @@ public class NavigationBar extends JPanel
 		//parentControls
 		else if(buttonPressed == 3)
 		{
-			run.setScreen(new AccountCreationScreen(run));
+			run.setScreen(new ParentControlsScreen(run));
 		}
 	}
 }
