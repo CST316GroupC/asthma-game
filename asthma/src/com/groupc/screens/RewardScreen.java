@@ -4,52 +4,48 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
 import com.groupc.Runner;
+import com.groupc.math.Resize;
 
 public class RewardScreen extends Screen
 {
-
-	JLabel pageTitle;
-	
-	JPanel box;
-	JPanel boxBorder;
-	JPanel rewardBox;
-	JPanel rewardBorder;
-	
-	JButton back;
-	JButton logout;
-	JToggleButton mute;
-	JButton continueButton;
-	
-	int butPressed = 0;
+	//Variables
+	boolean redraw     = true;
+	Resize  resize     = new Resize(run);
+	int     butPressed = 0;
 	boolean played = true;
 	
-	public RewardScreen(Runner run) {
+	//Display Elements
+	NavigationBar navBar         = new NavigationBar(run,false,true,"Rewards");
+	JPanel        rewardBox      = new JPanel();;
+	JButton       continueButton = new JButton("Continue");;
+	JToggleButton mute;
+
+	
+	public RewardScreen(Runner run) 
+	{
 		super(run);
+		//Basic Frame Settings
 		run.setTitle("Rewards");
 		
-		
-		// Page title
-		pageTitle = new JLabel("Rewards Page");
-		pageTitle.setFont(new Font("Serif", Font.BOLD, 25));
-		pageTitle.setBounds(180, 60, 350, 40);
-		
-		
-		// Add back button
-		back = new JButton("Back");
-		back.setBounds(25, 14, 80, 35);
-		
-		
-		// Add logout button
-		logout = new JButton("Logout");
-		logout.setBounds(380, 14, 80, 35);
+		//resize stuff
+		run.addComponentListener(new ComponentAdapter()
+		{
+			public void componentResized(ComponentEvent e)
+			{
+				redraw = true;
+			}
+		});
 		
 		
 		// Add mute button
@@ -59,64 +55,25 @@ public class RewardScreen extends Screen
 		mute.setBounds(340, 18, 30, 25);	
 		
 		
-		// Box display and border for buttons
-		box = new JPanel();
-		boxBorder = new JPanel();
-		
-		box.setBackground(Color.LIGHT_GRAY);
-		boxBorder.setBackground(Color.BLACK);
-		
-		box.setBounds(18, 0, 450, 60);
-		boxBorder.setBounds(17, 0, 452, 61);
-		
 		
 		// Reward display and border
 		rewardBox = new JPanel();
-		rewardBorder = new JPanel();
-		
-		rewardBox.setBackground(Color.LIGHT_GRAY);
-		rewardBorder.setBackground(Color.BLACK);
-		
-		rewardBox.setBounds(100, 110, 285, 250);
-		rewardBorder.setBounds(99, 109, 287, 252);
-		
-		
-		// Add continue button
-		continueButton = new JButton("Continue");
-		continueButton.setBounds(195, 420, 90, 25);
-		
-		
-		
-		this.add(pageTitle);
-		this.add(back);
-		this.add(logout);
-		this.add(mute);
-		this.add(continueButton);
-		
-		// Panels have to be added last for it to show 
-		this.add(box);
-		this.add(boxBorder);
-		this.add(rewardBox);
-		this.add(rewardBorder);
-		
-		
-		// Add back button listener
-		back.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 1;				
-			}
-		});		
 
-		// Add logout button listener
-		logout.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 2;				
-			}
-		});		
+		//Set colors
+		this.setBackground(Color.WHITE);
+		rewardBox.setBackground(Color.LIGHT_GRAY);
+		
+		//Set fonts
+		
+		
+		////Buttons////
+		
+		
+		this.add(continueButton);
+		this.add(rewardBox);
+		this.add(navBar);
+		
+		
 		
 		// Add mute button listener
 		mute.addActionListener(new ActionListener()
@@ -158,6 +115,25 @@ public class RewardScreen extends Screen
 			}
 		}
 		butPressed = 0;
+
+		if(redraw)
+		{	
+			//navBar
+			navBar.redrawUpdate();
+			
+			//rewardBox
+			rewardBox.setBounds(resize.locationX(100), resize.locationY(100), resize.width(285), resize.height(300));
+			rewardBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
+			
+			//continueButton
+			continueButton.setBounds(resize.locationX(200), resize.locationY(420), resize.width(100), resize.height(30));
+			continueButton.setFont(new Font(continueButton.getFont().getFontName(),continueButton.getFont().getStyle(), resize.font(12)));
+			
+			run.repaint();
+			redraw = false;
+		}
+		
+		navBar.update();
 	}
 
 	@Override
