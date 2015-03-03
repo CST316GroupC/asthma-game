@@ -10,15 +10,22 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 
 import com.groupc.Patient;
 import com.groupc.Runner;
 import com.groupc.math.Resize;
-
 
 public class DoctorScreen extends Screen
 {
@@ -40,7 +47,7 @@ public class DoctorScreen extends Screen
 	JButton displayPatients  = new JButton("Display Patients"); 
 	JButton addPatientButton = new JButton("Add Patient");
 	NavigationBar navBar           = new NavigationBar(run,false,false,"Doctor Page");
-
+	
 	public DoctorScreen(Runner run) 
 	{
 		super(run);
@@ -72,7 +79,6 @@ public class DoctorScreen extends Screen
 		
 		// Add patient button listener
 		navMuteButton.addActionListener(new ActionListener()
-
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -94,11 +100,11 @@ public class DoctorScreen extends Screen
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 2;				
+				butPressed = 4;				
 			}
 		});
-
-
+		
+		
 		//add things to the panel
 		this.add(addPatientButton);
 		this.add(displayPatients);
@@ -111,6 +117,86 @@ public class DoctorScreen extends Screen
 		this.setLayout(null);		
 		run.setContentPane(this);
 		run.setVisible(true);
+	}
+	
+	public void setDoctor(String docName)
+	{
+		if(docName != null)
+		{
+			doctor = docName;
+			run.setTitle(doctor + "s' page");
+		}else
+		{
+			System.out.println("null doctor name");
+			doctor = "doctor";
+			run.setTitle(doctor);
+		}
+	}
+	
+	private void getPatients() throws IOException
+	{
+		String line = null;
+		Vector<String> patientFirstNames = new Vector<String>(10);
+		Vector<String> patientLastNames = new Vector<String>(10);
+		Vector<String> types = new Vector<String>(10);
+		Vector<String> patDoctors = new Vector<String>(10);
+		int counter = 0;
+		
+		FileReader fr = new FileReader("login_information.txt");
+		BufferedReader br = new BufferedReader(fr);
+		StringTokenizer st;
+		
+		
+		while((line = br.readLine()) != null)
+		{
+			st = new StringTokenizer(line, " | ");
+			patientFirstNames.add(counter, st.nextToken()); //fname
+			patientLastNames.add(st.nextToken());  //last name
+			st.nextToken();  // age
+			st.nextToken();  //password
+			types.add(counter, st.nextToken()); //type
+			patDoctors.add(counter, st.nextToken()); //doctor for patient
+			
+			counter += 1;
+			
+			
+		}
+		br.close();
+		
+		counter = 0;
+		
+		/*JTable testTable;
+		String[] collumnNames = {"First Name", "Last Name"};
+		String[][] tData = {{"bob", "bill"}, {"Joe", "schhmoe"}};	
+		testTable = new JTable(tData, collumnNames);
+		jsp = new JScrollPane(testTable);*/
+		
+		Vector<String> collumnNames = new Vector<String>();
+		collumnNames.add("First Name");
+		collumnNames.add("Last Name");
+		//collumnNames.add("age");
+		Vector<Vector<String>> rowData = new Vector<Vector<String>>(10);
+		for(int i = 0; i < patientFirstNames.size(); ++i)
+		{
+			if(patDoctors.elementAt(i).equals(doctor))
+			{
+				Vector<String> tempVector = new Vector<String>(2);
+				tempVector.add(patientFirstNames.elementAt(i)); 
+				tempVector.add(patientLastNames.elementAt(i));
+				rowData.add(tempVector);
+			}
+		}
+		patientTable = new JTable(rowData, collumnNames);
+		jsp = new JScrollPane(patientTable);
+		
+		tableDisplay();
+		
+	}
+	
+	private void tableDisplay()
+	{
+		jsp.setBounds(resize.locationX(150), resize.locationY(200), resize.width(200), resize.height(200));
+		this.add(jsp);
 	}
 
 	@Override
@@ -135,7 +221,9 @@ public class DoctorScreen extends Screen
 		
 		if(butPressed == 1)
 		{
-			run.setScreen(new AccountCreationScreen(run));
+			AccountCreationScreen acs = new AccountCreationScreen(run);
+			acs.setPatientDoctor(doctor);
+			run.setScreen(acs);
 		}
 		else if(butPressed == 2)
 		{
@@ -170,8 +258,9 @@ public class DoctorScreen extends Screen
 	}
 
 	@Override
-	public void present(float deltaTime) {
-		// TODO Auto-generated method stub
+	public void present(float deltaTime)
+	{
+		
 		
 	}
 

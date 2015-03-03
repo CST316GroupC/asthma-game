@@ -10,13 +10,14 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.JToggleButton;
@@ -27,7 +28,6 @@ import com.groupc.math.Resize;
 
 public class AccountCreationScreen extends Screen
 {
-
 	//Variables
 	boolean redraw     = true;
 	Resize  resize     = new Resize(run);
@@ -124,6 +124,19 @@ public class AccountCreationScreen extends Screen
 		run.setContentPane(this);
 		run.setVisible(true);
 	}
+	
+	public void setPatientDoctor(String patientDoctor) //new patients doctor
+	{
+		if(patientDoctor != null)
+		{
+			newPatientDoctor = patientDoctor;
+			run.setTitle("Account Creation " + newPatientDoctor);
+		}else
+		{
+			run.setTitle("Account Creation");
+			System.out.println("null doctor for new patient");
+		}
+	}
 
 	
 
@@ -190,9 +203,10 @@ public class AccountCreationScreen extends Screen
 		}
 		else if(butPressed == 3)
 		{
-			if(run.player.music.isPlaying())
+			if(run.player.music.isPlaying() && played == true)
 			{
 				run.player.pauseMusic();
+				played = false;
 			}
 			else
 			{
@@ -202,7 +216,6 @@ public class AccountCreationScreen extends Screen
 			}
 			butPressed = 0;
 		}
-
 		navBar.update();
 	}
 
