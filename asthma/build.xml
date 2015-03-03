@@ -15,14 +15,12 @@
     <fileset dir="${lwjgl_jars.dir}" includes="slick-util.jar"/>
   </path>
 	
-  <fileset dir="${scr.dir}">
-	<include name="com"/>
-  	<exclude name="com/groupc/junit"/>
-  </fileset>
-
+ 
   <target name="compile">
     <mkdir dir="${build.dir}"/>
-    <javac source="1.8" target="1.8" srcdir="${src.dir}" destdir="${build.dir}" classpathref="my_cp"/>
+    <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="my_cp" >
+  	<exclude name="**/junit/*.java"/>
+  	</javac>
   </target>
 
   <target name="clean">
