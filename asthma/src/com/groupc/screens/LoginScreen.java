@@ -4,8 +4,6 @@ package com.groupc.screens;
  * displays and runs elements for the login screen
  */
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,7 +13,6 @@ import java.awt.event.ComponentEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
@@ -37,27 +34,26 @@ import com.groupc.math.Resize;
 public class LoginScreen extends Screen
 {
 	//Variables
-	int type = 0;
+	boolean redraw          = true;
+	Resize  resize          = new Resize(run);
+	int     type            = 0;
 	boolean loginErrorDrawn = false;
-	boolean redraw = true;
-	boolean elementMoved = false;
-	Resize resize = new Resize(run);
+	boolean elementMoved    = false;
+	
 	
 	//Display Elements
-	JPanel testBox = new JPanel();
-	JLabel title = new JLabel("Team C's Asthma Game");
-	JPanel loginBox = new JPanel();
-	JPanel loginBoxBorder = new JPanel();
-	JLabel userNameLabel = new JLabel("Username:");
-	JTextField userNameTF = new JTextField();
-	JLabel passwordLabel = new JLabel("Password:");
-	JPasswordField passwordTF = new JPasswordField();
-	JRadioButton saveLoginRadio = new JRadioButton("Remember Password");
-	JButton loginButton = new JButton("Login");
-	JLabel passRetrievalLabel = new JLabel("");
-	JButton passRetrievalButton = new JButton("Forgot Password?");
-	JLabel loginErrorMessage = new JLabel("Incorrect Username/Password");
-	
+	JLabel         title               = new JLabel("Team C's Asthma Game",SwingConstants.CENTER);
+	JPanel         loginBox            = new JPanel();
+	JLabel         userNameLabel       = new JLabel("Email:");
+	JTextField     userNameTF          = new JTextField();
+	JLabel         passwordLabel       = new JLabel("Password:");
+	JPasswordField passwordTF          = new JPasswordField();
+	JRadioButton   saveLoginRadio      = new JRadioButton("Remember Password");
+	JButton        loginButton         = new JButton("Login");
+	JLabel         passRetrievalLabel  = new JLabel("");
+	JButton        passRetrievalButton = new JButton("Forgot Password?");
+	JLabel         loginErrorMessage   = new JLabel("Incorrect Username/Password");
+
 	public LoginScreen(Runner run) 
 	{
 		super(run);
@@ -70,12 +66,13 @@ public class LoginScreen extends Screen
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
 		{
+			@Override
 			public void componentResized(ComponentEvent e)
 			{
 				redraw = true;
-				System.out.println("redraw");
 			}
 		});
+		
 		
 		//Set colors
 		this.setBackground(Color.LIGHT_GRAY);
@@ -83,13 +80,12 @@ public class LoginScreen extends Screen
 		loginBox.setBackground(Color.LIGHT_GRAY);
 		loginBoxBorder.setBackground(Color.BLACK);
 		saveLoginRadio.setBackground(Color.LIGHT_GRAY);
+		loginErrorMessage.setForeground(Color.RED);
 		
 		//Set fonts
-		title.setFont(new Font("Serif", Font.BOLD, 40));
-		loginErrorMessage.setForeground(Color.RED);
-				
+		title.setFont(new Font("Serif", Font.BOLD, 40));		
 		
-		
+		////Buttons////
 		//Test if Login Button is pushed
 		loginButton.addActionListener(new ActionListener()
 		{
@@ -105,8 +101,7 @@ public class LoginScreen extends Screen
 		});	
 		
 		//Enter Key is Pressed
-		userNameTF.addActionListener(new ActionListener()
-		{
+		userNameTF.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -141,8 +136,7 @@ public class LoginScreen extends Screen
 		this.add(passRetrievalButton);
 		this.add(loginErrorMessage);
 		this.add(loginBox);
-		this.add(loginBoxBorder);
-		this.add(testBox);
+
 		this.setLayout(null);
 		run.setContentPane(this);
 		run.setVisible(true);
@@ -182,7 +176,6 @@ public class LoginScreen extends Screen
 			passwordLabel.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
 			passwordTF.setBounds(resize.locationX(170), resize.locationY(280), resize.width(160), resize.height(20));
 			passwordTF.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
-
 			
 			//Radio			
 			saveLoginRadio.setBounds(resize.locationX(170), resize.locationY(300), resize.width(160), resize.height(20));		
@@ -229,7 +222,7 @@ public class LoginScreen extends Screen
 	@Override
 	public void dispose() 
 	{
-		
+		// TODO Auto-generated method stub
 	}
 	
 	//Private Methods
@@ -291,9 +284,6 @@ public class LoginScreen extends Screen
 		
 			if(!loginErrorDrawn)
 			{
-				//loginErrorMessage.setSize(200, 20);
-				//loginErrorMessage.setLocation(150, 180);
-				//this.add(loginErrorMessage);
 				loginErrorMessage.setVisible(true);
 				run.repaint();
 				loginErrorDrawn = true;
