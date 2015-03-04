@@ -238,6 +238,9 @@ public class LoginScreen extends Screen
 		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText())){
 			run.setScreen(new DoctorScreen(run));
 		}
+		if(Database.getPatient(userNameTF.getText(), passwordTF.getText())){
+			run.setScreen(new TutorialScreen(run));
+		}
 		String line = null;
 		String[] firstNames = new String [10];
 		char[][] passWords = new char[10][30];

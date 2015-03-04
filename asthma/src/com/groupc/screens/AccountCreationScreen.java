@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.groupc.Database;
 import com.groupc.Runner;
 
 
@@ -170,6 +171,9 @@ public class AccountCreationScreen extends Screen
 
 	private void addCurrentPatient() 
 	{
+		if(Database.addPatient(fname.getText(), lname.getText(), password.getText(), age.getText())){
+			run.setScreen(new DoctorScreen(run));
+		}
 		if(fname.getText().isEmpty()  || lname.getText().isEmpty()  || password.getText().isEmpty())  //required basic information
 		{
 			JLabel error = new JLabel("Missing Information*");
