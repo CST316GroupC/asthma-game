@@ -39,6 +39,8 @@ public class MainMenu extends GameScreen
 			if(CollisionChecker.PointToRect(mouseClick, play))
 			{
 				System.out.println("play");
+				this.dispose();
+				next = 1;
 			}
 			if(CollisionChecker.PointToRect(mouseClick, options))
 			{
@@ -88,6 +90,8 @@ public class MainMenu extends GameScreen
 	@Override
 	public GameScreen getNext() 
 	{
+		if(next == 1)
+			return new World();
 		if(next == 2)
 			return new Options(this.cam);
 		return null;

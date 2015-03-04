@@ -13,7 +13,6 @@ public class MovingGameObject extends GameObject
 	//Variables
 	public Vector velocity;
 	public Vector accel;
-	public Vector max;
 	
 	//Constructors
 	/**
@@ -24,12 +23,11 @@ public class MovingGameObject extends GameObject
 	 * @param width
 	 * @param height
 	 */
-	public MovingGameObject(float x, float y, int width, int height, int maxVX, int maxVY)
+	public MovingGameObject(float x, float y, float width, float height)
 	{
 		super(x, y, width, height);
 		velocity = new Vector(0, 0);
 		accel = new Vector(0, 0);
-		max = new Vector(maxVX, maxVY);
 	}
 	
 	/**
@@ -46,23 +44,12 @@ public class MovingGameObject extends GameObject
 	 * @param maxVX - max horizontal velocity
 	 * @param maxVY - max vertical velocity
 	 */
-	public MovingGameObject(float x, float y, int width, int height, float velX, float velY, float accX, float accY, float maxVX, float maxVY)
+	public MovingGameObject(float x, float y, float width, float height, float velX, float velY, float accX, float accY)
 	{
 		super(x, y, width, height);
 		velocity = new Vector(velX, velY);
 		accel = new Vector(accX, accY);
-		max = new Vector(maxVX, maxVY);
 	}
 	
-	/**
-	 * Increases velocity by the acceleration unless already
-	 * at max speed
-	 * @param deltaTime - Time since last redraw
-	 */
-	public void updateVectors(float deltaTime)
-	{
-		if(velocity.limit(max))
-			velocity.add(accel.mult(deltaTime));
-	}
 	
 }
