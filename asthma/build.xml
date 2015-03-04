@@ -22,6 +22,15 @@
   	<exclude name="**/junit/*.java"/>
   	</javac>
   </target>
+	
+	<target name="jar">
+		<jar destfile="app.jar" basedir="${build.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="com.groupc.Tester"/>
+				<attribute name="Class-Path" value="lib/jogg-0.0.7.jar lib/jorbis-0.0.15.jar lib/lwjgl_util.jar lib/lwjgl.jar lib/slick-util.jar"/>
+			</manifest>
+		</jar>
+	</target>
 
   <target name="clean">
     <delete dir="${build.dir}"/>

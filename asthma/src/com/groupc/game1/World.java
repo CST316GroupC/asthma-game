@@ -14,7 +14,7 @@ public class World extends GameScreen
 	public static final float FRUSTUM_WIDTH = 10;
 	public static final float FRUSTUM_HEIGHT = 10;
 	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 100; //400
-	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT; //400 (the * 10 means the total width is 4000 pixels but only 400 shown)
+	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 4; //400 (the * 10 means the total width is 4000 pixels but only 400 shown)
 	
 	public static final int WORLD_STATE_PAUSED = 0;
 	public static final int WORLD_STATE_PLAYING = 1;
@@ -34,7 +34,7 @@ public class World extends GameScreen
 	public World()
 	{
 		rand = new Random();
-		this.joey = new JoeyRooster(1, 0, 1);
+		this.joey = new JoeyRooster(1, .5f, 2);
 		this.ramp = new Ramp(21, 0);
 		this.seeds = new Seed[5];
 		seeds[0] = new Seed(25, 5);
@@ -52,7 +52,7 @@ public class World extends GameScreen
 		{
 			if(seeds[i].position.x < cam.position.x - FRUSTUM_WIDTH /2)
 			{
-				seeds[i].position.set(rand.nextFloat()* 5 + cam.position.x + FRUSTUM_WIDTH/2, rand.nextFloat()* - 3 + joey.position.y);
+				seeds[i].position.set(rand.nextFloat() + cam.position.x + FRUSTUM_WIDTH/2, rand.nextFloat() * (rand.nextInt(10) - 5) + cam.position.y);
 				seeds[i].update();
 			}
 		}
@@ -76,21 +76,30 @@ public class World extends GameScreen
 		
 		if(joey.position.x > cam.position.x)
 		{
-			if(cam.position.x  < WORLD_WIDTH - 20)
+			if(cam.position.x  < WORLD_WIDTH - 10)
 			{
 				cam.position.x = joey.position.x;
 			}
+			if(joey.position.y > cam.position.y || joey.position.y < cam.position.y)
+			{
+				if(cam.position.y  < WORLD_HEIGHT - 5)
+				{
+					if(joey.position.y >= FRUSTUM_HEIGHT / 2)
+					{
+						cam.position.y = joey.position.y;
+					}
+				}
+			}
 		}
 		cam.setCamera();
-		renderJoey();
 		renderRamp();
 		renderSeeds();
-		
+		renderJoey();
 	}
 	
 	public void renderJoey()
 	{
-		Rectangle rect = new Rectangle(joey.position.x, joey.position.y, 1, 1);
+		Rectangle rect = new Rectangle(joey.position.x - JoeyRooster.WIDTH / 2, joey.position.y - JoeyRooster.HEIGHT / 2, 1, 1);
 	
 		switch(joey.state)
 		{
@@ -108,7 +117,7 @@ public class World extends GameScreen
 	
 	public void renderRamp()
 	{
-		Rectangle rect = new Rectangle(ramp.position.x, ramp.position.y, 2, 2);
+		Rectangle rect = new Rectangle(ramp.position.x, ramp.position.y, 4, 4);
 		Assets.ramp.draw(rect);
 	}
 	

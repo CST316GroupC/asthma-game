@@ -28,10 +28,5 @@ public class GameObject
 		position = new Vector(x, y);
 		bounds = new Rectangle(x - width/2, y - height/2, width, height);
 	}
-	
-	public Rectangle getBounds()
-	{
-		return new Rectangle(0,0,0,0);
-	}
 }
 

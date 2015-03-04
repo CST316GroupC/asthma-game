@@ -13,8 +13,7 @@ public class Seed extends GameObject
 	
 	public void update()
 	{
-		bounds.lowerLeft.set(position.sub(bounds.width / 2, bounds.height / 2));
-		
+		bounds.lowerLeft.set(position.sub(bounds.width / 2, bounds.height / 2));		
 	}
 
 }

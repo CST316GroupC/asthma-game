@@ -108,14 +108,14 @@ public class TutorialScreen extends Screen
 			}
 		});
 
-		// Add start button listener
-		start.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 4;
-			}
-		});
+//		// Add start button listener
+//		start.addActionListener(new ActionListener()
+//		{
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {
+//				butPressed = 4;
+//			}
+//		});
 		
 		this.add(mute);
 		this.add(skipText);

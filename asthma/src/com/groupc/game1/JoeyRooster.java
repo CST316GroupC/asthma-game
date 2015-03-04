@@ -7,8 +7,8 @@ public class JoeyRooster extends MovingGameObject
 	public final static float WIDTH = 1f;
 	public final static float HEIGHT = .33f;
 	
-	public final static int MAX_SPEED_H = 15;
-	public final static int MAX_SPEED_V = 20;
+	public final static int MAX_SPEED_H = 25;
+	public final static int MAX_SPEED_V = 30;
 	
 	public final static int STATE_MOVE = 0;
 	public final static int STATE_FLYING = 1;
@@ -68,7 +68,7 @@ public class JoeyRooster extends MovingGameObject
 			velocity.set(0, 0);
 			state = STATE_STOP;
 
-			System.out.println(position.x);
+			//System.out.println(position.x);
 		}
 		
 		stateTime += deltaTime;
