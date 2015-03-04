@@ -75,6 +75,17 @@ public class Vector
 	}
 	
 	/**
+	 * Adds the values of another Vector onto the Vector
+	 * @param x - value to be added
+	 * @param y - value to be added
+	 */
+	public void add(float x, float y)
+	{
+		this.x += x;
+		this.y += y;
+	}
+	
+	/**
 	 * Subtracts the values of another Vector onto the Vector
 	 * @param v - Vector being subtracted
 	 */
@@ -82,6 +93,16 @@ public class Vector
 	{
 		this.x -= v.x;
 		this.y -= v.y;
+	}
+	
+	/**
+	 * Subtracts the values of another Vector onto the Vector
+	 * @param x - value to be subtracted
+	 * @param y - value to be subtracted
+	 */
+	public Vector sub(float x, float y)
+	{
+		return new Vector(this.x - x, this.y - y);
 	}
 	
 	/**

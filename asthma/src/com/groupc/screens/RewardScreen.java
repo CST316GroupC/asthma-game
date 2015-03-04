@@ -84,6 +84,14 @@ public class RewardScreen extends Screen
 			}
 		});
 		
+		continueButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				butPressed = 4;				
+			}
+		});
+		
 		this.setLayout(null);
 		run.setContentPane(this);
 		run.setVisible(true);
@@ -113,6 +121,10 @@ public class RewardScreen extends Screen
 				run.player.resume();
 				played = true;
 			}
+		}
+		else if(butPressed == 4)
+		{
+			run.setScreen(new Game1Screen(run));
 		}
 		butPressed = 0;
 

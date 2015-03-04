@@ -7,15 +7,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.groupc.Runner;
@@ -111,14 +108,14 @@ public class TutorialScreen extends Screen
 			}
 		});
 
-		// Add start button listener
-		start.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 4;
-			}
-		});
+//		// Add start button listener
+//		start.addActionListener(new ActionListener()
+//		{
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {
+//				butPressed = 4;
+//			}
+//		});
 		
 		this.add(mute);
 		this.add(skipText);
@@ -134,7 +131,6 @@ public class TutorialScreen extends Screen
 		this.add(descriptionBox);
 		this.add(stepsBox);
 		this.add(navBar);
-
 		this.setLayout(null);		
 		run.setContentPane(this);
 		run.setVisible(true);
@@ -198,8 +194,6 @@ public class TutorialScreen extends Screen
 				played = true;
 			}
 		}
-		butPressed = 0;
-		navBar.update();
 	}
 
 	@Override

@@ -23,15 +23,10 @@ public class GameObject
 	 * @param width - width of object
 	 * @param height - width of object
 	 */
-	public GameObject(float x, float y, int width, int height)
+	public GameObject(float x, float y, float width, float height)
 	{
 		position = new Vector(x, y);
 		bounds = new Rectangle(x - width/2, y - height/2, width, height);
-	}
-	
-	public Rectangle getBounds()
-	{
-		return new Rectangle(0,0,0,0);
 	}
 }
 
