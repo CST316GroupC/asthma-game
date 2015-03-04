@@ -129,10 +129,10 @@ public class AccountCreationScreen extends Screen
 	public void setPatientDoctor(String patientDoctor) //new patients doctor
 	{
 
-		if(Database.addPatient(fname.getText(), lname.getText(), password.getText(), age.getText())){
+		if(Database.addPatient(firstNameTF.getText(), lastNameTF.getText(), passwordTF.getText(), ageTF.getText())){
 			run.setScreen(new DoctorScreen(run));
 		}
-		if(fname.getText().isEmpty()  || lname.getText().isEmpty()  || password.getText().isEmpty())  //required basic information
+		if(firstNameTF.getText().isEmpty()  || lastNameTF.getText().isEmpty()  || passwordTF.getText().isEmpty())  //required basic information
 
 		{
 			newPatientDoctor = patientDoctor;
