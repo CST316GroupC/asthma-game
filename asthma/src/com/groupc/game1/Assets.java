@@ -10,9 +10,8 @@ import com.groupc.game.TextureRegion;
 
 public class Assets
 {
+	public static Texture atlas;
 	public static Texture sheet;
-	public static Texture joeySK;
-	public static Texture joeyF;
 	public static TextureRegion playBut;
 	public static TextureRegion optionsBut;
 	public static TextureRegion upgradeBut;
@@ -21,17 +20,34 @@ public class Assets
 	public static TextureRegion soundOff;
 	public static TextureRegion soundLbl;
 	public static TextureRegion arrowBut;
+	
+	//background
+	public static TextureRegion sky;
+	public static TextureRegion grass;
+	
+	//Cows
+	public static TextureRegion cow;
+	public static TextureRegion cowhit;
+	
+	//Joey the rooster
+	public static TextureRegion joeysk;
+	public static TextureRegion joeyfly;
+	public static TextureRegion joeyfall;
+	public static TextureRegion joeyRamp;
+	public static TextureRegion joeyBou;
+	public static TextureRegion joeyflap;
+	
+	//ramp
 	public static TextureRegion ramp;
-	public static TextureRegion ball;
-	public static TextureRegion joey_SK;
-	public static TextureRegion joey_fly;
+	
+	//seeds
+	public static TextureRegion seed1;
 	
 	public static void load()
 	{
 		try {
 			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("mainmenu.png"));
-			joeySK = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("JoeyRooster.png"));
-			joeyF = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("JoeyRoosterFlying.png"));
+			atlas = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/atlas.png"));
 			
 			title = new TextureRegion(sheet, 0, 226, 235, 30);
 			playBut = new TextureRegion(sheet, 0, 128, 116, 43);
@@ -41,10 +57,20 @@ public class Assets
 			soundOff = new TextureRegion(sheet, 54, 24, 54, 55);
 			soundLbl = new TextureRegion(sheet, 0, 0, 65, 23);
 			arrowBut = new TextureRegion(sheet, 110, 24, 54, 55);
-			ramp = new TextureRegion(sheet, 121, 175, 40, 41);
-			ball = new TextureRegion(sheet, 184, 183, 20, 20);
-			joey_SK = new TextureRegion(joeySK, 0, 0, 64, 64);
-			joey_fly = new TextureRegion(joeyF, 0, 0, 64, 64);
+			
+			sky = new TextureRegion(atlas, 0, 512 - 96, 32, 96);
+			grass = new TextureRegion(atlas, 32, 512 - 32, 32, 32);
+			cow = new TextureRegion(atlas, 64, 512 - 32, 64, 32);
+			cowhit = new TextureRegion(atlas, 64, 512 - 32 - 64, 64, 64);
+			seed1 = new TextureRegion(atlas, 128, 512 - 32, 32, 32);
+			ramp = new TextureRegion(atlas, 160, 512 - 32, 32, 32);
+			joeysk = new TextureRegion(atlas, 192, 512 - 32, 32, 32);
+			joeyfly = new TextureRegion(atlas, 192, 512 - 32 - 32, 32, 32);
+			joeyfall = new TextureRegion(atlas, 192, 512 - 64 - 32, 32, 32);
+			joeyBou = new TextureRegion(atlas, 192,  512 - 96 - 32, 32,32);
+			joeyflap = new TextureRegion(atlas, 192, 512 - 128 - 32, 32, 32);
+			joeyRamp = new TextureRegion(atlas, 192, 512 - 160 - 32, 32, 32);
+			
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

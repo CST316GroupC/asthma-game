@@ -1,4 +1,7 @@
-package com.groupc.math;
+package com.groupc.junit;
+
+import com.groupc.math.Rectangle;
+import com.groupc.math.Vector;
 
 /**
  * The CollisionChecker class is used to determine if collisions are happening and or if something like a point

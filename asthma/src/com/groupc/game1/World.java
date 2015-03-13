@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.lwjgl.input.Keyboard;
+
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
-import com.groupc.math.CollisionChecker;
+import com.groupc.junit.CollisionChecker;
 import com.groupc.math.Rectangle;
 
 public class World extends GameScreen
@@ -14,14 +16,13 @@ public class World extends GameScreen
 	public static final float FRUSTUM_WIDTH = 10;
 	public static final float FRUSTUM_HEIGHT = 10;
 	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 100; //400
-	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 4; //400 (the * 10 means the total width is 4000 pixels but only 400 shown)
+	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 6; //400 (the * 10 means the total width is 4000 pixels but only 400 shown)
 	
 	public static final int WORLD_STATE_PAUSED = 0;
 	public static final int WORLD_STATE_PLAYING = 1;
 	public static final int WORLD_STATE_OVER = 2;
 	
 	public static final int GRAVITY = -10;
-	
 	public int state;
 	public int score;
 	
@@ -29,19 +30,21 @@ public class World extends GameScreen
 	public final JoeyRooster joey;
 	public final Ramp ramp;
 	public final Seed[] seeds;
+	public final Cow cow;
 	public Random rand;
 	
 	public World()
 	{
 		rand = new Random();
 		this.joey = new JoeyRooster(1, .5f, 2);
-		this.ramp = new Ramp(21, 0);
+		this.ramp = new Ramp(21, 0, 5);
 		this.seeds = new Seed[5];
 		seeds[0] = new Seed(25, 5);
 		seeds[1] = new Seed(25, 6);
 		seeds[2] = new Seed(25, 7);
 		seeds[3] = new Seed(25, 8);
 		seeds[4] = new Seed(25, 9);
+		this.cow = new Cow(30, 0);
 		this.state = WORLD_STATE_PAUSED;
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 	}
@@ -55,25 +58,65 @@ public class World extends GameScreen
 				seeds[i].position.set(rand.nextFloat() + cam.position.x + FRUSTUM_WIDTH/2, rand.nextFloat() * (rand.nextInt(10) - 5) + cam.position.y);
 				seeds[i].update();
 			}
-		}
-		
+		}		
 	}
+	
+	public void updatecow()
+	{
+		if(cow.position.x < cam.position.x - FRUSTUM_WIDTH /2)
+		{
+			int chance = rand.nextInt(10);
+			System.out.println(chance);
+			if(chance < 2)
+			{
+				cow.position.set(rand.nextFloat() * 5 + cam.position.x + FRUSTUM_WIDTH/2, 0);
+				cow.update();
+			}
+		}
+	}
+	
 	
 	public void update(float deltaTime)
 	{
+		inputHandling();
 		updateSeeds();
+		updatecow();
 		updateJoey(deltaTime);
 		collision();
 	}
 	
+	public void inputHandling()
+	{
+		while (Keyboard.next()) {
+		    if (Keyboard.getEventKeyState()) {
+		        if (Keyboard.getEventKey() == Keyboard.KEY_W) {
+		        System.out.println("W Key Pressed");
+		        
+		        }
+		    }
+		    else {
+		        if (Keyboard.getEventKey() == Keyboard.KEY_W) {
+		        System.out.println("W Key Released");
+		        joey.flap();
+		        }
+		    }
+		}
+	}
+	
 	public void updateJoey(float deltaTime)
 	{
+		if(joey.state == JoeyRooster.STATE_RAMP && joey.position.x > ramp.position.x + ramp.bounds.width)
+		{
+			joey.state = JoeyRooster.STATE_FLYING;
+		}
+		
 		joey.update(deltaTime);
 	}
 	
 	public void render()
 	{
-		
+		Assets.sky.draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
+		Assets.grass.draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
 		if(joey.position.x > cam.position.x)
 		{
 			if(cam.position.x  < WORLD_WIDTH - 10)
@@ -94,30 +137,43 @@ public class World extends GameScreen
 		cam.setCamera();
 		renderRamp();
 		renderSeeds();
+		rendercow();
 		renderJoey();
 	}
 	
 	public void renderJoey()
 	{
-		Rectangle rect = new Rectangle(joey.position.x - JoeyRooster.WIDTH / 2, joey.position.y - JoeyRooster.HEIGHT / 2, 1, 1);
+		Rectangle rect = new Rectangle(joey.position.x, joey.position.y, 1, 1);
 	
 		switch(joey.state)
 		{
-		case JoeyRooster.STATE_MOVE:
+		case JoeyRooster.STATE_SB:
+			Assets.joeysk.draw(rect);
+			break;
 		case JoeyRooster.STATE_STOP:
-			Assets.joey_SK.draw(rect);
+			Assets.joeysk.draw(rect);
 			break;
 		case JoeyRooster.STATE_FLYING:
+			Assets.joeyfly.draw(rect);
+			break;
 		case JoeyRooster.STATE_FALLING:
+			Assets.joeyfall.draw(rect);
+			break;
 		case JoeyRooster.STATE_BOUNCE:
-			Assets.joey_fly.draw(rect);
+			Assets.joeyBou.draw(rect);
+			break;
+		case JoeyRooster.STATE_RAMP:
+			Assets.joeyRamp.draw(rect);
+			break;
+		case JoeyRooster.STATE_FLAP:
+			Assets.joeyflap.draw(rect);
 			break;
 		}
 	}
 	
 	public void renderRamp()
 	{
-		Rectangle rect = new Rectangle(ramp.position.x, ramp.position.y, 4, 4);
+		Rectangle rect = new Rectangle(ramp.position.x, ramp.position.y, ramp.bounds.width, ramp.bounds.height);
 		Assets.ramp.draw(rect);
 	}
 	
@@ -126,7 +182,22 @@ public class World extends GameScreen
 		for(int i =0; i < seeds.length; i++)
 		{
 			Rectangle rect = new Rectangle(seeds[i].position.x, seeds[i].position.y, .2f, .4f);
-			Assets.ball.draw(rect);
+			Assets.seed1.draw(rect);
+		}
+	}
+	
+	public void rendercow()
+	{		
+		switch(cow.state)
+		{
+		case Cow.STATE_COW:
+			Rectangle rect = new Rectangle(cow.position.x, cow.position.y, 2, 1);
+			Assets.cow.draw(rect);
+			break;
+		case Cow.STATE_HIT:
+			rect = new Rectangle(cow.position.x, cow.position.y, 2, 2);
+			Assets.cowhit.draw(rect);
+			break;
 		}
 	}
 	
@@ -134,6 +205,7 @@ public class World extends GameScreen
 	{
 		collisionRamp();
 		collisionSeed();
+		collisionCow();
 	}
 	
 	public void collisionRamp()
@@ -142,6 +214,15 @@ public class World extends GameScreen
 		{
 			joey.hitRamp();
 			
+		}
+	}
+	
+	public void collisionCow()
+	{
+		if(CollisionChecker.RectToRect(joey.bounds, cow.bounds))
+		{
+			joey.hitCow();	
+			cow.hit();
 		}
 	}
 	
