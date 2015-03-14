@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project name="asthma-game">
+<project xmlns:jacoco="antlib:org.jacoco.ant" name="asthma-game">
 
-  <property name="src.dir" value="src" />
-  <property name="build.dir" value="bin"/>
-  <property name="lwjgl_jars.dir" value="lib"/>
+  <property name="src" value="src" />
+  <property name="build" value="bin"/>
+  <property name="lib" value="lib"/>
   <property name="lwjgl_natives.dir" value="natives/windows"/>
+  <property name="jac-r" value="jacoco-report"/>
+  <property name="jun-r" value="junit-report"/>
   <property name="build.sysclasspath" value="last"/>
+  <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+	<classpath path="${lib}/jacocoant.jar"/>
+  </taskdef>
 
   <path id="my_cp">
-    <fileset dir="${lwjgl_jars.dir}" includes="lwjgl.jar"/>
-    <fileset dir="${lwjgl_jars.dir}" includes="lwjgl_util.jar"/>
-  	<fileset dir="${lwjgl_jars.dir}" includes="jogg-0.0.7.jar"/>
-  	<fileset dir="${lwjgl_jars.dir}" includes="jorbis-0.0.15.jar"/>
-    <fileset dir="${lwjgl_jars.dir}" includes="slick-util.jar"/>
+    <fileset dir="${lib}" includes="lwjgl.jar"/>
+    <fileset dir="${lib}" includes="lwjgl_util.jar"/>
+  	<fileset dir="${lib}" includes="jogg-0.0.7.jar"/>
+  	<fileset dir="${lib}" includes="jorbis-0.0.15.jar"/>
+    <fileset dir="${lib}" includes="slick-util.jar"/>
+  	<fileset dir="${lib}" includes="jacocoant.jar"/>
+  	<fileset dir="${lib}" includes="junit.jar"/>
+  	<fileset dir="${lib}" includes="org.hamcrest.core_1.3.0.v201303031735.jar"/>
   </path>
 	
  
-  <target name="compile">
-    <mkdir dir="${build.dir}"/>
-    <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="my_cp" >
-  	<exclude name="**/junit/*.java"/>
+  <target name="compile" depends="clean">
+    <mkdir dir="${build}"/>
+    <javac srcdir="${src}" destdir="${build}" classpathref="my_cp" >
   	</javac>
   </target>
 	
 	<target name="jar">
-		<jar destfile="app.jar" basedir="${build.dir}">
+		<jar destfile="app.jar" basedir="${build}">
 			<manifest>
 				<attribute name="Main-Class" value="com.groupc.Tester"/>
-				<attribute name="Class-Path" value="lib/jogg-0.0.7.jar lib/jorbis-0.0.15.jar lib/lwjgl_util.jar lib/lwjgl.jar lib/slick-util.jar"/>
+				<attribute name="Class-Path" value="lib/jacocoant.jar lib/junit.jar lib/org.hamcrest.core_1.3.0.v201303031735.jar lib/jogg-0.0.7.jar lib/jorbis-0.0.15.jar lib/lwjgl_util.jar lib/lwjgl.jar lib/slick-util.jar"/>
 			</manifest>
 		</jar>
 	</target>
 
   <target name="clean">
-    <delete dir="${build.dir}"/>
+    <delete dir="${build}"/>
+  	<delete dir="${jac-r}"/>
+  	<delete dir="${jun-r}"/>
   </target>
 
   <target name="run" depends="compile">
@@ -45,10 +54,63 @@
     <java fork="true" classname="com.groupc.Tester">
       <classpath>
         <path refid="my_cp"/>
-        <path location="${build.dir}"/>
+        <path location="${build}"/>
       </classpath>
       <sysproperty key="java.library.path"
                    value="${lwjgl_natives.dir}"/>
     </java>
   </target>	
+	
+  <target name="junit" depends="compile">
+    <mkdir dir="jac-r"/>
+  	<mkdir dir="jun-r"/>
+  	<jacoco:coverage>
+  	  <junit printsummary="withOutAndErr" haltonfailure="no" fork="on">
+  	    <classpath refid="my_cp"/>
+  	    <formatter type="xml"/>
+  	    <batchtest todir="${jun-r}">
+  	      <fileset dir="${src}">
+  	        <include name="**/*Test.jave"/>
+  	      </fileset>
+  	    </batchtest>
+  	  </junit>
+  	</jacoco:coverage>
+  	<junitreport todir="${jun-r}">
+  	  <fileset dir="${jun-r}">
+  	    <include name="TEST-*.xml"/>
+  	  </fileset>
+  	  <report todir="${jun-r}"/>
+  	</junitreport>
+  </target>
+  	
+  <target name="jacoco" depends="compile">
+  	<!--
+  	 Step 2: Wrap test execution with the JaCoCo coverage task 
+  	-->
+  	<jacoco:coverage destfile="jacoco.exec">
+  	<java classname="com.groupc.Tester" fork="true">
+  	  <classpath path="${build}"/>
+  	  <classpath path="${lib}"/>
+  	</java>
+  	</jacoco:coverage>
+  	<!--  Step 3: Create coverage report  -->
+  	<jacoco:report>
+  	<!--
+  	 This task needs the collected execution data and ... 
+  	-->
+  	<executiondata>
+  	<file file="jacoco.exec"/>
+  	</executiondata>
+  	<!--  the class files and optional source files ...  -->
+  	<structure name="JaCoCo Ant Example">
+  	<classfiles>
+  	<fileset dir="${build}"/>
+  	</classfiles>
+  	</structure>
+  	<!--  to produce reports in different formats.  -->
+  	<html destdir="jacoco-report"/>
+  	<csv destfile="jacoco-report/report.csv"/>
+  	<xml destfile="jacoco-report/report.xml"/>
+  	</jacoco:report>
+  	</target>
 </project>

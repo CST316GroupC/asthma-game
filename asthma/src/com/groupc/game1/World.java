@@ -8,7 +8,7 @@ import org.lwjgl.input.Keyboard;
 
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
-import com.groupc.junit.CollisionChecker;
+import com.groupc.math.CollisionChecker;
 import com.groupc.math.Rectangle;
 
 public class World extends GameScreen
@@ -16,7 +16,7 @@ public class World extends GameScreen
 	public static final float FRUSTUM_WIDTH = 10;
 	public static final float FRUSTUM_HEIGHT = 10;
 	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 100; //400
-	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 6; //400 (the * 10 means the total width is 4000 pixels but only 400 shown)
+	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 20; //400 (the * 10 means the total width is 4000 pixels but only 400 shown)
 	
 	public static final int WORLD_STATE_PAUSED = 0;
 	public static final int WORLD_STATE_PLAYING = 1;

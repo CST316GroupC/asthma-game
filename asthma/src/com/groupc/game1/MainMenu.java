@@ -4,7 +4,7 @@ import org.lwjgl.input.Mouse;
 
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
-import com.groupc.junit.CollisionChecker;
+import com.groupc.math.CollisionChecker;
 import com.groupc.math.Rectangle;
 import com.groupc.math.Vector;
 
