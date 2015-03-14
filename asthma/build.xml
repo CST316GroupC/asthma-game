@@ -24,7 +24,7 @@
   </path>
 	
  
-  <target name="compile" depends="clean">
+  <target name="compile">
     <mkdir dir="${build}"/>
     <javac srcdir="${src}" destdir="${build}" classpathref="my_cp" >
   	</javac>
