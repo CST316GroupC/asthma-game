@@ -62,8 +62,8 @@
   </target>	
 	
   <target name="junit" depends="compile">
-    <mkdir dir="jac-r"/>
-  	<mkdir dir="jun-r"/>
+    <mkdir dir="${jac-r}"/>
+  	<mkdir dir="${jun-r}"/>
   	<jacoco:coverage>
   	  <junit printsummary="withOutAndErr" haltonfailure="no" fork="on">
   	    <classpath refid="my_cp"/>
