@@ -1,5 +1,3 @@
 *.class
 bin
 *.pdn
-jacoco-report
-junit-report
