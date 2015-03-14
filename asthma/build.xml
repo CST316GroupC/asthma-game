@@ -70,7 +70,7 @@
   	    <formatter type="xml"/>
   	    <batchtest todir="${jun-r}">
   	      <fileset dir="${src}">
-  	        <include name="**/*Test.jave"/>
+  	        <include name="**/*Test.java"/>
   	      </fileset>
   	    </batchtest>
   	  </junit>
