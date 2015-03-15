@@ -22,12 +22,18 @@ public class JoeyRooster extends MovingGameObject
 	public int state;
 	public float stateTime;
 	
-	public JoeyRooster(float x, float y, float accX)
+	//upgrades
+	public float initialSpeed = 2;
+	
+	public float currentStatima;
+	
+	public JoeyRooster(float x, float y, float mul, int statima)
 	{
 		super(x, y, WIDTH, HEIGHT);
 		state = STATE_SB;
-		this.accel.set(accX, 0);
+		this.accel.set(initialSpeed * mul, 0);
 		stateTime = 0;
+		currentStatima = statima;
 	}
 	
 	public void update(float deltaTime)
@@ -113,9 +119,13 @@ public class JoeyRooster extends MovingGameObject
 	
 	public void flap()
 	{
-		state = STATE_FLAP;
-		stateTime = 0;
-		velocity.set(velocity.x * .9f, velocity.y * 1.1f);
+		if(currentStatima >= 0)
+		{
+			state = STATE_FLAP;
+			stateTime = 0;
+			velocity.set(velocity.x * .9f, velocity.y * 1.1f);
+			currentStatima--;
+		}
 	}
 	
 	public void hitCow()

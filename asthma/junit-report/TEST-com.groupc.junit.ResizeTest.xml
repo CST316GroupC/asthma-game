@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="1" failures="0" hostname="EdwinAvalos-PC" name="com.groupc.junit.ResizeTest" skipped="0" tests="1" time="0.0" timestamp="2015-03-14T02:13:19">
+<testsuite errors="1" failures="0" hostname="EdwinAvalos-PC" name="com.groupc.junit.ResizeTest" skipped="0" tests="1" time="0.0" timestamp="2015-03-15T06:49:28">
   <properties>
     <property name="java.vendor" value="Oracle Corporation" />
     <property name="osgi.bundles.defaultStartLevel" value="4" />
@@ -18,7 +18,7 @@
     <property name="ant.home" value="C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502" />
     <property name="java.runtime.version" value="1.8.0_31-b13" />
     <property name="osgi.instance.area" value="file:/C:/Users/Edwin Avalos/workspace/" />
-    <property name="org.osgi.framework.uuid" value="30920e2b-e0c9-0014-1003-c727677c0aa2" />
+    <property name="org.osgi.framework.uuid" value="20548b5b-d5ca-0014-1a46-8295d07c3844" />
     <property name="org.eclipse.m2e.log.dir" value="C:\Users\Edwin Avalos\workspace\.metadata\.plugins\org.eclipse.m2e.logback.configuration" />
     <property name="user.name" value="Edwin Avalos" />
     <property name="osgi.framework.extensions" value="reference:file:org.eclipse.osgi.compatibility.state_1.0.1.v20140709-1414.jar" />
@@ -77,7 +77,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
     <property name="org.osgi.framework.version" value="1.8.0" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
-    <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent2964837539586944362.jar" />
+    <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent3226958956958862574.jar" />
     <property name="user.script" value="" />
     <property name="jac-r" value="jacoco-report" />
     <property name="eclipse.stateSaveDelayInterval" value="30000" />
@@ -92,8 +92,8 @@
     <property name="java.library.path" value="C:\Users\Edwin Avalos\Desktop\eclipse;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files (x86)/Java/jdk1.8.0_31/bin/../jre/bin/client;C:/Program Files (x86)/Java/jdk1.8.0_31/bin/../jre/bin;C:/Program Files (x86)/Java/jdk1.8.0_31/bin/../jre/lib/i386;C:\Users\Edwin Avalos\AppData\Local\Android\android-sdk\platform-tools;C:\Users\Edwin Avalos\AppData\Local\Android\android-sdk\tools;C:\Program Files (x86)\Java\jdk1.8.0_31\bin;C:\Program Files (x86)\Java\jre1.8.0_31\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;c:\Program Files (x86)\Intel\iCLS Client\;c:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\Perforce;C:\Program Files (x86)\Git\cmd;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\nodejs\;C:\Program Files\Perforce\Server;C:\Users\Edwin Avalos\AppData\Roaming\npm;C:\Users\Edwin Avalos\Desktop\eclipse;;." />
     <property name="java.vendor.url" value="http://java.oracle.com/" />
     <property name="eclipse.p2.data.area" value="@config.dir/../p2/" />
-    <property name="eclipse.startTime" value="1426292534952" />
     <property name="org.osgi.framework.os.version" value="6.1.0" />
+    <property name="eclipse.startTime" value="1426397842140" />
     <property name="java.vm.vendor" value="Oracle Corporation" />
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
     <property name="ant.version" value="Apache Ant(TM) version 1.9.2 compiled on July 8 2013" />
@@ -103,13 +103,13 @@
     <property name="eclipse.vm" value="C:\Program Files (x86)\Java\jdk1.8.0_31\bin\..\jre\bin\client\jvm.dll" />
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
     <property name="java.vm.specification.version" value="1.8" />
-    <property name="jun-r" value="junit-report" />
-    <property name="sun.cpu.endian" value="little" />
     <property name="sun.os.patch.level" value="Service Pack 1" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="jun-r" value="junit-report" />
     <property name="gosh.args" value="--nointeractive" />
     <property name="java.io.tmpdir" value="C:\Users\EDWINA~1\AppData\Local\Temp\" />
-    <property name="applicationXMI" value="org.eclipse.ui.workbench/LegacyIDE.e4xmi" />
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+    <property name="applicationXMI" value="org.eclipse.ui.workbench/LegacyIDE.e4xmi" />
     <property name="eclipse.product" value="org.eclipse.epp.package.java.product" />
     <property name="eclipse.home.location" value="file:/C:/Users/Edwin Avalos/Desktop/eclipse/" />
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment" />
@@ -119,6 +119,7 @@
     <property name="org.osgi.supports.framework.requirebundle" value="true" />
     <property name="line.separator" value="&#xd;&#xa;" />
     <property name="java.vm.name" value="Java HotSpot(TM) Client VM" />
+    <property name="org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer0" value="C:\Users\EDWINA~1\AppData\Local\Temp\null1575881889" />
     <property name="org.apache.commons.logging.Log" value="org.apache.commons.logging.impl.NoOpLog" />
     <property name="basedir" value="C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma" />
     <property name="ant.java.version" value="1.8" />

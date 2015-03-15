@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="1" failures="0" hostname="EdwinAvalos-PC" id="0" name="ResizeTest" package="com.groupc.junit" skipped="0" tests="1" time="0.0" timestamp="2015-03-14T02:13:19">
+  <testsuite errors="1" failures="0" hostname="EdwinAvalos-PC" id="0" name="ResizeTest" package="com.groupc.junit" skipped="0" tests="1" time="0.0" timestamp="2015-03-15T06:49:28">
       <properties>
           <property name="java.vendor" value="Oracle Corporation" />
 
@@ -36,7 +36,7 @@
 
           <property name="osgi.instance.area" value="file:/C:/Users/Edwin Avalos/workspace/" />
 
-          <property name="org.osgi.framework.uuid" value="30920e2b-e0c9-0014-1003-c727677c0aa2" />
+          <property name="org.osgi.framework.uuid" value="20548b5b-d5ca-0014-1a46-8295d07c3844" />
 
           <property name="org.eclipse.m2e.log.dir" value="C:\Users\Edwin Avalos\workspace\.metadata\.plugins\org.eclipse.m2e.logback.configuration" />
 
@@ -154,7 +154,7 @@
 
           <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
 
-          <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent2964837539586944362.jar" />
+          <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent3226958956958862574.jar" />
 
           <property name="user.script" value="" />
 
@@ -184,9 +184,9 @@
 
           <property name="eclipse.p2.data.area" value="@config.dir/../p2/" />
 
-          <property name="eclipse.startTime" value="1426292534952" />
-
           <property name="org.osgi.framework.os.version" value="6.1.0" />
+
+          <property name="eclipse.startTime" value="1426397842140" />
 
           <property name="java.vm.vendor" value="Oracle Corporation" />
 
@@ -206,19 +206,19 @@
 
           <property name="java.vm.specification.version" value="1.8" />
 
-          <property name="jun-r" value="junit-report" />
+          <property name="sun.os.patch.level" value="Service Pack 1" />
 
           <property name="sun.cpu.endian" value="little" />
 
-          <property name="sun.os.patch.level" value="Service Pack 1" />
+          <property name="jun-r" value="junit-report" />
 
           <property name="gosh.args" value="--nointeractive" />
 
           <property name="java.io.tmpdir" value="C:\Users\EDWINA~1\AppData\Local\Temp\" />
 
-          <property name="applicationXMI" value="org.eclipse.ui.workbench/LegacyIDE.e4xmi" />
-
           <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="applicationXMI" value="org.eclipse.ui.workbench/LegacyIDE.e4xmi" />
 
           <property name="eclipse.product" value="org.eclipse.epp.package.java.product" />
 
@@ -237,6 +237,8 @@
           <property name="line.separator" value="&#xd;&#xa;" />
 
           <property name="java.vm.name" value="Java HotSpot(TM) Client VM" />
+
+          <property name="org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer0" value="C:\Users\EDWINA~1\AppData\Local\Temp\null1575881889" />
 
           <property name="org.apache.commons.logging.Log" value="org.apache.commons.logging.impl.NoOpLog" />
 
@@ -278,7 +280,7 @@
       </testcase>
 
   </testsuite>
-  <testsuite errors="1" failures="0" hostname="EdwinAvalos-PC" id="1" name="SoundTest" package="com.groupc.junit" skipped="0" tests="1" time="0.0" timestamp="2015-03-14T02:13:20">
+  <testsuite errors="1" failures="0" hostname="EdwinAvalos-PC" id="1" name="SoundTest" package="com.groupc.junit" skipped="0" tests="1" time="0.0" timestamp="2015-03-15T06:49:29">
       <properties>
           <property name="java.vendor" value="Oracle Corporation" />
 
@@ -314,7 +316,7 @@
 
           <property name="osgi.instance.area" value="file:/C:/Users/Edwin Avalos/workspace/" />
 
-          <property name="org.osgi.framework.uuid" value="30920e2b-e0c9-0014-1003-c727677c0aa2" />
+          <property name="org.osgi.framework.uuid" value="20548b5b-d5ca-0014-1a46-8295d07c3844" />
 
           <property name="org.eclipse.m2e.log.dir" value="C:\Users\Edwin Avalos\workspace\.metadata\.plugins\org.eclipse.m2e.logback.configuration" />
 
@@ -432,7 +434,7 @@
 
           <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
 
-          <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent2964837539586944362.jar" />
+          <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent3226958956958862574.jar" />
 
           <property name="user.script" value="" />
 
@@ -462,9 +464,9 @@
 
           <property name="eclipse.p2.data.area" value="@config.dir/../p2/" />
 
-          <property name="eclipse.startTime" value="1426292534952" />
-
           <property name="org.osgi.framework.os.version" value="6.1.0" />
+
+          <property name="eclipse.startTime" value="1426397842140" />
 
           <property name="java.vm.vendor" value="Oracle Corporation" />
 
@@ -484,19 +486,19 @@
 
           <property name="java.vm.specification.version" value="1.8" />
 
-          <property name="jun-r" value="junit-report" />
+          <property name="sun.os.patch.level" value="Service Pack 1" />
 
           <property name="sun.cpu.endian" value="little" />
 
-          <property name="sun.os.patch.level" value="Service Pack 1" />
+          <property name="jun-r" value="junit-report" />
 
           <property name="gosh.args" value="--nointeractive" />
 
           <property name="java.io.tmpdir" value="C:\Users\EDWINA~1\AppData\Local\Temp\" />
 
-          <property name="applicationXMI" value="org.eclipse.ui.workbench/LegacyIDE.e4xmi" />
-
           <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="applicationXMI" value="org.eclipse.ui.workbench/LegacyIDE.e4xmi" />
 
           <property name="eclipse.product" value="org.eclipse.epp.package.java.product" />
 
@@ -515,6 +517,8 @@
           <property name="line.separator" value="&#xd;&#xa;" />
 
           <property name="java.vm.name" value="Java HotSpot(TM) Client VM" />
+
+          <property name="org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer0" value="C:\Users\EDWINA~1\AppData\Local\Temp\null1575881889" />
 
           <property name="org.apache.commons.logging.Log" value="org.apache.commons.logging.impl.NoOpLog" />
 
@@ -542,7 +546,7 @@
 
       </properties>
 
-      <testcase classname="com.groupc.junit.SoundTest" name="unknown" time="0.0">
+      <testcase classname="com.groupc.junit.SoundTest" name="unknown" time="0.001">
           <error message="Forked Java VM exited abnormally. Please note the time in the report does not reflect the time until the VM exit." type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: Forked Java VM exited abnormally. Please note the time in the report does not reflect the time until the VM exit.
 	at org.jacoco.ant.CoverageTask.execute(CoverageTask.java:102)
 	at org.eclipse.ant.internal.core.ant.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)

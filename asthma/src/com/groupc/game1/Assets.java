@@ -1,6 +1,9 @@
 package com.groupc.game1;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Properties;
 
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
@@ -43,8 +46,20 @@ public class Assets
 	//seeds
 	public static TextureRegion seed1;
 	
+	public static Properties joeyProps;
+	
 	public static void load()
 	{
+		joeyProps = new Properties();
+		try {
+			FileInputStream in = new FileInputStream("res/joey.properties");
+			joeyProps.load(in);
+			in.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		
 		try {
 			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("mainmenu.png"));
 			atlas = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/atlas.png"));

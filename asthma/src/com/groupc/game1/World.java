@@ -1,5 +1,8 @@
 package com.groupc.game1;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -36,7 +39,7 @@ public class World extends GameScreen
 	public World()
 	{
 		rand = new Random();
-		this.joey = new JoeyRooster(1, .5f, 2);
+		this.joey = new JoeyRooster(1, .5f, Float.parseFloat(Assets.joeyProps.getProperty("speedmult")), Integer.parseInt(Assets.joeyProps.getProperty("statima")));
 		this.ramp = new Ramp(21, 0, 5);
 		this.seeds = new Seed[5];
 		seeds[0] = new Seed(25, 5);
@@ -45,7 +48,7 @@ public class World extends GameScreen
 		seeds[3] = new Seed(25, 8);
 		seeds[4] = new Seed(25, 9);
 		this.cow = new Cow(30, 0);
-		this.state = WORLD_STATE_PAUSED;
+		this.state = WORLD_STATE_PLAYING;
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 	}
 	
@@ -66,7 +69,6 @@ public class World extends GameScreen
 		if(cow.position.x < cam.position.x - FRUSTUM_WIDTH /2)
 		{
 			int chance = rand.nextInt(10);
-			System.out.println(chance);
 			if(chance < 2)
 			{
 				cow.position.set(rand.nextFloat() * 5 + cam.position.x + FRUSTUM_WIDTH/2, 0);
@@ -78,11 +80,36 @@ public class World extends GameScreen
 	
 	public void update(float deltaTime)
 	{
-		inputHandling();
-		updateSeeds();
-		updatecow();
-		updateJoey(deltaTime);
-		collision();
+		switch(state)
+		{
+		case WORLD_STATE_PLAYING:
+			inputHandling();
+			updateSeeds();
+			updatecow();
+			updateJoey(deltaTime);
+			collision();
+			if(joey.state == JoeyRooster.STATE_STOP)
+			{
+				state = WORLD_STATE_OVER;
+				int temp = Integer.parseInt(Assets.joeyProps.getProperty("score", "0"));
+				temp += score;
+				Assets.joeyProps.setProperty("score", ""+temp);
+
+				FileOutputStream out;
+				try {
+					out = new FileOutputStream("res/joey.properties");
+					Assets.joeyProps.store(out, "---No Comment---");
+					out.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			break;
+		case WORLD_STATE_OVER:
+			break;
+		}
 	}
 	
 	public void inputHandling()
@@ -243,7 +270,6 @@ public class World extends GameScreen
 	public void present(float deltaTime) 
 	{
 		render();
-		System.out.println(score);
 	}
 
 	@Override
