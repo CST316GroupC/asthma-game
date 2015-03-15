@@ -133,6 +133,10 @@ public class JoeyRooster extends MovingGameObject
 		if(state != STATE_BOUNCE)
 		{
 			velocity.set(velocity.x, velocity.y * 1.2f);
+			if(velocity.y < 0)
+			{
+				velocity.set(velocity.x, velocity.y * -1);
+			}
 			state = STATE_BOUNCE;
 			stateTime = 0;
 		}

@@ -27,7 +27,7 @@ public class World extends GameScreen
 	
 	public static final int GRAVITY = -10;
 	public int state;
-	public int score;
+	public int seedsCollected;
 	
 	public Camera cam;
 	public final JoeyRooster joey;
@@ -39,7 +39,7 @@ public class World extends GameScreen
 	public World()
 	{
 		rand = new Random();
-		this.joey = new JoeyRooster(1, .5f, Float.parseFloat(Assets.joeyProps.getProperty("speedmult")), Integer.parseInt(Assets.joeyProps.getProperty("statima")));
+		this.joey = new JoeyRooster(1, .5f, Float.parseFloat(Assets.joeyProps.getProperty("speedMult")), Integer.parseInt(Assets.joeyProps.getProperty("statima")));
 		this.ramp = new Ramp(21, 0, 5);
 		this.seeds = new Seed[5];
 		seeds[0] = new Seed(25, 5);
@@ -91,20 +91,24 @@ public class World extends GameScreen
 			if(joey.state == JoeyRooster.STATE_STOP)
 			{
 				state = WORLD_STATE_OVER;
-				int temp = Integer.parseInt(Assets.joeyProps.getProperty("score", "0"));
-				temp += score;
-				Assets.joeyProps.setProperty("score", ""+temp);
-
-				FileOutputStream out;
-				try {
-					out = new FileOutputStream("res/joey.properties");
-					Assets.joeyProps.store(out, "---No Comment---");
-					out.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				
+				//increase the score
+				int temp = Integer.parseInt(Assets.joeyProps.getProperty("score"));
+				temp += seedsCollected;
+				float distance = joey.position.x - ramp.position.x;
+				temp += distance/10;
+				Assets.joeyProps.setProperty("score", ""+temp);
+				
+				//set new max distance
+				if( Float.parseFloat(Assets.joeyProps.getProperty("maxDistance")) < distance)
+				{
+					Assets.joeyProps.setProperty("maxDistance", ""+distance);
+				}
+								
+				//add the newly gained seeds
+				temp = Integer.parseInt(Assets.joeyProps.getProperty("seeds")) + seedsCollected;
+				Assets.joeyProps.setProperty("seeds", ""+temp);
+				Assets.save();
 			}
 			break;
 		case WORLD_STATE_OVER:
@@ -261,7 +265,7 @@ public class World extends GameScreen
 			{
 				seeds[i].position.set(rand.nextFloat()* 5 + cam.position.x + FRUSTUM_WIDTH/2, rand.nextFloat()* - 3 + joey.position.y);
 				seeds[i].update();
-				score+=1;
+				seedsCollected+=1;
 			}
 		}
 	}

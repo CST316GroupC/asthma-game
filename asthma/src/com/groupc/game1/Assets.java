@@ -2,6 +2,7 @@ package com.groupc.game1;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -55,6 +56,17 @@ public class Assets
 			FileInputStream in = new FileInputStream("res/joey.properties");
 			joeyProps.load(in);
 			in.close();
+			String temp = joeyProps.getProperty("firstTime", "true");
+			if(temp.equals("true"))
+			{
+				joeyProps.setProperty("speedMult", "1");
+				joeyProps.setProperty("statima", "3");
+				joeyProps.setProperty("score", "0");
+				joeyProps.setProperty("maxDistance", "0");
+				joeyProps.setProperty("seeds", "0");
+				joeyProps.setProperty("firstTime", "false");
+				save();
+			}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -87,6 +99,19 @@ public class Assets
 			joeyRamp = new TextureRegion(atlas, 192, 512 - 160 - 32, 32, 32);
 			
 			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void save()
+	{
+		FileOutputStream out;
+		try {
+			out = new FileOutputStream("res/joey.properties");
+			joeyProps.store(out, "---No Comment---");
+			out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
