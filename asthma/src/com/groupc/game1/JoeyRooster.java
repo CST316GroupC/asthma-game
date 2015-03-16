@@ -44,12 +44,24 @@ public class JoeyRooster extends MovingGameObject
 			{
 				velocity.add(0, World.GRAVITY * deltaTime);
 			}
+			else
+			{
+				velocity.set(velocity.x, MAX_SPEED_V);
+				if(velocity.y < 0)
+				{
+					velocity.set(velocity.x, velocity.y * -1);
+				}
+			}
 		}
 		else
 		{
 			if(velocity.x < MAX_SPEED_H && velocity.x > -1 * MAX_SPEED_H)
 			{
 				velocity.add(accel);
+			}
+			else
+			{
+				accel.set(0, 0);
 			}
 		}
 		position.add(velocity.mult(deltaTime));
@@ -87,9 +99,9 @@ public class JoeyRooster extends MovingGameObject
 				state = STATE_FLYING;
 			}
 		
-			if(position.y < 0)
+			if(position.y < 0.5f)
 			{
-				position.y = 0;
+				position.y = 0.5f;
 				state = STATE_BOUNCE;
 				velocity.set(velocity.x /1.5f, -1* velocity.y /1.5f);
 				stateTime = 0;
@@ -119,11 +131,18 @@ public class JoeyRooster extends MovingGameObject
 	
 	public void flap()
 	{
-		if(currentStatima >= 0)
+		if(currentStatima > 0 && state != STATE_SB && state != STATE_RAMP)
 		{
 			state = STATE_FLAP;
 			stateTime = 0;
-			velocity.set(velocity.x * .9f, velocity.y * 1.1f);
+			if(state== STATE_FALLING)
+			{
+				velocity.set(velocity.x * .7f, velocity.y * .5f);
+			}
+			else
+			{
+				velocity.set(velocity.x * .7f, velocity.y * 1.5f);
+			}
 			currentStatima--;
 		}
 	}

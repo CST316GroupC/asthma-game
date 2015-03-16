@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="1" failures="0" hostname="EdwinAvalos-PC" id="0" name="ResizeTest" package="com.groupc.junit" skipped="0" tests="1" time="0.0" timestamp="2015-03-15T20:44:11">
+  <testsuite errors="1" failures="0" hostname="EdwinAvalos-PC" id="0" name="ResizeTest" package="com.groupc.junit" skipped="0" tests="1" time="0.0" timestamp="2015-03-16T06:30:15">
       <properties>
           <property name="java.vendor" value="Oracle Corporation" />
 
@@ -36,7 +36,7 @@
 
           <property name="osgi.instance.area" value="file:/C:/Users/Edwin Avalos/workspace/" />
 
-          <property name="org.osgi.framework.uuid" value="50db6275-2ccb-0014-1678-85efb5a1972c" />
+          <property name="org.osgi.framework.uuid" value="60a93e3f-9ecb-0014-1a8b-9163116c1fd9" />
 
           <property name="org.eclipse.m2e.log.dir" value="C:\Users\Edwin Avalos\workspace\.metadata\.plugins\org.eclipse.m2e.logback.configuration" />
 
@@ -154,7 +154,7 @@
 
           <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
 
-          <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent6803916844528883311.jar" />
+          <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent1394275604447123709.jar" />
 
           <property name="user.script" value="" />
 
@@ -186,7 +186,7 @@
 
           <property name="org.osgi.framework.os.version" value="6.1.0" />
 
-          <property name="eclipse.startTime" value="1426435252634" />
+          <property name="eclipse.startTime" value="1426484124460" />
 
           <property name="java.vm.vendor" value="Oracle Corporation" />
 
@@ -238,7 +238,7 @@
 
           <property name="java.vm.name" value="Java HotSpot(TM) Client VM" />
 
-          <property name="org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer0" value="C:\Users\EDWINA~1\AppData\Local\Temp\null1516452240" />
+          <property name="org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer0" value="C:\Users\EDWINA~1\AppData\Local\Temp\null632389536" />
 
           <property name="org.apache.commons.logging.Log" value="org.apache.commons.logging.impl.NoOpLog" />
 
@@ -280,7 +280,7 @@
       </testcase>
 
   </testsuite>
-  <testsuite errors="1" failures="0" hostname="EdwinAvalos-PC" id="1" name="SoundTest" package="com.groupc.junit" skipped="0" tests="1" time="0.0" timestamp="2015-03-15T20:44:11">
+  <testsuite errors="1" failures="0" hostname="EdwinAvalos-PC" id="1" name="SoundTest" package="com.groupc.junit" skipped="0" tests="1" time="0.0" timestamp="2015-03-16T06:30:15">
       <properties>
           <property name="java.vendor" value="Oracle Corporation" />
 
@@ -316,7 +316,7 @@
 
           <property name="osgi.instance.area" value="file:/C:/Users/Edwin Avalos/workspace/" />
 
-          <property name="org.osgi.framework.uuid" value="50db6275-2ccb-0014-1678-85efb5a1972c" />
+          <property name="org.osgi.framework.uuid" value="60a93e3f-9ecb-0014-1a8b-9163116c1fd9" />
 
           <property name="org.eclipse.m2e.log.dir" value="C:\Users\Edwin Avalos\workspace\.metadata\.plugins\org.eclipse.m2e.logback.configuration" />
 
@@ -434,7 +434,7 @@
 
           <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
 
-          <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent6803916844528883311.jar" />
+          <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent1394275604447123709.jar" />
 
           <property name="user.script" value="" />
 
@@ -466,7 +466,7 @@
 
           <property name="org.osgi.framework.os.version" value="6.1.0" />
 
-          <property name="eclipse.startTime" value="1426435252634" />
+          <property name="eclipse.startTime" value="1426484124460" />
 
           <property name="java.vm.vendor" value="Oracle Corporation" />
 
@@ -518,7 +518,7 @@
 
           <property name="java.vm.name" value="Java HotSpot(TM) Client VM" />
 
-          <property name="org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer0" value="C:\Users\EDWINA~1\AppData\Local\Temp\null1516452240" />
+          <property name="org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer0" value="C:\Users\EDWINA~1\AppData\Local\Temp\null632389536" />
 
           <property name="org.apache.commons.logging.Log" value="org.apache.commons.logging.impl.NoOpLog" />
 

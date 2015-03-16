@@ -40,14 +40,14 @@ public class World extends GameScreen
 	{
 		rand = new Random();
 		this.joey = new JoeyRooster(1, .5f, Float.parseFloat(Assets.joeyProps.getProperty("speedMult")), Integer.parseInt(Assets.joeyProps.getProperty("statima")));
-		this.ramp = new Ramp(21, 0, 5);
+		this.ramp = new Ramp(21, 0.5f, 5);
 		this.seeds = new Seed[5];
 		seeds[0] = new Seed(25, 5);
 		seeds[1] = new Seed(25, 6);
 		seeds[2] = new Seed(25, 7);
 		seeds[3] = new Seed(25, 8);
 		seeds[4] = new Seed(25, 9);
-		this.cow = new Cow(30, 0);
+		this.cow = new Cow(30, 0.5f);
 		this.state = WORLD_STATE_PLAYING;
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 	}
@@ -71,7 +71,7 @@ public class World extends GameScreen
 			int chance = rand.nextInt(10);
 			if(chance < 2)
 			{
-				cow.position.set(rand.nextFloat() * 5 + cam.position.x + FRUSTUM_WIDTH/2, 0);
+				cow.position.set(rand.nextFloat() * 5 + cam.position.x + FRUSTUM_WIDTH/2, 0.5f);
 				cow.update();
 			}
 		}
@@ -174,7 +174,7 @@ public class World extends GameScreen
 	
 	public void renderJoey()
 	{
-		Rectangle rect = new Rectangle(joey.position.x, joey.position.y, 1, 1);
+		Rectangle rect = new Rectangle(joey.position.x - .5f, joey.position.y -.5f, 1, 1);
 	
 		switch(joey.state)
 		{
@@ -204,7 +204,7 @@ public class World extends GameScreen
 	
 	public void renderRamp()
 	{
-		Rectangle rect = new Rectangle(ramp.position.x, ramp.position.y, ramp.bounds.width, ramp.bounds.height);
+		Rectangle rect = new Rectangle(ramp.position.x - 2.5f, ramp.position.y - 2.5f, ramp.bounds.width, ramp.bounds.height);
 		Assets.ramp.draw(rect);
 	}
 	
@@ -212,7 +212,7 @@ public class World extends GameScreen
 	{
 		for(int i =0; i < seeds.length; i++)
 		{
-			Rectangle rect = new Rectangle(seeds[i].position.x, seeds[i].position.y, .2f, .4f);
+			Rectangle rect = new Rectangle(seeds[i].position.x - .1f, seeds[i].position.y - .2f, .2f, .4f);
 			Assets.seed1.draw(rect);
 		}
 	}
@@ -222,11 +222,11 @@ public class World extends GameScreen
 		switch(cow.state)
 		{
 		case Cow.STATE_COW:
-			Rectangle rect = new Rectangle(cow.position.x, cow.position.y, 2, 1);
+			Rectangle rect = new Rectangle(cow.position.x - 1f, cow.position.y - .5f, 2, 1);
 			Assets.cow.draw(rect);
 			break;
 		case Cow.STATE_HIT:
-			rect = new Rectangle(cow.position.x, cow.position.y, 2, 2);
+			rect = new Rectangle(cow.position.x -1f, cow.position.y - 1f, 2, 2);
 			Assets.cowhit.draw(rect);
 			break;
 		}
@@ -253,6 +253,7 @@ public class World extends GameScreen
 		if(CollisionChecker.RectToRect(joey.bounds, cow.bounds))
 		{
 			joey.hitCow();	
+			cow.position.set(cow.position.x, 1f);
 			cow.hit();
 		}
 	}
