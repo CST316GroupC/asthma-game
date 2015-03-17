@@ -2,6 +2,7 @@ package com.groupc.junit;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Test;
 
 import com.groupc.Runner;
@@ -38,6 +39,12 @@ public class ResizeTest
 		assertEquals(resize.width(50),46);
 		assertEquals(resize.width(171),158);
 		assertEquals(resize.width(500),462);
+	}
+	
+	@After
+	public void cleanUp()
+	{
+		run.close();
 	}
 
 }

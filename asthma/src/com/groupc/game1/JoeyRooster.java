@@ -23,7 +23,7 @@ public class JoeyRooster extends MovingGameObject
 	public float stateTime;
 	
 	//upgrades
-	public float initialSpeed = 2;
+	public float initialSpeed = 5;
 	
 	public float currentStatima;
 	
@@ -57,7 +57,8 @@ public class JoeyRooster extends MovingGameObject
 		{
 			if(velocity.x < MAX_SPEED_H && velocity.x > -1 * MAX_SPEED_H)
 			{
-				velocity.add(accel);
+				System.out.println(accel.x * deltaTime);
+				velocity.add(accel.x * deltaTime, accel.y);
 			}
 			else
 			{
@@ -107,7 +108,7 @@ public class JoeyRooster extends MovingGameObject
 				stateTime = 0;
 			}
 		}
-		if(velocity.x <= .1f)
+		if(velocity.x <= .1f && state != STATE_SB)
 		{
 			if(position.y > 0)
 			{

@@ -2,6 +2,8 @@ package com.groupc;
 
 import javax.swing.JFrame;
 
+import org.lwjgl.openal.AL;
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.openal.SoundStore;
 
 import com.groupc.screens.Game1Screen;
@@ -57,6 +59,8 @@ public class Runner extends JFrame
 	public void close()
 	{
 		isClosing = true;
+		Display.destroy();
+		AL.destroy();
 	}
 
 }
