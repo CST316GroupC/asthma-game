@@ -1,6 +1,6 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-JaCoCo Ant Example,com.groupc.game1,World,43,679,15,44,0,0,16,37,4,16
-JaCoCo Ant Example,com.groupc.game1,JoeyRooster,98,278,20,28,0,0,15,14,1,4
+JaCoCo Ant Example,com.groupc.game1,World,21,701,9,50,0,0,13,40,4,16
+JaCoCo Ant Example,com.groupc.game1,JoeyRooster,44,332,13,35,0,0,12,17,0,5
 JaCoCo Ant Example,com.groupc.game1,Seed,0,25,0,0,0,0,0,2,0,2
 JaCoCo Ant Example,com.groupc.game1,Cow,0,32,0,0,0,0,0,3,0,3
 JaCoCo Ant Example,com.groupc.game1,Options,152,0,16,0,0,0,15,0,7,0
