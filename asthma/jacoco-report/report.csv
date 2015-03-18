@@ -1,1 +1,65 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+JaCoCo Ant Example,com.groupc.game1,World,43,679,15,44,0,0,16,37,4,16
+JaCoCo Ant Example,com.groupc.game1,JoeyRooster,98,278,20,28,0,0,15,14,1,4
+JaCoCo Ant Example,com.groupc.game1,Seed,0,25,0,0,0,0,0,2,0,2
+JaCoCo Ant Example,com.groupc.game1,Cow,0,32,0,0,0,0,0,3,0,3
+JaCoCo Ant Example,com.groupc.game1,Options,152,0,16,0,0,0,15,0,7,0
+JaCoCo Ant Example,com.groupc.game1,Ramp,0,7,0,0,0,0,0,1,0,1
+JaCoCo Ant Example,com.groupc.game1,MainMenu,25,126,6,6,0,0,7,6,2,5
+JaCoCo Ant Example,com.groupc.game1,Assets,43,229,1,1,0,0,2,2,1,2
+JaCoCo Ant Example,com.groupc.screens,NavigationBar.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,RecordingScreen,411,0,12,0,0,0,12,0,6,0
+JaCoCo Ant Example,com.groupc.screens,NavigationBar.new ActionListener() {...},12,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,NavigationBar.new ActionListener() {...},12,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,NavigationBar.new ActionListener() {...},12,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,LoginScreen.new ActionListener() {...},14,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,ParentControlsScreen.new ComponentAdapter() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,ParentControlsScreen.new ActionListener() {...},10,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,RewardScreen,284,0,14,0,0,0,13,0,6,0
+JaCoCo Ant Example,com.groupc.screens,TutorialScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,RecordingScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,TutorialScreen.new ComponentAdapter() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,ParentControlsScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,RecordingScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,ParentControlsScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,RecordingScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,RecordingScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,Game1Screen,9,103,1,3,0,0,4,4,3,3
+JaCoCo Ant Example,com.groupc.screens,LoginScreen.new ComponentAdapter() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,NavigationBar,438,0,12,0,0,0,9,0,3,0
+JaCoCo Ant Example,com.groupc.screens,LoginScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,LoginScreen.new ActionListener() {...},14,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,AccountCreationScreen,959,0,26,0,0,0,21,0,8,0
+JaCoCo Ant Example,com.groupc.screens,DoctorScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,DoctorScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,DoctorScreen.new ComponentAdapter() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,RewardScreen.new ComponentAdapter() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,RewardScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,DoctorScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,RewardScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,TutorialScreen,713,0,10,0,0,0,11,0,6,0
+JaCoCo Ant Example,com.groupc.screens,AccountCreationScreen.new ComponentAdapter() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,DoctorScreen,529,0,22,0,0,0,20,0,9,0
+JaCoCo Ant Example,com.groupc.screens,AccountCreationScreen.new ActionListener() {...},10,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,AccountCreationScreen.new ActionListener() {...},11,0,0,0,0,0,2,0,2,0
+JaCoCo Ant Example,com.groupc.screens,ParentControlsScreen,1515,0,8,0,0,0,14,0,10,0
+JaCoCo Ant Example,com.groupc.screens,LoginScreen,850,0,22,0,0,0,18,0,7,0
+JaCoCo Ant Example,com.groupc.screens,Screen,0,12,0,0,0,0,0,1,0,1
+JaCoCo Ant Example,com.groupc.junit,SoundTest,217,0,30,0,0,0,22,0,7,0
+JaCoCo Ant Example,com.groupc.junit,ResizeTest,119,0,0,0,0,0,4,0,4,0
+JaCoCo Ant Example,com.groupc.junit,Game1Test,105,0,18,0,0,0,16,0,7,0
+JaCoCo Ant Example,com.groupc.junit,DatabaseTest,54,0,8,0,0,0,8,0,4,0
+JaCoCo Ant Example,com.groupc.game,TextureRegion,0,181,0,0,0,0,0,2,0,2
+JaCoCo Ant Example,com.groupc.game,MovingGameObject,21,21,0,0,0,0,1,1,1,1
+JaCoCo Ant Example,com.groupc.game,GameScreen,0,6,0,0,0,0,0,1,0,1
+JaCoCo Ant Example,com.groupc.game,GameObject,0,27,0,0,0,0,0,1,0,1
+JaCoCo Ant Example,com.groupc.game,Camera,0,98,0,0,0,0,0,2,0,2
+JaCoCo Ant Example,com.groupc,Runner,33,56,3,1,0,0,4,2,2,2
+JaCoCo Ant Example,com.groupc,AudioPlayer,70,8,2,0,0,0,7,1,6,1
+JaCoCo Ant Example,com.groupc,Database,452,0,60,0,0,0,34,0,4,0
+JaCoCo Ant Example,com.groupc,Patient,3,0,0,0,0,0,1,0,1,0
+JaCoCo Ant Example,com.groupc,Tester,4,18,1,1,0,0,2,1,1,1
+JaCoCo Ant Example,com.groupc.math,Vector,63,80,8,0,0,0,7,8,3,8
+JaCoCo Ant Example,com.groupc.math,Resize,245,0,10,0,0,0,11,0,6,0
+JaCoCo Ant Example,com.groupc.math,CollisionChecker,39,86,10,14,0,0,8,8,2,2
+JaCoCo Ant Example,com.groupc.math,Rectangle,0,16,0,0,0,0,0,1,0,1
