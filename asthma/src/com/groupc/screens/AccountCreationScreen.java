@@ -200,7 +200,14 @@ public class AccountCreationScreen extends Screen
 		}
 		if(navBar.backButtonPressed)
 		{
-			run.setScreen(new DoctorScreen(run));
+			DoctorScreen docScreen = new DoctorScreen(run);
+			docScreen.setDoctor(newPatientDoctor);
+			try {
+				docScreen.getPatients();
+			} catch(Exception e){
+				e.printStackTrace();
+			}
+			run.setScreen(docScreen);
 		}
 		else if(butPressed == 2)
 		{
