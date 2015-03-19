@@ -35,7 +35,7 @@ public class AccountCreationScreen extends Screen
 	int     butPressed = 0;
 	int     type       = 1;
 	boolean played = true;
-	String newPatientDoctor;
+	public String newPatientDoctor;
 	
 	//Display Elements
 	NavigationBar navBar       = new NavigationBar(run,true,false,"Account Creation Page");
@@ -46,11 +46,11 @@ public class AccountCreationScreen extends Screen
 	JLabel     ageLabel        = new JLabel("Age:",SwingConstants.RIGHT);
 	JLabel     infoLabel       = new JLabel("Contact Info:",SwingConstants.RIGHT);
 	JLabel     passwordLabel   = new JLabel("Password*:",SwingConstants.RIGHT);
-	JTextField firstNameTF     = new JTextField();
-	JTextField passwordTF      = new JTextField();
-	JTextField lastNameTF      = new JTextField();
-	JTextField ageTF           = new JTextField();
-	JTextArea  infoTA          = new JTextArea();
+	public		JTextField firstNameTF     = new JTextField();
+	public		JTextField passwordTF      = new JTextField();
+	public		JTextField lastNameTF      = new JTextField();
+	public		JTextField ageTF           = new JTextField();
+	public		JTextArea  infoTA          = new JTextArea();
 	JButton    submitButton    = new JButton("Submit");
 	JLabel     errorMessage    = new JLabel("Missing Information*",SwingConstants.CENTER);
 	
@@ -130,10 +130,9 @@ public class AccountCreationScreen extends Screen
 	{
 
 		if(Database.addPatient(firstNameTF.getText(), lastNameTF.getText(), passwordTF.getText(), ageTF.getText())){
-			run.setScreen(new DoctorScreen(run));
+			//run.setScreen(new DoctorScreen(run));  THIS IS A BUG RIGHT NOW
 		}
-		if(firstNameTF.getText().isEmpty()  || lastNameTF.getText().isEmpty()  || passwordTF.getText().isEmpty())  //required basic information
-
+		if(patientDoctor != null)
 		{
 			newPatientDoctor = patientDoctor;
 			run.setTitle("Account Creation " + newPatientDoctor);
@@ -249,7 +248,7 @@ public class AccountCreationScreen extends Screen
 		
 	}
 	
-	private void addCurrentPatient() 
+	public void addCurrentPatient() 
 	{
 		if(firstNameTF.getText().isEmpty()  || lastNameTF.getText().isEmpty()  || passwordTF.getText().isEmpty())  //required basic information
 		{

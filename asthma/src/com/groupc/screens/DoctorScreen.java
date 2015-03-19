@@ -33,18 +33,22 @@ public class DoctorScreen extends Screen
 	boolean redraw     = true;
 	Resize  resize     = new Resize(run);
 	int     butPressed = 0; //0 is none, 1 is add patient, 2 is back and logout for now
-	ArrayList<Patient> patients;
 	boolean played = true;
 	String doctor;
+	//patient information
+	Vector<String> patientFirstNames = new Vector<String>();
+	Vector<String> patientLastNames = new Vector<String>();
+	Vector<String> patDoctors = new Vector<String>();
+	//table elements
 	JTable patientTable;
 	JScrollPane jsp;
+	
 	
 	//Display Elements
 	JPanel  testBox          = new JPanel();
 	JPanel  navBox           = new JPanel();
 	JPanel  navBoxBorder     = new JPanel();
 	JToggleButton navMuteButton    = new JToggleButton();
-	JButton displayPatients  = new JButton("Display Patients"); 
 	JButton addPatientButton = new JButton("Add Patient");
 	NavigationBar navBar           = new NavigationBar(run,false,false,"Doctor Page");
 	
@@ -93,21 +97,10 @@ public class DoctorScreen extends Screen
 			public void actionPerformed(ActionEvent arg0) {
 				butPressed = 1;				
 			}
-		});
-		
-
-		displayPatients.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 4;				
-			}
-		});
-		
+		});		
 		
 		//add things to the panel
 		this.add(addPatientButton);
-		this.add(displayPatients);
 		this.add(navMuteButton);
 		this.add(navBox);
 		//this.add(navBoxBorder);
@@ -117,9 +110,10 @@ public class DoctorScreen extends Screen
 		this.setLayout(null);		
 		run.setContentPane(this);
 		run.setVisible(true);
+		
 	}
 	
-	public void setDoctor(String docName)
+	protected void setDoctor(String docName)
 	{
 		if(docName != null)
 		{
@@ -133,13 +127,9 @@ public class DoctorScreen extends Screen
 		}
 	}
 	
-	private void getPatients() throws IOException
+	protected void getPatients() throws IOException
 	{
 		String line = null;
-		Vector<String> patientFirstNames = new Vector<String>(10);
-		Vector<String> patientLastNames = new Vector<String>(10);
-		Vector<String> types = new Vector<String>(10);
-		Vector<String> patDoctors = new Vector<String>(10);
 		int counter = 0;
 		
 		FileReader fr = new FileReader("login_information.txt");
@@ -154,7 +144,7 @@ public class DoctorScreen extends Screen
 			patientLastNames.add(st.nextToken());  //last name
 			st.nextToken();  // age
 			st.nextToken();  //password
-			types.add(counter, st.nextToken()); //type
+			st.nextToken(); //type
 			patDoctors.add(counter, st.nextToken()); //doctor for patient
 			
 			counter += 1;
@@ -163,13 +153,11 @@ public class DoctorScreen extends Screen
 		}
 		br.close();
 		
-		counter = 0;
-		
-		/*JTable testTable;
-		String[] collumnNames = {"First Name", "Last Name"};
-		String[][] tData = {{"bob", "bill"}, {"Joe", "schhmoe"}};	
-		testTable = new JTable(tData, collumnNames);
-		jsp = new JScrollPane(testTable);*/
+		tableDisplay();		
+	}
+	
+	private void tableDisplay()
+	{
 		
 		Vector<String> collumnNames = new Vector<String>();
 		collumnNames.add("First Name");
@@ -186,15 +174,11 @@ public class DoctorScreen extends Screen
 				rowData.add(tempVector);
 			}
 		}
+		
+		//set table contents
 		patientTable = new JTable(rowData, collumnNames);
 		jsp = new JScrollPane(patientTable);
-		
-		tableDisplay();
-		
-	}
-	
-	private void tableDisplay()
-	{
+		//set table size
 		jsp.setBounds(resize.locationX(150), resize.locationY(200), resize.width(200), resize.height(200));
 		this.add(jsp);
 	}
@@ -211,10 +195,6 @@ public class DoctorScreen extends Screen
 			addPatientButton.setBounds(resize.locationX(190), resize.locationY(400), resize.width(120), resize.height(40));
 			addPatientButton.setFont(new Font(addPatientButton.getFont().getFontName(),addPatientButton.getFont().getStyle(), resize.font(12)));
 			
-			//displays patients
-			displayPatients.setBounds(resize.locationX(190), resize.locationY(445), resize.width(120), resize.height(40));
-			displayPatients.setFont(new Font(displayPatients.getFont().getFontName(),displayPatients.getFont().getStyle(), resize.font(12)));
-			
 			run.repaint();
 			redraw = false;
 		}
@@ -224,6 +204,7 @@ public class DoctorScreen extends Screen
 			AccountCreationScreen acs = new AccountCreationScreen(run);
 			acs.setPatientDoctor(doctor);
 			run.setScreen(acs);
+			System.out.println("changing screen");
 		}
 		else if(butPressed == 2)
 		{
@@ -242,17 +223,7 @@ public class DoctorScreen extends Screen
 				played = true;
 			}
 		}
-		else if(butPressed == 4)
-		{
-
-			try {
-				getPatients();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			butPressed = 0;
-		}
+		
 		butPressed = 0;
 		navBar.update();
 	}

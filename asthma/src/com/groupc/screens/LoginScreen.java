@@ -234,14 +234,14 @@ public class LoginScreen extends Screen
 		}
 
 		String line = null;
-		char[][] passWords = new char[10][30];
+		char[][] passWords = new char[20][30];
 		int counter = 0;
 		String tempString;
 		char tempChar;
 		//can create a patients' doctor with new text file
 		
-		Vector<String> firstNames = new Vector<String>(11);
-		Vector<String> types = new Vector<String>(11);
+		Vector<String> firstNames = new Vector<String>();
+		Vector<String> types = new Vector<String>();
 		
 		
 		FileReader fr = new FileReader("login_information.txt");  //maybe create an 'onStart()' function for runner
@@ -279,6 +279,7 @@ public class LoginScreen extends Screen
 				{
 					DoctorScreen ds = new DoctorScreen(run);
 					ds.setDoctor(userNameTF.getText());
+					ds.getPatients();
 					run.setScreen(ds);
 				}
 				//Patients
