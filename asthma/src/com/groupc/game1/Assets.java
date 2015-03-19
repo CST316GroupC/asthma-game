@@ -1,6 +1,10 @@
 package com.groupc.game1;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
@@ -43,8 +47,31 @@ public class Assets
 	//seeds
 	public static TextureRegion seed1;
 	
+	public static Properties joeyProps;
+	
 	public static void load()
 	{
+		joeyProps = new Properties();
+		try {
+			FileInputStream in = new FileInputStream("res/joey.properties");
+			joeyProps.load(in);
+			in.close();
+			String temp = joeyProps.getProperty("firstTime", "true");
+			if(temp.equals("true"))
+			{
+				joeyProps.setProperty("speedMult", "1");
+				joeyProps.setProperty("statima", "3");
+				joeyProps.setProperty("score", "0");
+				joeyProps.setProperty("maxDistance", "0");
+				joeyProps.setProperty("seeds", "0");
+				joeyProps.setProperty("firstTime", "false");
+				save();
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		
 		try {
 			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("mainmenu.png"));
 			atlas = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/atlas.png"));
@@ -72,6 +99,19 @@ public class Assets
 			joeyRamp = new TextureRegion(atlas, 192, 512 - 160 - 32, 32, 32);
 			
 			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void save()
+	{
+		FileOutputStream out;
+		try {
+			out = new FileOutputStream("res/joey.properties");
+			joeyProps.store(out, "---No Comment---");
+			out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

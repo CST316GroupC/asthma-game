@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="1" failures="0" hostname="EdwinAvalos-PC" name="com.groupc.junit.ResizeTest" skipped="0" tests="1" time="0.0" timestamp="2015-03-14T02:13:19">
+<testsuite errors="2" failures="0" hostname="EdwinAvalos-PC" name="com.groupc.junit.ResizeTest" skipped="0" tests="2" time="0.202" timestamp="2015-03-18T10:20:14">
   <properties>
     <property name="java.vendor" value="Oracle Corporation" />
     <property name="osgi.bundles.defaultStartLevel" value="4" />
     <property name="org.eclipse.debug.ui.breakpoints.toggleFactoriesUsed" value="false" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
     <property name="org.osgi.supports.framework.extension" value="true" />
     <property name="sun.management.compiler" value="HotSpot Client Compiler" />
     <property name="eclipse.p2.profile" value="epp.package.java" />
@@ -18,7 +19,7 @@
     <property name="ant.home" value="C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502" />
     <property name="java.runtime.version" value="1.8.0_31-b13" />
     <property name="osgi.instance.area" value="file:/C:/Users/Edwin Avalos/workspace/" />
-    <property name="org.osgi.framework.uuid" value="30920e2b-e0c9-0014-1003-c727677c0aa2" />
+    <property name="org.osgi.framework.uuid" value="20c2a6c6-51cd-0014-1568-cac791a331fa" />
     <property name="org.eclipse.m2e.log.dir" value="C:\Users\Edwin Avalos\workspace\.metadata\.plugins\org.eclipse.m2e.logback.configuration" />
     <property name="user.name" value="Edwin Avalos" />
     <property name="osgi.framework.extensions" value="reference:file:org.eclipse.osgi.compatibility.state_1.0.1.v20140709-1414.jar" />
@@ -60,7 +61,7 @@
     <property name="java.home" value="C:\Program Files (x86)\Java\jdk1.8.0_31\jre" />
     <property name="osgi.os" value="win32" />
     <property name="eclipse.commands" value="-os&#xa;win32&#xa;-ws&#xa;win32&#xa;-arch&#xa;x86&#xa;-showsplash&#xa;C:\Users\Edwin Avalos\Desktop\eclipse\\plugins\org.eclipse.platform_4.4.2.v20150204-1700\splash.bmp&#xa;-launcher&#xa;C:\Users\Edwin Avalos\Desktop\eclipse\eclipse.exe&#xa;-name&#xa;Eclipse&#xa;--launcher.library&#xa;C:\Users\Edwin Avalos\Desktop\eclipse\\plugins/org.eclipse.equinox.launcher.win32.win32.x86_1.1.200.v20150204-1316\eclipse_1608.dll&#xa;-startup&#xa;C:\Users\Edwin Avalos\Desktop\eclipse\\plugins/org.eclipse.equinox.launcher_1.3.0.v20140415-2008.jar&#xa;--launcher.appendVmargs&#xa;-product&#xa;org.eclipse.epp.package.java.product&#xa;-vm&#xa;C:\Program Files (x86)\Java\jdk1.8.0_31\bin\..\jre\bin\client\jvm.dll&#xa;" />
-    <property name="java.vm.info" value="mixed mode" />
+    <property name="java.vm.info" value="mixed mode, sharing" />
     <property name="osgi.splashLocation" value="C:\Users\Edwin Avalos\Desktop\eclipse\\plugins\org.eclipse.platform_4.4.2.v20150204-1700\splash.bmp" />
     <property name="ant.file" value="C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\build.xml" />
     <property name="os.version" value="6.1" />
@@ -77,7 +78,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
     <property name="org.osgi.framework.version" value="1.8.0" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
-    <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent2964837539586944362.jar" />
+    <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent5025700856907246323.jar" />
     <property name="user.script" value="" />
     <property name="jac-r" value="jacoco-report" />
     <property name="eclipse.stateSaveDelayInterval" value="30000" />
@@ -89,15 +90,16 @@
     <property name="osgi.splashPath" value="platform:/base/plugins/org.eclipse.platform" />
     <property name="osgi.nl" value="en_US" />
     <property name="java.specification.vendor" value="Oracle Corporation" />
-    <property name="java.library.path" value="C:\Users\Edwin Avalos\Desktop\eclipse;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files (x86)/Java/jdk1.8.0_31/bin/../jre/bin/client;C:/Program Files (x86)/Java/jdk1.8.0_31/bin/../jre/bin;C:/Program Files (x86)/Java/jdk1.8.0_31/bin/../jre/lib/i386;C:\Users\Edwin Avalos\AppData\Local\Android\android-sdk\platform-tools;C:\Users\Edwin Avalos\AppData\Local\Android\android-sdk\tools;C:\Program Files (x86)\Java\jdk1.8.0_31\bin;C:\Program Files (x86)\Java\jre1.8.0_31\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;c:\Program Files (x86)\Intel\iCLS Client\;c:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\Perforce;C:\Program Files (x86)\Git\cmd;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\nodejs\;C:\Program Files\Perforce\Server;C:\Users\Edwin Avalos\AppData\Roaming\npm;C:\Users\Edwin Avalos\Desktop\eclipse;;." />
+    <property name="java.library.path" value="natives/windows" />
     <property name="java.vendor.url" value="http://java.oracle.com/" />
     <property name="eclipse.p2.data.area" value="@config.dir/../p2/" />
-    <property name="eclipse.startTime" value="1426292534952" />
+    <property name="eclipse.startTime" value="1426671182852" />
     <property name="org.osgi.framework.os.version" value="6.1.0" />
     <property name="java.vm.vendor" value="Oracle Corporation" />
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner com.groupc.junit.ResizeTest filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\junit-report\TEST-com.groupc.junit.ResizeTest.xml crashfile=C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\junitvmwatcher5234935898883045854.properties propsfile=C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\junit4939790924186060036.properties" />
     <property name="ant.version" value="Apache Ant(TM) version 1.9.2 compiled on July 8 2013" />
-    <property name="java.class.path" value="C:\Users\Edwin Avalos\Desktop\eclipse\\plugins/org.eclipse.equinox.launcher_1.3.0.v20140415-2008.jar" />
+    <property name="java.class.path" value="C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\lwjgl.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\lwjgl_util.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\jogg-0.0.7.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\jorbis-0.0.15.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\slick-util.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\jacocoant.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\junit.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\org.hamcrest.core_1.3.0.v201303031735.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\bin;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma;C:\PROGRA~2\JMF21~1.1E\lib\sound.jar;C:\PROGRA~2\JMF21~1.1E\lib\jmf.jar;C:\PROGRA~2\JMF21~1.1E\lib;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-launcher.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-junit.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-junit4.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-antlr.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-bcel.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-bsf.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-log4j.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-oro.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-regexp.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-resolver.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-xalan2.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-commons-logging.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-commons-net.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-jai.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-javamail.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-jdepend.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-jmf.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-jsch.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-netrexx.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-swing.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-testutil.jar;C:\Program Files (x86)\Java\jdk1.8.0_31\lib\tools.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\77\0\.cp\ant_tasks\resources-ant.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\151\0\.cp\ant_tasks\director-ant.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\158\0\.cp\lib\jarprocessor-ant.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\160\0\.cp\ant_tasks\metadataRepository-ant.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\163\0\.cp\ant_tasks\pdepublishing-ant.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\167\0\.cp\lib\repository-tools-ant.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\187\0\.cp\ant_tasks\helpbase-ant.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\198\0\.cp\jdtCompilerAdapter.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\56\0\.cp\lib\antsupportlib.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\57\0\.cp\lib\loggers.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\57\0\.cp\lib\antdebug.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\57\0\.cp\lib\remote.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\58\0\.cp\lib\antrunner.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\58\0\.cp\lib\remoteAnt.jar;C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent5025700856907246323.jar" />
     <property name="osgi.requiredJavaVersion" value="1.6" />
     <property name="org.eclipse.update.reconcile" value="false" />
     <property name="eclipse.vm" value="C:\Program Files (x86)\Java\jdk1.8.0_31\bin\..\jre\bin\client\jvm.dll" />
@@ -127,20 +129,36 @@
     <property name="eclipse.buildId" value="4.4.2.M20150204-1700" />
     <property name="eclipse.vmargs" value="-Dosgi.requiredJavaVersion=1.6&#xa;-Xms40m&#xa;-Xmx512m&#xa;-Djava.class.path=C:\Users\Edwin Avalos\Desktop\eclipse\\plugins/org.eclipse.equinox.launcher_1.3.0.v20140415-2008.jar&#xa;" />
     <property name="java.specification.version" value="1.8" />
-    <property name="ant.project.invoked-targets" value="clean,compile,run,jar,junit,jacoco" />
+    <property name="ant.project.invoked-targets" value="clean,compile,run,jar,junit" />
     <property name="org.osgi.framework.executionenvironment" value="OSGi/Minimum-1.0,OSGi/Minimum-1.1,OSGi/Minimum-1.2,JavaSE/compact1-1.8,JavaSE/compact2-1.8,JavaSE/compact3-1.8,JRE-1.1,J2SE-1.2,J2SE-1.3,J2SE-1.4,J2SE-1.5,JavaSE-1.6,JavaSE-1.7,JavaSE-1.8" />
     <property name="osgi.logfile" value="C:\Users\Edwin Avalos\workspace\.metadata\.log" />
     <property name="osgi.configuration.area" value="file:/C:/Users/Edwin Avalos/Desktop/eclipse/configuration/" />
   </properties>
-  <testcase classname="com.groupc.junit.ResizeTest" name="unknown" time="0.0">
-    <error message="Forked Java VM exited abnormally. Please note the time in the report does not reflect the time until the VM exit." type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: Forked Java VM exited abnormally. Please note the time in the report does not reflect the time until the VM exit.
-	at org.jacoco.ant.CoverageTask.execute(CoverageTask.java:102)
-	at org.eclipse.ant.internal.core.ant.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
-	at org.eclipse.ant.internal.core.ant.InternalAntRunner.run(InternalAntRunner.java:703)
-	at org.eclipse.ant.internal.core.ant.InternalAntRunner.run(InternalAntRunner.java:525)
-	at org.eclipse.ant.core.AntRunner.run(AntRunner.java:371)
-	at org.eclipse.ant.internal.launching.launchConfigurations.AntLaunchDelegate$1.run(AntLaunchDelegate.java:244)
-	at java.lang.Thread.run(Thread.java:745)
+  <testcase classname="com.groupc.junit.ResizeTest" name="locationTest" time="0.006">
+    <error message="no lwjgl in java.library.path" type="java.lang.UnsatisfiedLinkError">java.lang.UnsatisfiedLinkError: no lwjgl in java.library.path
+	at java.lang.ClassLoader.loadLibrary(ClassLoader.java:1865)
+	at java.lang.Runtime.loadLibrary0(Runtime.java:870)
+	at java.lang.System.loadLibrary(System.java:1119)
+	at org.lwjgl.Sys$1.run(Sys.java:73)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.lwjgl.Sys.doLoadLibrary(Sys.java:66)
+	at org.lwjgl.Sys.loadLibrary(Sys.java:95)
+	at org.lwjgl.Sys.&lt;clinit&gt;(Sys.java:112)
+	at org.lwjgl.opengl.Display.&lt;clinit&gt;(Display.java:135)
+	at com.groupc.screens.Game1Screen.&lt;init&gt;(Unknown Source)
+	at com.groupc.Runner.&lt;init&gt;(Unknown Source)
+	at com.groupc.junit.ResizeTest.&lt;init&gt;(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:408)
 </error>
   </testcase>
+  <testcase classname="com.groupc.junit.ResizeTest" name="widthHeightTest" time="0.002">
+    <error message="Could not initialize class org.lwjgl.opengl.Display" type="java.lang.NoClassDefFoundError">java.lang.NoClassDefFoundError: Could not initialize class org.lwjgl.opengl.Display
+	at com.groupc.screens.Game1Screen.&lt;init&gt;(Unknown Source)
+	at com.groupc.Runner.&lt;init&gt;(Unknown Source)
+	at com.groupc.junit.ResizeTest.&lt;init&gt;(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:408)
+</error>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>

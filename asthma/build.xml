@@ -23,10 +23,15 @@
   	<fileset dir="${lib}" includes="org.hamcrest.core_1.3.0.v201303031735.jar"/>
   </path>
 	
+  <path id="all_cp">
+  	<path refid="my_cp"/>
+  	<pathelement location="${build}"/>
+  </path>
+	
  
   <target name="compile">
     <mkdir dir="${build}"/>
-    <javac srcdir="${src}" destdir="${build}" classpathref="my_cp" >
+    <javac srcdir="${src}" destdir="${build}" classpathref="my_cp" includeAntRuntime="false" >
   	</javac>
   </target>
 	
@@ -45,7 +50,7 @@
   	<delete dir="${jun-r}"/>
   </target>
 
-  <target name="run" depends="compile">
+  <target name="run">
     <!--
       fork="true" seems to be absolutely
       necessary for the setting of java.library.path
@@ -61,12 +66,19 @@
     </java>
   </target>	
 	
-  <target name="junit" depends="compile">
+  <target name="junit">
     <mkdir dir="${jac-r}"/>
   	<mkdir dir="${jun-r}"/>
   	<jacoco:coverage>
   	  <junit printsummary="withOutAndErr" haltonfailure="no" fork="on">
-  	    <classpath refid="my_cp"/>
+  	  <jvmarg value="-Djava.library.path=/natives/windows"/>
+  	    <sysproperty key="java.library.path"
+  	                     value="natives/windows"/>
+  	  <classpath>
+  	         <path refid="my_cp"/>
+  	         <path location="${build}"/>
+  	       </classpath>
+  	 
   	    <formatter type="xml"/>
   	    <batchtest todir="${jun-r}">
   	      <fileset dir="${src}">
@@ -81,16 +93,14 @@
   	  </fileset>
   	  <report todir="${jun-r}"/>
   	</junitreport>
-  </target>
-  	
-  <target name="jacoco" depends="compile">
   	<!--
   	 Step 2: Wrap test execution with the JaCoCo coverage task 
   	-->
   	<jacoco:coverage destfile="jacoco.exec">
   	<java classname="com.groupc.Tester" fork="true">
-  	  <classpath path="${build}"/>
-  	  <classpath path="${lib}"/>
+  		<classpath>
+  		  	   <path refid="all_cp"/>
+  		 </classpath>
   	</java>
   	</jacoco:coverage>
   	<!--  Step 3: Create coverage report  -->
@@ -98,15 +108,15 @@
   	<!--
   	 This task needs the collected execution data and ... 
   	-->
-  	<executiondata>
-  	<file file="jacoco.exec"/>
-  	</executiondata>
+  	  <executiondata>
+  	    <file file="jacoco.exec"/>
+  	  </executiondata>
   	<!--  the class files and optional source files ...  -->
-  	<structure name="JaCoCo Ant Example">
-  	<classfiles>
-  	<fileset dir="${build}"/>
-  	</classfiles>
-  	</structure>
+  	  <structure name="JaCoCo Ant Example">
+  	    <classfiles>
+  	      <fileset dir="${build}"/>
+  	    </classfiles>
+  	  </structure>
   	<!--  to produce reports in different formats.  -->
   	<html destdir="jacoco-report"/>
   	<csv destfile="jacoco-report/report.csv"/>
