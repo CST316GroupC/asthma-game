@@ -19,19 +19,19 @@ public class JoeyRooster extends MovingGameObject
 	public final static int STATE_BOUNCE = 6;
 	public final static int STATE_STOP = 7;
 	
-	public int state;
-	public float stateTime;
+	private int state;
+	private float stateTime;
 	
 	//upgrades
-	public float initialSpeed = 5;
+	private final float INITIAL_SPEED = 5;
 	
-	public float currentStatima;
+	private float currentStatima;
 	
 	public JoeyRooster(float x, float y, float mul, int statima)
 	{
 		super(x, y, WIDTH, HEIGHT);
 		state = STATE_SB;
-		this.accel.set(initialSpeed * mul, 0);
+		this.accel.set(INITIAL_SPEED * mul, 0);
 		stateTime = 0;
 		currentStatima = statima;
 	}
@@ -40,7 +40,11 @@ public class JoeyRooster extends MovingGameObject
 	{
 		if(state != STATE_SB && state != STATE_RAMP)
 		{
-			if(velocity.y < MAX_SPEED_V && velocity.y > -1 * MAX_SPEED_V)
+			if(state == STATE_FLAP)
+			{
+				velocity.set(velocity.x, 2);
+			}
+			else if(velocity.y < MAX_SPEED_V && velocity.y > -1 * MAX_SPEED_V)
 			{
 				velocity.add(0, World.GRAVITY * deltaTime);
 			}
@@ -82,7 +86,7 @@ public class JoeyRooster extends MovingGameObject
 		}
 		else if(state == STATE_FLAP)
 		{
-			if(stateTime > .3f)
+			if(stateTime > 1f)
 			{
 				state = STATE_FLYING;
 				stateTime = 0;
@@ -136,14 +140,6 @@ public class JoeyRooster extends MovingGameObject
 		{
 			state = STATE_FLAP;
 			stateTime = 0;
-			if(state== STATE_FALLING)
-			{
-				velocity.set(velocity.x * .7f, velocity.y * .5f);
-			}
-			else
-			{
-				velocity.set(velocity.x * .7f, velocity.y * 1.5f);
-			}
 			currentStatima--;
 		}
 	}
@@ -160,6 +156,29 @@ public class JoeyRooster extends MovingGameObject
 			state = STATE_BOUNCE;
 			stateTime = 0;
 		}
+	}
+	
+	//getters
+	
+	public int getState()
+	{
+		return state;
+	}
+	
+	public float getStateTime()
+	{
+		return stateTime;
+	}
+	
+	public float getCurrentStatima()
+	{
+		return currentStatima;
+	}
+	
+	//setters
+	public void setState(int state)
+	{
+		this.state = state;
 	}
 
 }

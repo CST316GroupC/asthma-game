@@ -1,5 +1,6 @@
 package com.groupc.game1;
 
+import java.awt.Font;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,6 +9,8 @@ import java.util.List;
 import java.util.Random;
 
 import org.lwjgl.input.Keyboard;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
 
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
@@ -26,18 +29,20 @@ public class World extends GameScreen
 	public static final int WORLD_STATE_OVER = 2;
 	
 	public static final int GRAVITY = -10;
-	public int state;
-	public int seedsCollected;
 	
-	public Camera cam;
+	public int state;
+	private int seedsCollected;
+	
+	private Camera cam;
 	public final JoeyRooster joey;
 	public final Ramp ramp;
 	public final Seed[] seeds;
 	public final Cow cow;
-	public Random rand;
+	private Random rand;
+	private TrueTypeFont font;
 	
 	public World()
-	{
+	{        
 		rand = new Random();
 		this.joey = new JoeyRooster(1, .5f, Float.parseFloat(Assets.joeyProps.getProperty("speedMult")), Integer.parseInt(Assets.joeyProps.getProperty("statima")));
 		this.ramp = new Ramp(21, 0.5f, 5);
@@ -88,7 +93,7 @@ public class World extends GameScreen
 			updatecow();
 			updateJoey(deltaTime);
 			collision();
-			if(joey.state == JoeyRooster.STATE_STOP)
+			if(joey.getState() == JoeyRooster.STATE_STOP)
 			{
 				state = WORLD_STATE_OVER;
 				
@@ -136,18 +141,16 @@ public class World extends GameScreen
 	
 	public void updateJoey(float deltaTime)
 	{
-		if(joey.state == JoeyRooster.STATE_RAMP && joey.position.x > ramp.position.x + ramp.bounds.width)
+		if(joey.getState() == JoeyRooster.STATE_RAMP && joey.position.x > ramp.position.x + ramp.bounds.width)
 		{
-			joey.state = JoeyRooster.STATE_FLYING;
+			joey.setState(JoeyRooster.STATE_FLYING);
 		}
 		
 		joey.update(deltaTime);
 	}
 	
 	public void render()
-	{
-		Assets.sky.draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
-		Assets.grass.draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
+	{		
 		if(joey.position.x > cam.position.x)
 		{
 			if(cam.position.x  < WORLD_WIDTH - 10)
@@ -166,6 +169,11 @@ public class World extends GameScreen
 			}
 		}
 		cam.setCamera();
+		
+		Assets.sky.draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
+		Assets.grass.draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
+		Assets.seed1.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+		
 		renderRamp();
 		renderSeeds();
 		rendercow();
@@ -176,7 +184,7 @@ public class World extends GameScreen
 	{
 		Rectangle rect = new Rectangle(joey.position.x - .5f, joey.position.y -.5f, 1, 1);
 	
-		switch(joey.state)
+		switch(joey.getState())
 		{
 		case JoeyRooster.STATE_SB:
 			Assets.joeysk.draw(rect);
