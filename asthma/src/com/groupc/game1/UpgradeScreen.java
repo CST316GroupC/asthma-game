@@ -7,11 +7,11 @@ import com.groupc.math.Vector;
 
 public class UpgradeScreen extends GameScreen
 {
-	Camera cam;
-	Vector mouseClick;
-	Rectangle upgradeSpeed;
-	Rectangle upgradeFlaps;
-	int next;
+	private Camera cam;
+	private Vector mouseClick;
+	private Rectangle upgradeSpeed;
+	private Rectangle upgradeFlaps;
+	private int next;
 	
 	public UpgradeScreen()
 	{
@@ -33,6 +33,9 @@ public class UpgradeScreen extends GameScreen
 	@Override
 	public void present(float deltaTime)
 	{
+		cam.setCamera();
+		Assets.atlas.bind();
+		//draw arrows
 		Assets.joeyBou.draw(upgradeSpeed);
 		Assets.joeyBou.draw(upgradeFlaps);
 	}

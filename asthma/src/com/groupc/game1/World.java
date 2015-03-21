@@ -12,6 +12,7 @@ import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
+import com.groupc.TextDrawer;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
 import com.groupc.math.CollisionChecker;
@@ -190,9 +191,10 @@ public class World extends GameScreen
 		
 		Assets.sky.draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
 		Assets.grass.draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
+		
 		//hud
-		Assets.joeyfly.draw(new Rectangle(0, (cam.position.y + FRUSTUM_HEIGHT/2) -1, WORLD_WIDTH, 1));
-		Assets.seed1.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+		Assets.joeyfly.draw(new Rectangle(0, (cam.position.y + FRUSTUM_HEIGHT/2) - .35f, WORLD_WIDTH, .35f));
+		Assets.seed1.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, (cam.position.y + FRUSTUM_HEIGHT/2) - .35f, .35f, .35f));
 		renderScore();
 		
 		renderRamp();
@@ -203,46 +205,7 @@ public class World extends GameScreen
 	
 	public void renderScore()
 	{
-		int temp2 = seedsCollected;
-		System.out.println(temp2);
-		for(int i=0; temp2 > 0; i++)
-		{
-			int temp = temp2%10;
-			temp2 = temp2 / 10;
-			switch(temp)
-			{
-				case 0:
-					Assets.zero.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
-					break;
-				case 1:
-					Assets.one.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
-					break;
-				case 2:
-					Assets.two.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
-					break;
-				case 3:
-					Assets.three.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
-					break;
-				case 4:
-					Assets.four.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
-					break;
-				case 5:
-					Assets.five.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
-					break;
-				case 6:
-					Assets.six.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
-					break;
-				case 7:
-					Assets.seven.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
-					break;
-				case 8:
-					Assets.eight.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
-					break;
-				case 9:
-					Assets.nine.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
-					break;
-			}
-		}
+		TextDrawer.drawInt(seedsCollected, cam.position.x - 3, cam.position.y + FRUSTUM_HEIGHT/2 - .35f, .35f, .35f, 6);
 	}
 	public void renderJoey()
 	{

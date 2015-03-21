@@ -91,16 +91,16 @@ public class Assets
 			joeyflap = new TextureRegion(atlas, 192, 512 - 128 - 32, 32, 32);
 			joeyRamp = new TextureRegion(atlas, 192, 512 - 160 - 32, 32, 32);
 			
-			one = new TextureRegion(atlas, 0, 512 - 128, 192/10, 32);
-			two = new TextureRegion(atlas, 192/10, 512 - 128, 192/10, 32);
-			three = new TextureRegion(atlas, 192/10 * 2, 512 - 128, 192/10, 32);
-			four = new TextureRegion(atlas, 192/10 * 3, 512 - 128, 192/10, 32);
-			five = new TextureRegion(atlas, 192/10 * 4, 512 - 128, 192/10, 32);
-			six = new TextureRegion(atlas, 192/10 * 5, 512 - 128, 192/10, 32);
-			seven = new TextureRegion(atlas, 192/10 * 6, 512 - 128, 192/10, 32);
-			eight = new TextureRegion(atlas, 192/10 * 7, 512 - 128, 192/10, 32);
-			nine = new TextureRegion(atlas, 192/10 * 8, 512 - 128, 192/10, 32);
-			zero = new TextureRegion(atlas, 192/10 * 9, 512 - 128, 192/10, 32);
+			one = new TextureRegion(atlas, 0, 512 - 128 - 1, 192/10, 32);
+			two = new TextureRegion(atlas, 192/10, 512 - 128 - 1, 192/10, 32);
+			three = new TextureRegion(atlas, 192/10 * 2, 512 - 128 - 1, 192/10, 32);
+			four = new TextureRegion(atlas, 192/10 * 3, 512 - 128 - 1, 192/10, 32);
+			five = new TextureRegion(atlas, 192/10 * 4, 512 - 128 - 1, 192/10, 32);
+			six = new TextureRegion(atlas, 192/10 * 5, 512 - 128 - 1, 192/10, 32);
+			seven = new TextureRegion(atlas, 192/10 * 6, 512 - 128 - 1, 192/10, 32);
+			eight = new TextureRegion(atlas, 192/10 * 7, 512 - 128 - 1, 192/10, 32);
+			nine = new TextureRegion(atlas, 192/10 * 8, 512 - 128 - 1, 192/10, 32);
+			zero = new TextureRegion(atlas, 192/10 * 9, 512 - 128 - 1, 192/10, 32);
 			
 			
 			

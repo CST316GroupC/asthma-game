@@ -1,7 +1,7 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-JaCoCo Ant Example,com.groupc.game1,World,1080,0,80,0,0,0,69,0,21,0
+JaCoCo Ant Example,com.groupc.game1,World,809,0,67,0,0,0,58,0,21,0
 JaCoCo Ant Example,com.groupc.game1,JoeyRooster,188,181,31,17,0,0,25,8,5,4
-JaCoCo Ant Example,com.groupc.game1,UpgradeScreen,5,47,0,0,0,0,4,3,4,3
+JaCoCo Ant Example,com.groupc.game1,UpgradeScreen,57,0,0,0,0,0,7,0,7,0
 JaCoCo Ant Example,com.groupc.game1,Seed,0,25,0,0,0,0,0,2,0,2
 JaCoCo Ant Example,com.groupc.game1,Cow,0,32,0,0,0,0,0,3,0,3
 JaCoCo Ant Example,com.groupc.game1,Options,153,0,16,0,0,0,15,0,7,0
@@ -58,6 +58,7 @@ JaCoCo Ant Example,com.groupc.game,Camera,0,98,0,0,0,0,0,2,0,2
 JaCoCo Ant Example,com.groupc,Runner,33,56,3,1,0,0,4,2,2,2
 JaCoCo Ant Example,com.groupc,AudioPlayer,34,44,2,0,0,0,4,4,3,4
 JaCoCo Ant Example,com.groupc,Database,452,0,60,0,0,0,34,0,4,0
+JaCoCo Ant Example,com.groupc,TextDrawer,75,0,13,0,0,0,14,0,3,0
 JaCoCo Ant Example,com.groupc,Patient,3,0,0,0,0,0,1,0,1,0
 JaCoCo Ant Example,com.groupc,Tester,4,18,1,1,0,0,2,1,1,1
 JaCoCo Ant Example,com.groupc.math,Vector,63,80,8,0,0,0,7,8,3,8
