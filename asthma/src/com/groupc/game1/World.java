@@ -39,10 +39,10 @@ public class World extends GameScreen
 	public final Seed[] seeds;
 	public final Cow cow;
 	private Random rand;
-	private TrueTypeFont font;
 	
 	public World()
 	{        
+		Assets.reload();
 		rand = new Random();
 		this.joey = new JoeyRooster(1, .5f, Float.parseFloat(Assets.joeyProps.getProperty("speedMult")), Integer.parseInt(Assets.joeyProps.getProperty("statima")));
 		this.ramp = new Ramp(21, 0.5f, 5);
@@ -85,10 +85,10 @@ public class World extends GameScreen
 	
 	public void update(float deltaTime)
 	{
+		inputHandling();
 		switch(state)
 		{
-		case WORLD_STATE_PLAYING:
-			inputHandling();
+		case WORLD_STATE_PLAYING:			
 			updateSeeds();
 			updatecow();
 			updateJoey(deltaTime);
@@ -136,6 +136,24 @@ public class World extends GameScreen
 		        joey.flap();
 		        }
 		    }
+		    if (Keyboard.getEventKeyState()) {
+		        if (Keyboard.getEventKey() == Keyboard.KEY_Q) {
+		        System.out.println("W Key Pressed");
+		        
+		        }
+		    }
+		    else 
+		    {
+		        if (Keyboard.getEventKey() == Keyboard.KEY_Q)
+		        {
+		        	System.out.println("W Key Released");
+		        
+		        	if(state == WORLD_STATE_OVER)
+		        	{
+		        		dispose();
+		        	}
+		        }
+		    }
 		}
 	}
 	
@@ -172,7 +190,10 @@ public class World extends GameScreen
 		
 		Assets.sky.draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
 		Assets.grass.draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
+		//hud
+		Assets.joeyfly.draw(new Rectangle(0, (cam.position.y + FRUSTUM_HEIGHT/2) -1, WORLD_WIDTH, 1));
 		Assets.seed1.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+		renderScore();
 		
 		renderRamp();
 		renderSeeds();
@@ -180,6 +201,49 @@ public class World extends GameScreen
 		renderJoey();
 	}
 	
+	public void renderScore()
+	{
+		int temp2 = seedsCollected;
+		System.out.println(temp2);
+		for(int i=0; temp2 > 0; i++)
+		{
+			int temp = temp2%10;
+			temp2 = temp2 / 10;
+			switch(temp)
+			{
+				case 0:
+					Assets.zero.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+					break;
+				case 1:
+					Assets.one.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+					break;
+				case 2:
+					Assets.two.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+					break;
+				case 3:
+					Assets.three.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+					break;
+				case 4:
+					Assets.four.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+					break;
+				case 5:
+					Assets.five.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+					break;
+				case 6:
+					Assets.six.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+					break;
+				case 7:
+					Assets.seven.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+					break;
+				case 8:
+					Assets.eight.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+					break;
+				case 9:
+					Assets.nine.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 6 - i, (cam.position.y + FRUSTUM_HEIGHT/2) -1, 1, 1));
+					break;
+			}
+		}
+	}
 	public void renderJoey()
 	{
 		Rectangle rect = new Rectangle(joey.position.x - .5f, joey.position.y -.5f, 1, 1);
@@ -298,14 +362,14 @@ public class World extends GameScreen
 	}
 
 	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
+	public void dispose()
+	{
+		isClosing = true;		
 	}
-
+	
 	@Override
-	public GameScreen getNext() {
-		// TODO Auto-generated method stub
-		return null;
+	public GameScreen getNext()
+	{
+		return new MainMenu();
 	}
 }

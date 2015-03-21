@@ -47,30 +47,23 @@ public class Assets
 	//seeds
 	public static TextureRegion seed1;
 	
+	//score
+	public static TextureRegion zero;
+	public static TextureRegion one;
+	public static TextureRegion two;
+	public static TextureRegion three;
+	public static TextureRegion four;
+	public static TextureRegion five;
+	public static TextureRegion six;
+	public static TextureRegion seven;
+	public static TextureRegion eight;
+	public static TextureRegion nine;	
+	
 	public static Properties joeyProps;
 	
 	public static void load()
 	{
-		joeyProps = new Properties();
-		try {
-			FileInputStream in = new FileInputStream("res/joey.properties");
-			joeyProps.load(in);
-			in.close();
-			String temp = joeyProps.getProperty("firstTime", "true");
-			if(temp.equals("true"))
-			{
-				joeyProps.setProperty("speedMult", "1");
-				joeyProps.setProperty("statima", "3");
-				joeyProps.setProperty("score", "0");
-				joeyProps.setProperty("maxDistance", "0");
-				joeyProps.setProperty("seeds", "0");
-				joeyProps.setProperty("firstTime", "false");
-				save();
-			}
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} 
+		reload();
 		
 		try {
 			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("mainmenu.png"));
@@ -98,6 +91,18 @@ public class Assets
 			joeyflap = new TextureRegion(atlas, 192, 512 - 128 - 32, 32, 32);
 			joeyRamp = new TextureRegion(atlas, 192, 512 - 160 - 32, 32, 32);
 			
+			one = new TextureRegion(atlas, 0, 512 - 128, 192/10, 32);
+			two = new TextureRegion(atlas, 192/10, 512 - 128, 192/10, 32);
+			three = new TextureRegion(atlas, 192/10 * 2, 512 - 128, 192/10, 32);
+			four = new TextureRegion(atlas, 192/10 * 3, 512 - 128, 192/10, 32);
+			five = new TextureRegion(atlas, 192/10 * 4, 512 - 128, 192/10, 32);
+			six = new TextureRegion(atlas, 192/10 * 5, 512 - 128, 192/10, 32);
+			seven = new TextureRegion(atlas, 192/10 * 6, 512 - 128, 192/10, 32);
+			eight = new TextureRegion(atlas, 192/10 * 7, 512 - 128, 192/10, 32);
+			nine = new TextureRegion(atlas, 192/10 * 8, 512 - 128, 192/10, 32);
+			zero = new TextureRegion(atlas, 192/10 * 9, 512 - 128, 192/10, 32);
+			
+			
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -116,5 +121,29 @@ public class Assets
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void reload()
+	{
+		joeyProps = new Properties();
+		try {
+			FileInputStream in = new FileInputStream("res/joey.properties");
+			joeyProps.load(in);
+			in.close();
+			String temp = joeyProps.getProperty("firstTime", "true");
+			if(temp.equals("true"))
+			{
+				joeyProps.setProperty("speedMult", "1");
+				joeyProps.setProperty("statima", "3");
+				joeyProps.setProperty("score", "0");
+				joeyProps.setProperty("maxDistance", "0");
+				joeyProps.setProperty("seeds", "0");
+				joeyProps.setProperty("firstTime", "false");
+				save();
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
 	}
 }

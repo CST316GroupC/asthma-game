@@ -19,6 +19,7 @@ public class Options extends GameScreen
 	
 	public Options(Camera cam)
 	{
+		Assets.reload();
 		this.cam = cam;
 		this.cam.setCamera();
 		soundLabel = new Rectangle(50, 250, 200, 100);

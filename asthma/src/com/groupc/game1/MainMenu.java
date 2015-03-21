@@ -52,6 +52,8 @@ public class MainMenu extends GameScreen
 			if(CollisionChecker.PointToRect(mouseClick, upgrade))
 			{
 				System.out.println("upgrade");
+				this.dispose();
+				next = 3;
 			}
 		}
 		
@@ -94,6 +96,8 @@ public class MainMenu extends GameScreen
 			return new World();
 		if(next == 2)
 			return new Options(this.cam);
+		if(next == 3)
+			return new UpgradeScreen();
 		return null;
 	}
 }
