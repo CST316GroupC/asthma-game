@@ -134,7 +134,7 @@ public class Assets
 			if(temp.equals("true"))
 			{
 				joeyProps.setProperty("speedMult", "1");
-				joeyProps.setProperty("statima", "3");
+				joeyProps.setProperty("statima", "1");
 				joeyProps.setProperty("score", "0");
 				joeyProps.setProperty("maxDistance", "0");
 				joeyProps.setProperty("seeds", "0");

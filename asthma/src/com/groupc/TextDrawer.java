@@ -66,6 +66,44 @@ public class TextDrawer
 
 	public static void drawString(String str, float x, float y, float width, float height)
 	{
+		for(int i = 0; i < str.length(); i++)
+		{
+			Rectangle rect = new Rectangle(x + i*width, y, width, height);
+			char temp = str.charAt(i);
+			switch(temp)
+			{
+				case 'a':
+					Assets.zero.draw(rect);
+					break;
+				case 'b':
+					Assets.one.draw(rect);
+					break;
+				case 'c':
+					Assets.two.draw(rect);
+					break;
+				case 'd':
+					Assets.three.draw(rect);
+					break;
+				case 'e':
+					Assets.four.draw(rect);
+					break;
+				case 'f':
+					Assets.five.draw(rect);
+					break;
+				case 'g':
+					Assets.six.draw(rect);
+					break;
+				case 'h':
+					Assets.seven.draw(rect);
+					break;
+				case 'i':
+					Assets.eight.draw(rect);
+					break;
+				case 'j':
+					Assets.nine.draw(rect);
+					break;
+			}
+		}
 		
 	}
 }

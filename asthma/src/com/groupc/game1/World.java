@@ -22,12 +22,17 @@ public class World extends GameScreen
 {
 	public static final float FRUSTUM_WIDTH = 10;
 	public static final float FRUSTUM_HEIGHT = 10;
-	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 100; //400
-	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 20; //400 (the * 10 means the total width is 4000 pixels but only 400 shown)
+	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 500; //400 (the * 100 means the total width is 5000 pixels but only 400 shown)
+	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 20; //400 (the * 20 means the total height is 200 pixels but only 400 shown)
 	
 	public static final int WORLD_STATE_PAUSED = 0;
 	public static final int WORLD_STATE_PLAYING = 1;
 	public static final int WORLD_STATE_OVER = 2;
+	
+	public static final float TEXT_SIZE = .35f;
+	public static final int MAX_SCORE_DIGITS = 8; //99999999 max score
+	public static final int MAX_SEED_DIGITS = 4; //9999 max seeds
+	public static final int MAX_DISTANCE = 4; //9999 max distance
 	
 	public static final int GRAVITY = -10;
 	
@@ -205,7 +210,7 @@ public class World extends GameScreen
 	
 	public void renderScore()
 	{
-		TextDrawer.drawInt(seedsCollected, cam.position.x - 3, cam.position.y + FRUSTUM_HEIGHT/2 - .35f, .35f, .35f, 6);
+		TextDrawer.drawInt(seedsCollected, cam.position.x - 3, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SEED_DIGITS);
 	}
 	public void renderJoey()
 	{

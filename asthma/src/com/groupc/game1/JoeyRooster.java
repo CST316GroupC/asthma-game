@@ -42,7 +42,7 @@ public class JoeyRooster extends MovingGameObject
 		{
 			if(state == STATE_FLAP)
 			{
-				velocity.set(velocity.x, 2);
+				velocity.set(velocity.x, 3);
 			}
 			else if(velocity.y < MAX_SPEED_V && velocity.y > -1 * MAX_SPEED_V)
 			{
@@ -86,7 +86,7 @@ public class JoeyRooster extends MovingGameObject
 		}
 		else if(state == STATE_FLAP)
 		{
-			if(stateTime > 1f)
+			if(stateTime > .5f)
 			{
 				state = STATE_FLYING;
 				stateTime = 0;
