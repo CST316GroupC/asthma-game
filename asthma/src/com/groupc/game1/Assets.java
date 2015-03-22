@@ -59,6 +59,23 @@ public class Assets
 	public static TextureRegion eight;
 	public static TextureRegion nine;	
 	
+	//text
+	public static TextureRegion letterA;
+	public static TextureRegion letterC;
+	public static TextureRegion letterD;
+	public static TextureRegion letterE;
+	public static TextureRegion letterF;
+	public static TextureRegion letterG;
+	public static TextureRegion letterI;
+	public static TextureRegion letterL;
+	public static TextureRegion letterN;
+	public static TextureRegion letterO;
+	public static TextureRegion letterP;
+	public static TextureRegion letterR;
+	public static TextureRegion letterS;
+	public static TextureRegion letterT;
+	public static TextureRegion letterU;
+	
 	public static Properties joeyProps;
 	
 	public static void load()
@@ -102,6 +119,24 @@ public class Assets
 			nine = new TextureRegion(atlas, 192/10 * 8, 512 - 128 - 1, 192/10, 32);
 			zero = new TextureRegion(atlas, 192/10 * 9, 512 - 128 - 1, 192/10, 32);
 			
+			//row 1
+			letterA = new TextureRegion(atlas, 0, 512-160, 192/8, 32);
+			letterC = new TextureRegion(atlas, 192/8, 512-160, 192/8, 32);
+			letterD = new TextureRegion(atlas, 192/8 * 2, 512-160, 192/8, 32);
+			letterE = new TextureRegion(atlas, 192/8 * 3, 512-160, 192/8, 32);
+			letterF = new TextureRegion(atlas, 192/8 * 4, 512-160, 192/8, 32);
+			letterG = new TextureRegion(atlas, 192/8 * 5, 512-160, 192/8, 32);
+			letterI = new TextureRegion(atlas, 192/8 * 6, 512-160, 192/8, 32);
+			letterL = new TextureRegion(atlas, 192/8 * 7, 512-160, 192/8, 32);
+			
+			//row 2
+			letterN = new TextureRegion(atlas, 0, 512-192, 192/8, 32);
+			letterO = new TextureRegion(atlas, 192/8, 512-192, 192/8, 32);
+			letterP = new TextureRegion(atlas, 192/8 * 2, 512-192, 192/8, 32);
+			letterR = new TextureRegion(atlas, 192/8 * 3, 512-192, 192/8, 32);
+			letterS = new TextureRegion(atlas, 192/8 * 4, 512-192, 192/8, 32);
+			letterT = new TextureRegion(atlas, 192/8 * 5, 512-192, 192/8, 32);
+			letterU = new TextureRegion(atlas, 192/8 * 6, 512-192, 192/8, 32);
 			
 			
 		} catch (IOException e) {

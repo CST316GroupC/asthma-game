@@ -10,12 +10,12 @@ import com.groupc.math.Vector;
 
 public class Options extends GameScreen 
 {
-	Camera cam;
-	Rectangle soundLabel;
-	Rectangle soundOnOff;
-	Rectangle back;
-	boolean sound;
-	Vector mouseClick;
+	private Camera cam;
+	private Rectangle soundLabel;
+	private Rectangle soundOnOff;
+	private Rectangle back;
+	private boolean sound;
+	private Vector mouseClick;
 	
 	public Options(Camera cam)
 	{

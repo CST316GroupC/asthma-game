@@ -63,9 +63,17 @@ public class TextDrawer
 		}
 	}
 	
-
+	/**
+	 * Draws a string in all lower caps. Final size of drawn string is x + width*str.length() by height
+	 * @param str - The string to draw
+	 * @param x - The starting x coordinate
+	 * @param y - The starting y coordinate
+	 * @param width - The width of each letter
+	 * @param height - The height of each letter
+	 */
 	public static void drawString(String str, float x, float y, float width, float height)
 	{
+		str = str.toLowerCase();
 		for(int i = 0; i < str.length(); i++)
 		{
 			Rectangle rect = new Rectangle(x + i*width, y, width, height);
@@ -73,34 +81,49 @@ public class TextDrawer
 			switch(temp)
 			{
 				case 'a':
-					Assets.zero.draw(rect);
-					break;
-				case 'b':
-					Assets.one.draw(rect);
+					Assets.letterA.draw(rect);
 					break;
 				case 'c':
-					Assets.two.draw(rect);
+					Assets.letterC.draw(rect);
 					break;
 				case 'd':
-					Assets.three.draw(rect);
+					Assets.letterD.draw(rect);
 					break;
 				case 'e':
-					Assets.four.draw(rect);
+					Assets.letterE.draw(rect);
 					break;
 				case 'f':
-					Assets.five.draw(rect);
+					Assets.letterF.draw(rect);
 					break;
 				case 'g':
-					Assets.six.draw(rect);
-					break;
-				case 'h':
-					Assets.seven.draw(rect);
+					Assets.letterG.draw(rect);
 					break;
 				case 'i':
-					Assets.eight.draw(rect);
+					Assets.letterI.draw(rect);
 					break;
-				case 'j':
-					Assets.nine.draw(rect);
+				case 'l':
+					Assets.letterL.draw(rect);
+					break;
+				case 'n':
+					Assets.letterN.draw(rect);
+					break;
+				case 'o':
+					Assets.letterO.draw(rect);
+					break;
+				case 'p':
+					Assets.letterP.draw(rect);
+					break;
+				case 'r':
+					Assets.letterR.draw(rect);
+					break;
+				case 's':
+					Assets.letterS.draw(rect);
+					break;
+				case 't':
+					Assets.letterT.draw(rect);
+					break;
+				case 'u':
+					Assets.letterU.draw(rect);
 					break;
 			}
 		}
