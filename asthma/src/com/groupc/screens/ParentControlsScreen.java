@@ -280,11 +280,11 @@ public class ParentControlsScreen extends Screen
 		if(butPressed == 1)
 		{
 			saveInfo();
-			run.setScreen(new RewardScreen(run));
+			run.setScreen(new GameHubScreen(run));
 		}
 		else if(butPressed == 2 || navBar.backButtonPressed)
 		{
-			run.setScreen(new RewardScreen(run));
+			run.setScreen(new GameHubScreen(run));
 		}
 		navBar.update();
 	}

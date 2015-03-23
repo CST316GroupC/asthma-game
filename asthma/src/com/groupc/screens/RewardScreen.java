@@ -26,9 +26,9 @@ public class RewardScreen extends Screen
 	boolean played = true;
 	
 	//Display Elements
-	NavigationBar navBar         = new NavigationBar(run,true,true,"Rewards");
-	JPanel        rewardBox      = new JPanel();;
-	JButton       continueButton = new JButton("Continue");;
+	NavigationBar navBar         = new NavigationBar(run,true,false,"Rewards");
+	JPanel        rewardBox      = new JPanel();
+	JButton       continueButton = new JButton("Continue");
 	
 	public RewardScreen(Runner run) 
 	{
@@ -94,7 +94,8 @@ public class RewardScreen extends Screen
 		}
 		else if(butPressed == 4)
 		{
-			run.setScreen(new Game1Screen(run));
+			//run.setScreen(new Game1Screen(run));
+			run.setScreen(new GameHubScreen(run));
 		}
 		butPressed = 0;
 
