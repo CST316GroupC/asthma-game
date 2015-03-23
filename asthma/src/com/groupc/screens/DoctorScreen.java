@@ -14,11 +14,9 @@ import java.util.Collection;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -48,7 +46,6 @@ public class DoctorScreen extends Screen
 	JPanel  testBox          = new JPanel();
 	JPanel  navBox           = new JPanel();
 	JPanel  navBoxBorder     = new JPanel();
-	JToggleButton navMuteButton    = new JToggleButton();
 	JButton addPatientButton = new JButton("Add Patient");
 	NavigationBar navBar           = new NavigationBar(run,false,false,"Doctor Page");
 	
@@ -74,21 +71,7 @@ public class DoctorScreen extends Screen
 		//Set fonts
 		
 		////Buttons////
-
-		// Add mute button
-		navMuteButton.setSelectedIcon(new ImageIcon("UnMuteIcon.png"));
-		navMuteButton.setIcon(new ImageIcon("MuteIcon.png"));
-		navMuteButton.setBounds(340, 18, 30, 25);
 		
-		
-		// Add patient button listener
-		navMuteButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 3;				
-			}
-		});
 		
 		// Add patient button listener
 		addPatientButton.addActionListener(new ActionListener()
@@ -101,7 +84,6 @@ public class DoctorScreen extends Screen
 		
 		//add things to the panel
 		this.add(addPatientButton);
-		this.add(navMuteButton);
 		this.add(navBox);
 		//this.add(navBoxBorder);
 		this.add(testBox);
@@ -209,19 +191,6 @@ public class DoctorScreen extends Screen
 		else if(butPressed == 2)
 		{
 			run.setScreen(new LoginScreen(run));
-		}
-		else if(butPressed == 3)
-		{
-			if(run.player.music.isPlaying() && played == true)
-			{
-				run.player.pauseMusic();
-				played = false;
-			}
-			else
-			{
-				run.player.resume();
-				played = true;
-			}
 		}
 		
 		butPressed = 0;

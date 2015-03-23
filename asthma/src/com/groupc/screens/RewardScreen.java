@@ -26,11 +26,9 @@ public class RewardScreen extends Screen
 	boolean played = true;
 	
 	//Display Elements
-	NavigationBar navBar         = new NavigationBar(run,false,true,"Rewards");
+	NavigationBar navBar         = new NavigationBar(run,true,true,"Rewards");
 	JPanel        rewardBox      = new JPanel();;
 	JButton       continueButton = new JButton("Continue");;
-	JToggleButton mute;
-
 	
 	public RewardScreen(Runner run) 
 	{
@@ -47,12 +45,6 @@ public class RewardScreen extends Screen
 			}
 		});
 		
-		
-		// Add mute button
-		mute = new JToggleButton();
-		mute.setSelectedIcon(new ImageIcon("UnMuteIcon.png"));
-		mute.setIcon(new ImageIcon("MuteIcon.png"));
-		mute.setBounds(340, 18, 30, 25);	
 		
 		
 		
@@ -73,16 +65,7 @@ public class RewardScreen extends Screen
 		this.add(rewardBox);
 		this.add(navBar);
 		
-		
-		
-		// Add mute button listener
-		mute.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 3;				
-			}
-		});
+	
 		
 		continueButton.addActionListener(new ActionListener()
 		{
@@ -100,7 +83,7 @@ public class RewardScreen extends Screen
 	@Override
 	public void update(float deltaTime)
 	{
-		if(butPressed == 1)
+		if(navBar.backButtonPressed)
 		{
 			run.setScreen(new RecordingScreen(run));
 		}
@@ -108,19 +91,6 @@ public class RewardScreen extends Screen
 		{
 			run.setScreen(new LoginScreen(run));
 			
-		}
-		else if(butPressed == 3)
-		{
-			if(run.player.music.isPlaying() && played == true)
-			{
-				run.player.pauseMusic();
-				played = false;
-			}
-			else
-			{
-				run.player.resume();
-				played = true;
-			}
 		}
 		else if(butPressed == 4)
 		{

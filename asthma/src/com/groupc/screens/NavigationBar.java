@@ -6,9 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 import com.groupc.Runner;
@@ -22,19 +24,29 @@ public class NavigationBar extends JPanel
 	private Resize resize;
 	private int    buttonPressed      = 0; //0 is none, 1 is add patient, 2 is back and logout for now
 	public  boolean backButtonPressed = false;
-	
+	boolean played 					  = true;
 	//Display Elements
 	JPanel  navBox               = new JPanel();
 	JButton backButton           = new JButton("Back");
 	JButton logoutButton         = new JButton("Logout");
-	JButton muteButton           = new JButton("Mute");
 	JButton parentControlsButton = new JButton("Parental Controls");
+	JToggleButton muteButton     = new JToggleButton();
 	JLabel  pageTitle            = new JLabel("",SwingConstants.CENTER);
 	
+	
+
+	
+
+
 	public NavigationBar(Runner run, boolean backOn, boolean parentControlsOn, String title) 
 	{
+		
+		
 		this.run = run;
 		resize   = new Resize(run);
+		
+		muteButton.setIcon(new ImageIcon("UnMuteIcon.png"));
+		muteButton.setSelectedIcon(new ImageIcon("MuteIcon.png"));
 		
 		//set settings
 		if(backOn == false)
@@ -114,11 +126,11 @@ public class NavigationBar extends JPanel
 		backButton.setFont(new Font(backButton.getFont().getFontName(),backButton.getFont().getStyle(), resize.font(12)));
 		
 		//parentControlsButton
-		parentControlsButton.setBounds(resize.width(190), resize.height(10), resize.width(80), resize.height(30));
+		parentControlsButton.setBounds(resize.width(155), resize.height(10), resize.width(150), resize.height(30));
 		parentControlsButton.setFont(new Font(parentControlsButton.getFont().getFontName(),parentControlsButton.getFont().getStyle(), resize.font(12)));
 		
 		//MuteButton
-		muteButton.setBounds(resize.width(280), resize.height(10), resize.width(80), resize.height(30));
+		muteButton.setBounds(resize.width(330), resize.height(10), resize.width(30), resize.height(30));
 		muteButton.setFont(new Font(muteButton.getFont().getFontName(),muteButton.getFont().getStyle(), resize.font(12)));
 		
 		//logoutButton
@@ -140,15 +152,16 @@ public class NavigationBar extends JPanel
 		//mute
 		else if(buttonPressed == 2)
 		{
-			if(run.player.music.isPlaying())
+			if(run.player.music.isPlaying() && played == true)
 			{
 				run.player.pauseMusic();
+				played = false;
 			}
 			else
 			{
 				run.player.resume();
+				played = true;
 			}
-			buttonPressed = 0;
 		}
 		//parentControls
 		else if(buttonPressed == 3)
