@@ -30,7 +30,6 @@ public class TutorialScreen extends Screen
 	//Display Elements
 	NavigationBar navBar = new NavigationBar(run,false,false,"Tutorial");
 	JLabel skipText      = new JLabel("* To skip, press Start",SwingConstants.CENTER);;
-	JToggleButton mute;
 
 	
 	JPanel videoBox       = new JPanel();
@@ -74,12 +73,6 @@ public class TutorialScreen extends Screen
 		
 
 		
-		// Add mute button
-		mute = new JToggleButton();
-		mute.setSelectedIcon(new ImageIcon("UnMuteIcon.png"));
-		mute.setIcon(new ImageIcon("MuteIcon.png"));
-		mute.setBounds(340, 18, 30, 25);
-		
 		
 		// Add Steps button
 		step1 = new JButton("Step 1");
@@ -117,7 +110,6 @@ public class TutorialScreen extends Screen
 //			}
 //		});
 		
-		this.add(mute);
 		this.add(skipText);
 		this.add(step1);
 		this.add(step2);
