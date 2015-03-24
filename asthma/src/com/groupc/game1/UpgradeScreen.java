@@ -98,7 +98,7 @@ public class UpgradeScreen extends GameScreen
 		Assets.joeyfall.draw(back);
 		
 		TextDrawer.drawString("Seeds", 25, 350, 40, 40);
-		TextDrawer.drawInt(seeds, 300, 350, 20, 40, 5);
+		TextDrawer.drawInt(seeds, 250, 350, 20, 40, 5);
 		
 		TextDrawer.drawString("Speed", 50, 300, 20, 20);
 		TextDrawer.drawInt(prices[speedMult], 225, 300, 10, 20, 5);

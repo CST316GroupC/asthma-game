@@ -21,9 +21,10 @@ public class Game1Test
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		world = new World();
 		world.update(0);
-		world.render();
+		world.present(0);
 	}
 
 	
@@ -45,7 +46,7 @@ public class Game1Test
 	@Test
 	public void renderTest()
 	{
-		world.render();
+		world.present(0);
 	}
 	
 	@After

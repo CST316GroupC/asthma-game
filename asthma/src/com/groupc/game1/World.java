@@ -38,6 +38,8 @@ public class World extends GameScreen
 	
 	public int state;
 	private int seedsCollected;
+	private int score;
+	private float distance;
 	
 	private Camera cam;
 	public final JoeyRooster joey;
@@ -61,6 +63,8 @@ public class World extends GameScreen
 		this.cow = new Cow(30, 0.5f);
 		this.state = WORLD_STATE_PLAYING;
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+		score = Integer.parseInt(Assets.joeyProps.getProperty("score"));
+		seedsCollected = Integer.parseInt(Assets.joeyProps.getProperty("seeds"));
 	}
 	
 	public void updateSeeds()
@@ -75,7 +79,7 @@ public class World extends GameScreen
 		}		
 	}
 	
-	public void updatecow()
+	public void updateCow(float deltaTime)
 	{
 		if(cow.position.x < cam.position.x - FRUSTUM_WIDTH /2)
 		{
@@ -83,9 +87,10 @@ public class World extends GameScreen
 			if(chance < 2)
 			{
 				cow.position.set(rand.nextFloat() * 5 + cam.position.x + FRUSTUM_WIDTH/2, 0.5f);
-				cow.update();
+				cow.state = Cow.STATE_COW;
 			}
 		}
+		cow.update(deltaTime);
 	}
 	
 	
@@ -94,69 +99,102 @@ public class World extends GameScreen
 		inputHandling();
 		switch(state)
 		{
-		case WORLD_STATE_PLAYING:			
-			updateSeeds();
-			updatecow();
-			updateJoey(deltaTime);
-			collision();
-			if(joey.getState() == JoeyRooster.STATE_STOP)
-			{
-				state = WORLD_STATE_OVER;
-				
-				//increase the score
-				int temp = Integer.parseInt(Assets.joeyProps.getProperty("score"));
-				temp += seedsCollected;
-				float distance = joey.position.x - ramp.position.x;
-				temp += distance/10;
-				Assets.joeyProps.setProperty("score", ""+temp);
-				
-				//set new max distance
-				if( Float.parseFloat(Assets.joeyProps.getProperty("maxDistance")) < distance)
+			case WORLD_STATE_PLAYING:			
+				updateSeeds();
+				updateCow(deltaTime);
+				updateJoey(deltaTime);
+				collision();
+				if(joey.getState() == JoeyRooster.STATE_STOP)
 				{
-					Assets.joeyProps.setProperty("maxDistance", ""+distance);
+					state = WORLD_STATE_OVER;
+					distance = joey.position.x - ramp.position.x;
+					score += distance/10;
+					save();				
 				}
-								
-				//add the newly gained seeds
-				temp = Integer.parseInt(Assets.joeyProps.getProperty("seeds")) + seedsCollected;
-				Assets.joeyProps.setProperty("seeds", ""+temp);
-				Assets.save();
-			}
-			break;
-		case WORLD_STATE_OVER:
-			break;
+				break;
+			case WORLD_STATE_OVER:
+			case WORLD_STATE_PAUSED:
+				break;
 		}
+	}
+	
+	/**
+	 * Prepares the property file to store all the relevent player data at moment of method called.
+	 */
+	private void save()
+	{
+		Assets.joeyProps.setProperty("score", ""+score);
+		
+		//set new max distance
+		if( Float.parseFloat(Assets.joeyProps.getProperty("maxDistance")) < distance)
+		{
+			Assets.joeyProps.setProperty("maxDistance", ""+distance);
+		}
+						
+		//add the newly gained seeds]
+		Assets.joeyProps.setProperty("seeds", ""+seedsCollected);
+		Assets.save();
 	}
 	
 	public void inputHandling()
 	{
-		while (Keyboard.next()) {
-		    if (Keyboard.getEventKeyState()) {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_W) {
-		        System.out.println("W Key Pressed");
-		        
-		        }
-		    }
-		    else {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_W) {
-		        System.out.println("W Key Released");
-		        joey.flap();
-		        }
-		    }
-		    if (Keyboard.getEventKeyState()) {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_Q) {
+		while (Keyboard.next()) 
+		{
+		    if (Keyboard.getEventKeyState()) 
+		    {
+		        if (Keyboard.getEventKey() == Keyboard.KEY_W) 
+		        {
 		        System.out.println("W Key Pressed");
 		        
 		        }
 		    }
 		    else 
 		    {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_Q)
+		        if (Keyboard.getEventKey() == Keyboard.KEY_W) 
 		        {
 		        	System.out.println("W Key Released");
+		        	joey.flap();
+		        }
+		    }
+		    if (Keyboard.getEventKeyState()) 
+		    {
+		        if (Keyboard.getEventKey() == Keyboard.KEY_Q) 
+		        {
+		        	System.out.println("Q Key Pressed");		        
+		        }
+		    }
+		    else 
+		    {
+		        if (Keyboard.getEventKey() == Keyboard.KEY_Q)
+		        {
+		        	System.out.println("Q Key Released");
 		        
-		        	if(state == WORLD_STATE_OVER)
+		        	if(state == WORLD_STATE_OVER || state == WORLD_STATE_PAUSED)
 		        	{
 		        		dispose();
+		        	}
+		        }
+		    }
+		    if (Keyboard.getEventKeyState()) 
+		    {
+		        if (Keyboard.getEventKey() == Keyboard.KEY_P) 
+		        {
+		        	System.out.println("P Key Pressed");		        
+		        }
+		    }
+		    else 
+		    {
+		        if (Keyboard.getEventKey() == Keyboard.KEY_P)
+		        {
+		        	System.out.println("P Key Released");
+		        
+		        	if(state == WORLD_STATE_PLAYING || state == WORLD_STATE_OVER)
+		        	{
+		        		pause();
+		        	}
+		        	else
+		        	{
+		        		state = WORLD_STATE_PLAYING;
 		        	}
 		        }
 		    }
@@ -173,8 +211,8 @@ public class World extends GameScreen
 		joey.update(deltaTime);
 	}
 	
-	public void render()
-	{		
+	public void renderPlaying()
+	{	
 		if(joey.position.x > cam.position.x)
 		{
 			if(cam.position.x  < WORLD_WIDTH - 10)
@@ -196,22 +234,25 @@ public class World extends GameScreen
 		
 		Assets.sky.draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
 		Assets.grass.draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
-		
-		//hud
-		Assets.joeyfly.draw(new Rectangle(0, (cam.position.y + FRUSTUM_HEIGHT/2) - .35f, WORLD_WIDTH, .35f));
-		Assets.seed1.draw(new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, (cam.position.y + FRUSTUM_HEIGHT/2) - .35f, .35f, .35f));
-		renderScore();
-		
+		renderHud();	
 		renderRamp();
 		renderSeeds();
-		rendercow();
+		renderCow();
 		renderJoey();
 	}
 	
-	public void renderScore()
+	public void renderHud()
 	{
-		TextDrawer.drawInt(seedsCollected, cam.position.x - 3, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SEED_DIGITS);
+		//hud
+		Assets.joeyfly.draw(new Rectangle(0, (cam.position.y + FRUSTUM_HEIGHT/2) - .35f, WORLD_WIDTH, .35f));
+		TextDrawer.drawString("score", cam.position.x - 5, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
+		TextDrawer.drawInt(score, cam.position.x - 3, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SCORE_DIGITS);
+	
+		TextDrawer.drawString("seeds", cam.position.x + 1, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
+		TextDrawer.drawInt(seedsCollected, cam.position.x + 3, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SEED_DIGITS);
+		
 	}
+	
 	public void renderJoey()
 	{
 		Rectangle rect = new Rectangle(joey.position.x - .5f, joey.position.y -.5f, 1, 1);
@@ -257,7 +298,7 @@ public class World extends GameScreen
 		}
 	}
 	
-	public void rendercow()
+	public void renderCow()
 	{		
 		switch(cow.state)
 		{
@@ -270,6 +311,17 @@ public class World extends GameScreen
 			Assets.cowhit.draw(rect);
 			break;
 		}
+	}
+	
+	public void renderOver()
+	{
+		TextDrawer.drawString("Distance", cam.position.x - 3, cam.position.y, TEXT_SIZE * 1.5f, TEXT_SIZE * 1.5f);
+		TextDrawer.drawInt((int) distance, cam.position.x - 1, cam.position.y - 1f, TEXT_SIZE * 2, TEXT_SIZE * 2, MAX_DISTANCE);
+	}
+	
+	public void renderPaused()
+	{
+		TextDrawer.drawString("Paused", cam.position.x-2.5f, cam.position.y, TEXT_SIZE * 3, TEXT_SIZE * 3);
 	}
 	
 	public void collision()
@@ -292,7 +344,7 @@ public class World extends GameScreen
 	{
 		if(CollisionChecker.RectToRect(joey.bounds, cow.bounds))
 		{
-			joey.hitCow();	
+			joey.hitCow(cow);	
 			cow.position.set(cow.position.x, 1f);
 			cow.hit();
 		}
@@ -307,6 +359,7 @@ public class World extends GameScreen
 				seeds[i].position.set(rand.nextFloat()* 5 + cam.position.x + FRUSTUM_WIDTH/2, rand.nextFloat()* - 3 + joey.position.y);
 				seeds[i].update();
 				seedsCollected+=1;
+				score += 10;
 			}
 		}
 	}
@@ -314,13 +367,25 @@ public class World extends GameScreen
 	@Override
 	public void present(float deltaTime) 
 	{
-		render();
+		renderPlaying();
+		switch(state)
+		{
+			case WORLD_STATE_PLAYING:
+				break;
+			case WORLD_STATE_OVER:
+				renderOver();
+				break;
+			case WORLD_STATE_PAUSED:
+				renderPaused();
+				break;
+		}
 	}
 
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
+	public void pause() 
+	{
+		state = WORLD_STATE_PAUSED;
+		save();
 	}
 
 	@Override
@@ -329,10 +394,14 @@ public class World extends GameScreen
 		
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void dispose()
 	{
-		isClosing = true;		
+		isClosing = true;
+		save();
 	}
 	
 	@Override

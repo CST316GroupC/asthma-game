@@ -22,11 +22,11 @@ public class TextDrawer
 	 */
 	public static void drawInt(int num, float x, float y, float width, float height, float length)
 	{
-		for(int i=0; num > 0; i++)
+		for(int i=0; i < length; i++)
 		{
 			int temp = num% 10;
 			num = num / 10;
-			Rectangle rect = new Rectangle(x + length - (i * width), y, width, height);
+			Rectangle rect = new Rectangle(x + (length*width) - (i * width), y, width, height);
 			switch(temp)
 			{
 				case 0:

@@ -33,7 +33,7 @@ public class JoeyRooster extends MovingGameObject
 		state = STATE_SB;
 		this.accel.set(INITIAL_SPEED * mul, 0);
 		stateTime = 0;
-		currentStatima = statima;
+		currentStatima = 3 + statima - 1;
 	}
 	
 	public void update(float deltaTime)
@@ -144,7 +144,7 @@ public class JoeyRooster extends MovingGameObject
 		}
 	}
 	
-	public void hitCow()
+	public void hitCow(Cow cow)
 	{
 		if(state != STATE_BOUNCE)
 		{
@@ -153,6 +153,7 @@ public class JoeyRooster extends MovingGameObject
 			{
 				velocity.set(velocity.x, velocity.y * -1);
 			}
+			position.set(position.x, cow.position.y + Cow.HEIGHT);
 			state = STATE_BOUNCE;
 			stateTime = 0;
 		}
