@@ -8,6 +8,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -24,12 +25,13 @@ public class GameHubScreen extends Screen
 	
 	//Display Elements
 	NavigationBar 	navBar		= new NavigationBar(run,false,true,"Game Hub");	
-	JButton 		startButton				= new JButton("Game 1");
-	JButton         game1Button = new JButton("Game 1");
+	JButton         game1Button = new JButton("");
 	JButton         game2Button = new JButton("Game 2");
 	JButton         game3Button = new JButton("Game 3");
 	JButton         game4Button = new JButton("Game 4");
 	JButton         LeaderBoardButton = new JButton("Leader Board");
+	
+	ImageIcon game1Icon = new ImageIcon("Game1Button.png");
 	
 	public GameHubScreen(Runner run)
 	{
@@ -49,7 +51,6 @@ public class GameHubScreen extends Screen
 		this.setBackground(Color.WHITE);
 		
 		////Buttons////
-		
 		game1Button.addActionListener(new ActionListener()
 		{
 			@Override
@@ -106,6 +107,7 @@ public class GameHubScreen extends Screen
 			
 			//Game 1
 			game1Button.setBounds(resize.locationX(50), resize.locationY(125), resize.width(175), resize.height(100));
+			game1Button.setIcon(new ImageIcon(game1Icon.getImage().getScaledInstance(resize.width(175), resize.height(100), java.awt.Image.SCALE_SMOOTH)));
 			
 			//Game 2
 			game2Button.setBounds(resize.locationX(275), resize.locationY(125), resize.width(175), resize.height(100));
@@ -118,7 +120,7 @@ public class GameHubScreen extends Screen
 			
 			//LeaderBoardButton
 			LeaderBoardButton.setBounds(resize.locationX(175), resize.locationY(420), resize.width(150), resize.height(30));
-			LeaderBoardButton.setFont(new Font(startButton.getFont().getFontName(),startButton.getFont().getStyle(), resize.font(12)));
+			LeaderBoardButton.setFont(new Font(LeaderBoardButton.getFont().getFontName(),LeaderBoardButton.getFont().getStyle(), resize.font(12)));
 			
 			run.repaint();
 			redraw = false;

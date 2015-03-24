@@ -27,6 +27,7 @@ public class NavigationBar extends JPanel
 	private int    buttonPressed      = 0; //0 is none, 1 is add patient, 2 is back and logout for now
 	public  boolean backButtonPressed = false;
 	boolean played 					  = true;
+	
 	//Display Elements
 	JPanel  navBox               = new JPanel();
 	JButton backButton           = new JButton("Back");
@@ -34,6 +35,9 @@ public class NavigationBar extends JPanel
 	JButton parentControlsButton = new JButton("Parental Controls");
 	JToggleButton muteButton     = new JToggleButton();
 	JLabel  pageTitle            = new JLabel("",SwingConstants.CENTER);
+	
+	ImageIcon muteOffIcon = new ImageIcon("UnMuteIcon.png");
+	ImageIcon muteOnIcon  = new ImageIcon("MuteIcon.png");
 
 	public NavigationBar(Runner run, boolean backOn, boolean parentControlsOn, String title) 
 	{
@@ -137,6 +141,8 @@ public class NavigationBar extends JPanel
 		//MuteButton
 		muteButton.setBounds(resize.width(330), resize.height(10), resize.width(30), resize.height(30));
 		muteButton.setFont(new Font(muteButton.getFont().getFontName(),muteButton.getFont().getStyle(), resize.font(12)));
+		muteButton.setIcon(new ImageIcon(muteOffIcon.getImage().getScaledInstance(resize.width(30), resize.height(30), java.awt.Image.SCALE_SMOOTH)));
+		muteButton.setSelectedIcon(new ImageIcon(muteOnIcon.getImage().getScaledInstance(resize.width(30), resize.height(30), java.awt.Image.SCALE_SMOOTH)));
 		
 		//logoutButton
 		logoutButton.setBounds(resize.width(370), resize.height(10), resize.width(80), resize.height(30));

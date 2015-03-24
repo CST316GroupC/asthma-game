@@ -59,8 +59,8 @@ public class Game1Screen extends Screen
 		
 		canvas.setFocusable(true);
         canvas.requestFocus();
-		canvas.setSize(400, 400);
-        canvas.setLocation(64, 64);
+		//canvas.setSize(400, 400);
+        //canvas.setLocation(64, 64);
         canvas.setIgnoreRepaint(true);
         canvas.setVisible(true);
         
