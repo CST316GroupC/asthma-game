@@ -256,7 +256,7 @@ public class AccountCreationScreen extends Screen
 			{
 				e.printStackTrace();
 			}
-			run.setScreen(new LoginScreen(run));
+			run.setScreen(new DoctorScreen(run));
 		}
 	}
 }

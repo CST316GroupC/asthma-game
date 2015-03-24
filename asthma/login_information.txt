@@ -8,5 +8,5 @@ test | patient | 7 | test | 1 | bob@bob.com | test
 test | patient | 7 | test | 1 | bob@bob.com | test
 test | patient | 7 | test | 1 | bob@bob.com | test
 test | patient | 7 | test | 1 | bob@bob.com | test
-user | test | 11 | pass | 1 | user@test.com | hi
-doctor | test | 22 | pass | 0 | doctor@test.com | hig | g | g | g | 1 | doctor | fghgfh
+user | test | 11 | pass | 1 | doctor | hi
+doctor | test | 22 | pass | 0 | null | hi

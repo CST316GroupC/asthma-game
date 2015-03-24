@@ -1,5 +1,6 @@
 package com.groupc.screens;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,6 +45,11 @@ public class RecordingScreen extends Screen
 				redraw = true;
 			}
 		});
+		
+		
+		//Set colors
+		this.setBackground(Color.WHITE);
+		
 		
 		////Buttons////
 		

@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import org.lwjgl.opengl.Display;
+
 import com.groupc.Runner;
 import com.groupc.math.Resize;
 
@@ -32,16 +34,9 @@ public class NavigationBar extends JPanel
 	JButton parentControlsButton = new JButton("Parental Controls");
 	JToggleButton muteButton     = new JToggleButton();
 	JLabel  pageTitle            = new JLabel("",SwingConstants.CENTER);
-	
-	
-
-	
-
 
 	public NavigationBar(Runner run, boolean backOn, boolean parentControlsOn, String title) 
 	{
-		
-		
 		this.run = run;
 		resize   = new Resize(run);
 		
@@ -65,6 +60,16 @@ public class NavigationBar extends JPanel
 		
 		//Set fonts
 		pageTitle.setFont(new Font("Serif", Font.BOLD, 25));
+		
+		//Mute on/off
+		if(run.player.getPausedMusic())
+		{
+			muteButton.setSelected(true);
+		}
+		else
+		{
+			muteButton.setSelected(false);
+		}
 		
 		////Buttons////
 		//logoutButton
@@ -147,20 +152,19 @@ public class NavigationBar extends JPanel
 		//logout
 		if(buttonPressed == 1)
 		{
+			Display.destroy();
 			run.setScreen(new LoginScreen(run));
 		}
 		//mute
 		else if(buttonPressed == 2)
 		{
-			if(run.player.music.isPlaying() && played == true)
+			if(muteButton.getSelectedObjects() != null)
 			{
-				run.player.pauseMusic();
-				played = false;
+				played = !run.player.pauseMusic();
 			}
 			else
 			{
-				run.player.resume();
-				played = true;
+				played = run.player.resume();
 			}
 		}
 		//parentControls
@@ -168,5 +172,6 @@ public class NavigationBar extends JPanel
 		{
 			run.setScreen(new ParentControlsScreen(run));
 		}
+		buttonPressed = 0;
 	}
 }

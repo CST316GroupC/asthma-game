@@ -25,7 +25,6 @@ public class TutorialScreen extends Screen
 	boolean redraw     = true;
 	Resize  resize     = new Resize(run);
 	int     butPressed = 0;	
-	boolean played = true;
 	
 	//Display Elements
 	NavigationBar navBar = new NavigationBar(run,false,false,"Tutorial");
@@ -67,30 +66,6 @@ public class TutorialScreen extends Screen
 		skipText.setForeground(Color.RED);
 		
 		//Font 
-		videoBox.setBounds(30, 120, 250, 180);
-		descriptionBox.setBounds(30, 320, 250, 60);
-		stepsBox.setBounds(310, 120, 150, 260);
-		
-
-		
-		
-		// Add Steps button
-		step1 = new JButton("Step 1");
-		step2 = new JButton("Step 2");
-		step3 = new JButton("Step 3");
-		step4 = new JButton("Step 4");
-		step5 = new JButton("Step 5");
-	
-		step1.setBounds(345, 140, 80, 25);
-		step2.setBounds(345, 190, 80, 25);
-		step3.setBounds(345, 240, 80, 25);
-		step4.setBounds(345, 290, 80, 25);
-		step5.setBounds(345, 340, 80, 25);
-
-		start.setBounds(200, 420, 80, 25 );
-		
-		skipText.setBounds(180, 395, 120, 25);
-		
 		
 		////Buttons////
 		start.addActionListener(new ActionListener()
@@ -100,15 +75,6 @@ public class TutorialScreen extends Screen
 				butPressed = 1;
 			}
 		});
-
-//		// Add start button listener
-//		start.addActionListener(new ActionListener()
-//		{
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				butPressed = 4;
-//			}
-//		});
 		
 		this.add(skipText);
 		this.add(step1);
@@ -168,23 +134,11 @@ public class TutorialScreen extends Screen
 			run.repaint();
 			redraw = false;
 		}
+		navBar.update();
 		
 		if(butPressed == 1)
 		{
 			run.setScreen(new RecordingScreen(run));
-		}
-		else if(butPressed == 3)
-		{
-			if(run.player.music.isPlaying() && played == true)
-			{
-				run.player.pauseMusic();
-				played = false;
-			}
-			else
-			{
-				run.player.resume();
-				played = true;
-			}
 		}
 	}
 

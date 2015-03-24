@@ -12,6 +12,7 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class AudioPlayer 
 {
+	private boolean pausedMusic = true;
 	public Audio music;
 	public ArrayList<Audio> sounds;
 	
@@ -22,18 +23,21 @@ public class AudioPlayer
 	
 	public boolean playMusic(boolean looping)
 	{
+		pausedMusic = false;
 		music.playAsMusic(1.0f, 1.0f, looping);
 		return music.isPlaying();
 	}
 	
 	public boolean pauseMusic()
 	{
+		pausedMusic = true;
 		AudioImpl.pauseMusic();
 		return music.isPlaying();
 	}
 	
 	public boolean resume()
 	{
+		pausedMusic = false;
 		AudioImpl.restartMusic();
 		return music.isPlaying();
 	}
@@ -48,7 +52,11 @@ public class AudioPlayer
 			e.printStackTrace();
 			return false;
 		}
-		
+	}
+	
+	public boolean getPausedMusic()
+	{
+		return pausedMusic;
 	}
 	
 	//public boolean addSound(String filename)
