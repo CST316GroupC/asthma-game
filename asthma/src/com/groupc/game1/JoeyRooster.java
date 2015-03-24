@@ -7,8 +7,6 @@ public class JoeyRooster extends MovingGameObject
 	public final static float WIDTH = 1f;
 	public final static float HEIGHT = .33f;
 	
-	public final static int MAX_SPEED_H = 25;
-	public final static int MAX_SPEED_V = 30;
 	
 	public final static int STATE_SB = 0;
 	public final static int STATE_RAMP = 1;
@@ -17,7 +15,8 @@ public class JoeyRooster extends MovingGameObject
 	public final static int STATE_FLAP = 4;
 	public final static int STATE_HIT = 5;
 	public final static int STATE_BOUNCE = 6;
-	public final static int STATE_STOP = 7;
+	public final static int STATE_GLIDE = 7;
+	public final static int STATE_STOP = 8;
 	
 	private int state;
 	private float stateTime;
@@ -38,40 +37,34 @@ public class JoeyRooster extends MovingGameObject
 	
 	public void update(float deltaTime)
 	{
+		//set acceleration
 		if(state != STATE_SB && state != STATE_RAMP)
 		{
 			if(state == STATE_FLAP)
 			{
-				velocity.set(velocity.x, 3);
+				velocity.set(velocity.x, 0);
+				accel.set(0, 10);
 			}
-			else if(velocity.y < MAX_SPEED_V && velocity.y > -1 * MAX_SPEED_V)
+			else if(state == STATE_GLIDE)
 			{
-				velocity.add(0, World.GRAVITY * deltaTime);
+				
 			}
-			else
-			{
-				velocity.set(velocity.x, MAX_SPEED_V);
-				if(velocity.y < 0)
-				{
-					velocity.set(velocity.x, velocity.y * -1);
-				}
-			}
-		}
-		else
-		{
-			if(velocity.x < MAX_SPEED_H && velocity.x > -1 * MAX_SPEED_H)
-			{
-				System.out.println(accel.x * deltaTime);
-				velocity.add(accel.x * deltaTime, accel.y);
-			}
-			else
+			else if(state == STATE_STOP)
 			{
 				accel.set(0, 0);
 			}
+			else
+			{
+				
+			}
 		}
+		
+		//move Joey
+		velocity.add(accel.mult(deltaTime));
 		position.add(velocity.mult(deltaTime));
 		bounds.lowerLeft.set(position.sub(bounds.width / 2, bounds.height / 2));
 		
+		//determine next state
 		if(state == STATE_BOUNCE)
 		{
 			if(stateTime > .5f)
@@ -90,6 +83,14 @@ public class JoeyRooster extends MovingGameObject
 			{
 				state = STATE_FLYING;
 				stateTime = 0;
+			}
+		}
+		else if(state == STATE_GLIDE)
+		{
+			if(position.y < 0.5f)
+			{
+				position.y = 0.5f;
+				state = STATE_STOP;
 			}
 		}
 		else
@@ -112,11 +113,13 @@ public class JoeyRooster extends MovingGameObject
 				stateTime = 0;
 			}
 		}
+		
 		if(velocity.x <= .1f && state != STATE_SB)
 		{
 			if(position.y > 0)
 			{
 				state = STATE_FALLING;
+				accel.set(0, World.GRAVITY);
 			}
 			velocity.set(0, 0);
 			state = STATE_STOP;
@@ -156,6 +159,21 @@ public class JoeyRooster extends MovingGameObject
 			position.set(position.x, cow.position.y + Cow.HEIGHT);
 			state = STATE_BOUNCE;
 			stateTime = 0;
+		}
+	}
+	
+	public void glide()
+	{
+		if(state != STATE_SB && state != STATE_RAMP)
+		{
+			state = STATE_GLIDE;
+			velocity.set(velocity.x, 0);
+			accel.set(-.1f, -1f);
+		}
+		else
+		{
+			state = STATE_FALLING;
+			accel.set(0, World.GRAVITY);
 		}
 	}
 	

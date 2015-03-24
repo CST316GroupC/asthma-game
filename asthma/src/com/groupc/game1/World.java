@@ -140,55 +140,31 @@ public class World extends GameScreen
 	{
 		while (Keyboard.next()) 
 		{
-		    if (Keyboard.getEventKeyState()) 
-		    {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_W) 
-		        {
-		        System.out.println("W Key Pressed");
-		        
-		        }
-		    }
-		    else 
-		    {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_W) 
-		        {
-		        	System.out.println("W Key Released");
-		        	joey.flap();
-		        }
-		    }
-		    if (Keyboard.getEventKeyState()) 
-		    {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_Q) 
-		        {
-		        	System.out.println("Q Key Pressed");		        
-		        }
-		    }
-		    else 
-		    {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_Q)
-		        {
-		        	System.out.println("Q Key Released");
-		        
-		        	if(state == WORLD_STATE_OVER || state == WORLD_STATE_PAUSED)
+			if(Keyboard.getEventKeyState())
+			{
+				if(Keyboard.getEventKey() == Keyboard.KEY_S || Keyboard.getEventKey() == Keyboard.KEY_DOWN)
+				{
+					joey.glide();
+				}
+			}
+			else
+			{
+				if(Keyboard.getEventKey() == Keyboard.KEY_W || Keyboard.getEventKey() == Keyboard.KEY_UP)
+				{
+					joey.flap();
+				}
+				
+				if(Keyboard.getEventKey() == Keyboard.KEY_Q || Keyboard.getEventKey() == Keyboard.KEY_ESCAPE)
+				{
+					if(state == WORLD_STATE_OVER || state == WORLD_STATE_PAUSED)
 		        	{
 		        		dispose();
 		        	}
-		        }
-		    }
-		    if (Keyboard.getEventKeyState()) 
-		    {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_P) 
-		        {
-		        	System.out.println("P Key Pressed");		        
-		        }
-		    }
-		    else 
-		    {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_P)
-		        {
-		        	System.out.println("P Key Released");
-		        
-		        	if(state == WORLD_STATE_PLAYING || state == WORLD_STATE_OVER)
+				}
+				
+				if(Keyboard.getEventKey() == Keyboard.KEY_P || Keyboard.getEventKey() == Keyboard.KEY_RETURN)
+				{
+					if(state == WORLD_STATE_PLAYING || state == WORLD_STATE_OVER)
 		        	{
 		        		pause();
 		        	}
@@ -196,8 +172,13 @@ public class World extends GameScreen
 		        	{
 		        		state = WORLD_STATE_PLAYING;
 		        	}
-		        }
-		    }
+				}
+				
+				if(Keyboard.getEventKey() == Keyboard.KEY_S || Keyboard.getEventKey() == Keyboard.KEY_DOWN)
+				{
+					joey.glide();
+				}
+			}
 		}
 	}
 	
@@ -279,6 +260,9 @@ public class World extends GameScreen
 			break;
 		case JoeyRooster.STATE_FLAP:
 			Assets.joeyflap.draw(rect);
+			break;
+		case JoeyRooster.STATE_GLIDE:
+			Assets.joeysk.draw(rect);
 			break;
 		}
 	}
