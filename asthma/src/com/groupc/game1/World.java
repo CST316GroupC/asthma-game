@@ -144,7 +144,7 @@ public class World extends GameScreen
 			{
 				if(Keyboard.getEventKey() == Keyboard.KEY_S || Keyboard.getEventKey() == Keyboard.KEY_DOWN)
 				{
-					joey.glide();
+					joey.toggleGlide();
 				}
 			}
 			else
@@ -176,7 +176,7 @@ public class World extends GameScreen
 				
 				if(Keyboard.getEventKey() == Keyboard.KEY_S || Keyboard.getEventKey() == Keyboard.KEY_DOWN)
 				{
-					joey.glide();
+					joey.toggleGlide();
 				}
 			}
 		}
@@ -326,7 +326,7 @@ public class World extends GameScreen
 	
 	public void collisionCow()
 	{
-		if(CollisionChecker.RectToRect(joey.bounds, cow.bounds))
+		if(CollisionChecker.RectToRect(joey.bounds, cow.bounds) && joey.getState() != JoeyRooster.STATE_GLIDE)
 		{
 			joey.hitCow(cow);	
 			cow.position.set(cow.position.x, 1f);
