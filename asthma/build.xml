@@ -48,6 +48,8 @@
     <delete dir="${build}"/>
   	<delete dir="${jac-r}"/>
   	<delete dir="${jun-r}"/>
+  	<delete dir="fb-report"/>
+  	<delete dir="pmd-report"/>
   </target>
 
   <target name="run">
@@ -155,16 +157,16 @@
 		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="pmd.classpath"/>
 	
 		<target name="pmd">
-	 		<pmd shortFilenames="true">
+
+			  <mkdir dir="pmd-report"/>
+			<pmd shortFilenames="true">
 	  			<sourceLanguage name="java" version="1.8"/>
 	  			<ruleset>rulesets/java/design.xml</ruleset>
 	  			<ruleset>java-basic</ruleset>
-	  			<formatter type="html" toFile="pmd_report_fromant.html">
+	  			<formatter type="html" toFile="pmd-report/pmd_report_fromant.html">
 	    				<param name="linkPrefix" value="http://pmd.sourceforge.net/xref/"/>
 	  			</formatter>
-	  			<fileset dir="${src}">
-	   				<include name="banking/server/*.java"/>
-	  			</fileset>
+	  			<fileset dir="${src}"/>
 	 		</pmd>
 		</target>
 </project>
