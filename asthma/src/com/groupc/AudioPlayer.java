@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioImpl;
@@ -86,7 +87,7 @@ public class AudioPlayer
 	{
 		String type;
 		type = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
-		type = type.toUpperCase();
+		type = type.toUpperCase(new Locale("US"));
 		return type;
 	}
 

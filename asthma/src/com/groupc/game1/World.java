@@ -20,7 +20,7 @@ import com.groupc.math.Rectangle;
 
 public class World extends GameScreen
 {
-	public static final float FRUSTUM_WIDTH = 10;
+	public static final float FRUSTUM_WIDTH = 15;
 	public static final float FRUSTUM_HEIGHT = 10;
 	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 500; //400 (the * 100 means the total width is 5000 pixels but only 400 shown)
 	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 20; //400 (the * 20 means the total height is 200 pixels but only 400 shown)

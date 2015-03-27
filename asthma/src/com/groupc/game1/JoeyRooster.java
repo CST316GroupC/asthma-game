@@ -22,7 +22,7 @@ public class JoeyRooster extends MovingGameObject
 	private float stateTime;
 	
 	//upgrades
-	private final float INITIAL_SPEED = 5;
+	private final static float INITIAL_SPEED = 5;
 	
 	private float currentStatima;
 	
@@ -91,6 +91,7 @@ public class JoeyRooster extends MovingGameObject
 			if(position.y < 0.5f)
 			{
 				position.y = 0.5f;
+				velocity.set(0, 0);
 				state = STATE_STOP;
 			}
 		}
@@ -143,8 +144,7 @@ public class JoeyRooster extends MovingGameObject
 		if(currentStatima > 0 && state != STATE_SB && state != STATE_RAMP)
 		{
 
-			velocity.set(velocity.x, 0);
-			accel.set(0, 10);
+			velocity.set(velocity.x, 10);
 			state = STATE_FLAP;
 			stateTime = 0;
 			currentStatima--;
@@ -172,7 +172,7 @@ public class JoeyRooster extends MovingGameObject
 		{
 			state = STATE_GLIDE;
 			velocity.set(velocity.x, 0);
-			accel.set(-.1f, -1f);
+			accel.set(-.1f, -2f);
 		}
 		else
 		{

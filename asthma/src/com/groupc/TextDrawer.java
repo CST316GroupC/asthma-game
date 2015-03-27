@@ -1,5 +1,7 @@
 package com.groupc;
 
+import java.util.Locale;
+
 import com.groupc.game1.Assets;
 import com.groupc.math.Rectangle;
 
@@ -73,7 +75,7 @@ public class TextDrawer
 	 */
 	public static void drawString(String str, float x, float y, float width, float height)
 	{
-		str = str.toLowerCase();
+		str = str.toLowerCase(new Locale("US"));
 		for(int i = 0; i < str.length(); i++)
 		{
 			Rectangle rect = new Rectangle(x + i*width, y, width, height);
