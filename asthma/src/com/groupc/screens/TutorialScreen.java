@@ -1,5 +1,16 @@
 package com.groupc.screens;
 
+/*
+ * Author(s):		Team C
+ * Course: 			CST 316 Spring
+ * Instructor:		Dr. Gary
+ * Date Changed:	3/29/2015
+ * 
+ * Description:		TutorialScreen is the first page after the patient logs in. 
+ * 					This page only appears the first time the patient logs in.
+ * 					Instructions on how to use the Spirometer and how to operate/navigate the software.
+ */
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -22,26 +33,28 @@ import com.groupc.math.Resize;
 public class TutorialScreen extends Screen
 {
 	//Variables
-	boolean redraw     = true;
-	Resize  resize     = new Resize(run);
-	int     butPressed = 0;	
-	boolean played = true;
+	boolean redraw				= true;
+	boolean played				= true;
+	int 	butPressed			= 0;	
+	Resize  resize				= new Resize(run);
+	
 	
 	//Display Elements
-	NavigationBar navBar = new NavigationBar(run,false,false,"Tutorial");
-	JLabel skipText      = new JLabel("* To skip, press Start",SwingConstants.CENTER);;
+	NavigationBar navBar		= new NavigationBar(run,false,false,"Tutorial");
+	JLabel skipText				= new JLabel("* To skip, press Start",SwingConstants.CENTER);;
 
+	//Panels
+	JPanel videoBox				= new JPanel();
+	JPanel descriptionBox		= new JPanel();
+	JPanel stepsBox				= new JPanel();
 	
-	JPanel videoBox       = new JPanel();
-	JPanel descriptionBox = new JPanel();
-	JPanel stepsBox       = new JPanel();
-	
-	JButton step1 = new JButton("Step 1");
-	JButton step2 = new JButton("Step 2");
-	JButton step3 = new JButton("Step 3");
-	JButton step4 = new JButton("Step 4");
-	JButton step5 = new JButton("Step 5");
-	JButton start = new JButton("Start");
+	//Buttons
+	JButton step1				= new JButton("Step 1");
+	JButton step2				= new JButton("Step 2");
+	JButton step3				= new JButton("Step 3");
+	JButton step4				= new JButton("Step 4");
+	JButton step5				= new JButton("Step 5");
+	JButton start				= new JButton("Start");
 	
 	public TutorialScreen(Runner run) 
 	{
@@ -70,8 +83,6 @@ public class TutorialScreen extends Screen
 		videoBox.setBounds(30, 120, 250, 180);
 		descriptionBox.setBounds(30, 320, 250, 60);
 		stepsBox.setBounds(310, 120, 150, 260);
-		
-
 		
 		
 		// Add Steps button
@@ -189,19 +200,22 @@ public class TutorialScreen extends Screen
 	}
 
 	@Override
-	public void present(float deltaTime) {
+	public void present(float deltaTime) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void pause() {
+	public void pause() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void resume() {
+	public void resume() 
+	{
 		// TODO Auto-generated method stub
 		
 	}

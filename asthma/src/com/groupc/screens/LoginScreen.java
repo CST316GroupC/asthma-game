@@ -1,7 +1,14 @@
 package com.groupc.screens;
+
 /*
- * LoginScreen.java
- * displays and runs elements for the login screen
+ * Author(s):		Team C
+ * Course: 			CST 316 Spring
+ * Instructor:		Dr. Gary
+ * Date Changed:	3/29/2015
+ * 
+ * Description:		LoginScreen is the first page the patient/doctor/parent will see when they first open the software.
+ * 					Just a simple login screen that ask for the user's email and password.
+ * 					Additional feature allows user to remember their password as well as retrieve their forgotten password.
  */
 
 import java.awt.Color;
@@ -33,29 +40,34 @@ import com.groupc.Runner;
 import com.groupc.math.Resize;
 
 
-
 public class LoginScreen extends Screen
 {
 	//Variables
-	boolean redraw          = true;
-	Resize  resize          = new Resize(run);
-	int     type            = 0;
-	boolean loginErrorDrawn = false;
-	boolean elementMoved    = false;
+	boolean redraw						= true;
+	boolean loginErrorDrawn				= false;
+	boolean elementMoved				= false;
+	int 	type						= 0;
+	Resize 	resize						= new Resize(run);
 	
 	
 	//Display Elements
-	JLabel         title               = new JLabel("Team C's Asthma Game",SwingConstants.CENTER);
-	JPanel         loginBox            = new JPanel();
-	JLabel         userNameLabel       = new JLabel("Email:");
-	JTextField     userNameTF          = new JTextField();
-	JLabel         passwordLabel       = new JLabel("Password:");
-	JPasswordField passwordTF          = new JPasswordField();
-	JRadioButton   saveLoginRadio      = new JRadioButton("Remember Password");
-	JButton        loginButton         = new JButton("Login");
-	JLabel         passRetrievalLabel  = new JLabel("");
-	JButton        passRetrievalButton = new JButton("Forgot Password?");
-	JLabel         loginErrorMessage   = new JLabel("Incorrect Username/Password");
+	JPanel loginBox 					= new JPanel();
+	
+	JPasswordField passwordTF			= new JPasswordField();
+	
+	JTextField userNameTF				= new JTextField();
+		
+	//Labels
+	JLabel title						= new JLabel("Team C's Asthma Game",SwingConstants.CENTER);
+	JLabel userNameLabel				= new JLabel("Email:");
+	JLabel passwordLabel				= new JLabel("Password:");
+	JLabel passRetrievalLabel			= new JLabel("");
+	JLabel loginErrorMessage			= new JLabel("Incorrect Username/Password");
+	
+	//Buttons
+	JRadioButton saveLoginRadio			= new JRadioButton("Remember Password");
+	JButton	loginButton					= new JButton("Login");
+	JButton	passRetrievalButton			= new JButton("Forgot Password?");
 	
 	public LoginScreen(Runner run) 
 	{
@@ -94,16 +106,19 @@ public class LoginScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				try {
+				try 
+				{
 					checkLogin();
-				} catch (IOException e1) {
+				} catch (IOException e1) 
+				{
 					e1.printStackTrace();
 				}			
 			}
 		});	
 		
 		//Enter Key is Pressed
-		userNameTF.addActionListener(new ActionListener(){
+		userNameTF.addActionListener(new ActionListener()
+		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -111,7 +126,8 @@ public class LoginScreen extends Screen
 			}
 		});
 		
-		passwordTF.addActionListener(new ActionListener(){
+		passwordTF.addActionListener(new ActionListener()
+		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -226,10 +242,12 @@ public class LoginScreen extends Screen
 
 	public void checkLogin() throws IOException
 	{
-		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText())){
+		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText()))
+		{
 			run.setScreen(new DoctorScreen(run));
 		}
-		if(Database.getPatient(userNameTF.getText(), passwordTF.getText())){
+		if(Database.getPatient(userNameTF.getText(), passwordTF.getText()))
+		{
 			run.setScreen(new TutorialScreen(run));
 		}
 
@@ -265,6 +283,7 @@ public class LoginScreen extends Screen
 			counter += 1;
 		}
 		br.close();
+		
 		for(int i = 0; i < firstNames.size(); ++i)
 		{
 			tempString = new String (passWords[i]);
@@ -297,5 +316,4 @@ public class LoginScreen extends Screen
 			}
 		}
 	}
-	
 }
