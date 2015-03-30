@@ -32,7 +32,7 @@ public class AccTest {
 			
 		acc.firstNameTF.setText("testFirst");
 		acc.lastNameTF.setText("testLast");
-		acc.ageTF.setText("3");
+		acc.dobTF.setText("3");
 		acc.passwordTF.setText("testPass");
 		acc.infoTA.setText("test");
 		acc.newPatientDoctor = "bill";
@@ -89,7 +89,7 @@ public class AccTest {
 		
 		acc.firstNameTF.setText("nextFirst");
 		acc.lastNameTF.setText("nextLast");
-		acc.ageTF.setText("4");
+		acc.dobTF.setText("4");
 		acc.passwordTF.setText("nextPass");
 		acc.infoTA.setText("test2");
 		acc.newPatientDoctor = "bill";
