@@ -273,18 +273,18 @@ public class AccountCreationScreen extends Screen
 			run.repaint();
 			return false;
 		}
-		if(ageTF.getText().isEmpty())
+		if(dobTF.getText().isEmpty())
 		{
-			ageTF.setText("N/A");
+			dobTF.setText("N/A");
 		} else 
 		{  
 			try
 			{
-				Integer.parseInt(ageTF.getText());
+				Integer.parseInt(dobTF.getText());
 		
 			}catch(Exception e)
 			{
-				ageTF.setText("");
+				dobTF.setText("");
 				invalidInputMessage.setVisible(true);
 				return false;
 			}
