@@ -252,7 +252,7 @@ public class LoginScreen extends Screen
 		}
 
 		String line = null;
-		char[][] passWords = new char[20][30];
+		char[][] passWords = new char[20][30];  //need to make dynamic otherwise only 20 patients allowed!!
 		int counter = 0;
 		String tempString;
 		char tempChar;
@@ -304,7 +304,9 @@ public class LoginScreen extends Screen
 				//Patients
 				if(types.elementAt(i).equals("1"))
 				{
-					run.setScreen(new TutorialScreen(run));
+					TutorialScreen ts = new TutorialScreen(run);
+					ts.getPatient(userNameTF.getText(), i + 1);
+					run.setScreen(ts);
 				}
 		}
 		
