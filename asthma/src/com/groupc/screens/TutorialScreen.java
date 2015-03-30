@@ -76,7 +76,7 @@ public class TutorialScreen extends Screen
 	JLabel step6Image			= new JLabel(image6);
 	JLabel step7Image			= new JLabel(image7);
 	
-	public TutorialScreen(Runner run) throws IOException
+	public TutorialScreen(Runner run)
 	{
 		super(run);
 		
