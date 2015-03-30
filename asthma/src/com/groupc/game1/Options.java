@@ -60,19 +60,19 @@ public class Options extends GameScreen
 	public void present(float deltaTime)
 	{
 		cam.setCamera();
-		Assets.sheet.bind();
-		Assets.soundLbl.draw(soundLabel);
+		Assets.getTexture("sheet").bind();
+		Assets.getImage("soundLbl").draw(soundLabel);
 		if(sound)
 		{
-			Assets.soundOn.draw(soundOnOff);
+			Assets.getImage("soundOn").draw(soundOnOff);
 		}
 		else
 		{
-			Assets.soundOff.draw(soundOnOff);
+			Assets.getImage("soundOff").draw(soundOnOff);
 		}
 		
 		Rectangle temp = new Rectangle(back.lowerLeft.x + back.width, back.lowerLeft.y, -1*back.width, back.height);
-		Assets.arrowBut.draw(temp);
+		Assets.getImage("arrowBut").draw(temp);
 	}
 
 	@Override

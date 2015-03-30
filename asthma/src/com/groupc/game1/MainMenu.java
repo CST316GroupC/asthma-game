@@ -63,11 +63,11 @@ public class MainMenu extends GameScreen
 	public void present(float deltaTime)
 	{
 		cam.setCamera();
-		Assets.sheet.bind();
-		Assets.title.draw(title);
-		Assets.playBut.draw(play);
-		Assets.optionsBut.draw(options);
-		Assets.upgradeBut.draw(upgrade);
+		Assets.getTexture("sheet").bind();
+		Assets.getImage("title").draw(title);
+		Assets.getImage("playBut").draw(play);
+		Assets.getImage("optionsBut").draw(options);
+		Assets.getImage("upgradeBut").draw(upgrade);
 	}
 
 	

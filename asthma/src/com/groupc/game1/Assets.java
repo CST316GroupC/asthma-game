@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Properties;
 
 import org.newdawn.slick.opengl.Texture;
@@ -12,131 +14,74 @@ import org.newdawn.slick.util.ResourceLoader;
 
 import com.groupc.game.TextureRegion;
 
-public class Assets
+public final class Assets
 {
-	public static Texture atlas;
-	public static Texture sheet;
-	public static TextureRegion playBut;
-	public static TextureRegion optionsBut;
-	public static TextureRegion upgradeBut;
-	public static TextureRegion title;
-	public static TextureRegion soundOn;
-	public static TextureRegion soundOff;
-	public static TextureRegion soundLbl;
-	public static TextureRegion arrowBut;
+	private static Hashtable<String, Texture> textures;
+	private static Hashtable<String, TextureRegion> sprites;	
 	
-	//background
-	public static TextureRegion sky;
-	public static TextureRegion grass;
-	
-	//Cows
-	public static TextureRegion cow;
-	public static TextureRegion cowhit;
-	
-	//Joey the rooster
-	public static TextureRegion joeysk;
-	public static TextureRegion joeyfly;
-	public static TextureRegion joeyfall;
-	public static TextureRegion joeyRamp;
-	public static TextureRegion joeyBou;
-	public static TextureRegion joeyflap;
-	
-	//ramp
-	public static TextureRegion ramp;
-	
-	//seeds
-	public static TextureRegion seed1;
-	
-	//score
-	public static TextureRegion zero;
-	public static TextureRegion one;
-	public static TextureRegion two;
-	public static TextureRegion three;
-	public static TextureRegion four;
-	public static TextureRegion five;
-	public static TextureRegion six;
-	public static TextureRegion seven;
-	public static TextureRegion eight;
-	public static TextureRegion nine;	
-	
-	//text
-	public static TextureRegion letterA;
-	public static TextureRegion letterC;
-	public static TextureRegion letterD;
-	public static TextureRegion letterE;
-	public static TextureRegion letterF;
-	public static TextureRegion letterG;
-	public static TextureRegion letterI;
-	public static TextureRegion letterL;
-	public static TextureRegion letterN;
-	public static TextureRegion letterO;
-	public static TextureRegion letterP;
-	public static TextureRegion letterR;
-	public static TextureRegion letterS;
-	public static TextureRegion letterT;
-	public static TextureRegion letterU;
-	
-	public static Properties joeyProps;
+	private static Properties joeyProps;
 	
 	public static void load()
 	{
 		reload();
+		textures = new Hashtable<String, Texture>();
+		sprites = new Hashtable<String, TextureRegion>();
 		
 		try {
-			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("mainmenu.png"));
-			atlas = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/atlas.png"));
+			textures.put("sheet", TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("mainmenu.png")));			 
+			textures.put("atlas", TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/atlas.png")));
 			
-			title = new TextureRegion(sheet, 0, 226, 235, 30);
-			playBut = new TextureRegion(sheet, 0, 128, 116, 43);
-			upgradeBut = new TextureRegion(sheet, 0, 176, 116, 42);
-			optionsBut = new TextureRegion(sheet, 0, 84, 113, 42);
-			soundOn = new TextureRegion(sheet, 0, 24, 54, 55);
-			soundOff = new TextureRegion(sheet, 54, 24, 54, 55);
-			soundLbl = new TextureRegion(sheet, 0, 0, 65, 23);
-			arrowBut = new TextureRegion(sheet, 110, 24, 54, 55);
+			sprites.put("title", new TextureRegion(textures.get("sheet"), 0, 226, 235, 30));
+			sprites.put("playBut", new TextureRegion(textures.get("sheet"), 0, 128, 116, 43));
+			sprites.put("upgradeBut", new TextureRegion(textures.get("sheet"), 0, 176, 116, 42));
+			sprites.put("optionsBut", new TextureRegion(textures.get("sheet"), 0, 84, 113, 42));
+			sprites.put("soundOn", new TextureRegion(textures.get("sheet"), 0, 24, 54, 55));
+			sprites.put("soundOff", new TextureRegion(textures.get("sheet"),  54, 24, 54, 55));
+			sprites.put("soundLbl", new TextureRegion(textures.get("sheet"),  0, 0, 65, 23));
+			sprites.put("arrowBut", new TextureRegion(textures.get("sheet"), 110, 24, 54, 55));
 			
-			sky = new TextureRegion(atlas, 0, 512 - 96, 32, 96);
-			grass = new TextureRegion(atlas, 32, 512 - 32, 32, 32);
-			cow = new TextureRegion(atlas, 64, 512 - 32, 64, 32);
-			cowhit = new TextureRegion(atlas, 64, 512 - 32 - 64, 64, 64);
-			seed1 = new TextureRegion(atlas, 128, 512 - 32, 32, 32);
-			ramp = new TextureRegion(atlas, 160, 512 - 32, 32, 32);
-			joeysk = new TextureRegion(atlas, 192, 512 - 32, 32, 32);
-			joeyfly = new TextureRegion(atlas, 192, 512 - 32 - 32, 32, 32);
-			joeyfall = new TextureRegion(atlas, 192, 512 - 64 - 32, 32, 32);
-			joeyBou = new TextureRegion(atlas, 192,  512 - 96 - 32, 32,32);
-			joeyflap = new TextureRegion(atlas, 192, 512 - 128 - 32, 32, 32);
-			joeyRamp = new TextureRegion(atlas, 192, 512 - 160 - 32, 32, 32);
+			sprites.put("sky", new TextureRegion(textures.get("atlas"), 0, 512 - 96, 32, 96));
+			sprites.put("grass", new TextureRegion(textures.get("atlas"), 32, 512 - 32, 32, 32));
+			sprites.put("cow", new TextureRegion(textures.get("atlas"), 64, 512 - 32, 64, 32));
+			sprites.put("cowHit", new TextureRegion(textures.get("atlas"), 64, 512 - 32 - 64, 64, 64));
+			sprites.put("seed", new TextureRegion(textures.get("atlas"), 128, 512 - 32, 32, 32));
+			sprites.put("ramp", new TextureRegion(textures.get("atlas"), 160, 512 - 32, 32, 32));
+			sprites.put("joeySk", new TextureRegion(textures.get("atlas"), 192, 512 - 32, 32, 32));
+			sprites.put("joeyFly", new TextureRegion(textures.get("atlas"), 192, 512 - 32 - 32, 32, 32));
+			sprites.put("joeyFall", new TextureRegion(textures.get("atlas"), 192, 512 - 64 - 32, 32, 32));
+			sprites.put("joeyBou", new TextureRegion(textures.get("atlas"),192,  512 - 96 - 32, 32,32));
+			sprites.put("joeyFlap", new TextureRegion(textures.get("atlas"),192, 512 - 128 - 32, 32, 32));
+			sprites.put("joeyRamp", new TextureRegion(textures.get("atlas"), 192, 512 - 160 - 32, 32, 32));
 			
-			one = new TextureRegion(atlas, 0, 512 - 128 - 1, 192/10, 32);
-			two = new TextureRegion(atlas, 192/10, 512 - 128 - 1, 192/10, 32);
-			three = new TextureRegion(atlas, 192/10 * 2, 512 - 128 - 1, 192/10, 32);
-			four = new TextureRegion(atlas, 192/10 * 3, 512 - 128 - 1, 192/10, 32);
-			five = new TextureRegion(atlas, 192/10 * 4, 512 - 128 - 1, 192/10, 32);
-			six = new TextureRegion(atlas, 192/10 * 5, 512 - 128 - 1, 192/10, 32);
-			seven = new TextureRegion(atlas, 192/10 * 6, 512 - 128 - 1, 192/10, 32);
-			eight = new TextureRegion(atlas, 192/10 * 7, 512 - 128 - 1, 192/10, 32);
-			nine = new TextureRegion(atlas, 192/10 * 8, 512 - 128 - 1, 192/10, 32);
-			zero = new TextureRegion(atlas, 192/10 * 9, 512 - 128 - 1, 192/10, 32);
+			sprites.put("one", new TextureRegion(textures.get("atlas"), 0, 512 - 128 - 1, 192/10, 32));
+			sprites.put("two", new TextureRegion(textures.get("atlas"), 192/10, 512 - 128 - 1, 192/10, 32));
+			sprites.put("three", new TextureRegion(textures.get("atlas"), 192/10 * 2, 512 - 128 - 1, 192/10, 32));
+			sprites.put("four", new TextureRegion(textures.get("atlas"), 192/10 * 3, 512 - 128 - 1, 192/10, 32));
+			sprites.put("five", new TextureRegion(textures.get("atlas"), 192/10 * 4, 512 - 128 - 1, 192/10, 32));
+			sprites.put("six", new TextureRegion(textures.get("atlas"), 192/10 * 5, 512 - 128 - 1, 192/10, 32));
+			sprites.put("seven", new TextureRegion(textures.get("atlas"), 192/10 * 6, 512 - 128 - 1, 192/10, 32));
+			sprites.put("eight", new TextureRegion(textures.get("atlas"), 192/10 * 7, 512 - 128 - 1, 192/10, 32));
+			sprites.put("nine", new TextureRegion(textures.get("atlas"), 192/10 * 8, 512 - 128 - 1, 192/10, 32));
+			sprites.put("zero", new TextureRegion(textures.get("atlas"), 192/10 * 9, 512 - 128 - 1, 192/10, 32));
 			
 			//row 1
-			letterA = new TextureRegion(atlas, 0, 512-160, 192/8, 32);
-			letterC = new TextureRegion(atlas, 192/8, 512-160, 192/8, 32);
-			letterD = new TextureRegion(atlas, 192/8 * 2, 512-160, 192/8, 32);
-			letterE = new TextureRegion(atlas, 192/8 * 3, 512-160, 192/8, 32);
-			letterF = new TextureRegion(atlas, 192/8 * 4, 512-160, 192/8, 32);
-			letterG = new TextureRegion(atlas, 192/8 * 5, 512-160, 192/8, 32);
-			letterI = new TextureRegion(atlas, 192/8 * 6, 512-160, 192/8, 32);
-			letterL = new TextureRegion(atlas, 192/8 * 7, 512-160, 192/8, 32);
+			sprites.put("letterA", new TextureRegion(textures.get("atlas"), 0, 512-160, 192/8, 32));
+			sprites.put("letterC", new TextureRegion(textures.get("atlas"), 192/8, 512-160, 192/8, 32));
+			sprites.put("letterD", new TextureRegion(textures.get("atlas"), 192/8 * 2, 512-160, 192/8, 32));
+			sprites.put("letterE", new TextureRegion(textures.get("atlas"), 192/8 * 3, 512-160, 192/8, 32));
+			sprites.put("letterF", new TextureRegion(textures.get("atlas"), 192/8 * 4, 512-160, 192/8, 32));
+			sprites.put("letterG", new TextureRegion(textures.get("atlas"), 192/8 * 5, 512-160, 192/8, 32));
+			sprites.put("letterI", new TextureRegion(textures.get("atlas"), 192/8 * 6, 512-160, 192/8, 32));
+			sprites.put("letterL", new TextureRegion(textures.get("atlas"), 192/8 * 7, 512-160, 192/8, 32));
 			
 			//row 2
-			letterN = new TextureRegion(atlas, 0, 512-192, 192/8, 32);
-			letterO = new TextureRegion(atlas, 192/8, 512-192, 192/8, 32);
-			letterP = new TextureRegion(atlas, 192/8 * 2, 512-192, 192/8, 32);
-			letterR = new TextureRegion(atlas, 192/8 * 3, 512-192, 192/8, 32);
-			letterS = new TextureRegion(atlas, 192/8 * 4, 512-192, 192/8, 32);
-			letterT = new TextureRegion(atlas, 192/8 * 5, 512-192, 192/8, 32);
-			letterU = new TextureRegion(atlas, 192/8 * 6, 512-192, 192/8, 32);
+			sprites.put("letterN", new TextureRegion(textures.get("atlas"), 0, 512-192, 192/8, 32));
+			sprites.put("letterO", new TextureRegion(textures.get("atlas"), 192/8, 512-192, 192/8, 32));
+			sprites.put("letterP", new TextureRegion(textures.get("atlas"), 192/8 * 2, 512-192, 192/8, 32));
+			sprites.put("letterR", new TextureRegion(textures.get("atlas"), 192/8 * 3, 512-192, 192/8, 32));
+			sprites.put("letterS", new TextureRegion(textures.get("atlas"), 192/8 * 4, 512-192, 192/8, 32));
+			sprites.put("letterT", new TextureRegion(textures.get("atlas"), 192/8 * 5, 512-192, 192/8, 32));
+			sprites.put("letterU", new TextureRegion(textures.get("atlas"), 192/8 * 6, 512-192, 192/8, 32));
 			
 			
 		} catch (IOException e) {
@@ -180,5 +125,25 @@ public class Assets
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} 
+	}
+	
+	public static TextureRegion getImage(String img)
+	{
+		return sprites.get(img);
+	}
+	
+	public static Texture getTexture(String txt)
+	{
+		return textures.get(txt);
+	}
+	
+	public static Properties getProps()
+	{
+		return joeyProps;
+	}
+	
+	public static void setProps(String key, String value)
+	{
+		joeyProps.setProperty(key, value);
 	}
 }

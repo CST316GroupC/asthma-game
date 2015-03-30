@@ -52,7 +52,7 @@ public class World extends GameScreen
 	{        
 		Assets.reload();
 		rand = new Random();
-		this.joey = new JoeyRooster(1, .5f, Float.parseFloat(Assets.joeyProps.getProperty("speedMult")), Integer.parseInt(Assets.joeyProps.getProperty("statima")));
+		this.joey = new JoeyRooster(1, .5f, Float.parseFloat(Assets.getProps().getProperty("speedMult")), Integer.parseInt(Assets.getProps().getProperty("statima")));
 		this.ramp = new Ramp(21, 0.5f, 5);
 		this.seeds = new Seed[5];
 		seeds[0] = new Seed(25, 5);
@@ -63,8 +63,8 @@ public class World extends GameScreen
 		this.cow = new Cow(30, 0.5f);
 		this.state = WORLD_STATE_PLAYING;
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-		score = Integer.parseInt(Assets.joeyProps.getProperty("score"));
-		seedsCollected = Integer.parseInt(Assets.joeyProps.getProperty("seeds"));
+		score = Integer.parseInt(Assets.getProps().getProperty("score"));
+		seedsCollected = Integer.parseInt(Assets.getProps().getProperty("seeds"));
 	}
 	
 	public void updateSeeds()
@@ -123,16 +123,16 @@ public class World extends GameScreen
 	 */
 	private void save()
 	{
-		Assets.joeyProps.setProperty("score", ""+score);
+		Assets.getProps().setProperty("score", ""+score);
 		
 		//set new max distance
-		if( Float.parseFloat(Assets.joeyProps.getProperty("maxDistance")) < distance)
+		if( Float.parseFloat(Assets.getProps().getProperty("maxDistance")) < distance)
 		{
-			Assets.joeyProps.setProperty("maxDistance", ""+distance);
+			Assets.getProps().setProperty("maxDistance", ""+distance);
 		}
 						
 		//add the newly gained seeds]
-		Assets.joeyProps.setProperty("seeds", ""+seedsCollected);
+		Assets.getProps().setProperty("seeds", ""+seedsCollected);
 		Assets.save();
 	}
 	
@@ -213,8 +213,9 @@ public class World extends GameScreen
 		}
 		cam.setCamera();
 		
-		Assets.sky.draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
-		Assets.grass.draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
+		Assets.getTexture("atlas").bind();
+		Assets.getImage("sky").draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
+		Assets.getImage("grass").draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
 		renderHud();	
 		renderRamp();
 		renderSeeds();
@@ -225,7 +226,7 @@ public class World extends GameScreen
 	public void renderHud()
 	{
 		//hud
-		Assets.joeyfly.draw(new Rectangle(0, (cam.position.y + FRUSTUM_HEIGHT/2) - .35f, WORLD_WIDTH, .35f));
+		Assets.getImage("joeyFly").draw(new Rectangle(0, (cam.position.y + FRUSTUM_HEIGHT/2) - .35f, WORLD_WIDTH, .35f));
 		TextDrawer.drawString("score", cam.position.x - 5, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
 		TextDrawer.drawInt(score, cam.position.x - 3, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SCORE_DIGITS);
 	
@@ -241,28 +242,28 @@ public class World extends GameScreen
 		switch(joey.getState())
 		{
 		case JoeyRooster.STATE_SB:
-			Assets.joeysk.draw(rect);
+			Assets.getImage("joeySk").draw(rect);
 			break;
 		case JoeyRooster.STATE_STOP:
-			Assets.joeysk.draw(rect);
+			Assets.getImage("joeySk").draw(rect);
 			break;
 		case JoeyRooster.STATE_FLYING:
-			Assets.joeyfly.draw(rect);
+			Assets.getImage("joeyFly").draw(rect);
 			break;
 		case JoeyRooster.STATE_FALLING:
-			Assets.joeyfall.draw(rect);
+			Assets.getImage("joeyFall").draw(rect);
 			break;
 		case JoeyRooster.STATE_BOUNCE:
-			Assets.joeyBou.draw(rect);
+			Assets.getImage("joeyBou").draw(rect);
 			break;
 		case JoeyRooster.STATE_RAMP:
-			Assets.joeyRamp.draw(rect);
+			Assets.getImage("joeyRamp").draw(rect);
 			break;
 		case JoeyRooster.STATE_FLAP:
-			Assets.joeyflap.draw(rect);
+			Assets.getImage("joeyFlap").draw(rect);
 			break;
 		case JoeyRooster.STATE_GLIDE:
-			Assets.joeysk.draw(rect);
+			Assets.getImage("joeySk").draw(rect);
 			break;
 		}
 	}
@@ -270,7 +271,7 @@ public class World extends GameScreen
 	public void renderRamp()
 	{
 		Rectangle rect = new Rectangle(ramp.position.x - 2.5f, ramp.position.y - 2.5f, ramp.bounds.width, ramp.bounds.height);
-		Assets.ramp.draw(rect);
+		Assets.getImage("ramp").draw(rect);
 	}
 	
 	public void renderSeeds()
@@ -278,7 +279,7 @@ public class World extends GameScreen
 		for(int i =0; i < seeds.length; i++)
 		{
 			Rectangle rect = new Rectangle(seeds[i].position.x - .1f, seeds[i].position.y - .2f, .2f, .4f);
-			Assets.seed1.draw(rect);
+			Assets.getImage("seed").draw(rect);
 		}
 	}
 	
@@ -288,11 +289,11 @@ public class World extends GameScreen
 		{
 		case Cow.STATE_COW:
 			Rectangle rect = new Rectangle(cow.position.x - 1f, cow.position.y - .5f, 2, 1);
-			Assets.cow.draw(rect);
+			Assets.getImage("cow").draw(rect);
 			break;
 		case Cow.STATE_HIT:
 			rect = new Rectangle(cow.position.x -1f, cow.position.y - 1f, 2, 2);
-			Assets.cowhit.draw(rect);
+			Assets.getImage("cowHit").draw(rect);
 			break;
 		}
 	}

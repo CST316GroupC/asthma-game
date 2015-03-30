@@ -36,9 +36,9 @@ public class UpgradeScreen extends GameScreen
 		mouseClick = new Vector();
 		
 		//get the current saved data
-		seeds = Integer.parseInt(Assets.joeyProps.getProperty("seeds"));
-		speedMult = Integer.parseInt(Assets.joeyProps.getProperty("speedMult"));
-		flaps = Integer.parseInt(Assets.joeyProps.getProperty("statima"));
+		seeds = Integer.parseInt(Assets.getProps().getProperty("seeds"));
+		speedMult = Integer.parseInt(Assets.getProps().getProperty("speedMult"));
+		flaps = Integer.parseInt(Assets.getProps().getProperty("statima"));
 	}
 
 	
@@ -61,7 +61,7 @@ public class UpgradeScreen extends GameScreen
 						{
 							seeds -= prices[speedMult];
 							speedMult++;
-							Assets.joeyProps.setProperty("speedMult", "" + speedMult);
+							Assets.getProps().setProperty("speedMult", "" + speedMult);
 						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, upgradeFlaps))
@@ -70,7 +70,7 @@ public class UpgradeScreen extends GameScreen
 						{
 							seeds -= prices[flaps];
 							flaps++;
-							Assets.joeyProps.setProperty("statima", "" + flaps);
+							Assets.getProps().setProperty("statima", "" + flaps);
 						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, back))
@@ -78,7 +78,7 @@ public class UpgradeScreen extends GameScreen
 						dispose();
 					}
 					
-					Assets.joeyProps.setProperty("seeds", "" + seeds);
+					Assets.getProps().setProperty("seeds", "" + seeds);
 		        }
 		    }
 		}
@@ -89,13 +89,13 @@ public class UpgradeScreen extends GameScreen
 	{
 		cam.setCamera();
 		
-		Assets.atlas.bind();
-		Assets.joeyfly.draw(new Rectangle(0, 0, 400, 400));
+		Assets.getTexture("atlas").bind();
+		Assets.getImage("joeyFly").draw(new Rectangle(0, 0, 400, 400));
 		
 		//draw arrows
-		Assets.joeyBou.draw(upgradeSpeed);
-		Assets.joeyBou.draw(upgradeFlaps);
-		Assets.joeyfall.draw(back);
+		Assets.getImage("joeyBou").draw(upgradeSpeed);
+		Assets.getImage("joeyBou").draw(upgradeFlaps);
+		Assets.getImage("joeyFall").draw(back);
 		
 		TextDrawer.drawString("Seeds", 25, 350, 40, 40);
 		TextDrawer.drawInt(seeds, 250, 350, 20, 40, 5);

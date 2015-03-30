@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<BugCollection version="3.0.1" sequence="0" timestamp="1427492040820" analysisTimestamp="1427492040835" release="">
+<BugCollection version="3.0.1" sequence="0" timestamp="1427752115487" analysisTimestamp="1427752115500" release="">
   <Project projectName="">
     <Jar>C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\bin</Jar>
     <AuxClasspathEntry>C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib</AuxClasspathEntry>
@@ -132,390 +132,6 @@
     </Class>
     <Field classname="com.groupc.Patient" name="username" signature="Ljava/lang/String;" isStatic="false">
       <SourceLine classname="com.groupc.Patient"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="eight" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="five" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="four" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterA" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterC" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterD" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterE" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterF" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterG" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterI" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterL" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterN" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterO" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterP" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterR" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterS" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterT" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="letterU" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="nine" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="one" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="seven" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="six" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="three" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="two" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="zero" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="arrowBut" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="atlas" signature="Lorg/newdawn/slick/opengl/Texture;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="cow" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="cowhit" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="grass" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="joeyBou" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="joeyProps" signature="Ljava/util/Properties;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="joeyRamp" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="joeyfall" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="joeyflap" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="joeyfly" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="joeysk" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="optionsBut" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="playBut" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="ramp" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="seed1" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="sheet" signature="Lorg/newdawn/slick/opengl/Texture;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="sky" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="soundLbl" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="soundOff" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="soundOn" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="title" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Field>
-  </BugInstance>
-  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE">
-    <Class classname="com.groupc.game1.Assets">
-      <SourceLine classname="com.groupc.game1.Assets"/>
-    </Class>
-    <Field classname="com.groupc.game1.Assets" name="upgradeBut" signature="Lcom/groupc/game/TextureRegion;" isStatic="true">
-      <SourceLine classname="com.groupc.game1.Assets"/>
     </Field>
   </BugInstance>
   <BugInstance type="OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE" priority="2" rank="20" abbrev="OBL" category="EXPERIMENTAL">
@@ -655,14 +271,14 @@
     <SourceLine classname="com.groupc.screens.LoginScreen" startBytecode="113" endBytecode="113"/>
   </BugInstance>
   <Errors errors="0" missingClasses="0"></Errors>
-  <FindBugsSummary timestamp="Fri, 27 Mar 2015 14:34:00 -0700" total_classes="61" referenced_classes="429" total_bugs="75" total_size="2993" num_packages="6" java_version="1.8.0_31" vm_version="25.31-b07" cpu_seconds="8.74" clock_seconds="7.30" peak_mbytes="100.14" alloc_mbytes="247.50" gc_seconds="0.65" priority_2="67" priority_1="8">
-    <PackageStats package="com.groupc" total_bugs="14" total_types="6" total_size="244" priority_2="11" priority_1="3">
+  <FindBugsSummary timestamp="Mon, 30 Mar 2015 14:48:35 -0700" total_classes="61" referenced_classes="429" total_bugs="27" total_size="3034" num_packages="6" java_version="1.8.0_31" vm_version="25.31-b07" cpu_seconds="9.14" clock_seconds="7.74" peak_mbytes="100.77" alloc_mbytes="247.50" gc_seconds="0.67" priority_2="19" priority_1="8">
+    <PackageStats package="com.groupc" total_bugs="14" total_types="6" total_size="249" priority_2="11" priority_1="3">
       <ClassStats class="com.groupc.AudioPlayer" sourceFile="&lt;Unknown&gt;" interface="false" size="25" bugs="0"/>
       <ClassStats class="com.groupc.Database" sourceFile="&lt;Unknown&gt;" interface="false" size="119" bugs="8" priority_2="5" priority_1="3"/>
       <ClassStats class="com.groupc.Patient" sourceFile="&lt;Unknown&gt;" interface="false" size="8" bugs="6" priority_2="6"/>
       <ClassStats class="com.groupc.Runner" sourceFile="&lt;Unknown&gt;" interface="false" size="27" bugs="0"/>
       <ClassStats class="com.groupc.Tester" sourceFile="&lt;Unknown&gt;" interface="false" size="7" bugs="0"/>
-      <ClassStats class="com.groupc.TextDrawer" sourceFile="&lt;Unknown&gt;" interface="false" size="58" bugs="0"/>
+      <ClassStats class="com.groupc.TextDrawer" sourceFile="&lt;Unknown&gt;" interface="false" size="63" bugs="0"/>
     </PackageStats>
     <PackageStats package="com.groupc.game" total_bugs="0" total_types="5" total_size="91">
       <ClassStats class="com.groupc.game.Camera" sourceFile="&lt;Unknown&gt;" interface="false" size="25" bugs="0"/>
@@ -671,16 +287,16 @@
       <ClassStats class="com.groupc.game.MovingGameObject" sourceFile="&lt;Unknown&gt;" interface="false" size="12" bugs="0"/>
       <ClassStats class="com.groupc.game.TextureRegion" sourceFile="&lt;Unknown&gt;" interface="false" size="36" bugs="0"/>
     </PackageStats>
-    <PackageStats package="com.groupc.game1" total_bugs="50" total_types="9" total_size="748" priority_2="50">
-      <ClassStats class="com.groupc.game1.Assets" sourceFile="&lt;Unknown&gt;" interface="false" size="166" bugs="50" priority_2="50"/>
+    <PackageStats package="com.groupc.game1" total_bugs="2" total_types="9" total_size="784" priority_2="2">
+      <ClassStats class="com.groupc.game1.Assets" sourceFile="&lt;Unknown&gt;" interface="false" size="195" bugs="2" priority_2="2"/>
       <ClassStats class="com.groupc.game1.Cow" sourceFile="&lt;Unknown&gt;" interface="false" size="20" bugs="0"/>
       <ClassStats class="com.groupc.game1.JoeyRooster" sourceFile="&lt;Unknown&gt;" interface="false" size="104" bugs="0"/>
-      <ClassStats class="com.groupc.game1.MainMenu" sourceFile="&lt;Unknown&gt;" interface="false" size="50" bugs="0"/>
-      <ClassStats class="com.groupc.game1.Options" sourceFile="&lt;Unknown&gt;" interface="false" size="48" bugs="0"/>
+      <ClassStats class="com.groupc.game1.MainMenu" sourceFile="&lt;Unknown&gt;" interface="false" size="51" bugs="0"/>
+      <ClassStats class="com.groupc.game1.Options" sourceFile="&lt;Unknown&gt;" interface="false" size="49" bugs="0"/>
       <ClassStats class="com.groupc.game1.Ramp" sourceFile="&lt;Unknown&gt;" interface="false" size="2" bugs="0"/>
       <ClassStats class="com.groupc.game1.Seed" sourceFile="&lt;Unknown&gt;" interface="false" size="9" bugs="0"/>
-      <ClassStats class="com.groupc.game1.UpgradeScreen" sourceFile="&lt;Unknown&gt;" interface="false" size="85" bugs="0"/>
-      <ClassStats class="com.groupc.game1.World" sourceFile="&lt;Unknown&gt;" interface="false" size="264" bugs="0"/>
+      <ClassStats class="com.groupc.game1.UpgradeScreen" sourceFile="&lt;Unknown&gt;" interface="false" size="86" bugs="0"/>
+      <ClassStats class="com.groupc.game1.World" sourceFile="&lt;Unknown&gt;" interface="false" size="268" bugs="0"/>
     </PackageStats>
     <PackageStats package="com.groupc.junit" total_bugs="3" total_types="5" total_size="221" priority_2="1" priority_1="2">
       <ClassStats class="com.groupc.junit.AccTest" sourceFile="&lt;Unknown&gt;" interface="false" size="80" bugs="1" priority_1="1"/>
@@ -730,22 +346,22 @@
       <ClassStats class="com.groupc.screens.TutorialScreen$2" sourceFile="&lt;Unknown&gt;" interface="false" size="5" bugs="0"/>
     </PackageStats>
     <FindBugsProfile>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="1793" invocations="1882" avgMicrosecondsPerInvocation="952" maxMicrosecondsPerInvocation="7440" standardDeviationMircosecondsPerInvocation="536"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="620" invocations="1878" avgMicrosecondsPerInvocation="330" maxMicrosecondsPerInvocation="18337" standardDeviationMircosecondsPerInvocation="1047"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="394" invocations="429" avgMicrosecondsPerInvocation="919" maxMicrosecondsPerInvocation="92837" standardDeviationMircosecondsPerInvocation="4708"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="295" invocations="429" avgMicrosecondsPerInvocation="689" maxMicrosecondsPerInvocation="14165" standardDeviationMircosecondsPerInvocation="1453"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="276" invocations="264" avgMicrosecondsPerInvocation="1048" maxMicrosecondsPerInvocation="127258" standardDeviationMircosecondsPerInvocation="7879"/>
-      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="244" invocations="249" avgMicrosecondsPerInvocation="980" maxMicrosecondsPerInvocation="23591" standardDeviationMircosecondsPerInvocation="2784"/>
-      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="176" invocations="1031" avgMicrosecondsPerInvocation="171" maxMicrosecondsPerInvocation="5204" standardDeviationMircosecondsPerInvocation="293"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="171" invocations="249" avgMicrosecondsPerInvocation="687" maxMicrosecondsPerInvocation="16915" standardDeviationMircosecondsPerInvocation="2045"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="158" invocations="249" avgMicrosecondsPerInvocation="637" maxMicrosecondsPerInvocation="16309" standardDeviationMircosecondsPerInvocation="1612"/>
-      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="146" invocations="1831" avgMicrosecondsPerInvocation="80" maxMicrosecondsPerInvocation="45295" standardDeviationMircosecondsPerInvocation="1081"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="120" invocations="260" avgMicrosecondsPerInvocation="461" maxMicrosecondsPerInvocation="9500" standardDeviationMircosecondsPerInvocation="1006"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="101" invocations="249" avgMicrosecondsPerInvocation="407" maxMicrosecondsPerInvocation="16357" standardDeviationMircosecondsPerInvocation="1314"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="100" invocations="525" avgMicrosecondsPerInvocation="191" maxMicrosecondsPerInvocation="22784" standardDeviationMircosecondsPerInvocation="1129"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="95" invocations="429" avgMicrosecondsPerInvocation="223" maxMicrosecondsPerInvocation="6322" standardDeviationMircosecondsPerInvocation="533"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="79" invocations="179" avgMicrosecondsPerInvocation="444" maxMicrosecondsPerInvocation="5156" standardDeviationMircosecondsPerInvocation="782"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="61" invocations="429" avgMicrosecondsPerInvocation="143" maxMicrosecondsPerInvocation="8974" standardDeviationMircosecondsPerInvocation="476"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="1962" invocations="1882" avgMicrosecondsPerInvocation="1042" maxMicrosecondsPerInvocation="84949" standardDeviationMircosecondsPerInvocation="2015"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="641" invocations="1878" avgMicrosecondsPerInvocation="341" maxMicrosecondsPerInvocation="45895" standardDeviationMircosecondsPerInvocation="1471"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="352" invocations="429" avgMicrosecondsPerInvocation="821" maxMicrosecondsPerInvocation="20173" standardDeviationMircosecondsPerInvocation="1893"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="327" invocations="429" avgMicrosecondsPerInvocation="764" maxMicrosecondsPerInvocation="15072" standardDeviationMircosecondsPerInvocation="1679"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="288" invocations="253" avgMicrosecondsPerInvocation="1140" maxMicrosecondsPerInvocation="125136" standardDeviationMircosecondsPerInvocation="7953"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="266" invocations="253" avgMicrosecondsPerInvocation="1051" maxMicrosecondsPerInvocation="28579" standardDeviationMircosecondsPerInvocation="3123"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="200" invocations="1035" avgMicrosecondsPerInvocation="193" maxMicrosecondsPerInvocation="9247" standardDeviationMircosecondsPerInvocation="465"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="170" invocations="268" avgMicrosecondsPerInvocation="635" maxMicrosecondsPerInvocation="19314" standardDeviationMircosecondsPerInvocation="1603"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="166" invocations="264" avgMicrosecondsPerInvocation="629" maxMicrosecondsPerInvocation="20738" standardDeviationMircosecondsPerInvocation="1877"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="146" invocations="253" avgMicrosecondsPerInvocation="578" maxMicrosecondsPerInvocation="16122" standardDeviationMircosecondsPerInvocation="1441"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="112" invocations="253" avgMicrosecondsPerInvocation="442" maxMicrosecondsPerInvocation="13781" standardDeviationMircosecondsPerInvocation="1315"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="109" invocations="1831" avgMicrosecondsPerInvocation="59" maxMicrosecondsPerInvocation="6342" standardDeviationMircosecondsPerInvocation="266"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="95" invocations="182" avgMicrosecondsPerInvocation="524" maxMicrosecondsPerInvocation="10810" standardDeviationMircosecondsPerInvocation="1161"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="95" invocations="429" avgMicrosecondsPerInvocation="222" maxMicrosecondsPerInvocation="4309" standardDeviationMircosecondsPerInvocation="474"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="88" invocations="525" avgMicrosecondsPerInvocation="168" maxMicrosecondsPerInvocation="16544" standardDeviationMircosecondsPerInvocation="788"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="80" invocations="264" avgMicrosecondsPerInvocation="304" maxMicrosecondsPerInvocation="60528" standardDeviationMircosecondsPerInvocation="3715"/>
     </FindBugsProfile>
   </FindBugsSummary>
   <ClassFeatures></ClassFeatures>
