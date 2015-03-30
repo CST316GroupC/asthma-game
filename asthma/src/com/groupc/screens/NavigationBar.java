@@ -23,7 +23,7 @@ public class NavigationBar extends JPanel
 {
 	//Variables
 	private Runner run;
-	private Resize resize;
+	private final Resize resize;
 	private int    buttonPressed      = 0; //0 is none, 1 is add patient, 2 is back and logout for now
 	public  boolean backButtonPressed = false;
 	boolean played 					  = true;

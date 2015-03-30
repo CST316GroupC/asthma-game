@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns:jacoco="antlib:org.jacoco.ant" name="asthma-game">
+<project xmlns:jacoco="antlib:org.jacoco.ant" name="asthma-game" basedir=".">
 
   <property name="src" value="src" />
   <property name="build" value="bin"/>
@@ -48,6 +48,8 @@
     <delete dir="${build}"/>
   	<delete dir="${jac-r}"/>
   	<delete dir="${jun-r}"/>
+  	<delete dir="fb-report"/>
+  	<delete dir="pmd-report"/>
   </target>
 
   <target name="run">
@@ -123,4 +125,48 @@
   	<xml destfile="jacoco-report/report.xml"/>
   	</jacoco:report>
   	</target>
+	
+	<property name="findbug" location="${basedir}/lib/findbugs" />
+		<target name="findbugs" >
+			<taskdef name="findbugs" 
+			    classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
+			    <classpath>
+			       <fileset dir="lib/findbugs"/>
+			    </classpath>
+			</taskdef>
+		  <mkdir dir="fb-report"/>
+		  <findbugs home="${findbug}"
+	              output="xml"
+	              outputFile="fb-report/findbugs.xml" >
+		  	<auxClasspath path="lib"/>
+		    <sourcePath path="${src}" />
+		    <class location="${build}" />
+		  </findbugs>
+			
+			<xslt in="fb-report/findbugs.xml"
+			              style="fancy.xsl"
+			              out="fb-report/findbugs-default.html"
+			        />
+		  	
+		</target>
+		
+		<property name="pmd.home" location="lib/pmd" />
+		<path id="pmd.classpath">
+		    	<fileset dir="${pmd.home}" includes="*.jar" />
+		</path>
+		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="pmd.classpath"/>
+	
+		<target name="pmd">
+
+			  <mkdir dir="pmd-report"/>
+			<pmd shortFilenames="true">
+	  			<sourceLanguage name="java" version="1.8"/>
+	  			<ruleset>rulesets/java/design.xml</ruleset>
+	  			<ruleset>java-basic</ruleset>
+	  			<formatter type="html" toFile="pmd-report/pmd_report_fromant.html">
+	    				<param name="linkPrefix" value="http://pmd.sourceforge.net/xref/"/>
+	  			</formatter>
+	  			<fileset dir="${src}"/>
+	 		</pmd>
+		</target>
 </project>

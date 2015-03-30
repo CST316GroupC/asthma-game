@@ -1,5 +1,7 @@
 package com.groupc;
 
+import java.util.Locale;
+
 import com.groupc.game1.Assets;
 import com.groupc.math.Rectangle;
 
@@ -30,34 +32,34 @@ public class TextDrawer
 			switch(temp)
 			{
 				case 0:
-					Assets.zero.draw(rect);
+					Assets.getImage("zero").draw(rect);
 					break;
 				case 1:
-					Assets.one.draw(rect);
+					Assets.getImage("one").draw(rect);
 					break;
 				case 2:
-					Assets.two.draw(rect);
+					Assets.getImage("two").draw(rect);
 					break;
 				case 3:
-					Assets.three.draw(rect);
+					Assets.getImage("three").draw(rect);
 					break;
 				case 4:
-					Assets.four.draw(rect);
+					Assets.getImage("four").draw(rect);
 					break;
 				case 5:
-					Assets.five.draw(rect);
+					Assets.getImage("five").draw(rect);
 					break;
 				case 6:
-					Assets.six.draw(rect);
+					Assets.getImage("six").draw(rect);
 					break;
 				case 7:
-					Assets.seven.draw(rect);
+					Assets.getImage("seven").draw(rect);
 					break;
 				case 8:
-					Assets.eight.draw(rect);
+					Assets.getImage("eight").draw(rect);
 					break;
 				case 9:
-					Assets.nine.draw(rect);
+					Assets.getImage("nine").draw(rect);
 					break;
 			}
 		}
@@ -73,7 +75,7 @@ public class TextDrawer
 	 */
 	public static void drawString(String str, float x, float y, float width, float height)
 	{
-		str = str.toLowerCase();
+		str = str.toLowerCase(new Locale("US"));
 		for(int i = 0; i < str.length(); i++)
 		{
 			Rectangle rect = new Rectangle(x + i*width, y, width, height);
@@ -81,49 +83,49 @@ public class TextDrawer
 			switch(temp)
 			{
 				case 'a':
-					Assets.letterA.draw(rect);
+					Assets.getImage("letterA").draw(rect);
 					break;
 				case 'c':
-					Assets.letterC.draw(rect);
+					Assets.getImage("letterC").draw(rect);
 					break;
 				case 'd':
-					Assets.letterD.draw(rect);
+					Assets.getImage("letterD").draw(rect);
 					break;
 				case 'e':
-					Assets.letterE.draw(rect);
+					Assets.getImage("letterE").draw(rect);
 					break;
 				case 'f':
-					Assets.letterF.draw(rect);
+					Assets.getImage("letterF").draw(rect);
 					break;
 				case 'g':
-					Assets.letterG.draw(rect);
+					Assets.getImage("letterG").draw(rect);
 					break;
 				case 'i':
-					Assets.letterI.draw(rect);
+					Assets.getImage("letterI").draw(rect);
 					break;
 				case 'l':
-					Assets.letterL.draw(rect);
+					Assets.getImage("letterL").draw(rect);
 					break;
 				case 'n':
-					Assets.letterN.draw(rect);
+					Assets.getImage("letterN").draw(rect);
 					break;
 				case 'o':
-					Assets.letterO.draw(rect);
+					Assets.getImage("letterO").draw(rect);
 					break;
 				case 'p':
-					Assets.letterP.draw(rect);
+					Assets.getImage("letterP").draw(rect);
 					break;
 				case 'r':
-					Assets.letterR.draw(rect);
+					Assets.getImage("letterR").draw(rect);
 					break;
 				case 's':
-					Assets.letterS.draw(rect);
+					Assets.getImage("letterS").draw(rect);
 					break;
 				case 't':
-					Assets.letterT.draw(rect);
+					Assets.getImage("letterT").draw(rect);
 					break;
 				case 'u':
-					Assets.letterU.draw(rect);
+					Assets.getImage("letterU").draw(rect);
 					break;
 			}
 		}

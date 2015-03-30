@@ -22,7 +22,7 @@ public class JoeyRooster extends MovingGameObject
 	private float stateTime;
 	
 	//upgrades
-	private final float INITIAL_SPEED = 5;
+	private final static float INITIAL_SPEED = 5;
 	
 	private float currentStatima;
 	
@@ -42,8 +42,6 @@ public class JoeyRooster extends MovingGameObject
 		{
 			if(state == STATE_FLAP)
 			{
-				velocity.set(velocity.x, 0);
-				accel.set(0, 10);
 			}
 			else if(state == STATE_GLIDE)
 			{
@@ -69,6 +67,7 @@ public class JoeyRooster extends MovingGameObject
 		{
 			if(stateTime > .5f)
 			{
+				accel.set(0, World.GRAVITY);
 				state = STATE_FLYING;
 				stateTime = 0;
 			}
@@ -81,6 +80,8 @@ public class JoeyRooster extends MovingGameObject
 		{
 			if(stateTime > .5f)
 			{
+
+				accel.set(0, World.GRAVITY);
 				state = STATE_FLYING;
 				stateTime = 0;
 			}
@@ -90,6 +91,7 @@ public class JoeyRooster extends MovingGameObject
 			if(position.y < 0.5f)
 			{
 				position.y = 0.5f;
+				velocity.set(0, 0);
 				state = STATE_STOP;
 			}
 		}
@@ -134,13 +136,15 @@ public class JoeyRooster extends MovingGameObject
 	{
 		state = STATE_RAMP;
 		velocity.set(velocity.x, velocity.x);
-		accel.set(0, 0);
+		accel.set(0, World.GRAVITY);
 	}
 	
 	public void flap()
 	{
 		if(currentStatima > 0 && state != STATE_SB && state != STATE_RAMP)
 		{
+
+			velocity.set(velocity.x, 10);
 			state = STATE_FLAP;
 			stateTime = 0;
 			currentStatima--;
@@ -158,22 +162,24 @@ public class JoeyRooster extends MovingGameObject
 			}
 			position.set(position.x, cow.position.y + Cow.HEIGHT);
 			state = STATE_BOUNCE;
-			stateTime = 0;
+			stateTime = 0;			
 		}
 	}
 	
-	public void glide()
+	public void toggleGlide()
 	{
-		if(state != STATE_SB && state != STATE_RAMP)
+		if(state != STATE_SB && state != STATE_RAMP && state != STATE_GLIDE)
 		{
 			state = STATE_GLIDE;
 			velocity.set(velocity.x, 0);
-			accel.set(-.1f, -1f);
+			accel.set(-.1f, -2f);
 		}
 		else
 		{
 			state = STATE_FALLING;
 			accel.set(0, World.GRAVITY);
+
+			System.out.println("released");
 		}
 	}
 	

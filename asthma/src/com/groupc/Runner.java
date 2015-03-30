@@ -19,9 +19,9 @@ public class Runner extends JFrame
 	long startTime = System.nanoTime();
 	public AudioPlayer player;
 	
-	public final int SCR_WIDTH = 500;
-	public final int SCR_HEIGHT = 500;
-	public final long FPS = (long) (1.0/60.0);
+	public final static int SCR_WIDTH = 500;
+	public final static int SCR_HEIGHT = 500;
+	public final static long FPS = (long) (1.0/60.0);
 	
 	boolean isClosing = false;
 	
