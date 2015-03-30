@@ -75,9 +75,9 @@ public class LoginScreen extends Screen
 		
 		//Basic Frame Settings
 		run.setTitle("Login");
-		run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		run.setMinimumSize(new Dimension(run.SCR_WIDTH, run.SCR_HEIGHT));
-		run.setLocationRelativeTo(null);
+		//run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//run.setMinimumSize(new Dimension(run.SCR_WIDTH, run.SCR_HEIGHT));
+		//run.setLocationRelativeTo(null);
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -176,7 +176,7 @@ public class LoginScreen extends Screen
 			
 			//loginBox
 			loginBox.setBounds(resize.locationX(100), resize.locationY(200), resize.width(300), resize.height(200));
-			loginBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
+			loginBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			//UserName
 			userNameLabel.setBounds(resize.locationX(170), resize.locationY(220), resize.width(160), resize.height(20));

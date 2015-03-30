@@ -1,5 +1,6 @@
 package com.groupc.screens;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +22,7 @@ public class RecordingScreen extends Screen
 	boolean	played		= true;
 	
 	//Display Elements
-	NavigationBar 	navBar		= new NavigationBar(run,true,false,"Recording Screen Page");	
+	NavigationBar 	navBar		= new NavigationBar(run,true,false,"Spirometer Input");	
 	JLabel 			text1		= new JLabel("* Air quality readings auto taken during test");
 	JLabel 			text2		= new JLabel("No Spirometer detected");
 	JLabel 			text3		= new JLabel("Check connection or click manual input");
@@ -34,7 +35,7 @@ public class RecordingScreen extends Screen
 	{
 		super(run);
 		//Basic Frame Settings
-		//run.setTitle("Recording");
+		run.setTitle("Spirometer Input");
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -44,6 +45,11 @@ public class RecordingScreen extends Screen
 				redraw = true;
 			}
 		});
+		
+		
+		//Set colors
+		this.setBackground(Color.WHITE);
+		
 		
 		////Buttons////
 		

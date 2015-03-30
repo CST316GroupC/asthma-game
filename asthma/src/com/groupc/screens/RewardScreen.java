@@ -26,9 +26,9 @@ public class RewardScreen extends Screen
 	boolean played = true;
 	
 	//Display Elements
-	NavigationBar navBar         = new NavigationBar(run,true,true,"Rewards");
-	JPanel        rewardBox      = new JPanel();;
-	JButton       continueButton = new JButton("Continue");;
+	NavigationBar navBar         = new NavigationBar(run,false,false,"Rewards");
+	JPanel        rewardBox      = new JPanel();
+	JButton       continueButton = new JButton("Continue");
 	
 	public RewardScreen(Runner run) 
 	{
@@ -45,9 +45,6 @@ public class RewardScreen extends Screen
 			}
 		});
 		
-		
-		
-		
 		// Reward display and border
 		rewardBox = new JPanel();
 
@@ -59,21 +56,17 @@ public class RewardScreen extends Screen
 		
 		
 		////Buttons////
-		
-		
-		this.add(continueButton);
-		this.add(rewardBox);
-		this.add(navBar);
-		
-	
-		
 		continueButton.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				butPressed = 4;				
+				butPressed = 1;				
 			}
 		});
+		
+		this.add(continueButton);
+		this.add(rewardBox);
+		this.add(navBar);
 		
 		this.setLayout(null);
 		run.setContentPane(this);
@@ -83,18 +76,10 @@ public class RewardScreen extends Screen
 	@Override
 	public void update(float deltaTime)
 	{
-		if(navBar.backButtonPressed)
+		if(butPressed == 1)
 		{
-			run.setScreen(new RecordingScreen(run));
-		}
-		else if(butPressed == 2)
-		{
-			run.setScreen(new LoginScreen(run));
-			
-		}
-		else if(butPressed == 4)
-		{
-			run.setScreen(new Game1Screen(run));
+			//run.setScreen(new Game1Screen(run));
+			run.setScreen(new GameHubScreen(run));
 		}
 		butPressed = 0;
 
@@ -105,7 +90,7 @@ public class RewardScreen extends Screen
 			
 			//rewardBox
 			rewardBox.setBounds(resize.locationX(100), resize.locationY(100), resize.width(285), resize.height(300));
-			rewardBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
+			rewardBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			//continueButton
 			continueButton.setBounds(resize.locationX(200), resize.locationY(420), resize.width(100), resize.height(30));
