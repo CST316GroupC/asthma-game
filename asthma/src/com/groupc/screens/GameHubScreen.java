@@ -1,3 +1,11 @@
+/*
+ * Author(s):     Team C
+ * Course:        CST 316 Spring
+ * Instructor:    Dr. Gary
+ * Date Changed:  3/27/2015
+ * Description:   Screen that will bring you to the individual games
+ */
+
 package com.groupc.screens;
 
 import java.awt.Color;
@@ -11,6 +19,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import com.groupc.Runner;
 import com.groupc.math.Resize;
@@ -18,25 +27,29 @@ import com.groupc.math.Resize;
 public class GameHubScreen extends Screen
 {
 	//Variables
-	boolean redraw		= true;
-	Resize  resize		= new Resize(run);
-	int		butPressed	= 0;
-	boolean	played		= true;
+	private boolean	redraw		= true;
+	private Resize	resize		= new Resize(run);
+	private int 	butPressed	= 0;
+	private boolean	played		= true;
 	
 	//Display Elements
-	NavigationBar 	navBar		= new NavigationBar(run,false,true,"Game Hub");	
-	JButton         game1Button = new JButton("");
-	JButton         game2Button = new JButton("Game 2");
-	JButton         game3Button = new JButton("Game 3");
-	JButton         game4Button = new JButton("Game 4");
-	JButton         LeaderBoardButton = new JButton("Leader Board");
-	
-	ImageIcon game1Icon = new ImageIcon("Game1Button.png");
+	private NavigationBar	navBar				= new NavigationBar(run,false,true,"Game Hub");	
+	private JButton			game1Button 		= new JButton("");
+	private JButton			game2Button 		= new JButton("Game 2");
+	private JButton			game3Button 		= new JButton("Game 3");
+	private JButton			game4Button 		= new JButton("Game 4");
+	private JButton			LeaderBoardButton	= new JButton("Leader Board");
+	private JLabel			game1Label 			= new JLabel("Game 1",SwingConstants.CENTER);
+	private JLabel 			game2Label 			= new JLabel("Game 2",SwingConstants.CENTER);
+	private JLabel 			game3Label 			= new JLabel("Game 3",SwingConstants.CENTER);
+	private JLabel 			game4Label 			= new JLabel("Game 4",SwingConstants.CENTER);
+	private ImageIcon 		game1Icon 			= new ImageIcon("Game1Button.png");
 	
 	public GameHubScreen(Runner run)
 	{
 		super(run);
 		//Basic Frame Settings
+		run.setTitle("Game Hub");
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -89,6 +102,10 @@ public class GameHubScreen extends Screen
 		this.add(game2Button);
 		this.add(game3Button);
 		this.add(game4Button);
+		this.add(game1Label);
+		this.add(game2Label);
+		this.add(game3Label);
+		this.add(game4Label);
 		this.add(LeaderBoardButton);
 		this.add(navBar);
 		
@@ -108,15 +125,23 @@ public class GameHubScreen extends Screen
 			//Game 1
 			game1Button.setBounds(resize.locationX(50), resize.locationY(125), resize.width(175), resize.height(100));
 			game1Button.setIcon(new ImageIcon(game1Icon.getImage().getScaledInstance(resize.width(175), resize.height(100), java.awt.Image.SCALE_SMOOTH)));
+			game1Label.setBounds(resize.locationX(50), resize.locationY(105), resize.width(175), resize.height(20));
+			game1Label.setFont(new Font(game1Label.getFont().getFontName(),game1Label.getFont().getStyle(), resize.font(12)));
 			
 			//Game 2
 			game2Button.setBounds(resize.locationX(275), resize.locationY(125), resize.width(175), resize.height(100));
+			game2Label.setBounds(resize.locationX(275), resize.locationY(105), resize.width(175), resize.height(20));
+			game2Label.setFont(new Font(game2Label.getFont().getFontName(),game2Label.getFont().getStyle(), resize.font(12)));
 			
 			//Game 3
 			game3Button.setBounds(resize.locationX(50), resize.locationY(275), resize.width(175), resize.height(100));
+			game3Label.setBounds(resize.locationX(50), resize.locationY(255), resize.width(175), resize.height(20));
+			game3Label.setFont(new Font(game3Label.getFont().getFontName(),game3Label.getFont().getStyle(), resize.font(12)));
 			
 		    //Game 4
 			game4Button.setBounds(resize.locationX(275), resize.locationY(275), resize.width(175), resize.height(100));
+			game4Label.setBounds(resize.locationX(275), resize.locationY(255), resize.width(175), resize.height(20));
+			game4Label.setFont(new Font(game4Label.getFont().getFontName(),game4Label.getFont().getStyle(), resize.font(12)));
 			
 			//LeaderBoardButton
 			LeaderBoardButton.setBounds(resize.locationX(175), resize.locationY(420), resize.width(150), resize.height(30));

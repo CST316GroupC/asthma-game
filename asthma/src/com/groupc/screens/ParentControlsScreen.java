@@ -183,7 +183,7 @@ public class ParentControlsScreen extends Screen
 			
 			//pinBox
 			pinBox.setBounds(resize.locationX(100), resize.locationY(200), resize.width(300), resize.height(160));
-			pinBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
+			pinBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			//pinLabel
 			pinLabel.setBounds(resize.locationX(170), resize.locationY(220), resize.width(160), resize.height(20));
@@ -211,7 +211,7 @@ public class ParentControlsScreen extends Screen
 			
 			//pageBox
 			pageBox.setBounds(resize.locationX(80), resize.locationY(100), resize.width(340), resize.height(300));
-			pageBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
+			pageBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			//timeControls
 			timeControlsLabel.setBounds(resize.locationX(100), resize.locationY(100), resize.width(300), resize.height(20));

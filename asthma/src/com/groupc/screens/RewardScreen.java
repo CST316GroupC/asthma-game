@@ -90,7 +90,7 @@ public class RewardScreen extends Screen
 			
 			//rewardBox
 			rewardBox.setBounds(resize.locationX(100), resize.locationY(100), resize.width(285), resize.height(300));
-			rewardBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
+			rewardBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			//continueButton
 			continueButton.setBounds(resize.locationX(200), resize.locationY(420), resize.width(100), resize.height(30));

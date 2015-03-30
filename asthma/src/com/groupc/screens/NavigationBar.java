@@ -128,7 +128,7 @@ public class NavigationBar extends JPanel
 		
 		//navBox
 		navBox.setBounds(resize.width(20), resize.height(-2), resize.width(460), resize.height(52));
-		navBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
+		navBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 		
 		//backButton
 		backButton.setBounds(resize.width(10), resize.height(10), resize.width(80), resize.height(30));

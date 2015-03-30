@@ -107,11 +107,11 @@ public class TutorialScreen extends Screen
 			
 			//description
 			descriptionBox.setBounds(resize.locationX(30), resize.locationY(320), resize.width(250), resize.height(60));
-			descriptionBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
+			descriptionBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			//step
 			stepsBox.setBounds(resize.locationX(310), resize.locationY(120), resize.width(150), resize.height(260));
-			stepsBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
+			stepsBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			step1.setBounds(resize.locationX(345), resize.locationY(140), resize.width(80), resize.height(25));
 			step1.setFont(new Font(step1.getFont().getFontName(),step1.getFont().getStyle(), resize.font(12)));
 			step2.setBounds(resize.locationX(345), resize.locationY(190), resize.width(80), resize.height(25));

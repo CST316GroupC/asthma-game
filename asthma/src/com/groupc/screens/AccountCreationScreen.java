@@ -143,7 +143,7 @@ public class AccountCreationScreen extends Screen
 			
 			//pageBox
 			pageBox.setBounds(resize.locationX(80), resize.locationY(100), resize.width(340), resize.height(360));
-			pageBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
+			pageBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			//firstName
 			firstNameLabel.setBounds(resize.locationX(80), resize.locationY(120), resize.width(165), resize.height(20));
