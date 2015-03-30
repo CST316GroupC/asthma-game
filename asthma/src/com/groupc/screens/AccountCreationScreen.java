@@ -53,6 +53,7 @@ public class AccountCreationScreen extends Screen
 	public		JTextArea  infoTA          = new JTextArea();
 	JButton    submitButton    = new JButton("Submit");
 	JLabel     errorMessage    = new JLabel("Missing Information*",SwingConstants.CENTER);
+	JLabel	   invalidInputMessage = new JLabel("Please insert a valid Age");
 	
 	public AccountCreationScreen(Runner run) 
 	{
@@ -76,6 +77,7 @@ public class AccountCreationScreen extends Screen
 		this.setBackground(Color.WHITE);
 		pageBox.setBackground(Color.LIGHT_GRAY);
 		errorMessage.setForeground(Color.RED);
+		invalidInputMessage.setForeground(Color.RED);
 		
 		//Set fonts
 		
@@ -104,6 +106,7 @@ public class AccountCreationScreen extends Screen
 		});
 
 		errorMessage.setVisible(false);
+		invalidInputMessage.setVisible(false);
 		
 		//add things to the panel
 		this.add(firstNameLabel);
@@ -117,6 +120,7 @@ public class AccountCreationScreen extends Screen
 		this.add(infoLabel);
 		this.add(infoTA);
 		this.add(errorMessage);
+		this.add(invalidInputMessage);
 		this.add(submitButton);
 		this.add(pageBox);
 		this.add(navBar);
@@ -192,8 +196,12 @@ public class AccountCreationScreen extends Screen
 			submitButton.setFont(new Font(submitButton.getFont().getFontName(),submitButton.getFont().getStyle(), resize.font(12)));
 			
 			//errorMessage
-			errorMessage.setBounds(resize.locationX(200), resize.locationY(380), resize.width(150), resize.height(20));
+			errorMessage.setBounds(resize.locationX(175), resize.locationY(380), resize.width(150), resize.height(20));
 			errorMessage.setFont(new Font(errorMessage.getFont().getFontName(),errorMessage.getFont().getStyle(), resize.font(12)));
+			
+			//invalidInputMessage
+			invalidInputMessage.setBounds(resize.locationX(180), resize.locationY(380), resize.width(150), resize.height(20));
+			invalidInputMessage.setFont(new Font(invalidInputMessage.getFont().getFontName(),invalidInputMessage.getFont().getStyle(), resize.font(12)));
 			
 			run.repaint();
 			redraw = false;
@@ -257,12 +265,7 @@ public class AccountCreationScreen extends Screen
 	
 	public void addCurrentPatient() 
 	{
-		if(firstNameTF.getText().isEmpty()  || lastNameTF.getText().isEmpty()  || passwordTF.getText().isEmpty())  //required basic information
-		{
-			errorMessage.setVisible(true);
-			run.repaint();
-			
-		}else  //assumes a database will be implemented but for now will just use a text file
+		if(checkContents())  //required basic information
 		{
 			try 
 			{
@@ -279,6 +282,40 @@ public class AccountCreationScreen extends Screen
 			run.setScreen(new LoginScreen(run));
 		}
 		
+		
+	}
+	
+	private boolean checkContents()  //false if error in content, otherwise true
+	{
+		invalidInputMessage.setVisible(false);
+		errorMessage.setVisible(false);
+		if(firstNameTF.getText().isEmpty()  || lastNameTF.getText().isEmpty()  || passwordTF.getText().isEmpty())
+		{
+			errorMessage.setVisible(true);
+			run.repaint();
+			return false;
+		}
+		if(ageTF.getText().isEmpty())
+		{
+			ageTF.setText("N/A");
+		} else 
+		{  
+			try
+			{
+				Integer.parseInt(ageTF.getText());
+		
+			}catch(Exception e)
+			{
+				ageTF.setText("");
+				invalidInputMessage.setVisible(true);
+				return false;
+			}
+		}
+		if(infoTA.getText().isEmpty())
+		{
+			infoTA.setText("N/A");
+		}
+		return true;
 		
 	}
 }

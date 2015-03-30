@@ -164,11 +164,11 @@ public class DoctorScreen extends Screen
 		collumnNames.add("Last Name");
 		//collumnNames.add("age");
 		Vector<Vector<String>> rowData = new Vector<Vector<String>>(10);
-		for(int i = 0; i < patientFirstNames.size(); ++i)
+		for(int i = 0; i < patientFirstNames.size(); ++i)  
 		{
-			if(patDoctors.elementAt(i).equals(doctor))
+			if(patDoctors.elementAt(i).equals(doctor)) 
 			{
-				Vector<String> tempVector = new Vector<String>(2);
+				Vector<String> tempVector = new Vector<String>(2);//set values in temp vector in order for what you want to display
 				tempVector.add(patientFirstNames.elementAt(i)); 
 				tempVector.add(patientLastNames.elementAt(i));
 				rowData.add(tempVector);
