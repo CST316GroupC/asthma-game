@@ -35,7 +35,7 @@ public class MainMenu extends GameScreen
 		if(Mouse.isButtonDown(0))
 		{
 			mouseClick.set(Mouse.getX(), Mouse.getY());
-			
+			cam.click(mouseClick);
 			if(CollisionChecker.PointToRect(mouseClick, play))
 			{
 				System.out.println("play");

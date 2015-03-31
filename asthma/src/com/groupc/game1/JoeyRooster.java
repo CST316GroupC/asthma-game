@@ -22,7 +22,7 @@ public class JoeyRooster extends MovingGameObject
 	private float stateTime;
 	
 	//upgrades
-	private final static float INITIAL_SPEED = 5;
+	private final static float INITIAL_SPEED = 7;
 	
 	private float currentStatima;
 	

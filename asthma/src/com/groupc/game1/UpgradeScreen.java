@@ -54,7 +54,7 @@ public class UpgradeScreen extends GameScreen
 		        if (Mouse.getEventButton() == 0) {
 		            System.out.println("Left button released");
 		            mouseClick.set(Mouse.getX(), Mouse.getY());
-					
+		            cam.click(mouseClick);
 					if(CollisionChecker.PointToRect(mouseClick, upgradeSpeed))
 					{
 						if(seeds > prices[speedMult])

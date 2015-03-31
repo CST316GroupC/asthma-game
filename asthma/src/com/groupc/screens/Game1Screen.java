@@ -113,7 +113,6 @@ public class Game1Screen extends Screen
 			
 			//canvas
 			canvas.setBounds(resize.locationX(0), resize.locationY(100), resize.width(500), resize.height(400));
-			
 			run.repaint();
 			redraw = false;
 		}

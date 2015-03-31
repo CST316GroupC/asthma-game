@@ -20,16 +20,16 @@ import com.groupc.math.Rectangle;
 
 public class World extends GameScreen
 {
-	public static final float FRUSTUM_WIDTH = 15;
-	public static final float FRUSTUM_HEIGHT = 10;
-	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 500; //400 (the * 100 means the total width is 5000 pixels but only 400 shown)
-	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 20; //400 (the * 20 means the total height is 200 pixels but only 400 shown)
+	public static final float FRUSTUM_WIDTH = 8;
+	public static final float FRUSTUM_HEIGHT = 6;
+	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 700; //400 (the * 100 means the total width is 5000 pixels but only 400 shown)
+	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 30; //400 (the * 20 means the total height is 200 pixels but only 400 shown)
 	
 	public static final int WORLD_STATE_PAUSED = 0;
 	public static final int WORLD_STATE_PLAYING = 1;
 	public static final int WORLD_STATE_OVER = 2;
 	
-	public static final float TEXT_SIZE = .35f;
+	public static final float TEXT_SIZE = .15f;
 	public static final int MAX_SCORE_DIGITS = 8; //99999999 max score
 	public static final int MAX_SEED_DIGITS = 4; //9999 max seeds
 	public static final int MAX_DISTANCE = 4; //9999 max distance
@@ -176,7 +176,10 @@ public class World extends GameScreen
 				
 				if(Keyboard.getEventKey() == Keyboard.KEY_S || Keyboard.getEventKey() == Keyboard.KEY_DOWN)
 				{
-					joey.toggleGlide();
+					if(state == WORLD_STATE_PLAYING)
+		        	{
+						joey.toggleGlide();
+		        	}
 				}
 			}
 		}
@@ -227,11 +230,11 @@ public class World extends GameScreen
 	{
 		//hud
 		Assets.getImage("joeyFly").draw(new Rectangle(0, (cam.position.y + FRUSTUM_HEIGHT/2) - .35f, WORLD_WIDTH, .35f));
-		TextDrawer.drawString("score", cam.position.x - 5, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
-		TextDrawer.drawInt(score, cam.position.x - 3, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SCORE_DIGITS);
+		TextDrawer.drawString("score", cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
+		TextDrawer.drawInt(score, cam.position.x - 3.2f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SCORE_DIGITS);
 	
-		TextDrawer.drawString("seeds", cam.position.x + 1, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
-		TextDrawer.drawInt(seedsCollected, cam.position.x + 3, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SEED_DIGITS);
+		TextDrawer.drawString("seeds", cam.position.x, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
+		TextDrawer.drawInt(seedsCollected, cam.position.x +1f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SEED_DIGITS);
 		
 	}
 	
@@ -257,13 +260,13 @@ public class World extends GameScreen
 			Assets.getImage("joeyBou").draw(rect);
 			break;
 		case JoeyRooster.STATE_RAMP:
-			Assets.getImage("joeyRamp").draw(rect);
+			Assets.getImage("joeyBou").draw(rect);
 			break;
 		case JoeyRooster.STATE_FLAP:
 			Assets.getImage("joeyFlap").draw(rect);
 			break;
 		case JoeyRooster.STATE_GLIDE:
-			Assets.getImage("joeySk").draw(rect);
+			Assets.getImage("joeyGlide").draw(rect);
 			break;
 		}
 	}

@@ -51,7 +51,7 @@ public final class Assets
 			sprites.put("joeyFall", new TextureRegion(textures.get("atlas"), 192, 512 - 64 - 32, 32, 32));
 			sprites.put("joeyBou", new TextureRegion(textures.get("atlas"),192,  512 - 96 - 32, 32,32));
 			sprites.put("joeyFlap", new TextureRegion(textures.get("atlas"),192, 512 - 128 - 32, 32, 32));
-			sprites.put("joeyRamp", new TextureRegion(textures.get("atlas"), 192, 512 - 160 - 32, 32, 32));
+			sprites.put("joeyGlide", new TextureRegion(textures.get("atlas"), 192, 512 - 160 - 32, 32, 32));
 			
 			sprites.put("one", new TextureRegion(textures.get("atlas"), 0, 512 - 128 - 1, 192/10, 32));
 			sprites.put("two", new TextureRegion(textures.get("atlas"), 192/10, 512 - 128 - 1, 192/10, 32));
