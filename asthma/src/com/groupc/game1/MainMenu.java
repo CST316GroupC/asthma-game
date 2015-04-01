@@ -2,6 +2,7 @@ package com.groupc.game1;
 
 import org.lwjgl.input.Mouse;
 
+import com.groupc.TextDrawer;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
 import com.groupc.math.CollisionChecker;
@@ -64,10 +65,14 @@ public class MainMenu extends GameScreen
 	{
 		cam.setCamera();
 		Assets.getTexture("sheet").bind();
+		Assets.getImage("grass").draw(new Rectangle(0, 0, 400, 400));
 		Assets.getImage("title").draw(title);
-		Assets.getImage("playBut").draw(play);
-		Assets.getImage("optionsBut").draw(options);
-		Assets.getImage("upgradeBut").draw(upgrade);
+		TextDrawer.drawStringinRect("Start", play);
+		TextDrawer.drawStringinRect("Options", options);
+		TextDrawer.drawStringinRect("Upgrade", upgrade);
+		//Assets.getImage("playBut").draw(play);
+		//Assets.getImage("optionsBut").draw(options);
+		//Assets.getImage("upgradeBut").draw(upgrade);
 	}
 
 	

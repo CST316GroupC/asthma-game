@@ -83,65 +83,93 @@ public class TextDrawer
 		for(int i = 0; i < str.length(); i++)
 		{
 			Rectangle rect = new Rectangle(x + i*width, y, width, height);
-			char temp = str.charAt(i);
-			switch(temp)
-			{
-				case 'a':
-					Assets.getImage("letterA").draw(rect);
-					break;
-				case 'c':
-					Assets.getImage("letterC").draw(rect);
-					break;
-				case 'd':
-					Assets.getImage("letterD").draw(rect);
-					break;
-				case 'e':
-					Assets.getImage("letterE").draw(rect);
-					break;
-				case 'f':
-					Assets.getImage("letterF").draw(rect);
-					break;
-				case 'g':
-					Assets.getImage("letterG").draw(rect);
-					break;
-				case 'i':
-					Assets.getImage("letterI").draw(rect);
-					break;
-				case 'l':
-					Assets.getImage("letterL").draw(rect);
-					break;
-				case 'n':
-					Assets.getImage("letterN").draw(rect);
-					break;
-				case 'o':
-					Assets.getImage("letterO").draw(rect);
-					break;
-				case 'p':
-					Assets.getImage("letterP").draw(rect);
-					break;
-				case 'q':
-					rect.width *= -1;
-					Assets.getImage("letterP").draw(rect);
-					break;
-				case 'r':
-					Assets.getImage("letterR").draw(rect);
-					break;
-				case 's':
-					Assets.getImage("letterS").draw(rect);
-					break;
-				case 't':
-					Assets.getImage("letterT").draw(rect);
-					break;
-				case 'u':
-					Assets.getImage("letterU").draw(rect);
-					break;
-				case 'w':
-					Assets.getImage("letterW").draw(rect);
-					break;
-				default:
-					break;
-			}
+			drawLetter(str.charAt(i), rect);			
+		}		
+	}
+	
+	/**
+	 * Draws the correct letter in the rectangle specified
+	 * @param temp - Letter to be drawn
+	 * @param rect - Rectangle to draw letter inside off.
+	 */
+	public static void drawLetter(char temp, Rectangle rect)
+	{
+		switch(temp)
+		{
+			case 'a':
+				Assets.getImage("letterA").draw(rect);
+				break;
+			case 'c':
+				Assets.getImage("letterC").draw(rect);
+				break;
+			case 'd':
+				Assets.getImage("letterD").draw(rect);
+				break;
+			case 'e':
+				Assets.getImage("letterE").draw(rect);
+				break;
+			case 'f':
+				Assets.getImage("letterF").draw(rect);
+				break;
+			case 'g':
+				rect.lowerLeft.y -= rect.height/6;
+				Assets.getImage("letterG").draw(rect);
+				break;
+			case 'i':
+				Assets.getImage("letterI").draw(rect);
+				break;
+			case 'l':
+				Assets.getImage("letterL").draw(rect);
+				break;
+			case 'n':
+				Assets.getImage("letterN").draw(rect);
+				break;
+			case 'o':
+				Assets.getImage("letterO").draw(rect);
+				break;
+			case 'p':
+				rect.lowerLeft.y -= rect.height/6;
+				Assets.getImage("letterP").draw(rect);
+				break;
+			case 'q':
+				rect.lowerLeft.y -= rect.height/6;
+				rect.width *= -1;
+				Assets.getImage("letterP").draw(rect);
+				break;
+			case 'r':
+				Assets.getImage("letterR").draw(rect);
+				break;
+			case 's':
+				Assets.getImage("letterS").draw(rect);
+				break;
+			case 't':
+				Assets.getImage("letterT").draw(rect);
+				break;
+			case 'u':
+				Assets.getImage("letterU").draw(rect);
+				break;
+			case 'w':
+				Assets.getImage("letterW").draw(rect);
+				break;
+			default:
+				break;
 		}
-		
+	}
+	
+	/**
+	 * Draws a string inside of a specify rectangle
+	 * @param string - String to be drawn
+	 * @param rect - Rectangle to draw string inside of.
+	 */
+	public static void drawStringinRect(String string, Rectangle rect)
+	{
+		String str = string.toLowerCase(new Locale("US"));
+		float newWidth = rect.width / str.length();
+		System.out.println(str.length());
+		for(int i = 0; i < str.length(); i++)
+		{
+			Rectangle let = new Rectangle(rect.lowerLeft.x + i*newWidth, rect.lowerLeft.y, newWidth, rect.height);
+			drawLetter(str.charAt(i), let);			
+		}
 	}
 }

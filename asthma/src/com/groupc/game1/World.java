@@ -29,7 +29,7 @@ public class World extends GameScreen
 	public static final int WORLD_STATE_PLAYING = 1;
 	public static final int WORLD_STATE_OVER = 2;
 	
-	public static final float TEXT_SIZE = .15f;
+	public static final float TEXT_SIZE = .2f;
 	public static final int MAX_SCORE_DIGITS = 8; //99999999 max score
 	public static final int MAX_SEED_DIGITS = 4; //9999 max seeds
 	public static final int MAX_DISTANCE = 4; //9999 max distance
