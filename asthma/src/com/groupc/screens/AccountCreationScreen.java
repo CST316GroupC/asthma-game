@@ -42,19 +42,21 @@ public class AccountCreationScreen extends Screen
 	JPanel     pageBox         = new JPanel();
 	JLabel     firstNameLabel  = new JLabel("First Name*:",SwingConstants.RIGHT);
 	JLabel     lastNameLabel   = new JLabel("Last Name*:",SwingConstants.RIGHT);
-	JLabel     dobLabel        = new JLabel("D.O.B (dd/mm/yy)*:",SwingConstants.RIGHT);
+	JLabel     dobLabel        = new JLabel("D.O.B (mm/dd/yy)*:",SwingConstants.RIGHT);
 	JLabel     emailLabel	   = new JLabel("Email*:",SwingConstants.RIGHT);
 	JLabel     passwordLabel   = new JLabel("Password*:",SwingConstants.RIGHT);
 	JLabel     infoLabel       = new JLabel("Contact Info:",SwingConstants.RIGHT);
 	public		JTextField firstNameTF     = new JTextField();
 	public		JTextField lastNameTF      = new JTextField();
-	public		JTextField dobTF           = new JTextField();
+	public		JTextField monthTF         = new JTextField();
+				JTextField dayTF           = new JTextField();
+				JTextField yearTF          = new JTextField();
 	public		JTextField emailTF		   = new JTextField();
 	public		JTextField passwordTF      = new JTextField();
 	public		JTextArea  infoTA          = new JTextArea();
 	JButton    submitButton    = new JButton("Submit");
 	JLabel     errorMessage    = new JLabel("Missing Information*",SwingConstants.CENTER);
-	JLabel	   invalidInputMessage = new JLabel("Please insert a valid Age");
+	JLabel	   invalidInputMessage = new JLabel("Please insert a valid Date*");
 	
 	public AccountCreationScreen(Runner run) 
 	{
@@ -100,7 +102,9 @@ public class AccountCreationScreen extends Screen
 		this.add(lastNameLabel);
 		this.add(lastNameTF);
 		this.add(dobLabel);
-		this.add(dobTF);
+		this.add(monthTF);
+		this.add(dayTF);
+		this.add(yearTF);
 		this.add(emailLabel);
 		this.add(emailTF);
 		this.add(passwordLabel);
@@ -164,8 +168,15 @@ public class AccountCreationScreen extends Screen
 			//DOB
 			dobLabel.setBounds(resize.locationX(80), resize.locationY(180), resize.width(165), resize.height(20));
 			dobLabel.setFont(new Font(dobLabel.getFont().getFontName(),dobLabel.getFont().getStyle(), resize.font(12)));
-			dobTF.setBounds(resize.locationX(255), resize.locationY(180), resize.width(100), resize.height(20));
-			dobTF.setFont(new Font(dobTF.getFont().getFontName(),dobTF.getFont().getStyle(), resize.font(12)));
+			
+			monthTF.setBounds(resize.locationX(255), resize.locationY(180), resize.width(25), resize.height(20));
+			monthTF.setFont(new Font(monthTF.getFont().getFontName(),monthTF.getFont().getStyle(), resize.font(12)));
+			
+			dayTF.setBounds(resize.locationX(293), resize.locationY(180), resize.width(25), resize.height(20));
+			dayTF.setFont(new Font(dayTF.getFont().getFontName(),dayTF.getFont().getStyle(), resize.font(12)));
+			
+			yearTF.setBounds(resize.locationX(330), resize.locationY(180), resize.width(25), resize.height(20));
+			yearTF.setFont(new Font(yearTF.getFont().getFontName(),yearTF.getFont().getStyle(), resize.font(12)));
 			
 			//email
 			emailLabel.setBounds(resize.locationX(80), resize.locationY(210), resize.width(165), resize.height(20));
@@ -194,7 +205,7 @@ public class AccountCreationScreen extends Screen
 			errorMessage.setFont(new Font(errorMessage.getFont().getFontName(),errorMessage.getFont().getStyle(), resize.font(12)));
 			
 			//invalidInputMessage
-			invalidInputMessage.setBounds(resize.locationX(180), resize.locationY(380), resize.width(150), resize.height(20));
+			invalidInputMessage.setBounds(resize.locationX(175), resize.locationY(380), resize.width(180), resize.height(20));
 			invalidInputMessage.setFont(new Font(invalidInputMessage.getFont().getFontName(),invalidInputMessage.getFont().getStyle(), resize.font(12)));
 			
 			run.repaint();
@@ -251,15 +262,23 @@ public class AccountCreationScreen extends Screen
 			{
 				FileWriter fWriter = new FileWriter("login_information.txt", true);
 				BufferedWriter bWriter = new BufferedWriter(fWriter);
-				bWriter.write(firstNameTF.getText() + " | " + lastNameTF.getText() + " | " + dobTF.getText() +
-							  " | " + passwordTF.getText() + " | " + type + " | " + newPatientDoctor + " | " + infoTA.getText() +
-							  "\n"); //all patients created from doctor screen will be 0
+				bWriter.write(emailTF.getText() + " | " + firstNameTF.getText() + " | " + lastNameTF.getText() + " | " + 
+							  monthTF.getText() + "/" + dayTF.getText() + "/" + yearTF.getText() + " | " + passwordTF.getText() 
+							  + " | " + type + " | " + newPatientDoctor + " | " + infoTA.getText() +"\n"); 
+								//all patients created from doctor screen will be type 0
 				bWriter.close();
 			} catch (IOException e)
 			{
 				e.printStackTrace();
 			}
-			run.setScreen(new DoctorScreen(run));
+			DoctorScreen docScreen = new DoctorScreen(run);
+			docScreen.setDoctor(newPatientDoctor);
+			try {
+				docScreen.getPatients();
+			} catch(Exception e){
+				e.printStackTrace();
+			}
+			run.setScreen(docScreen);
 		}
 	}
 	
@@ -267,24 +286,28 @@ public class AccountCreationScreen extends Screen
 	{
 		invalidInputMessage.setVisible(false);
 		errorMessage.setVisible(false);
-		if(firstNameTF.getText().isEmpty()  || lastNameTF.getText().isEmpty()  || passwordTF.getText().isEmpty())
+		if(firstNameTF.getText().isEmpty()  || lastNameTF.getText().isEmpty()  || passwordTF.getText().isEmpty() || emailTF.getText().isEmpty())
 		{
 			errorMessage.setVisible(true);
-			run.repaint();
 			return false;
 		}
-		if(dobTF.getText().isEmpty())
+		if(monthTF.getText().isEmpty() || dayTF.getText().isEmpty() || yearTF.getText().isEmpty())
 		{
-			dobTF.setText("N/A");
-		} else 
-		{  
+			errorMessage.setVisible(true);
+			return false;
+		}else
+		{
 			try
 			{
-				Integer.parseInt(dobTF.getText());
+				Integer.parseInt(monthTF.getText());
+				Integer.parseInt(dayTF.getText());
+				Integer.parseInt(yearTF.getText());
 		
 			}catch(Exception e)
 			{
-				dobTF.setText("");
+				monthTF.setText("");
+				dayTF.setText("");
+				yearTF.setText("");
 				invalidInputMessage.setVisible(true);
 				return false;
 			}

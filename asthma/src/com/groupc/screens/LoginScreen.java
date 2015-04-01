@@ -258,8 +258,8 @@ public class LoginScreen extends Screen
 		char tempChar;
 		//can create a patients' doctor with new text file
 		
-		Vector<String> firstNames = new Vector<String>();
 		Vector<String> types = new Vector<String>();
+		Vector<String> emails = new Vector<String>();
 		
 		
 		FileReader fr = new FileReader("login_information.txt");  //maybe create an 'onStart()' function for runner
@@ -270,9 +270,10 @@ public class LoginScreen extends Screen
 		while((line = br.readLine()) != null)
 		{
 			st = new StringTokenizer(line, " | ");
-			firstNames.add(counter, st.nextToken());
+			emails.add(counter, st.nextToken());
+			st.nextToken();  //first name
 			st.nextToken();  //last name
-			st.nextToken();  // age
+			st.nextToken();  //dob
 			tempString = st.nextToken();  //password
 			types.add(counter, st.nextToken()); //type
 			for(int i = 0; i < tempString.length(); ++i)
@@ -284,13 +285,13 @@ public class LoginScreen extends Screen
 		}
 		br.close();
 		
-		for(int i = 0; i < firstNames.size(); ++i)
+		for(int i = 0; i < emails.size(); ++i)
 		{
 			tempString = new String (passWords[i]);
 			tempString = tempString.trim();
 			passWords[i] = tempString.toCharArray();
 			
-			if(userNameTF.getText().equals(firstNames.elementAt(i)) && Arrays.equals(passwordTF.getPassword(),passWords[i]))
+			if(userNameTF.getText().equals(emails.elementAt(i)) && Arrays.equals(passwordTF.getPassword(),passWords[i]))
 			{
 				//Use variable type at the top to switch between doctor login and patient login
 				//Doctors
@@ -305,7 +306,7 @@ public class LoginScreen extends Screen
 				if(types.elementAt(i).equals("1"))
 				{
 					TutorialScreen ts = new TutorialScreen(run);
-					//ts.getPatient(userNameTF.getText(), i + 1);
+					ts.setPatient(emails.elementAt(i));
 					run.setScreen(ts);
 				}
 		}
