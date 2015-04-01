@@ -16,11 +16,12 @@ public class Vector
 	
 	//Constructors
 	/**
-	 * Used for when position or value of object is unknown
+	 * Used when vector not know
 	 */
 	public Vector()
-	{}
-	
+	{
+		
+	}
 	/** 
 	 * Used for when position of object is known
 	 * @param x - x value
@@ -122,7 +123,7 @@ public class Vector
 		if(Math.abs(this.y) > v.y)
 			this.y = v.y;
 		
-		return (Math.abs(this.x) == v.x && Math.abs(this.y) == v.y);
+		return Math.abs(this.x) == v.x && Math.abs(this.y) == v.y;
 	}
 	
 	/**

@@ -21,11 +21,11 @@ public class SoundTest {
 	public void OGGfileTypeTest() 
 	{
 		String temp = "OGG";
-		assert(player.getFileType(files[0]) == temp);
+		assert player.getFileType(files[0]) == temp;
 		System.out.println(player.getFileType(files[0]));
-		assert(player.getFileType(files[1]) != temp);
+		assert player.getFileType(files[1]) != temp;
 		System.out.println(player.getFileType(files[1]));
-		assert(player.getFileType(files[2]) != temp);
+		assert player.getFileType(files[2]) != temp;
 		System.out.println(player.getFileType(files[2]));
 	}
 	
@@ -33,11 +33,11 @@ public class SoundTest {
 	public void WAVfileTypeTest() 
 	{
 		String temp = "WAV";
-		assert(player.getFileType(files[0]) != temp);
+		assert player.getFileType(files[0]) != temp;
 		System.out.println(player.getFileType(files[0]));
-		assert(player.getFileType(files[1]) != temp);
+		assert player.getFileType(files[1]) != temp;
 		System.out.println(player.getFileType(files[1]));
-		assert(player.getFileType(files[2]) == temp);
+		assert player.getFileType(files[2]) == temp;
 		System.out.println(player.getFileType(files[2]));
 	}
 	

@@ -21,6 +21,10 @@ public final class Assets
 	
 	private static Properties joeyProps;
 	
+	private Assets()
+	{
+	}
+	
 	public static void load()
 	{
 		reload();
@@ -39,6 +43,9 @@ public final class Assets
 			sprites.put("soundOff", new TextureRegion(textures.get("sheet"),  54, 24, 54, 55));
 			sprites.put("soundLbl", new TextureRegion(textures.get("sheet"),  0, 0, 65, 23));
 			sprites.put("arrowBut", new TextureRegion(textures.get("sheet"), 110, 24, 54, 55));
+			
+			sprites.put("back", new TextureRegion(textures.get("atlas"), 128, 512 - 64, 32, 32));
+			sprites.put("upgrade", new TextureRegion(textures.get("atlas"), 160, 512 - 64, 32, 32));
 			
 			sprites.put("sky", new TextureRegion(textures.get("atlas"), 0, 512 - 96, 32, 96));
 			sprites.put("grass", new TextureRegion(textures.get("atlas"), 32, 512 - 32, 32, 32));

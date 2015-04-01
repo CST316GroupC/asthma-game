@@ -69,6 +69,7 @@ public class Options extends GameScreen
 	{
 		cam.setCamera();
 		Assets.getTexture("sheet").bind();
+		Assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		Assets.getImage("soundLbl").draw(soundLabel);
 		if(sound.equals("true"))
 		{
@@ -79,8 +80,7 @@ public class Options extends GameScreen
 			Assets.getImage("soundOff").draw(soundOnOff);
 		}
 		
-		Rectangle temp = new Rectangle(back.lowerLeft.x + back.width, back.lowerLeft.y, -1*back.width, back.height);
-		Assets.getImage("arrowBut").draw(temp);
+		Assets.getImage("back").draw(back);
 	}
 
 	@Override
@@ -99,6 +99,7 @@ public class Options extends GameScreen
 	public void dispose() 
 	{
 		Assets.setProps("sound", sound);
+		Assets.save();
 		isClosing = true;
 	}
 

@@ -39,13 +39,13 @@ public class TextureRegion
 		float textHeight = text.getImageHeight();
 		
 		//topleft
-		points[0] = new Vector(((x+1)/textWidth), 1 - ((y+height)/textHeight));
+		points[0] = new Vector((x+1)/textWidth, 1 - (y+height)/textHeight);
 		//topright
-		points[1] = new Vector(((x+width-1)/textWidth), 1 - ((y+height)/textHeight));
+		points[1] = new Vector((x+width-1)/textWidth, 1 - (y+height)/textHeight);
 		//botright
-		points[2] = new Vector(((x+width-1)/textWidth), 1 - (y/textHeight));
+		points[2] = new Vector((x+width-1)/textWidth, 1 - (y/textHeight));
 		//botleft
-		points[3] = new Vector(((x+1)/textWidth), 1 - (y/textHeight));	
+		points[3] = new Vector((x+1)/textWidth, 1 - (y/textHeight));	
 	}
 	
 	/**

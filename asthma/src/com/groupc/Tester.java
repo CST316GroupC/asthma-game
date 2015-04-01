@@ -2,8 +2,13 @@ package com.groupc;
 
 import java.io.File;
 
-public class Tester {
+public final class Tester
+{
 
+	private Tester()
+	{
+	}
+	
 	/**
 	 * @param args
 	 * @throws InterruptedException 

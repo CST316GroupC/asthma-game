@@ -10,8 +10,13 @@ import com.groupc.math.Rectangle;
  * @author Edwin Avalos
  *
  */
-public class TextDrawer 
+public final class TextDrawer 
 {
+	
+	private TextDrawer()
+	{
+	}
+	
 	/**
 	 * Draws a number on the screen. Draws from right to left and only draws the number of digits specified
 	 * 
@@ -133,6 +138,7 @@ public class TextDrawer
 				break;
 			case 'q':
 				rect.lowerLeft.y -= rect.height/6;
+				rect.lowerLeft.x += rect.width;
 				rect.width *= -1;
 				Assets.getImage("letterP").draw(rect);
 				break;

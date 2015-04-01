@@ -90,12 +90,13 @@ public class UpgradeScreen extends GameScreen
 		cam.setCamera();
 		
 		Assets.getTexture("atlas").bind();
-		Assets.getImage("joeyFly").draw(new Rectangle(0, 0, 400, 400));
+
+		Assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		
 		//draw arrows
-		Assets.getImage("joeyBou").draw(upgradeSpeed);
-		Assets.getImage("joeyBou").draw(upgradeFlaps);
-		Assets.getImage("joeyFall").draw(back);
+		Assets.getImage("upgrade").draw(upgradeSpeed);
+		Assets.getImage("upgrade").draw(upgradeFlaps);
+		Assets.getImage("back").draw(back);
 		
 		TextDrawer.drawString("Seeds", 25, 350, 40, 40);
 		TextDrawer.drawInt(seeds, 250, 350, 20, 40, 5);

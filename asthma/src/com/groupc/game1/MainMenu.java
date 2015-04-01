@@ -16,6 +16,7 @@ public class MainMenu extends GameScreen
 	private final Rectangle play;
 	private final Rectangle options;
 	private final Rectangle upgrade;
+	private final Rectangle instruct;
 	private final Vector mouseClick;
 	private int next;
 	
@@ -28,6 +29,7 @@ public class MainMenu extends GameScreen
 		play = new Rectangle(25, 200, 150, 75);
 		options = new Rectangle(200, 200, 150, 75);
 		upgrade = new Rectangle(25, 100, 150, 75);
+		instruct = new Rectangle(200, 100, 150, 75);
 		mouseClick = new Vector();
 	}
 
@@ -39,22 +41,24 @@ public class MainMenu extends GameScreen
 			cam.click(mouseClick);
 			if(CollisionChecker.PointToRect(mouseClick, play))
 			{
-				System.out.println("play");
 				this.dispose();
 				next = 1;
 			}
 			if(CollisionChecker.PointToRect(mouseClick, options))
 			{
-				System.out.println("options");
 				this.dispose();
 				next = 2;
 				
 			}
 			if(CollisionChecker.PointToRect(mouseClick, upgrade))
 			{
-				System.out.println("upgrade");
 				this.dispose();
 				next = 3;
+			}
+			if(CollisionChecker.PointToRect(mouseClick, instruct))
+			{
+				this.dispose();
+				next = 4;
 			}
 		}
 		
@@ -65,11 +69,12 @@ public class MainMenu extends GameScreen
 	{
 		cam.setCamera();
 		Assets.getTexture("sheet").bind();
-		Assets.getImage("grass").draw(new Rectangle(0, 0, 400, 400));
+		Assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		Assets.getImage("title").draw(title);
 		TextDrawer.drawStringinRect("Start", play);
 		TextDrawer.drawStringinRect("Options", options);
 		TextDrawer.drawStringinRect("Upgrade", upgrade);
+		TextDrawer.drawStringinRect("Instructions", instruct);
 		//Assets.getImage("playBut").draw(play);
 		//Assets.getImage("optionsBut").draw(options);
 		//Assets.getImage("upgradeBut").draw(upgrade);
@@ -98,11 +103,21 @@ public class MainMenu extends GameScreen
 	public GameScreen getNext() 
 	{
 		if(next == 1)
+		{
 			return new World();
+		}
 		if(next == 2)
+		{
 			return new Options(this.cam);
+		}
 		if(next == 3)
+		{
 			return new UpgradeScreen();
+		}
+		if(next == 4)
+		{
+			return new Instructions();
+		}
 		return null;
 	}
 }
