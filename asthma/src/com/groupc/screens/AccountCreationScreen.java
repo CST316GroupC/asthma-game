@@ -239,7 +239,7 @@ public class AccountCreationScreen extends Screen
 			
 		}else  //assumes a database will be implemented but for now will just use a text file
 		{
-			Database.addPatient(firstNameTF.getText(), lastNameTF.getText(), dobTF.getText(), emailTF.getText(), passwordTF.getText(), infoTA.getText());
+			Database.addPatient(firstNameTF.getText(), lastNameTF.getText(), dobTF.getText(), passwordTF.getText(), emailTF.getText(), infoTA.getText());
 				//run.setScreen(new DoctorScreen(run));  THIS IS A BUG RIGHT NOW
 			try 
 			{
