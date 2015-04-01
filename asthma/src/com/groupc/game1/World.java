@@ -46,6 +46,7 @@ public class World extends GameScreen
 	public final Ramp ramp;
 	public final Seed[] seeds;
 	public final Cow cow;
+	public final HayStack hay;
 	private Random rand;
 	
 	public World()
@@ -65,6 +66,7 @@ public class World extends GameScreen
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 		score = Integer.parseInt(Assets.getProps().getProperty("score"));
 		seedsCollected = Integer.parseInt(Assets.getProps().getProperty("seeds"));
+		this.hay = new HayStack(25, 0.5f);
 	}
 	
 	public void updateSeeds()
@@ -93,6 +95,26 @@ public class World extends GameScreen
 		cow.update(deltaTime);
 	}
 	
+	public void updateHayStack()
+	{
+		if(hay.position.x < cam.position.x - FRUSTUM_WIDTH /2)
+		{
+			int chance = rand.nextInt(5);
+			if(chance < 3)
+			{
+				hay.setHit(false);
+				hay.position.set(rand.nextFloat() * 10 + cam.position.x + FRUSTUM_WIDTH/2, 0.5f);
+				hay.update();
+				if(CollisionChecker.RectToRect(hay.bounds, cow.bounds))
+				{
+					hay.position.set(rand.nextFloat() * 10 + cam.position.x + FRUSTUM_WIDTH/2, 0.5f);
+					hay.update();
+				}
+				
+			}
+		}
+	}
+	
 	
 	public void update(float deltaTime)
 	{
@@ -102,6 +124,7 @@ public class World extends GameScreen
 			case WORLD_STATE_PLAYING:			
 				updateSeeds();
 				updateCow(deltaTime);
+				updateHayStack();
 				updateJoey(deltaTime);
 				collision();
 				if(joey.getState() == JoeyRooster.STATE_STOP)
@@ -226,7 +249,23 @@ public class World extends GameScreen
 		renderRamp();
 		renderSeeds();
 		renderCow();
+		renderHay();
 		renderJoey();
+	}
+	
+	public void renderHay()
+	{
+		Rectangle rect;
+		if(hay.getHit())
+		{
+			rect = new Rectangle(hay.position.x - .5f, hay.position.y -.5f, 2, 1);
+			Assets.getImage("hayHit").draw(rect);
+		}
+		else
+		{
+			rect = new Rectangle(hay.position.x - .5f, hay.position.y -.5f, 1, 1);
+			Assets.getImage("hay").draw(rect);
+		}
 	}
 	
 	public void renderHud()
@@ -323,6 +362,16 @@ public class World extends GameScreen
 		collisionRamp();
 		collisionSeed();
 		collisionCow();
+		collisionHay();
+	}
+	
+	public void collisionHay()
+	{
+		if(CollisionChecker.RectToRect(joey.bounds, hay.bounds) && !(hay.getHit()))
+		{
+			joey.hitHay(hay);
+			hay.setHit(true);
+		}
 	}
 	
 	public void collisionRamp()

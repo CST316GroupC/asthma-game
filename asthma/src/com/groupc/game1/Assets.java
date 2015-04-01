@@ -49,6 +49,8 @@ public final class Assets
 			
 			sprites.put("sky", new TextureRegion(textures.get("atlas"), 0, 512 - 96, 32, 96));
 			sprites.put("grass", new TextureRegion(textures.get("atlas"), 32, 512 - 32, 32, 32));
+			sprites.put("hay", new TextureRegion(textures.get("atlas"), 32, 512 - 64, 32, 32));
+			sprites.put("hayHit", new TextureRegion(textures.get("atlas"), 32, 512 - 96, 32, 32));
 			sprites.put("cow", new TextureRegion(textures.get("atlas"), 64, 512 - 32, 64, 32));
 			sprites.put("cowHit", new TextureRegion(textures.get("atlas"), 64, 512 - 32 - 64, 64, 64));
 			sprites.put("seed", new TextureRegion(textures.get("atlas"), 128, 512 - 32, 32, 32));

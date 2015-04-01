@@ -155,6 +155,15 @@ public class JoeyRooster extends MovingGameObject
 		}
 	}
 	
+	public void hitHay(HayStack hay)
+	{
+		if(state != STATE_BOUNCE && !(hay.getHit()))
+		{
+			velocity.set(velocity.x * .9f, velocity.y * .7f);
+			state = STATE_BOUNCE;
+		}
+	}
+	
 	public void toggleGlide()
 	{
 		if(state != STATE_SB && state != STATE_RAMP && state != STATE_GLIDE)
