@@ -31,16 +31,16 @@ public class Game1Test
 	@Test
 	public void creationTest()
 	{
-		assert(world.joey != null);
-		assert(world.state == World.WORLD_STATE_PLAYING);
+		assert world.joey != null;
+		assert world.state == World.WORLD_STATE_PLAYING;
 	}
 	
 	@Test
 	public void updateTest()
 	{
 		world.update(1);
-		assert(world.joey.velocity.x == world.joey.accel.x);
-		assert(world.joey.position.x != 1 + world.joey.velocity.x);
+		assert world.joey.velocity.x == world.joey.accel.x;
+		assert world.joey.position.x != 1 + world.joey.velocity.x;
 	}
 	
 	@Test

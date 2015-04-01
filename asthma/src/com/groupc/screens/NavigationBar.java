@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import org.lwjgl.opengl.Display;
+
 import com.groupc.Runner;
 import com.groupc.math.Resize;
 
@@ -21,10 +23,11 @@ public class NavigationBar extends JPanel
 {
 	//Variables
 	private Runner run;
-	private Resize resize;
+	private final Resize resize;
 	private int    buttonPressed      = 0; //0 is none, 1 is add patient, 2 is back and logout for now
 	public  boolean backButtonPressed = false;
 	boolean played 					  = true;
+	
 	//Display Elements
 	JPanel  navBox               = new JPanel();
 	JButton backButton           = new JButton("Back");
@@ -33,15 +36,11 @@ public class NavigationBar extends JPanel
 	JToggleButton muteButton     = new JToggleButton();
 	JLabel  pageTitle            = new JLabel("",SwingConstants.CENTER);
 	
-	
-
-	
-
+	ImageIcon muteOffIcon = new ImageIcon("UnMuteIcon.png");
+	ImageIcon muteOnIcon  = new ImageIcon("MuteIcon.png");
 
 	public NavigationBar(Runner run, boolean backOn, boolean parentControlsOn, String title) 
 	{
-		
-		
 		this.run = run;
 		resize   = new Resize(run);
 		
@@ -65,6 +64,16 @@ public class NavigationBar extends JPanel
 		
 		//Set fonts
 		pageTitle.setFont(new Font("Serif", Font.BOLD, 25));
+		
+		//Mute on/off
+		if(run.player.getPausedMusic())
+		{
+			muteButton.setSelected(true);
+		}
+		else
+		{
+			muteButton.setSelected(false);
+		}
 		
 		////Buttons////
 		//logoutButton
@@ -119,7 +128,7 @@ public class NavigationBar extends JPanel
 		
 		//navBox
 		navBox.setBounds(resize.width(20), resize.height(-2), resize.width(460), resize.height(52));
-		navBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
+		navBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 		
 		//backButton
 		backButton.setBounds(resize.width(10), resize.height(10), resize.width(80), resize.height(30));
@@ -132,6 +141,8 @@ public class NavigationBar extends JPanel
 		//MuteButton
 		muteButton.setBounds(resize.width(330), resize.height(10), resize.width(30), resize.height(30));
 		muteButton.setFont(new Font(muteButton.getFont().getFontName(),muteButton.getFont().getStyle(), resize.font(12)));
+		muteButton.setIcon(new ImageIcon(muteOffIcon.getImage().getScaledInstance(resize.width(30), resize.height(30), java.awt.Image.SCALE_SMOOTH)));
+		muteButton.setSelectedIcon(new ImageIcon(muteOnIcon.getImage().getScaledInstance(resize.width(30), resize.height(30), java.awt.Image.SCALE_SMOOTH)));
 		
 		//logoutButton
 		logoutButton.setBounds(resize.width(370), resize.height(10), resize.width(80), resize.height(30));
@@ -147,20 +158,19 @@ public class NavigationBar extends JPanel
 		//logout
 		if(buttonPressed == 1)
 		{
+			Display.destroy();
 			run.setScreen(new LoginScreen(run));
 		}
 		//mute
 		else if(buttonPressed == 2)
 		{
-			if(run.player.music.isPlaying() && played == true)
+			if(muteButton.getSelectedObjects() != null)
 			{
-				run.player.pauseMusic();
-				played = false;
+				played = !run.player.pauseMusic();
 			}
 			else
 			{
-				run.player.resume();
-				played = true;
+				played = run.player.resume();
 			}
 		}
 		//parentControls
@@ -168,5 +178,6 @@ public class NavigationBar extends JPanel
 		{
 			run.setScreen(new ParentControlsScreen(run));
 		}
+		buttonPressed = 0;
 	}
 }

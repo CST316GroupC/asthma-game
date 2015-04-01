@@ -1,18 +1,31 @@
 package com.groupc.screens;
 
+/*
+ * Author(s):		Team C
+ * Course: 			CST 316 Spring
+ * Instructor:		Dr. Gary
+ * Date Changed:	3/29/2015
+ * 
+ * Description:		TutorialScreen is the first page after the patient logs in. 
+ * 					This page only appears the first time the patient logs in.
+ * 					Instructions on how to use the Spirometer and how to operate/navigate the software.
+ */
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 import com.groupc.Runner;
@@ -22,33 +35,47 @@ import com.groupc.math.Resize;
 public class TutorialScreen extends Screen
 {
 	//Variables
-	boolean redraw     = true;
-	Resize  resize     = new Resize(run);
-	int     butPressed = 0;	
-	boolean played = true;
+	boolean redraw				= true;
+	boolean played				= true;
+	int 	butPressed			= 0;	
+	int 	step				= 0;
+	Resize  resize				= new Resize(run);
+	String patientUserName;
 	
 	//Display Elements
-	NavigationBar navBar = new NavigationBar(run,false,false,"Tutorial");
-	JLabel skipText      = new JLabel("* To skip, press Start",SwingConstants.CENTER);;
-
+	NavigationBar navBar		= new NavigationBar(run,false,false,"Tutorial");
+	JLabel skipText				= new JLabel("* To skip, press Start",SwingConstants.CENTER);
+	JLabel citation				= new JLabel("http://www.drugs.com/cg/how-to-use-an-incentive-spirometer.html",SwingConstants.CENTER);
+	//Panels
+	JPanel videoBox				= new JPanel();
+	JPanel descriptionBox		= new JPanel();
+	JPanel stepsBox				= new JPanel();
 	
-	JPanel videoBox       = new JPanel();
-	JPanel descriptionBox = new JPanel();
-	JPanel stepsBox       = new JPanel();
+	//Buttons
+	JButton step1				= new JButton("Step 1");
+	JButton step2				= new JButton("Step 2");
+	JButton step3				= new JButton("Step 3");
+	JButton step4				= new JButton("Step 4");
+	JButton step5				= new JButton("Step 5");
+	JButton step6				= new JButton("Step 6");
+	JButton step7				= new JButton("Step 7");
+	JButton start				= new JButton("Start");
 	
-	JButton step1 = new JButton("Step 1");
-	JButton step2 = new JButton("Step 2");
-	JButton step3 = new JButton("Step 3");
-	JButton step4 = new JButton("Step 4");
-	JButton step5 = new JButton("Step 5");
-	JButton start = new JButton("Start");
+	ImageIcon image1 			= new ImageIcon("tutorial1.png");
+	ImageIcon image2 			= new ImageIcon("tutorial2.png");
+	ImageIcon image3 			= new ImageIcon("tutorial3.png");
+	ImageIcon image4 			= new ImageIcon("tutorial4.png");
+	ImageIcon image5 			= new ImageIcon("tutorial5.png");
+	ImageIcon image6 			= new ImageIcon("tutorial6.png");
+	ImageIcon image7 			= new ImageIcon("tutorial7.png");
 	
-	public TutorialScreen(Runner run) 
+	JLabel stepImage			= new JLabel();
+	
+	public TutorialScreen(Runner run)
 	{
 		super(run);
 		
-		//Basic Frame Settings
-		run.setTitle("Tutorial");
+		//Basic Frame Settings moved to set patient
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -66,58 +93,90 @@ public class TutorialScreen extends Screen
 		stepsBox.setBackground(Color.GRAY);
 		skipText.setForeground(Color.RED);
 		
-		//Font 
-		videoBox.setBounds(30, 120, 250, 180);
-		descriptionBox.setBounds(30, 320, 250, 60);
-		stepsBox.setBounds(310, 120, 150, 260);
-		
-
-		
-		
-		// Add Steps button
-		step1 = new JButton("Step 1");
-		step2 = new JButton("Step 2");
-		step3 = new JButton("Step 3");
-		step4 = new JButton("Step 4");
-		step5 = new JButton("Step 5");
-	
-		step1.setBounds(345, 140, 80, 25);
-		step2.setBounds(345, 190, 80, 25);
-		step3.setBounds(345, 240, 80, 25);
-		step4.setBounds(345, 290, 80, 25);
-		step5.setBounds(345, 340, 80, 25);
-
-		start.setBounds(200, 420, 80, 25 );
-		
-		skipText.setBounds(180, 395, 120, 25);
-		
-		
 		////Buttons////
 		start.addActionListener(new ActionListener()
 		{
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				butPressed = 1;
 			}
 		});
-
-//		// Add start button listener
-//		start.addActionListener(new ActionListener()
-//		{
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				butPressed = 4;
-//			}
-//		});
 		
+		step1.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				stepImage.setIcon(image1);
+			}
+		});
+				
+
+		step2.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				stepImage.setIcon(image2);
+			}
+		});
+		
+		step3.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				stepImage.setIcon(image3);
+			}
+		});
+		
+		step4.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				stepImage.setIcon(image4);
+			}
+		});
+		
+		step5.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				stepImage.setIcon(image5);
+			}
+		});
+		step6.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				stepImage.setIcon(image6);
+			}
+		});
+		
+		step7.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				stepImage.setIcon(image7);
+			}
+		});
+								
 		this.add(skipText);
+		this.add(citation);
 		this.add(step1);
 		this.add(step2);
 		this.add(step3);
 		this.add(step4);
 		this.add(step5);
+		this.add(step6);
+		this.add(step7);
 		this.add(start);
-		
+		this.add(stepImage);
 		// Panels have to be added last for it to show 
 		this.add(videoBox);
 		this.add(descriptionBox);
@@ -126,6 +185,18 @@ public class TutorialScreen extends Screen
 		this.setLayout(null);		
 		run.setContentPane(this);
 		run.setVisible(true);
+	}
+	
+	public void setPatient(String pUserName)
+	{
+		if(pUserName != null)
+		{
+			patientUserName = pUserName;
+			run.setTitle(patientUserName + " Tutorial");
+		} else
+		{
+			run.setTitle("Tutorial");
+		}
 	}
 
 	@Override
@@ -137,25 +208,38 @@ public class TutorialScreen extends Screen
 			navBar.redrawUpdate();
 			
 			//video
-			videoBox.setBounds(resize.locationX(30), resize.locationY(120), resize.width(250), resize.height(180));
+			//videoBox.setBounds(resize.locationX(20), resize.locationY(120), resize.width(315), resize.height(215));
 			
 			//description
+			/*
 			descriptionBox.setBounds(resize.locationX(30), resize.locationY(320), resize.width(250), resize.height(60));
-			descriptionBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
+			descriptionBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+			*/
+			
+			citation.setBounds(resize.locationX(15), resize.locationY(350), resize.width(330), resize.height(25));
+			citation.setFont(new Font(citation.getFont().getFontName(),citation.getFont().getStyle(), resize.font(10)));
 			
 			//step
-			stepsBox.setBounds(resize.locationX(310), resize.locationY(120), resize.width(150), resize.height(260));
-			stepsBox.setBorder(BorderFactory.createLineBorder(Color.black, resize.height(1)));
-			step1.setBounds(resize.locationX(345), resize.locationY(140), resize.width(80), resize.height(25));
+			stepsBox.setBounds(resize.locationX(360), resize.locationY(120), resize.width(120), resize.height(260));
+			stepsBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+			step1.setBounds(resize.locationX(385), resize.locationY(135), resize.width(75), resize.height(20));
 			step1.setFont(new Font(step1.getFont().getFontName(),step1.getFont().getStyle(), resize.font(12)));
-			step2.setBounds(resize.locationX(345), resize.locationY(190), resize.width(80), resize.height(25));
+			step2.setBounds(resize.locationX(385), resize.locationY(170), resize.width(75), resize.height(20));
 			step2.setFont(new Font(step2.getFont().getFontName(),step2.getFont().getStyle(), resize.font(12)));
-			step3.setBounds(resize.locationX(345), resize.locationY(240), resize.width(80), resize.height(25));
+			step3.setBounds(resize.locationX(385), resize.locationY(205), resize.width(75), resize.height(20));
 			step3.setFont(new Font(step3.getFont().getFontName(),step3.getFont().getStyle(), resize.font(12)));
-			step4.setBounds(resize.locationX(345), resize.locationY(290), resize.width(80), resize.height(25));
+			step4.setBounds(resize.locationX(385), resize.locationY(240), resize.width(75), resize.height(20));
 			step4.setFont(new Font(step4.getFont().getFontName(),step4.getFont().getStyle(), resize.font(12)));
-			step5.setBounds(resize.locationX(345), resize.locationY(340), resize.width(80), resize.height(25));
+			step5.setBounds(resize.locationX(385), resize.locationY(275), resize.width(75), resize.height(20));
 			step5.setFont(new Font(step5.getFont().getFontName(),step5.getFont().getStyle(), resize.font(12)));
+			step6.setBounds(resize.locationX(385), resize.locationY(310), resize.width(75), resize.height(20));
+			step6.setFont(new Font(step6.getFont().getFontName(),step6.getFont().getStyle(), resize.font(12)));
+			step7.setBounds(resize.locationX(385), resize.locationY(345), resize.width(75), resize.height(20));
+			step7.setFont(new Font(step7.getFont().getFontName(),step7.getFont().getStyle(), resize.font(12)));
+			
+			//image
+			stepImage.setBounds(resize.locationX(20), resize.locationY(120), resize.width(315), resize.height(215));
+			
 			
 			//skipText
 			skipText.setBounds(resize.locationX(0), resize.locationY(395), resize.width(500), resize.height(25));
@@ -168,10 +252,13 @@ public class TutorialScreen extends Screen
 			run.repaint();
 			redraw = false;
 		}
+		navBar.update();
 		
 		if(butPressed == 1)
 		{
-			run.setScreen(new RecordingScreen(run));
+			RecordingScreen rs = new RecordingScreen(run);
+			rs.setPatient(patientUserName);
+			run.setScreen(rs);
 		}
 		else if(butPressed == 3)
 		{
@@ -189,19 +276,22 @@ public class TutorialScreen extends Screen
 	}
 
 	@Override
-	public void present(float deltaTime) {
+	public void present(float deltaTime) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void pause() {
+	public void pause() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void resume() {
+	public void resume() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
@@ -211,5 +301,4 @@ public class TutorialScreen extends Screen
 	{
 		// TODO Auto-generated method stub
 	}
-
 }

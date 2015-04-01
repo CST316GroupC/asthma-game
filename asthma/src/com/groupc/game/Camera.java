@@ -39,5 +39,10 @@ public class Camera
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glLoadIdentity();
 	}
+	
+	public void click(Vector clk)
+	{
+		clk.set(clk.x * (frustumWidth / Display.getWidth()), clk.y * (frustumHeight / Display.getHeight()));
+	}
 }
 

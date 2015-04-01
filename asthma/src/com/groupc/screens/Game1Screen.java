@@ -3,8 +3,13 @@ package com.groupc.screens;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 
 import org.lwjgl.LWJGLException;
@@ -15,14 +20,23 @@ import org.lwjgl.opengl.GL11;
 import com.groupc.Runner;
 import com.groupc.game1.MainMenu;
 import com.groupc.game.GameScreen;
+import com.groupc.math.Resize;
 
 
 public class Game1Screen extends Screen
 {
-	//testing
-	int testx = 0;
+	//Variables
+	boolean redraw     = true;
+	Resize  resize     = new Resize(run);
+	int     butPressed = 0;
+	int testx = 0;	
+
+	//Display Elements
+	NavigationBar navBar = new NavigationBar(run,true,false,"Game 1");
+	
 	Canvas canvas;
 	GameScreen scr;
+	
 	public Game1Screen(Runner run)
 	{
 		super(run);
@@ -30,24 +44,42 @@ public class Game1Screen extends Screen
 		
 		//Basic Frame Settings
 		run.setTitle("GameScreen");
-		run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		run.setMinimumSize(new Dimension(run.SCR_WIDTH, run.SCR_HEIGHT));
+		
+		//resize stuff
+		run.addComponentListener(new ComponentAdapter()
+		{
+			public void componentResized(ComponentEvent e)
+			{
+				redraw = true;
+			}
+		});
+		
+		//Set colors
+		this.setBackground(Color.WHITE);
 		
 		canvas.setFocusable(true);
         canvas.requestFocus();
-		canvas.setSize(400, 400);
-        canvas.setLocation(64, 64);
+		//canvas.setSize(400, 400);
+        //canvas.setLocation(64, 64);
         canvas.setIgnoreRepaint(true);
         canvas.setVisible(true);
+        
+		this.add(navBar);
 		this.add(canvas);
+		
+		this.setLayout(null);
+		run.setContentPane(this);
+		run.setVisible(true);
+		
+		
 		run.setContentPane(this);
 		run.setVisible(true);
 		
 		try {			
 			
             //Display.setDisplayMode(new DisplayMode(400, 400));
-			Display.create();
 			Display.setParent(canvas);
+			Display.create();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,6 +105,24 @@ public class Game1Screen extends Screen
 		{
 			scr = scr.getNext();
 		}
+		
+		if(redraw)
+		{	
+			//navBar
+			navBar.redrawUpdate();
+			
+			//canvas
+			canvas.setBounds(resize.locationX(0), resize.locationY(100), resize.width(500), resize.height(400));
+			run.repaint();
+			redraw = false;
+		}
+		if(navBar.backButtonPressed)
+		{
+			Display.destroy();
+			run.setScreen(new GameHubScreen(run));
+		}
+		
+		navBar.update();
 	}
 
 	@Override

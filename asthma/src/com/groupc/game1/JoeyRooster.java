@@ -22,7 +22,7 @@ public class JoeyRooster extends MovingGameObject
 	private float stateTime;
 	
 	//upgrades
-	private final static float INITIAL_SPEED = 5;
+	private final static float INITIAL_SPEED = 7;
 	
 	private float currentStatima;
 	
@@ -40,20 +40,9 @@ public class JoeyRooster extends MovingGameObject
 		//set acceleration
 		if(state != STATE_SB && state != STATE_RAMP)
 		{
-			if(state == STATE_FLAP)
-			{
-			}
-			else if(state == STATE_GLIDE)
-			{
-				
-			}
-			else if(state == STATE_STOP)
+			if(state == STATE_STOP)
 			{
 				accel.set(0, 0);
-			}
-			else
-			{
-				
 			}
 		}
 		
@@ -166,6 +155,15 @@ public class JoeyRooster extends MovingGameObject
 		}
 	}
 	
+	public void hitHay(HayStack hay)
+	{
+		if(state != STATE_BOUNCE && !(hay.getHit()))
+		{
+			velocity.set(velocity.x * .9f, velocity.y * .7f);
+			state = STATE_BOUNCE;
+		}
+	}
+	
 	public void toggleGlide()
 	{
 		if(state != STATE_SB && state != STATE_RAMP && state != STATE_GLIDE)
@@ -178,8 +176,6 @@ public class JoeyRooster extends MovingGameObject
 		{
 			state = STATE_FALLING;
 			accel.set(0, World.GRAVITY);
-
-			System.out.println("released");
 		}
 	}
 	

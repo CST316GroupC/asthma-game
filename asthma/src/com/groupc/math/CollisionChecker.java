@@ -7,8 +7,12 @@ package com.groupc.math;
  * @author Edwin Avalos
  *
  */
-public class CollisionChecker
+public final class CollisionChecker
 {
+	private CollisionChecker()
+	{
+	}
+	
 	/**
 	 * Check if two Rectangles are colliding
 	 * @param r1 - One of the Rectangles
@@ -17,10 +21,10 @@ public class CollisionChecker
 	 */
 	public static boolean RectToRect(Rectangle r1, Rectangle r2)
 	{
-		return (r1.lowerLeft.x < r2.lowerLeft.x + r2.width &&
+		return r1.lowerLeft.x < r2.lowerLeft.x + r2.width &&
 		           r1.lowerLeft.x + r1.width > r2.lowerLeft.x &&
 		           r1.lowerLeft.y < r2.lowerLeft.y + r2.height &&
-		           r1.lowerLeft.y + r1.height > r2.lowerLeft.y);
+		           r1.lowerLeft.y + r1.height > r2.lowerLeft.y;
 	}
 	
 	/**
@@ -31,8 +35,8 @@ public class CollisionChecker
 	 */
 	public static boolean PointToRect(Vector v, Rectangle r)
 	{
-		return (r.lowerLeft.x <= v.x && r.lowerLeft.x + r.width >= v.x &&
-	               r.lowerLeft.y <= v.y && r.lowerLeft.y + r.height >= v.y);
+		return r.lowerLeft.x <= v.x && r.lowerLeft.x + r.width >= v.x &&
+	               r.lowerLeft.y <= v.y && r.lowerLeft.y + r.height >= v.y;
 	}
 	
 	/**
@@ -44,8 +48,8 @@ public class CollisionChecker
 	 */
 	public static boolean RectInside(Rectangle r, int width, int height)
 	{
-		return (r.lowerLeft.x + r.width <= width && r.lowerLeft.x >= 0
-				&& r.lowerLeft.y + height <= height && r.lowerLeft.y >= 0);
+		return r.lowerLeft.x + r.width <= width && r.lowerLeft.x >= 0
+				&& r.lowerLeft.y + height <= height && r.lowerLeft.y >= 0;
 	}
 
 }
