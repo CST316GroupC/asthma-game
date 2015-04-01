@@ -82,6 +82,7 @@ public final class Assets
 			sprites.put("letterS", new TextureRegion(textures.get("atlas"), 192/8 * 4, 512-192, 192/8, 32));
 			sprites.put("letterT", new TextureRegion(textures.get("atlas"), 192/8 * 5, 512-192, 192/8, 32));
 			sprites.put("letterU", new TextureRegion(textures.get("atlas"), 192/8 * 6, 512-192, 192/8, 32));
+			sprites.put("letterW", new TextureRegion(textures.get("atlas"), 192/8 * 7, 512-192, 192/8, 32));
 			
 			
 		} catch (IOException e) {
@@ -111,7 +112,7 @@ public final class Assets
 			joeyProps.load(in);
 			in.close();
 			String temp = joeyProps.getProperty("firstTime", "true");
-			if(temp.equals("true"))
+			if("true".equals(temp))
 			{
 				joeyProps.setProperty("speedMult", "1");
 				joeyProps.setProperty("statima", "1");
@@ -119,6 +120,7 @@ public final class Assets
 				joeyProps.setProperty("maxDistance", "0");
 				joeyProps.setProperty("seeds", "0");
 				joeyProps.setProperty("firstTime", "false");
+				joeyProps.setProperty("sound", "true");
 				save();
 			}
 		} catch (IOException e1) {

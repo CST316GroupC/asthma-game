@@ -40,20 +40,9 @@ public class JoeyRooster extends MovingGameObject
 		//set acceleration
 		if(state != STATE_SB && state != STATE_RAMP)
 		{
-			if(state == STATE_FLAP)
-			{
-			}
-			else if(state == STATE_GLIDE)
-			{
-				
-			}
-			else if(state == STATE_STOP)
+			if(state == STATE_STOP)
 			{
 				accel.set(0, 0);
-			}
-			else
-			{
-				
 			}
 		}
 		
@@ -178,8 +167,6 @@ public class JoeyRooster extends MovingGameObject
 		{
 			state = STATE_FALLING;
 			accel.set(0, World.GRAVITY);
-
-			System.out.println("released");
 		}
 	}
 	

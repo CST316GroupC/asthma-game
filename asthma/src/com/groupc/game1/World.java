@@ -144,7 +144,10 @@ public class World extends GameScreen
 			{
 				if(Keyboard.getEventKey() == Keyboard.KEY_S || Keyboard.getEventKey() == Keyboard.KEY_DOWN)
 				{
-					joey.toggleGlide();
+					if(state == WORLD_STATE_PLAYING)
+					{
+						joey.toggleGlide();
+					}
 				}
 			}
 			else
@@ -229,7 +232,7 @@ public class World extends GameScreen
 	public void renderHud()
 	{
 		//hud
-		Assets.getImage("joeyFly").draw(new Rectangle(0, (cam.position.y + FRUSTUM_HEIGHT/2) - .35f, WORLD_WIDTH, .35f));
+		Assets.getImage("joeyFly").draw(new Rectangle(0, cam.position.y + FRUSTUM_HEIGHT/2 - .35f, WORLD_WIDTH, .35f));
 		TextDrawer.drawString("score", cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
 		TextDrawer.drawInt(score, cam.position.x - 3.2f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SCORE_DIGITS);
 	

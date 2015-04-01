@@ -10,12 +10,12 @@ import com.groupc.math.Vector;
 
 public class Options extends GameScreen 
 {
-	private Camera cam;
-	private Rectangle soundLabel;
-	private Rectangle soundOnOff;
-	private Rectangle back;
-	private boolean sound;
-	private Vector mouseClick;
+	private final Camera cam;
+	private final Rectangle soundLabel;
+	private final Rectangle soundOnOff;
+	private final Rectangle back;
+	private String sound;
+	private final Vector mouseClick;
 	
 	public Options(Camera cam)
 	{
@@ -25,7 +25,7 @@ public class Options extends GameScreen
 		soundLabel = new Rectangle(50, 250, 200, 100);
 		soundOnOff = new Rectangle(250, 250, 100, 100);
 		back = new Rectangle(180, 50, 100, 100);
-		sound = true;
+		sound = "true";
 		mouseClick = new Vector();
 	}
 	
@@ -45,7 +45,14 @@ public class Options extends GameScreen
 					cam.click(mouseClick);
 					if(CollisionChecker.PointToRect(mouseClick, soundOnOff))
 					{
-						sound = !sound;
+						if(sound.equals("true"))
+						{
+							sound = "false";
+						}
+						else
+						{
+							sound = "true";
+						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, back))
 					{
@@ -63,7 +70,7 @@ public class Options extends GameScreen
 		cam.setCamera();
 		Assets.getTexture("sheet").bind();
 		Assets.getImage("soundLbl").draw(soundLabel);
-		if(sound)
+		if(sound.equals("true"))
 		{
 			Assets.getImage("soundOn").draw(soundOnOff);
 		}
@@ -91,6 +98,7 @@ public class Options extends GameScreen
 	@Override
 	public void dispose() 
 	{
+		Assets.setProps("sound", sound);
 		isClosing = true;
 	}
 

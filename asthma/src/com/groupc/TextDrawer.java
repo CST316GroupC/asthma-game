@@ -22,11 +22,12 @@ public class TextDrawer
 	 * @param height - The height of each digit
 	 * @param length - The number of digits
 	 */
-	public static void drawInt(int num, float x, float y, float width, float height, float length)
+	public static void drawInt(int number, float x, float y, float width, float height, float length)
 	{
+		int num = number;
 		for(int i=0; i < length; i++)
 		{
-			int temp = num% 10;
+			int temp = num % 10;
 			num = num / 10;
 			Rectangle rect = new Rectangle(x + (length*width) - (i * width), y, width, height);
 			switch(temp)
@@ -61,6 +62,9 @@ public class TextDrawer
 				case 9:
 					Assets.getImage("nine").draw(rect);
 					break;
+				default:
+					break;
+						
 			}
 		}
 	}
@@ -73,9 +77,9 @@ public class TextDrawer
 	 * @param width - The width of each letter
 	 * @param height - The height of each letter
 	 */
-	public static void drawString(String str, float x, float y, float width, float height)
+	public static void drawString(String string, float x, float y, float width, float height)
 	{
-		str = str.toLowerCase(new Locale("US"));
+		String str = string.toLowerCase(new Locale("US"));
 		for(int i = 0; i < str.length(); i++)
 		{
 			Rectangle rect = new Rectangle(x + i*width, y, width, height);
@@ -115,6 +119,10 @@ public class TextDrawer
 				case 'p':
 					Assets.getImage("letterP").draw(rect);
 					break;
+				case 'q':
+					rect.width *= -1;
+					Assets.getImage("letterP").draw(rect);
+					break;
 				case 'r':
 					Assets.getImage("letterR").draw(rect);
 					break;
@@ -126,6 +134,11 @@ public class TextDrawer
 					break;
 				case 'u':
 					Assets.getImage("letterU").draw(rect);
+					break;
+				case 'w':
+					Assets.getImage("letterW").draw(rect);
+					break;
+				default:
 					break;
 			}
 		}

@@ -11,11 +11,11 @@ import com.groupc.math.Vector;
 
 public class UpgradeScreen extends GameScreen
 {
-	private Camera cam;
-	private Vector mouseClick;
-	private Rectangle upgradeSpeed;
-	private Rectangle upgradeFlaps;
-	private Rectangle back;
+	private final Camera cam;
+	private final Vector mouseClick;
+	private final Rectangle upgradeSpeed;
+	private final Rectangle upgradeFlaps;
+	private final Rectangle back;
 	
 	private int seeds;
 	private int speedMult;

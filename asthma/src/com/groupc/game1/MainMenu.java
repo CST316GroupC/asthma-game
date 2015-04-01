@@ -10,12 +10,12 @@ import com.groupc.math.Vector;
 
 public class MainMenu extends GameScreen
 {	
-	private Camera cam;
-	private Rectangle title;
-	private Rectangle play;
-	private Rectangle options;
-	private Rectangle upgrade;
-	private Vector mouseClick;
+	private final Camera cam;
+	private final Rectangle title;
+	private final Rectangle play;
+	private final Rectangle options;
+	private final Rectangle upgrade;
+	private final Vector mouseClick;
 	private int next;
 	
 	public MainMenu()

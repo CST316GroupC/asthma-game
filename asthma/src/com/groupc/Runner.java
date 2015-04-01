@@ -15,9 +15,13 @@ import com.groupc.screens.Screen;
 
 public class Runner extends JFrame
 {
-	Screen screen;
-	long startTime = System.nanoTime();
-	public AudioPlayer player;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Screen screen;
+	private long startTime = System.nanoTime();
+	public static AudioPlayer player;
 	
 	public final static int SCR_WIDTH = 500;
 	public final static int SCR_HEIGHT = 500;
