@@ -122,9 +122,10 @@ public class DoctorScreen extends Screen
 		while((line = br.readLine()) != null)
 		{
 			st = new StringTokenizer(line, " | ");
+			st.nextToken(); //email
 			patientFirstNames.add(counter, st.nextToken()); //fname
 			patientLastNames.add(st.nextToken());  //last name
-			st.nextToken();  // age
+			st.nextToken();  // dob
 			st.nextToken();  //password
 			st.nextToken(); //type
 			patDoctors.add(counter, st.nextToken()); //doctor for patient
