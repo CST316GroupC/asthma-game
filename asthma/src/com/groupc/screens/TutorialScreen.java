@@ -43,8 +43,8 @@ public class TutorialScreen extends Screen
 	
 	//Display Elements
 	NavigationBar navBar		= new NavigationBar(run,false,false,"Tutorial");
-	JLabel skipText				= new JLabel("* To skip, press Start",SwingConstants.CENTER);;
-
+	JLabel skipText				= new JLabel("* To skip, press Start",SwingConstants.CENTER);
+	JLabel citation				= new JLabel("http://www.drugs.com/cg/how-to-use-an-incentive-spirometer.html",SwingConstants.CENTER);
 	//Panels
 	JPanel videoBox				= new JPanel();
 	JPanel descriptionBox		= new JPanel();
@@ -68,13 +68,7 @@ public class TutorialScreen extends Screen
 	ImageIcon image6 			= new ImageIcon("tutorial6.png");
 	ImageIcon image7 			= new ImageIcon("tutorial7.png");
 	
-	JLabel step1Image			= new JLabel(image1);
-	JLabel step2Image			= new JLabel(image2);
-	JLabel step3Image			= new JLabel(image3);
-	JLabel step4Image			= new JLabel(image4);
-	JLabel step5Image			= new JLabel(image5);
-	JLabel step6Image			= new JLabel(image6);
-	JLabel step7Image			= new JLabel(image7);
+	JLabel stepImage			= new JLabel();
 	
 	public TutorialScreen(Runner run)
 	{
@@ -114,7 +108,7 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				step = 1;
+				stepImage.setIcon(image1);
 			}
 		});
 				
@@ -124,7 +118,7 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				step = 2;
+				stepImage.setIcon(image2);
 			}
 		});
 		
@@ -133,7 +127,7 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				step = 3;
+				stepImage.setIcon(image3);
 			}
 		});
 		
@@ -142,7 +136,7 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				step = 4;
+				stepImage.setIcon(image4);
 			}
 		});
 		
@@ -151,7 +145,7 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				step = 5;
+				stepImage.setIcon(image5);
 			}
 		});
 		step6.addActionListener(new ActionListener()
@@ -159,7 +153,7 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				step = 6;
+				stepImage.setIcon(image6);
 			}
 		});
 		
@@ -168,11 +162,12 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				step = 7;
+				stepImage.setIcon(image7);
 			}
 		});
 								
 		this.add(skipText);
+		this.add(citation);
 		this.add(step1);
 		this.add(step2);
 		this.add(step3);
@@ -181,14 +176,7 @@ public class TutorialScreen extends Screen
 		this.add(step6);
 		this.add(step7);
 		this.add(start);
-		this.add(step1Image);
-		this.add(step2Image);
-		this.add(step3Image);
-		this.add(step4Image);
-		this.add(step5Image);
-		this.add(step6Image);
-		this.add(step7Image);
-		
+		this.add(stepImage);
 		// Panels have to be added last for it to show 
 		this.add(videoBox);
 		this.add(descriptionBox);
@@ -197,7 +185,6 @@ public class TutorialScreen extends Screen
 		this.setLayout(null);		
 		run.setContentPane(this);
 		run.setVisible(true);
-		stepVisibility();
 	}
 
 	@Override
@@ -209,32 +196,37 @@ public class TutorialScreen extends Screen
 			navBar.redrawUpdate();
 			
 			//video
-			videoBox.setBounds(resize.locationX(30), resize.locationY(120), resize.width(250), resize.height(180));
+			//videoBox.setBounds(resize.locationX(20), resize.locationY(120), resize.width(315), resize.height(215));
 			
 			//description
+			/*
 			descriptionBox.setBounds(resize.locationX(30), resize.locationY(320), resize.width(250), resize.height(60));
 			descriptionBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+			*/
+			
+			citation.setBounds(resize.locationX(15), resize.locationY(350), resize.width(330), resize.height(25));
+			citation.setFont(new Font(citation.getFont().getFontName(),citation.getFont().getStyle(), resize.font(10)));
 			
 			//step
-			stepsBox.setBounds(resize.locationX(330), resize.locationY(120), resize.width(150), resize.height(260));
+			stepsBox.setBounds(resize.locationX(360), resize.locationY(120), resize.width(120), resize.height(260));
 			stepsBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-			step1.setBounds(resize.locationX(370), resize.locationY(135), resize.width(75), resize.height(20));
+			step1.setBounds(resize.locationX(385), resize.locationY(135), resize.width(75), resize.height(20));
 			step1.setFont(new Font(step1.getFont().getFontName(),step1.getFont().getStyle(), resize.font(12)));
-			step2.setBounds(resize.locationX(370), resize.locationY(170), resize.width(75), resize.height(20));
+			step2.setBounds(resize.locationX(385), resize.locationY(170), resize.width(75), resize.height(20));
 			step2.setFont(new Font(step2.getFont().getFontName(),step2.getFont().getStyle(), resize.font(12)));
-			step3.setBounds(resize.locationX(370), resize.locationY(205), resize.width(75), resize.height(20));
+			step3.setBounds(resize.locationX(385), resize.locationY(205), resize.width(75), resize.height(20));
 			step3.setFont(new Font(step3.getFont().getFontName(),step3.getFont().getStyle(), resize.font(12)));
-			step4.setBounds(resize.locationX(370), resize.locationY(240), resize.width(75), resize.height(20));
+			step4.setBounds(resize.locationX(385), resize.locationY(240), resize.width(75), resize.height(20));
 			step4.setFont(new Font(step4.getFont().getFontName(),step4.getFont().getStyle(), resize.font(12)));
-			step5.setBounds(resize.locationX(370), resize.locationY(275), resize.width(75), resize.height(20));
+			step5.setBounds(resize.locationX(385), resize.locationY(275), resize.width(75), resize.height(20));
 			step5.setFont(new Font(step5.getFont().getFontName(),step5.getFont().getStyle(), resize.font(12)));
-			step6.setBounds(resize.locationX(370), resize.locationY(310), resize.width(75), resize.height(20));
+			step6.setBounds(resize.locationX(385), resize.locationY(310), resize.width(75), resize.height(20));
 			step6.setFont(new Font(step6.getFont().getFontName(),step6.getFont().getStyle(), resize.font(12)));
-			step7.setBounds(resize.locationX(370), resize.locationY(345), resize.width(75), resize.height(20));
+			step7.setBounds(resize.locationX(385), resize.locationY(345), resize.width(75), resize.height(20));
 			step7.setFont(new Font(step7.getFont().getFontName(),step7.getFont().getStyle(), resize.font(12)));
 			
 			//image
-			step1Image.setBounds(resize.locationX(30), resize.locationY(120), resize.width(250), resize.height(180));
+			stepImage.setBounds(resize.locationX(20), resize.locationY(120), resize.width(315), resize.height(215));
 			
 			
 			//skipText
@@ -267,56 +259,6 @@ public class TutorialScreen extends Screen
 				played = true;
 			}
 		}
-		
-		if(step == 1)
-		{
-			stepVisibility();
-			videoBox.setVisible(false);
-			step1Image.setVisible(true);
-			step = 0;
-		}
-		else if(step == 2)
-		{
-			stepVisibility();
-			videoBox.setVisible(false);
-			step2Image.setVisible(true);
-			step = 0;
-		}
-		else if(step == 3)
-		{
-			stepVisibility();
-			videoBox.setVisible(false);
-			step3Image.setVisible(true);
-			step = 0;
-		}
-		else if(step == 4)
-		{
-			stepVisibility();
-			videoBox.setVisible(false);
-			step4Image.setVisible(true);
-			step = 0;
-		}
-		else if(step == 5)
-		{
-			stepVisibility();
-			videoBox.setVisible(false);
-			step5Image.setVisible(true);
-			step = 0;
-		}
-		else if(step == 6)
-		{
-			stepVisibility();
-			videoBox.setVisible(false);
-			step6Image.setVisible(true);
-			step = 0;
-		}
-		else if(step == 7)
-		{
-			stepVisibility();
-			videoBox.setVisible(false);
-			step7Image.setVisible(true);
-			step = 0;
-		}
 	}
 
 	@Override
@@ -345,16 +287,4 @@ public class TutorialScreen extends Screen
 	{
 		// TODO Auto-generated method stub
 	}
-	
-	public void stepVisibility()
-	{
-		step1Image.setVisible(false);
-		step2Image.setVisible(false);
-		step3Image.setVisible(false);
-		step4Image.setVisible(false);
-		step5Image.setVisible(false);
-		step6Image.setVisible(false);
-		step7Image.setVisible(false);
-	}
-
 }
