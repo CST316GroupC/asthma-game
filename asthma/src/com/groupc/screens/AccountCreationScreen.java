@@ -114,13 +114,8 @@ public class AccountCreationScreen extends Screen
 		run.setVisible(true);
 	}
 	
-	public void setPatientDoctor(String patientDoctor) //new patients doctor
-	{
-		/*
-		if(Database.addPatient(firstNameTF.getText(), lastNameTF.getText(), emailTF.getText(), passwordTF.getText(), dobTF.getText())){
-			//run.setScreen(new DoctorScreen(run));  THIS IS A BUG RIGHT NOW
-		}
-		*/
+	public void setPatientDoctor(String patientDoctor){ //new patients doctor
+	
 		if(patientDoctor != null)
 		{
 			newPatientDoctor = patientDoctor;
@@ -244,6 +239,8 @@ public class AccountCreationScreen extends Screen
 			
 		}else  //assumes a database will be implemented but for now will just use a text file
 		{
+			Database.addPatient(firstNameTF.getText(), lastNameTF.getText(), dobTF.getText(), emailTF.getText(), passwordTF.getText(), infoTA.getText());
+				//run.setScreen(new DoctorScreen(run));  THIS IS A BUG RIGHT NOW
 			try 
 			{
 				FileWriter fWriter = new FileWriter("login_information.txt", true);

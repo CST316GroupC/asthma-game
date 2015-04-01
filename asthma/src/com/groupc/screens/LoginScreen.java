@@ -226,9 +226,9 @@ public class LoginScreen extends Screen
 
 	public void checkLogin() throws IOException
 	{
-		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText())){
-			run.setScreen(new DoctorScreen(run));
-		}
+		//if(Database.getDoctor(userNameTF.getText(), passwordTF.getText())){
+		//	run.setScreen(new DoctorScreen(run));
+		//}
 		if(Database.getPatient(userNameTF.getText(), passwordTF.getText())){
 			run.setScreen(new TutorialScreen(run));
 		}
