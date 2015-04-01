@@ -253,7 +253,7 @@ public class AccountCreationScreen extends Screen
 	{
 		if(checkContents())  //required basic information
 		{
-			Database.addPatient(firstNameTF.getText(), lastNameTF.getText(), dobTF.getText(), passwordTF.getText(), emailTF.getText(), infoTA.getText());
+			Database.addPatient(firstNameTF.getText(), lastNameTF.getText(), yearTF.getText(), passwordTF.getText(), emailTF.getText(), infoTA.getText());
 				//run.setScreen(new DoctorScreen(run));  THIS IS A BUG RIGHT NOW
 			try 
 			{

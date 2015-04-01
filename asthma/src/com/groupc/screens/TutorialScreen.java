@@ -193,6 +193,7 @@ public class TutorialScreen extends Screen
 		{
 			patientUserName = pUserName;
 			run.setTitle(patientUserName + " Tutorial");
+			stepImage.setIcon(image1);
 		} else
 		{
 			run.setTitle("Tutorial");

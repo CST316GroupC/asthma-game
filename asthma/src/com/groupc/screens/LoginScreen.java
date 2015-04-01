@@ -246,7 +246,7 @@ public class LoginScreen extends Screen
 		{
 			run.setScreen(new DoctorScreen(run));
 		}
-		if(Database.getPatient(userNameTF.getText(), passwordTF.getText()))
+		else if(Database.getPatient(userNameTF.getText(), passwordTF.getText()))
 		{
 			run.setScreen(new TutorialScreen(run));
 		}
