@@ -62,6 +62,8 @@ public class NavigationBar extends JPanel
 		//Set fonts
 		pageTitle.setFont(new Font("Serif", Font.BOLD, 25));
 		
+		muteButton.setToolTipText("Toggle Sound");
+		
 		//Mute on/off
 		if(run.player.getPausedMusic())
 		{

@@ -36,6 +36,8 @@ public class Runner extends JFrame
 		setLocationRelativeTo(null);
 		
 		player = new AudioPlayer();
+		player.loadSong("resources/sounds/AMemoryAway.ogg");
+		player.playMusic(true);
 		screen = new LoginScreen(this);
 		//screen = new Game1Screen(this);
 		
