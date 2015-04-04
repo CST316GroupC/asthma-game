@@ -43,7 +43,7 @@ public class GameHubScreen extends Screen
 	private JLabel 			game2Label 			= new JLabel("Game 2",SwingConstants.CENTER);
 	private JLabel 			game3Label 			= new JLabel("Game 3",SwingConstants.CENTER);
 	private JLabel 			game4Label 			= new JLabel("Game 4",SwingConstants.CENTER);
-	private ImageIcon 		game1Icon 			= new ImageIcon("Game1Button.png");
+	private ImageIcon 		game1Icon 			= new ImageIcon("resources/interface/Game1Button.png");
 	
 	public GameHubScreen(Runner run)
 	{

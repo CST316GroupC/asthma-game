@@ -1,2 +1,4 @@
 bob@bob.com | bob | L | 12 | blh | 0 | null | nkk | knk | kkn | 1 | kn
 dmierke@yahoo.com | david | mierke | 7/12/87 | teamc | 1 | bob@bob.com | blah blah
+user | user | test | 7/12/87 | pass | 1 | doctor | blah blah
+doctor | doctor | test | 7/12/87 | pass | 0 | null | blah blah

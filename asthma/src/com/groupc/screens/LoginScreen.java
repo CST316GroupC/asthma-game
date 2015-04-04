@@ -161,7 +161,7 @@ public class LoginScreen extends Screen
 		
 		
 		//music stuff
-		run.player.loadSong("AMemoryAway.ogg");
+		run.player.loadSong("resources/sounds/AMemoryAway.ogg");
 		run.player.playMusic(true);
 	}
 
