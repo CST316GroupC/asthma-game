@@ -1,5 +1,14 @@
 package com.groupc.screens;
 
+/*
+ * Author(s):		Team C
+ * Course: 			CST 316 Spring
+ * Instructor:		Dr. Gary
+ * Date Changed:	4/1/2015
+ * 
+ * Description:		Appears when Game 1 button is clicked. Executes Game 1.
+ */
+
 import static org.lwjgl.opengl.GL11.*;
 
 import java.awt.Canvas;
@@ -26,10 +35,10 @@ import com.groupc.math.Resize;
 public class Game1Screen extends Screen
 {
 	//Variables
-	boolean redraw     = true;
-	Resize  resize     = new Resize(run);
-	int     butPressed = 0;
-	int testx = 0;	
+	boolean redraw     	= true;
+	Resize  resize     	= new Resize(run);
+	int     butPressed 	= 0;
+	int testx 			= 0;	
 
 	//Display Elements
 	NavigationBar navBar = new NavigationBar(run,true,false,"Game 1");
@@ -59,8 +68,6 @@ public class Game1Screen extends Screen
 		
 		canvas.setFocusable(true);
         canvas.requestFocus();
-		//canvas.setSize(400, 400);
-        //canvas.setLocation(64, 64);
         canvas.setIgnoreRepaint(true);
         canvas.setVisible(true);
         
@@ -80,7 +87,8 @@ public class Game1Screen extends Screen
             //Display.setDisplayMode(new DisplayMode(400, 400));
 			Display.setParent(canvas);
 			Display.create();
-		} catch (LWJGLException e) {
+		} 
+		catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.exit(0);
@@ -97,10 +105,12 @@ public class Game1Screen extends Screen
 		Display.update();
 		scr.update(deltaTime);
 		Display.sync(60); 
+		
 		if(Display.isCloseRequested())
 		{
 			Display.destroy();
 		}
+		
 		if(scr.isClosing)
 		{
 			scr = scr.getNext();
@@ -116,6 +126,7 @@ public class Game1Screen extends Screen
 			run.repaint();
 			redraw = false;
 		}
+		
 		if(navBar.backButtonPressed)
 		{
 			Display.destroy();
@@ -136,19 +147,22 @@ public class Game1Screen extends Screen
 	}
 
 	@Override
-	public void pause() {
+	public void pause() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void resume() {
+	public void resume() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose() 
+	{
 		// TODO Auto-generated method stub
 		
 	}

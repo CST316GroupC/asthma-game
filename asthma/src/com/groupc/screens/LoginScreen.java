@@ -49,27 +49,28 @@ public class LoginScreen extends Screen
 	boolean redraw						= true;
 	boolean loginErrorDrawn				= false;
 	boolean elementMoved				= false;
+	boolean mutePressed					= false;
+	boolean played 					  	= true;
 	int 	type						= 0;
 	Resize 	resize						= new Resize(run);
-	boolean mutePressed					= false;
-	boolean played 					  = true;
 	
 	Date date = new Date();
 	
 	//Display Elements
-	JLabel background					=new JLabel();
-	JPanel loginBox 					= new JPanel();
 	
-	JPasswordField passwordTF			= new JPasswordField();
+	JPanel loginBox 				= new JPanel();
 	
-	JTextField userNameTF				= new JTextField();
+	JPasswordField passwordTF		= new JPasswordField();
+	
+	JTextField userNameTF			= new JTextField();
 		
 	//Labels
-	JLabel title						= new JLabel("Team C's Asthma Game",SwingConstants.CENTER);
-	JLabel userNameLabel				= new JLabel("Email:");
-	JLabel passwordLabel				= new JLabel("Password:");
-	JLabel passRetrievalLabel			= new JLabel("");
-	JLabel loginErrorMessage			= new JLabel("Incorrect Username/Password");
+	JLabel title					= new JLabel("Team C's Asthma Game",SwingConstants.CENTER);
+	JLabel userNameLabel			= new JLabel("Email:");
+	JLabel passwordLabel			= new JLabel("Password:");
+	JLabel passRetrievalLabel		= new JLabel("");
+	JLabel loginErrorMessage		= new JLabel("Incorrect Username/Password");
+	JLabel background				= new JLabel();
 	
 	//Buttons
 	JRadioButton saveLoginRadio			= new JRadioButton("Remember Password");
@@ -125,7 +126,8 @@ public class LoginScreen extends Screen
 				try 
 				{
 					checkLogin();
-				} catch (IOException e1) 
+				} 
+				catch (IOException e1) 
 				{
 					e1.printStackTrace();
 				}			
@@ -149,7 +151,8 @@ public class LoginScreen extends Screen
 			{
 				try {
 					checkLogin();
-				} catch (IOException e1) {
+				} 
+				catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -430,7 +433,7 @@ public class LoginScreen extends Screen
 						run.setScreen(new GameHubScreen(run));
 					}
 				}
-		}
+			}
 		
 			if(!loginErrorDrawn)
 			{

@@ -6,7 +6,7 @@ package com.groupc.screens;
  * Instructor:		Dr. Gary
  * Date Changed:	3/29/2015
  * 
- * Description:		TutorialScreen is the first page after the patient logs in. 
+ * Description:		TutorialScreen is the first screen that appears after a patient logs in. 
  * 					This page only appears the first time the patient logs in.
  * 					Instructions on how to use the Spirometer and how to operate/navigate the software.
  */
@@ -185,7 +185,6 @@ public class TutorialScreen extends Screen
 		this.add(step7);
 		this.add(start);
 		this.add(stepImage);
-		// Panels have to be added last for it to show 
 		this.add(videoBox);
 		this.add(descriptionBox);
 		this.add(stepsBox);
@@ -202,7 +201,8 @@ public class TutorialScreen extends Screen
 			patientUserName = pUserName;
 			run.setTitle(patientUserName + " Tutorial");
 			stepImage.setIcon(image1);
-		} else
+		} 
+		else
 		{
 			run.setTitle("Tutorial");
 		}

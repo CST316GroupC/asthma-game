@@ -1,5 +1,14 @@
 package com.groupc.screens;
 
+/*
+ * Author(s):		Team C
+ * Course: 			CST 316 Spring
+ * Instructor:		Dr. Gary
+ * Date Changed:	4/1/2015
+ * 
+ * Description:		
+ */
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -20,10 +29,11 @@ import com.groupc.math.Resize;
 public class RewardScreen extends Screen
 {
 	//Variables
-	boolean redraw     = true;
-	Resize  resize     = new Resize(run);
-	int     butPressed = 0;
-	boolean played = true;
+	boolean redraw     	= true;
+	boolean played 		= true;
+	Resize  resize     	= new Resize(run);
+	int     butPressed 	= 0;
+
 	
 	//Display Elements
 	NavigationBar navBar         = new NavigationBar(run,false,false,"Rewards");
@@ -51,10 +61,7 @@ public class RewardScreen extends Screen
 		//Set colors
 		this.setBackground(Color.WHITE);
 		rewardBox.setBackground(Color.LIGHT_GRAY);
-		
-		//Set fonts
-		
-		
+
 		////Buttons////
 		continueButton.addActionListener(new ActionListener()
 		{
@@ -104,19 +111,22 @@ public class RewardScreen extends Screen
 	}
 
 	@Override
-	public void present(float deltaTime) {
+	public void present(float deltaTime) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void pause() {
+	public void pause() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void resume() {
+	public void resume() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
