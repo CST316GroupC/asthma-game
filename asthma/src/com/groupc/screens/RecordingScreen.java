@@ -38,8 +38,12 @@ public class RecordingScreen extends Screen
 	JLabel 			text2			= new JLabel("No Spirometer detected");
 	JLabel 			text3			= new JLabel("Check connection or submit manual input");
 	JLabel     		errorMessage    = new JLabel("Missing Information*");
+	JLabel     		invalidInputMessage    = new JLabel("Please insert a number*");
+	JLabel 			volumeLabel		= new JLabel("Volume*:");
+	JLabel 			forceLabel		= new JLabel("Force*:");
 	JButton 		manualInputButton		= new JButton("Manual Input");
-	JTextField 		manualReadingTF           = new JTextField();
+	JTextField 		volumeTF           = new JTextField();
+	JTextField 		forceTF            = new JTextField();
 	
 	
 	public RecordingScreen(Runner run)
@@ -60,6 +64,7 @@ public class RecordingScreen extends Screen
 		//Set colors
 		this.setBackground(Color.WHITE);
 		errorMessage.setForeground(Color.RED);
+		invalidInputMessage.setForeground(Color.RED);
 		
 		
 		////Buttons////
@@ -75,12 +80,17 @@ public class RecordingScreen extends Screen
 		});	
 		
 		errorMessage.setVisible(false);
+		invalidInputMessage.setVisible(false);
 		
 		this.add(text2);
 		this.add(text3);
 		this.add(manualInputButton);
-		this.add(manualReadingTF);
+		this.add(volumeTF);
+		this.add(forceTF);
+		this.add(volumeLabel);
+		this.add(forceLabel);
 		this.add(errorMessage);
+		this.add(invalidInputMessage);
 		this.add(navBar);
 		
 		this.setLayout(null);		
@@ -99,92 +109,54 @@ public class RecordingScreen extends Screen
 		{
 			run.setTitle("Spriometer Input");
 		}
-		if(hasTakenReadings(patientUserName))
-		{
-			run.setScreen(new GameHubScreen(run));
-		}
 	}
 	
-	private boolean hasTakenReadings(String user)
+	private boolean validInputs()
 	{
-		String line = null;
-		String tempString = date.toString();
-		String currentDay = null;
-		
-		Vector<String> userNames = new Vector<String>();
-		Vector<String> days = new Vector<String>();
-		StringTokenizer st;
-		
-		try
-		{
-			FileReader fr = new FileReader("spirometer_readings.txt");
-			BufferedReader br = new BufferedReader(fr);
-			
-			
-			while((line = br.readLine()) != null)
-			{
-				st = new StringTokenizer(line, " | ");
-				userNames.add(st.nextToken()); //user
-				st.nextToken(); //input
-				st.nextToken(); //day of week
-				st.nextToken(); //month
-				days.add(st.nextToken()); //day 
-				st.nextToken(); //time
-				st.nextToken(); //timezone
-				st.nextToken(); //year
-				
-				
-			}
-			br.close();
-		} catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		st = new StringTokenizer(tempString);
-		while(st.hasMoreElements())
-		{
-			st.nextToken(); // day of week
-			st.nextToken(); // month
-			currentDay = st.nextToken(); // day
-			st.nextToken(); // time
-			st.nextToken(); // timezone
-			st.nextToken(); // year
-		}
-		for(int i = 0; i < userNames.size(); i++)
-		{
-			if(userNames.elementAt(i).equals(patientUserName))
-			{
-				if(days.elementAt(i).equals(currentDay))
-				{
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	private boolean submitReadings() //submits patient username, the readings, and the current date
-	{
-		if(manualReadingTF.getText().isEmpty())
+		errorMessage.setVisible(false);
+		invalidInputMessage.setVisible(false);
+		if(volumeTF.getText().isEmpty() || forceTF.getText().isEmpty())
 		{
 			errorMessage.setVisible(true);
 			return false;
 		}else
 		{
+			try
+			{
+				Float.parseFloat(volumeTF.getText());
+				Float.parseFloat(forceTF.getText());
+		
+			}catch(Exception e)
+			{
+				volumeTF.setText("");
+				forceTF.setText("");
+				invalidInputMessage.setVisible(true);
+				return false;
+			}
+		}
+		
+		
+		return true;
+	}
+	
+	private boolean submitReadings() //submits patient username, the readings, and the current date
+	{
+		if(validInputs())
+		{
 			try 
 			{
 				FileWriter fWriter = new FileWriter("spirometer_readings.txt", true);
 				BufferedWriter bWriter = new BufferedWriter(fWriter);
-				bWriter.write(patientUserName + " | " + manualReadingTF.getText() + " | " + date + "\n"); 
+				bWriter.write(patientUserName + " | " + volumeTF.getText() + " | " + forceTF.getText() + " | " + date + "\n"); 
 				bWriter.close();
+				return true;
 			} catch (IOException e)
 			{
 				e.printStackTrace();
 				return false;
 			}
 		}
-		return true;
+		return false;
 	}
 	
 	@Override
@@ -204,14 +176,26 @@ public class RecordingScreen extends Screen
 			text3.setFont(new Font(text3.getFont().getFontName(),text3.getFont().getStyle(), resize.font(12)));	
 			
 			//manualInputButton
-			manualInputButton.setBounds(resize.locationX(170), resize.locationY(350), resize.width(130), resize.height(25));
+			manualInputButton.setBounds(resize.locationX(170), resize.locationY(400), resize.width(130), resize.height(25));
 			manualInputButton.setFont(new Font(manualInputButton.getFont().getFontName(),manualInputButton.getFont().getStyle(), resize.font(12)));	
 			
-			errorMessage.setBounds(resize.locationX(170), resize.locationY(330), resize.width(150), resize.height(20));
+			errorMessage.setBounds(resize.locationX(170), resize.locationY(380), resize.width(150), resize.height(20));
 			errorMessage.setFont(new Font(errorMessage.getFont().getFontName(),errorMessage.getFont().getStyle(), resize.font(12)));
 			
-			manualReadingTF.setBounds(resize.locationX(170), resize.locationY(310), resize.width(130), resize.height(20));
-			manualReadingTF.setFont(new Font(manualReadingTF.getFont().getFontName(),manualReadingTF.getFont().getStyle(), resize.font(12)));
+			invalidInputMessage.setBounds(resize.locationX(165), resize.locationY(380), resize.width(150), resize.height(20));
+			invalidInputMessage.setFont(new Font(invalidInputMessage.getFont().getFontName(),invalidInputMessage.getFont().getStyle(), resize.font(12)));
+			
+			volumeTF.setBounds(resize.locationX(170), resize.locationY(331), resize.width(130), resize.height(20));
+			volumeTF.setFont(new Font(volumeTF.getFont().getFontName(),volumeTF.getFont().getStyle(), resize.font(12)));
+			
+			forceTF.setBounds(resize.locationX(170), resize.locationY(361), resize.width(130), resize.height(20));
+			forceTF.setFont(new Font(forceTF.getFont().getFontName(),forceTF.getFont().getStyle(), resize.font(12)));
+			
+			volumeLabel.setBounds(resize.locationX(107), resize.locationY(330), resize.width(130), resize.height(20));
+			volumeLabel.setFont(new Font(volumeLabel.getFont().getFontName(),volumeLabel.getFont().getStyle(), resize.font(12)));
+			
+			forceLabel.setBounds(resize.locationX(120), resize.locationY(360), resize.width(130), resize.height(20));
+			forceLabel.setFont(new Font(forceLabel.getFont().getFontName(),forceLabel.getFont().getStyle(), resize.font(12)));
 			
 			run.repaint();
 			redraw = false;
