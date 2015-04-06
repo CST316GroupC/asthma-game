@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -48,6 +49,7 @@ public class LoginScreen extends Screen
 	boolean elementMoved				= false;
 	int 	type						= 0;
 	Resize 	resize						= new Resize(run);
+	Date date = new Date();
 	
 	
 	//Display Elements
@@ -163,6 +165,66 @@ public class LoginScreen extends Screen
 		//music stuff
 		run.player.loadSong("AMemoryAway.ogg");
 		run.player.playMusic(true);
+	}
+	
+	private boolean hasNotTakenReadings(String user)
+	{
+		String line = null;
+		String tempString = date.toString();
+		String currentDay = null;
+		
+		Vector<String> userNames = new Vector<String>();
+		Vector<String> days = new Vector<String>();
+		StringTokenizer st;
+		
+		try
+		{
+			FileReader fr = new FileReader("spirometer_readings.txt");
+			BufferedReader br = new BufferedReader(fr);
+			
+			
+			while((line = br.readLine()) != null)
+			{
+				st = new StringTokenizer(line, " | ");
+				userNames.add(st.nextToken()); //user
+				st.nextToken(); //volume
+				st.nextToken(); //force
+				st.nextToken(); //day of week
+				st.nextToken(); //month
+				days.add(st.nextToken()); //day 
+				st.nextToken(); //time
+				st.nextToken(); //timezone
+				st.nextToken(); //year
+				
+				
+			}
+			br.close();
+		} catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		st = new StringTokenizer(tempString);
+		while(st.hasMoreElements())
+		{
+			st.nextToken(); // day of week
+			st.nextToken(); // month
+			currentDay = st.nextToken(); // day
+			st.nextToken(); // time
+			st.nextToken(); // timezone
+			st.nextToken(); // year
+		}
+		for(int i = 0; i < userNames.size(); i++)
+		{
+			if(userNames.elementAt(i).equals(userNameTF.getText()))
+			{
+				if(days.elementAt(i).equals(currentDay))
+				{
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	@Override
@@ -301,13 +363,19 @@ public class LoginScreen extends Screen
 					ds.setDoctor(userNameTF.getText());
 					ds.getPatients();
 					run.setScreen(ds);
-				}
+				}else
 				//Patients
 				if(types.elementAt(i).equals("1"))
 				{
-					TutorialScreen ts = new TutorialScreen(run);
-					ts.setPatient(emails.elementAt(i));
-					run.setScreen(ts);
+					if(hasNotTakenReadings(userNameTF.getText()))
+					{
+						TutorialScreen ts = new TutorialScreen(run);
+						ts.setPatient(emails.elementAt(i));
+						run.setScreen(ts);
+					} else 
+					{
+						run.setScreen(new GameHubScreen(run));
+					}
 				}
 		}
 		
