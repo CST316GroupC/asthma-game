@@ -83,7 +83,7 @@ public final class Assets
 	
 	public static Texture getTexture(String txt)
 	{
-		return textures.get(txt);
+		return textures;
 	}
 	
 	public static Properties getProps()

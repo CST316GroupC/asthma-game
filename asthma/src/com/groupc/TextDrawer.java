@@ -164,7 +164,6 @@ public final class TextDrawer
 	 */
 	public static void drawChar(char temp, Rectangle rect)
 	{
-		System.out.println("char"+temp);
 		getChar("char"+temp).draw(rect);
 	}
 	
