@@ -167,7 +167,7 @@ public class World extends GameScreen
 			{
 				if(Keyboard.getEventKey() == Keyboard.KEY_S || Keyboard.getEventKey() == Keyboard.KEY_DOWN)
 				{
-					if(state == WORLD_STATE_PLAYING)
+					if(state == WORLD_STATE_PLAYING && joey.getState() != JoeyRooster.STATE_SB)
 					{
 						joey.toggleGlide();
 					}
@@ -177,7 +177,10 @@ public class World extends GameScreen
 			{
 				if(Keyboard.getEventKey() == Keyboard.KEY_W || Keyboard.getEventKey() == Keyboard.KEY_UP)
 				{
-					joey.flap();
+					if(state == WORLD_STATE_PLAYING)
+					{
+						joey.flap();
+					}
 				}
 				
 				if(Keyboard.getEventKey() == Keyboard.KEY_Q || Keyboard.getEventKey() == Keyboard.KEY_ESCAPE)
@@ -272,9 +275,9 @@ public class World extends GameScreen
 	{
 		//hud
 		Assets.getImage("joeyFly").draw(new Rectangle(0, cam.position.y + FRUSTUM_HEIGHT/2 - .35f, WORLD_WIDTH, .35f));
-		TextDrawer.drawString("score", cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
-		TextDrawer.drawInt(score, cam.position.x - 3.2f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SCORE_DIGITS);
-	
+		
+		TextDrawer.drawStringinRect("score", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE));
+		TextDrawer.drawStringinRect(score +"", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, MAX_SCORE_DIGITS * TEXT_SIZE, TEXT_SIZE));
 		TextDrawer.drawString("seeds", cam.position.x, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
 		TextDrawer.drawInt(seedsCollected, cam.position.x +1f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SEED_DIGITS);
 		
