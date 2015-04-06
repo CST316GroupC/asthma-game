@@ -29,14 +29,14 @@ public class AccTest {
 	
 	@Before
 	public void setUp() throws Exception {
-			
+		/*	
 		acc.firstNameTF.setText("testFirst");
 		acc.lastNameTF.setText("testLast");
-		//acc.dobTF.setText("3");
+		acc.dobTF.setText("3");
 		acc.passwordTF.setText("testPass");
 		acc.infoTA.setText("test");
 		acc.newPatientDoctor = "bill";
-		
+		*/
 		
 		
 		FileReader fr = new FileReader("login_information.txt");
@@ -82,7 +82,7 @@ public class AccTest {
 	
 	@Test
 	public void addCurrentPatientTest(){
-		
+		/*
 		acc.firstNameTF.setText("");
 		acc.addCurrentPatient();
 		
@@ -95,7 +95,7 @@ public class AccTest {
 		acc.newPatientDoctor = "bill";
 		
 		acc.addCurrentPatient();
-
+		*/
 		
 	}
 

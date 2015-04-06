@@ -1,5 +1,17 @@
 package com.groupc.screens;
 
+/*
+ * Author(s):		Team C
+ * Course: 			CST 316 Spring
+ * Instructor:		Dr. Gary
+ * Date Changed:	4/1/2015
+ * 
+ * Description:		RecordingScreen appears after patient completes the tutorial.
+ * 					RecordingScreen only appears once a day, after the patient has done their daily recording
+ * 					the RecordingScreen does not appear until the next day.
+ * 					Current state of functionality for RecordingScreen is only with Manual Input.
+ */
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -18,7 +30,6 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 import com.groupc.Runner;
 import com.groupc.math.Resize;
@@ -27,19 +38,21 @@ public class RecordingScreen extends Screen
 {
 	//Variables
 	boolean redraw		= true;
+	boolean	played		= true;
 	Resize  resize		= new Resize(run);
 	int		butPressed	= 0;
-	boolean	played		= true;
+
 	String patientUserName;
+	
 	Date date = new Date();
 	
 	//Display Elements
-	NavigationBar 	navBar			= new NavigationBar(run,true,false,"Spirometer Input");	
-	JLabel 			text2			= new JLabel("No Spirometer detected");
-	JLabel 			text3			= new JLabel("Check connection or submit manual input");
-	JLabel     		errorMessage    = new JLabel("Missing Information*");
-	JButton 		manualInputButton		= new JButton("Manual Input");
-	JTextField 		manualReadingTF           = new JTextField();
+	NavigationBar 	navBar				= new NavigationBar(run,true,false,"Spirometer Input");	
+	JLabel 			text2				= new JLabel("No Spirometer detected");
+	JLabel 			text3				= new JLabel("Check connection or submit manual input");
+	JLabel     		errorMessage   		= new JLabel("Missing Information*");
+	JButton 		manualInputButton	= new JButton("Manual Input");
+	JTextField 		manualReadingTF     = new JTextField();
 	
 	
 	public RecordingScreen(Runner run)
@@ -64,7 +77,6 @@ public class RecordingScreen extends Screen
 		
 		////Buttons////
 		
-			
 		
 		manualInputButton.addActionListener(new ActionListener()
 		{
@@ -95,10 +107,12 @@ public class RecordingScreen extends Screen
 			patientUserName = pUserName;
 			run.setTitle(patientUserName + " Spirometer Input");
 			
-		} else
+		} 
+		else
 		{
 			run.setTitle("Spriometer Input");
 		}
+		
 		if(hasTakenReadings(patientUserName))
 		{
 			run.setScreen(new GameHubScreen(run));
@@ -136,12 +150,14 @@ public class RecordingScreen extends Screen
 				
 			}
 			br.close();
-		} catch(Exception e)
+		} 
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 		
 		st = new StringTokenizer(tempString);
+		
 		while(st.hasMoreElements())
 		{
 			st.nextToken(); // day of week
@@ -151,6 +167,7 @@ public class RecordingScreen extends Screen
 			st.nextToken(); // timezone
 			st.nextToken(); // year
 		}
+		
 		for(int i = 0; i < userNames.size(); i++)
 		{
 			if(userNames.elementAt(i).equals(patientUserName))
@@ -170,7 +187,8 @@ public class RecordingScreen extends Screen
 		{
 			errorMessage.setVisible(true);
 			return false;
-		}else
+		}
+		else
 		{
 			try 
 			{
@@ -178,7 +196,8 @@ public class RecordingScreen extends Screen
 				BufferedWriter bWriter = new BufferedWriter(fWriter);
 				bWriter.write(patientUserName + " | " + manualReadingTF.getText() + " | " + date + "\n"); 
 				bWriter.close();
-			} catch (IOException e)
+			} 
+			catch (IOException e)
 			{
 				e.printStackTrace();
 				return false;
@@ -236,19 +255,22 @@ public class RecordingScreen extends Screen
 	}
 
 	@Override
-	public void present(float deltaTime) {
+	public void present(float deltaTime) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void pause() {
+	public void pause() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void resume() {
+	public void resume() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
@@ -258,5 +280,4 @@ public class RecordingScreen extends Screen
 	{
 		// TODO Auto-generated method stub
 	}
-	
 }

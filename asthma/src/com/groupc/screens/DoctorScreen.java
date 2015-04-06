@@ -1,5 +1,16 @@
 package com.groupc.screens;
 
+/*
+ * Author(s):		Team C
+ * Course: 			CST 316 Spring
+ * Instructor:		Dr. Gary
+ * Date Changed:	4/1/2015
+ * 
+ * Description:		DoctorScreen is the first screen that appears after a doctor logs in.
+ * 					This screen will display a list of patients linked to the doctor that logged in.
+ * 					The doctor is able to browse through a list of patients and also add a patient.
+ */
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -28,26 +39,29 @@ import com.groupc.math.Resize;
 public class DoctorScreen extends Screen
 {
 	//Variables
-	boolean redraw     = true;
-	Resize  resize     = new Resize(run);
-	int     butPressed = 0; //0 is none, 1 is add patient, 2 is back and logout for now
-	boolean played = true;
+	boolean redraw		= true;
+	boolean played 		= true;
+	Resize  resize     	= new Resize(run);
+	int     butPressed 	= 0; //0 is none, 1 is add patient, 2 is back and logout for now
+	
 	String doctor;
-	//patient information
-	Vector<String> patientFirstNames = new Vector<String>();
-	Vector<String> patientLastNames = new Vector<String>();
-	Vector<String> patDoctors = new Vector<String>();
-	//table elements
+	
+	//Patient information
+	Vector<String> patientFirstNames 	= new Vector<String>();
+	Vector<String> patientLastNames 	= new Vector<String>();
+	Vector<String> patDoctors 			= new Vector<String>();
+	
+	//Table elements
 	JTable patientTable;
 	JScrollPane jsp;
 	
 	
 	//Display Elements
-	JPanel  testBox          = new JPanel();
-	JPanel  navBox           = new JPanel();
-	JPanel  navBoxBorder     = new JPanel();
-	JButton addPatientButton = new JButton("Add Patient");
-	NavigationBar navBar           = new NavigationBar(run,false,false,"Doctor Page");
+	JPanel  testBox          		= new JPanel();
+	JPanel  navBox           		= new JPanel();
+	JPanel  navBoxBorder     		= new JPanel();
+	JButton addPatientButton 		= new JButton("Add Patient");
+	NavigationBar navBar           	= new NavigationBar(run,false,false,"Doctor Page");
 	
 	public DoctorScreen(Runner run) 
 	{
@@ -67,11 +81,7 @@ public class DoctorScreen extends Screen
 		
 		//Set colors
 		this.setBackground(Color.WHITE);
-		
-		//Set fonts
-		
-		////Buttons////
-		
+
 		
 		// Add patient button listener
 		addPatientButton.addActionListener(new ActionListener()
@@ -85,14 +95,12 @@ public class DoctorScreen extends Screen
 		//add things to the panel
 		this.add(addPatientButton);
 		this.add(navBox);
-		//this.add(navBoxBorder);
 		this.add(testBox);
 		this.add(navBar);
 		
 		this.setLayout(null);		
 		run.setContentPane(this);
 		run.setVisible(true);
-		
 	}
 	
 	protected void setDoctor(String docName)
@@ -125,7 +133,7 @@ public class DoctorScreen extends Screen
 			st.nextToken(); //email
 			patientFirstNames.add(counter, st.nextToken()); //fname
 			patientLastNames.add(st.nextToken());  //last name
-			st.nextToken();  // dob
+			st.nextToken();  //dob
 			st.nextToken();  //password
 			st.nextToken(); //type
 			patDoctors.add(counter, st.nextToken()); //doctor for patient
@@ -206,19 +214,22 @@ public class DoctorScreen extends Screen
 	}
 
 	@Override
-	public void pause() {
+	public void pause() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void resume() {
+	public void resume() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose() 
+	{
 		// TODO Auto-generated method stub
 		
 	}

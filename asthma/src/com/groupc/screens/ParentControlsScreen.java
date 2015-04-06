@@ -1,14 +1,23 @@
 package com.groupc.screens;
 
+/*
+ * Author(s):		Team C
+ * Course: 			CST 316 Spring
+ * Instructor:		Dr. Gary
+ * Date Changed:	4/1/2015
+ * 
+ * Description:		ParentalControlsScreen appears at the top of Game Hub for parents.
+ * 					A pin is required to access the controls to prevent kids from accessing.
+ * 					Parents are able to set up certain restrictions for their child.
+ * 					
+ */
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -18,13 +27,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.JSpinner;
-import javax.swing.JSpinner.NumberEditor;
 import javax.swing.JTextField;
-import javax.swing.SpinnerDateModel;
-import javax.swing.SpinnerModel;
 import javax.swing.SwingConstants;
 
-import com.groupc.Patient;
 import com.groupc.Runner;
 import com.groupc.math.Resize;
 
@@ -36,37 +41,44 @@ public class ParentControlsScreen extends Screen
 	int     butPressed = 0;
 	
 	//Display Elements
-	NavigationBar navBar      = new NavigationBar(run,true,false,"Parental Controls");
+	NavigationBar navBar      	= new NavigationBar(run,true,false,"Parental Controls");
 	
-	JPanel  pinBox          = new JPanel();
-	JLabel  pinLabel        = new JLabel("Enter Your Parent Pin",SwingConstants.CENTER);
-	JLabel  pinErrorLabel = new JLabel("Incorrect Pin",SwingConstants.CENTER);
-	JPasswordField pinPF    = new JPasswordField();
-	JButton pinButton       = new JButton("Submit");
-	JButton pinForgotButton = new JButton("Forgot Pin?");
+	JPanel  pinBox         		= new JPanel();
+	JPanel  pageBox           	= new JPanel();
 	
-	JPanel  pageBox           = new JPanel();
-	JButton saveButton        = new JButton("Submit");
-	JButton cancelButton      = new JButton("Cancel");
-	JButton defaultButton     = new JButton("default");
-	JLabel  timeControlsLabel = new JLabel("Time Controls");
-	JLabel  gameControlsLabel = new JLabel("Game Controls");
-	JLabel  alertsLabel       = new JLabel("Alerts");
-	JLabel  hourLabel         = new JLabel("hr",SwingConstants.CENTER);
-	JLabel  minuteLabel       = new JLabel("min",SwingConstants.CENTER);
-	JLabel  emailFieldLabel   = new JLabel("Email: ",SwingConstants.RIGHT);
-	JCheckBox timeCB     = new JCheckBox("Time (per day)");
-	JCheckBox Game1CB    = new JCheckBox("Game 1");
-	JCheckBox Game2CB    = new JCheckBox("Game 2");
-	JCheckBox Game3CB    = new JCheckBox("Game 3");
-	JCheckBox Game4CB    = new JCheckBox("Game 4");
-	JCheckBox EmailCB    = new JCheckBox("Email me when child submits test");
-	JTextField emailTF   = new JTextField();
-	JSpinner hourTF    = new JSpinner();
-	JSpinner minuteTF  = new JSpinner();
-	JSeparator timeControlsSep = new JSeparator();
-	JSeparator gameControlsSep = new JSeparator();
-	JSeparator alertsSep       = new JSeparator();
+	JButton pinButton       	= new JButton("Submit");
+	JButton pinForgotButton		= new JButton("Forgot Pin?");
+	JButton saveButton     		= new JButton("Submit");
+	JButton cancelButton      	= new JButton("Cancel");
+	JButton defaultButton     	= new JButton("default");
+	
+	JPasswordField pinPF   		= new JPasswordField();
+	
+	JTextField emailTF   		= new JTextField();
+	
+	JLabel  pinLabel      		= new JLabel("Enter Your Parent Pin",SwingConstants.CENTER);
+	JLabel  pinErrorLabel 		= new JLabel("Incorrect Pin",SwingConstants.CENTER);
+	JLabel  timeControlsLabel 	= new JLabel("Time Controls");
+	JLabel  gameControlsLabel 	= new JLabel("Game Controls");
+	JLabel  alertsLabel       	= new JLabel("Alerts");
+	JLabel  hourLabel         	= new JLabel("hr",SwingConstants.CENTER);
+	JLabel  minuteLabel       	= new JLabel("min",SwingConstants.CENTER);
+	JLabel  emailFieldLabel   	= new JLabel("Email: ",SwingConstants.RIGHT);
+	
+	JCheckBox timeCB   			= new JCheckBox("Time (per day)");
+	JCheckBox Game1CB    		= new JCheckBox("Game 1");
+	JCheckBox Game2CB    		= new JCheckBox("Game 2");
+	JCheckBox Game3CB    		= new JCheckBox("Game 3");
+	JCheckBox Game4CB    		= new JCheckBox("Game 4");
+	JCheckBox EmailCB    		= new JCheckBox("Email me when child submits test");
+	
+	
+	JSpinner hourTF   			= new JSpinner();
+	JSpinner minuteTF 			= new JSpinner();
+	
+	JSeparator timeControlsSep	= new JSeparator();
+	JSeparator gameControlsSep	= new JSeparator();
+	JSeparator alertsSep      	= new JSeparator();
 	
 	public ParentControlsScreen(Runner run) 
 	{
@@ -102,9 +114,8 @@ public class ParentControlsScreen extends Screen
 		Game4CB.setBackground(Color.LIGHT_GRAY);
 		EmailCB.setBackground(Color.LIGHT_GRAY);
 		
-		//Set fonts
-		
 		////Buttons////
+		
 		//pinButton
 		pinButton.addActionListener(new ActionListener()
 		{
@@ -113,6 +124,7 @@ public class ParentControlsScreen extends Screen
 				checkPin();				
 			}
 		});
+		
 		//saveButton
 		saveButton.addActionListener(new ActionListener()
 		{
@@ -121,6 +133,7 @@ public class ParentControlsScreen extends Screen
 				butPressed = 1;				
 			}
 		});
+		
 		//cancelButton
 		cancelButton.addActionListener(new ActionListener()
 		{
@@ -130,10 +143,6 @@ public class ParentControlsScreen extends Screen
 			}
 		});
 		
-		//Disable Elements
-		
-		
-		
 		//add things to the panel
 		this.add(pinErrorLabel);
 		this.add(pinLabel);
@@ -141,7 +150,6 @@ public class ParentControlsScreen extends Screen
 		this.add(pinButton);
 		this.add(pinForgotButton);
 		this.add(pinBox);
-		
 		this.add(timeControlsSep);
 		this.add(timeControlsLabel);
 		this.add(gameControlsLabel);
@@ -159,10 +167,7 @@ public class ParentControlsScreen extends Screen
 		this.add(Game4CB);
 		this.add(EmailCB);
 		this.add(emailTF);
-		this.add(emailFieldLabel);
-		//this.add(defaultButton);
-		
-		
+		this.add(emailFieldLabel);	
 		this.add(cancelButton);
 		this.add(saveButton);
 		this.add(pageBox);
@@ -290,25 +295,29 @@ public class ParentControlsScreen extends Screen
 	}
 
 	@Override
-	public void present(float deltaTime) {
+	public void present(float deltaTime) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void pause() {
+	public void pause() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void resume() {
+	public void resume() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose() 
+	{
 		// TODO Auto-generated method stub
 		
 	}

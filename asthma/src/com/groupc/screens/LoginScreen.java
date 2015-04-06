@@ -43,31 +43,31 @@ import com.groupc.math.Resize;
 public class LoginScreen extends Screen
 {
 	//Variables
-	boolean redraw						= true;
-	boolean loginErrorDrawn				= false;
-	boolean elementMoved				= false;
-	int 	type						= 0;
-	Resize 	resize						= new Resize(run);
+	boolean redraw					= true;
+	boolean loginErrorDrawn			= false;
+	boolean elementMoved			= false;
+	int 	type					= 0;
+	Resize 	resize					= new Resize(run);
 	
 	
 	//Display Elements
-	JPanel loginBox 					= new JPanel();
+	JPanel loginBox 				= new JPanel();
 	
-	JPasswordField passwordTF			= new JPasswordField();
+	JPasswordField passwordTF		= new JPasswordField();
 	
-	JTextField userNameTF				= new JTextField();
+	JTextField userNameTF			= new JTextField();
 		
 	//Labels
-	JLabel title						= new JLabel("Team C's Asthma Game",SwingConstants.CENTER);
-	JLabel userNameLabel				= new JLabel("Email:");
-	JLabel passwordLabel				= new JLabel("Password:");
-	JLabel passRetrievalLabel			= new JLabel("");
-	JLabel loginErrorMessage			= new JLabel("Incorrect Username/Password");
+	JLabel title					= new JLabel("Team C's Asthma Game",SwingConstants.CENTER);
+	JLabel userNameLabel			= new JLabel("Email:");
+	JLabel passwordLabel			= new JLabel("Password:");
+	JLabel passRetrievalLabel		= new JLabel("");
+	JLabel loginErrorMessage		= new JLabel("Incorrect Username/Password");
 	
 	//Buttons
-	JRadioButton saveLoginRadio			= new JRadioButton("Remember Password");
-	JButton	loginButton					= new JButton("Login");
-	JButton	passRetrievalButton			= new JButton("Forgot Password?");
+	JRadioButton saveLoginRadio		= new JRadioButton("Remember Password");
+	JButton	loginButton				= new JButton("Login");
+	JButton	passRetrievalButton		= new JButton("Forgot Password?");
 	
 	public LoginScreen(Runner run) 
 	{
@@ -109,7 +109,8 @@ public class LoginScreen extends Screen
 				try 
 				{
 					checkLogin();
-				} catch (IOException e1) 
+				} 
+				catch (IOException e1) 
 				{
 					e1.printStackTrace();
 				}			
@@ -133,7 +134,8 @@ public class LoginScreen extends Screen
 			{
 				try {
 					checkLogin();
-				} catch (IOException e1) {
+				} 
+				catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -309,7 +311,7 @@ public class LoginScreen extends Screen
 					ts.setPatient(emails.elementAt(i));
 					run.setScreen(ts);
 				}
-		}
+			}
 		
 			if(!loginErrorDrawn)
 			{

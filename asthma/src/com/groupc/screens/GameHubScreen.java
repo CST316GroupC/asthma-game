@@ -28,9 +28,10 @@ public class GameHubScreen extends Screen
 {
 	//Variables
 	private boolean	redraw		= true;
+	private boolean	played		= true;
 	private Resize	resize		= new Resize(run);
 	private int 	butPressed	= 0;
-	private boolean	played		= true;
+	
 	
 	//Display Elements
 	private NavigationBar	navBar				= new NavigationBar(run,false,true,"Game Hub");	
@@ -171,19 +172,22 @@ public class GameHubScreen extends Screen
 	}
 
 	@Override
-	public void present(float deltaTime) {
+	public void present(float deltaTime) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void pause() {
+	public void pause() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void resume() {
+	public void resume() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
