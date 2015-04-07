@@ -3,6 +3,7 @@ package com.groupc.game1;
 import org.lwjgl.input.Mouse;
 
 import com.groupc.TextDrawer;
+import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
 import com.groupc.math.CollisionChecker;
@@ -23,9 +24,10 @@ public class UpgradeScreen extends GameScreen
 	
 	private int[] prices = {10, 25, 50, 100, 200, 500, 1000, 2500, 5000, 10000};
 	
-	public UpgradeScreen()
+	public UpgradeScreen(Asset assets)
 	{
-		Assets.reload();
+		super(assets);
+		assets.reload();
 		cam = new Camera(400, 400);
 		cam.setCamera();
 		upgradeSpeed = new Rectangle(300, 300, 50, 50);
@@ -36,9 +38,9 @@ public class UpgradeScreen extends GameScreen
 		mouseClick = new Vector();
 		
 		//get the current saved data
-		seeds = Integer.parseInt(Assets.getProps().getProperty("seeds"));
-		speedMult = Integer.parseInt(Assets.getProps().getProperty("speedMult"));
-		flaps = Integer.parseInt(Assets.getProps().getProperty("statima"));
+		seeds = Integer.parseInt(assets.getProps().getProperty("seeds"));
+		speedMult = Integer.parseInt(assets.getProps().getProperty("speedMult"));
+		flaps = Integer.parseInt(assets.getProps().getProperty("statima"));
 	}
 
 	
@@ -61,7 +63,7 @@ public class UpgradeScreen extends GameScreen
 						{
 							seeds -= prices[speedMult];
 							speedMult++;
-							Assets.getProps().setProperty("speedMult", "" + speedMult);
+							assets.getProps().setProperty("speedMult", "" + speedMult);
 						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, upgradeFlaps))
@@ -70,7 +72,7 @@ public class UpgradeScreen extends GameScreen
 						{
 							seeds -= prices[flaps];
 							flaps++;
-							Assets.getProps().setProperty("statima", "" + flaps);
+							assets.getProps().setProperty("statima", "" + flaps);
 						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, back))
@@ -78,7 +80,7 @@ public class UpgradeScreen extends GameScreen
 						dispose();
 					}
 					
-					Assets.getProps().setProperty("seeds", "" + seeds);
+					assets.getProps().setProperty("seeds", "" + seeds);
 		        }
 		    }
 		}
@@ -89,14 +91,14 @@ public class UpgradeScreen extends GameScreen
 	{
 		cam.setCamera();
 		
-		Assets.getTexture("atlas").bind();
+		assets.getTexture("atlas").bind();
 
-		Assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
+		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		
 		//draw arrows
-		Assets.getImage("upgrade").draw(upgradeSpeed);
-		Assets.getImage("upgrade").draw(upgradeFlaps);
-		Assets.getImage("back").draw(back);
+		assets.getImage("upgrade").draw(upgradeSpeed);
+		assets.getImage("upgrade").draw(upgradeFlaps);
+		assets.getImage("back").draw(back);
 		
 		TextDrawer.drawString("Seeds", 25, 350, 40, 40);
 		TextDrawer.drawInt(seeds, 250, 350, 20, 40, 5);
@@ -126,7 +128,7 @@ public class UpgradeScreen extends GameScreen
 	@Override
 	public void dispose() 
 	{
-		Assets.save();
+		assets.save();
 		isClosing = true;
 	}
 
@@ -134,7 +136,7 @@ public class UpgradeScreen extends GameScreen
 	public GameScreen getNext() 
 	{
 		// TODO Auto-generated method stub
-		return new MainMenu();
+		return new MainMenu(assets);
 	}
 
 }

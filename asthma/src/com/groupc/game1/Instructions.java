@@ -3,6 +3,7 @@ package com.groupc.game1;
 import org.lwjgl.input.Mouse;
 
 import com.groupc.TextDrawer;
+import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
 import com.groupc.math.CollisionChecker;
@@ -15,9 +16,9 @@ public class Instructions extends GameScreen
 	private final Rectangle back;
 	private final Vector mouseClick;
 	
-	public Instructions()
+	public Instructions(Asset assets)
 	{
-		Assets.load();
+		super(assets);
 		cam = new Camera(300, 100);
 		cam.setCamera();
 		back = new Rectangle(250, 0, 50, 30);
@@ -42,8 +43,8 @@ public class Instructions extends GameScreen
 	public void present(float deltaTime)
 	{
 		cam.setCamera();
-		Assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
-		Assets.getImage("back").draw(back);
+		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
+		assets.getImage("back").draw(back);
 		TextDrawer.drawString("Press w or up to flap wings", 20, 40, 10, 10);
 		TextDrawer.drawString("Press s or down to glide", 20, 55, 10, 10);
 		TextDrawer.drawString("Press p to pause", 20, 70, 10, 10);
@@ -70,7 +71,7 @@ public class Instructions extends GameScreen
 	@Override
 	public GameScreen getNext() 
 	{
-		return new MainMenu();
+		return new MainMenu(assets);
 	}
 
 }

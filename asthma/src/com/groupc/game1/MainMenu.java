@@ -3,6 +3,7 @@ package com.groupc.game1;
 import org.lwjgl.input.Mouse;
 
 import com.groupc.TextDrawer;
+import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
 import com.groupc.math.CollisionChecker;
@@ -20,9 +21,9 @@ public class MainMenu extends GameScreen
 	private final Vector mouseClick;
 	private int next;
 	
-	public MainMenu()
+	public MainMenu(Asset asset)
 	{
-		Assets.load();
+		super(asset);
 		cam = new Camera(400, 400);
 		cam.setCamera();
 		title = new Rectangle(50, 300, 300, 100);
@@ -68,9 +69,9 @@ public class MainMenu extends GameScreen
 	public void present(float deltaTime)
 	{
 		cam.setCamera();
-		Assets.getTexture("sheet").bind();
-		Assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
-		Assets.getImage("title").draw(title);
+		assets.getTexture("sheet").bind();
+		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
+		assets.getImage("title").draw(title);
 		TextDrawer.drawStringinRect("Start", play);
 		TextDrawer.drawStringinRect("Options", options);
 		TextDrawer.drawStringinRect("Upgrade", upgrade);
@@ -104,19 +105,19 @@ public class MainMenu extends GameScreen
 	{
 		if(next == 1)
 		{
-			return new World();
+			return new World(assets);
 		}
 		if(next == 2)
 		{
-			return new Options(this.cam);
+			return new Options(assets, this.cam);
 		}
 		if(next == 3)
 		{
-			return new UpgradeScreen();
+			return new UpgradeScreen(assets);
 		}
 		if(next == 4)
 		{
-			return new Instructions();
+			return new Instructions(assets);
 		}
 		return null;
 	}

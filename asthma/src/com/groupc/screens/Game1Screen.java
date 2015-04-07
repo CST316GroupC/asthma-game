@@ -18,6 +18,8 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 import com.groupc.Runner;
+import com.groupc.TextDrawer;
+import com.groupc.game1.Game1Assets;
 import com.groupc.game1.MainMenu;
 import com.groupc.game.GameScreen;
 import com.groupc.math.Resize;
@@ -36,6 +38,8 @@ public class Game1Screen extends Screen
 	
 	Canvas canvas;
 	GameScreen scr;
+	
+	Game1Assets assets;
 	
 	public Game1Screen(Runner run)
 	{
@@ -80,13 +84,15 @@ public class Game1Screen extends Screen
             //Display.setDisplayMode(new DisplayMode(400, 400));
 			Display.setParent(canvas);
 			Display.create();
+			TextDrawer.prepare();
+			assets = new Game1Assets();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.exit(0);
 		}
 		
-		scr = new MainMenu();
+		scr = new MainMenu(assets);
 		
 		         
 	}
