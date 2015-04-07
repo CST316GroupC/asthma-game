@@ -1,2 +1,14 @@
 bob@bob.com | bob | L | 12 | blh | 0 | null | nkk | knk | kkn | 1 | kn
 dmierke@yahoo.com | david | mierke | 7/12/87 | teamc | 1 | bob@bob.com | blah blah
+user | user | test | 7/12/87 | pass | 1 | doctor | blah blah
+doctor | doctor | test | 7/12/87 | pass | 0 | null | blah blah
+e@goog.com | edwin | avalos | 19/20/21 | pik | 1 | bob@bob.com | d
+testFirst | testLast | 3 | testPass | 1 | bill | test
+nextFirst | nextLast | 4 | nextPass | 1 | bill | test2
+t@goog.com | test | patient | 77/88/99 | test | 1 | bob@bob.com | test
+d@goog.com | Derek | Hoffman | 66/77/88 | derkpass | 1 | bob@bob.com | test
+b@goog.com | bill | hufferson | 33/55/66 | passwurd | 1 | bob@bob.com | N/A
+b@yah.com | bill | bob | 22/33/44 | joe | 1 | bob@bob.com | this works
+u@yahgoo.com | user | test | 11/22/33 | pass | 1 | doctor | hi
+doctor@doc.com | doctor | test | 22/33/44 | pass | 0 | null | hi
+watdo@email.com | final | patient | 14/32/23 | soekw | 1 | bob@bob.com | worejro

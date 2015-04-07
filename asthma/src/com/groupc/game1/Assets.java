@@ -12,6 +12,7 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
+import com.groupc.TextDrawer;
 import com.groupc.game.TextureRegion;
 
 public final class Assets
@@ -62,38 +63,7 @@ public final class Assets
 			sprites.put("joeyFlap", new TextureRegion(textures.get("atlas"),192, 512 - 128 - 32, 32, 32));
 			sprites.put("joeyGlide", new TextureRegion(textures.get("atlas"), 192, 512 - 160 - 32, 32, 32));
 			
-			sprites.put("one", new TextureRegion(textures.get("atlas"), 0, 512 - 128 - 1, 192/10, 32));
-			sprites.put("two", new TextureRegion(textures.get("atlas"), 192/10, 512 - 128 - 1, 192/10, 32));
-			sprites.put("three", new TextureRegion(textures.get("atlas"), 192/10 * 2, 512 - 128 - 1, 192/10, 32));
-			sprites.put("four", new TextureRegion(textures.get("atlas"), 192/10 * 3, 512 - 128 - 1, 192/10, 32));
-			sprites.put("five", new TextureRegion(textures.get("atlas"), 192/10 * 4, 512 - 128 - 1, 192/10, 32));
-			sprites.put("six", new TextureRegion(textures.get("atlas"), 192/10 * 5, 512 - 128 - 1, 192/10, 32));
-			sprites.put("seven", new TextureRegion(textures.get("atlas"), 192/10 * 6, 512 - 128 - 1, 192/10, 32));
-			sprites.put("eight", new TextureRegion(textures.get("atlas"), 192/10 * 7, 512 - 128 - 1, 192/10, 32));
-			sprites.put("nine", new TextureRegion(textures.get("atlas"), 192/10 * 8, 512 - 128 - 1, 192/10, 32));
-			sprites.put("zero", new TextureRegion(textures.get("atlas"), 192/10 * 9, 512 - 128 - 1, 192/10, 32));
-			
-			//row 1
-			sprites.put("letterA", new TextureRegion(textures.get("atlas"), 0, 512-160, 192/8, 32));
-			sprites.put("letterC", new TextureRegion(textures.get("atlas"), 192/8, 512-160, 192/8, 32));
-			sprites.put("letterD", new TextureRegion(textures.get("atlas"), 192/8 * 2, 512-160, 192/8, 32));
-			sprites.put("letterE", new TextureRegion(textures.get("atlas"), 192/8 * 3, 512-160, 192/8, 32));
-			sprites.put("letterF", new TextureRegion(textures.get("atlas"), 192/8 * 4, 512-160, 192/8, 32));
-			sprites.put("letterG", new TextureRegion(textures.get("atlas"), 192/8 * 5, 512-160, 192/8, 32));
-			sprites.put("letterI", new TextureRegion(textures.get("atlas"), 192/8 * 6, 512-160, 192/8, 32));
-			sprites.put("letterL", new TextureRegion(textures.get("atlas"), 192/8 * 7, 512-160, 192/8, 32));
-			
-			//row 2
-			sprites.put("letterN", new TextureRegion(textures.get("atlas"), 0, 512-192, 192/8, 32));
-			sprites.put("letterO", new TextureRegion(textures.get("atlas"), 192/8, 512-192, 192/8, 32));
-			sprites.put("letterP", new TextureRegion(textures.get("atlas"), 192/8 * 2, 512-192, 192/8, 32));
-			sprites.put("letterR", new TextureRegion(textures.get("atlas"), 192/8 * 3, 512-192, 192/8, 32));
-			sprites.put("letterS", new TextureRegion(textures.get("atlas"), 192/8 * 4, 512-192, 192/8, 32));
-			sprites.put("letterT", new TextureRegion(textures.get("atlas"), 192/8 * 5, 512-192, 192/8, 32));
-			sprites.put("letterU", new TextureRegion(textures.get("atlas"), 192/8 * 6, 512-192, 192/8, 32));
-			sprites.put("letterW", new TextureRegion(textures.get("atlas"), 192/8 * 7, 512-192, 192/8, 32));
-			
-			
+			TextDrawer.prepare();		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -36,15 +36,18 @@ public class GameHubScreen extends Screen
 	//Display Elements
 	private NavigationBar	navBar				= new NavigationBar(run,false,true,"Game Hub");	
 	private JButton			game1Button 		= new JButton("");
-	private JButton			game2Button 		= new JButton("Game 2");
-	private JButton			game3Button 		= new JButton("Game 3");
-	private JButton			game4Button 		= new JButton("Game 4");
+	private JButton			game2Button 		= new JButton("");
+	private JButton			game3Button 		= new JButton("");
+	private JButton			game4Button 		= new JButton("");
 	private JButton			LeaderBoardButton	= new JButton("Leader Board");
 	private JLabel			game1Label 			= new JLabel("Game 1",SwingConstants.CENTER);
 	private JLabel 			game2Label 			= new JLabel("Game 2",SwingConstants.CENTER);
 	private JLabel 			game3Label 			= new JLabel("Game 3",SwingConstants.CENTER);
 	private JLabel 			game4Label 			= new JLabel("Game 4",SwingConstants.CENTER);
-	private ImageIcon 		game1Icon 			= new ImageIcon("Game1Button.png");
+	private ImageIcon 		game1Icon 			= new ImageIcon("resources/interface/Game1Button.png");
+	private ImageIcon 		game2Icon 			= new ImageIcon("resources/interface/Game2Button.png");
+	private ImageIcon 		game3Icon 			= new ImageIcon("resources/interface/Game3Button.png");
+	private ImageIcon 		game4Icon 			= new ImageIcon("resources/interface/Game4Button.png");
 	
 	public GameHubScreen(Runner run)
 	{
@@ -95,9 +98,9 @@ public class GameHubScreen extends Screen
 		});
 		
 		//deactivate buttons
-		game2Button.setEnabled(false);
-		game3Button.setEnabled(false);
-		game4Button.setEnabled(false);
+		//game2Button.setEnabled(false);
+		//game3Button.setEnabled(false);
+		//game4Button.setEnabled(false);
 		
 		this.add(game1Button);
 		this.add(game2Button);
@@ -131,16 +134,19 @@ public class GameHubScreen extends Screen
 			
 			//Game 2
 			game2Button.setBounds(resize.locationX(275), resize.locationY(125), resize.width(175), resize.height(100));
+			game2Button.setIcon(new ImageIcon(game2Icon.getImage().getScaledInstance(resize.width(175), resize.height(100), java.awt.Image.SCALE_SMOOTH)));
 			game2Label.setBounds(resize.locationX(275), resize.locationY(105), resize.width(175), resize.height(20));
 			game2Label.setFont(new Font(game2Label.getFont().getFontName(),game2Label.getFont().getStyle(), resize.font(12)));
 			
 			//Game 3
 			game3Button.setBounds(resize.locationX(50), resize.locationY(275), resize.width(175), resize.height(100));
+			game3Button.setIcon(new ImageIcon(game3Icon.getImage().getScaledInstance(resize.width(175), resize.height(100), java.awt.Image.SCALE_SMOOTH)));
 			game3Label.setBounds(resize.locationX(50), resize.locationY(255), resize.width(175), resize.height(20));
 			game3Label.setFont(new Font(game3Label.getFont().getFontName(),game3Label.getFont().getStyle(), resize.font(12)));
 			
 		    //Game 4
 			game4Button.setBounds(resize.locationX(275), resize.locationY(275), resize.width(175), resize.height(100));
+			game4Button.setIcon(new ImageIcon(game4Icon.getImage().getScaledInstance(resize.width(175), resize.height(100), java.awt.Image.SCALE_SMOOTH)));
 			game4Label.setBounds(resize.locationX(275), resize.locationY(255), resize.width(175), resize.height(20));
 			game4Label.setFont(new Font(game4Label.getFont().getFontName(),game4Label.getFont().getStyle(), resize.font(12)));
 			
@@ -157,15 +163,15 @@ public class GameHubScreen extends Screen
 		}
 		else if(butPressed == 2)
 		{
-			//run.setScreen(new Game1Screen(run));
+			run.setScreen(new Game2Screen(run));
 		}
 		else if(butPressed == 3)
 		{
-			//run.setScreen(new Game1Screen(run));
+			run.setScreen(new Game3Screen(run));
 		}
 		else if(butPressed == 4)
 		{
-			//run.setScreen(new Game1Screen(run));
+			run.setScreen(new Game4Screen(run));
 		}
 		butPressed = 0;
 		navBar.update();
