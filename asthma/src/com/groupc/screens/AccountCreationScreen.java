@@ -1,5 +1,15 @@
 package com.groupc.screens;
 
+/*
+ * Author(s):		Team C
+ * Course: 			CST 316 Spring
+ * Instructor:		Dr. Gary
+ * Date Changed:	4/1/2015
+ * 
+ * Description:		AccountCreationScreen appears when the doctor clicks "Add Patient" at the DoctorScreen.
+ * 					The doctor can add a new patient to his/her list of patients.
+ */
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -38,25 +48,30 @@ public class AccountCreationScreen extends Screen
 	public String newPatientDoctor;
 	
 	//Display Elements
-	NavigationBar navBar       = new NavigationBar(run,true,false,"Account Creation Page");
-	JPanel     pageBox         = new JPanel();
-	JLabel     firstNameLabel  = new JLabel("First Name*:",SwingConstants.RIGHT);
-	JLabel     lastNameLabel   = new JLabel("Last Name*:",SwingConstants.RIGHT);
-	JLabel     dobLabel        = new JLabel("D.O.B (mm/dd/yy)*:",SwingConstants.RIGHT);
-	JLabel     emailLabel	   = new JLabel("Email*:",SwingConstants.RIGHT);
-	JLabel     passwordLabel   = new JLabel("Password*:",SwingConstants.RIGHT);
-	JLabel     infoLabel       = new JLabel("Contact Info:",SwingConstants.RIGHT);
-	public		JTextField firstNameTF     = new JTextField();
-	public		JTextField lastNameTF      = new JTextField();
-	public		JTextField monthTF         = new JTextField();
-				JTextField dayTF           = new JTextField();
-				JTextField yearTF          = new JTextField();
-	public		JTextField emailTF		   = new JTextField();
-	public		JTextField passwordTF      = new JTextField();
-	public		JTextArea  infoTA          = new JTextArea();
-	JButton    submitButton    = new JButton("Submit");
-	JLabel     errorMessage    = new JLabel("Missing Information*",SwingConstants.CENTER);
-	JLabel	   invalidInputMessage = new JLabel("Please insert a valid Date*");
+	NavigationBar 	navBar       	= new NavigationBar(run,true,false,"Account Creation Page");
+	
+	JPanel    	 	pageBox         	= new JPanel();
+	JLabel   	 	firstNameLabel  	= new JLabel("First Name*:",SwingConstants.RIGHT);
+	JLabel     		lastNameLabel   	= new JLabel("Last Name*:",SwingConstants.RIGHT);
+	JLabel     		dobLabel        	= new JLabel("D.O.B (mm/dd/yy)*:",SwingConstants.RIGHT);
+	JLabel     		emailLabel	   		= new JLabel("Email*:",SwingConstants.RIGHT);
+	JLabel     		passwordLabel   	= new JLabel("Password*:",SwingConstants.RIGHT);
+	JLabel     		infoLabel       	= new JLabel("Contact Info:",SwingConstants.RIGHT);
+	JLabel     		errorMessage    	= new JLabel("Missing Information*",SwingConstants.CENTER);
+	JLabel	   		invalidInputMessage = new JLabel("Please insert a valid Date*");
+	
+	JTextField 		firstNameTF     = new JTextField();
+	JTextField 		lastNameTF      = new JTextField();
+	JTextField 		monthTF         = new JTextField();
+	JTextField 		dayTF           = new JTextField();
+	JTextField 		yearTF          = new JTextField();
+	JTextField 		emailTF		   	= new JTextField();
+	JTextField 		passwordTF      = new JTextField();
+	
+	JTextArea  		infoTA          = new JTextArea();
+	
+	JButton    		submitButton    = new JButton("Submit");
+
 	
 	public AccountCreationScreen(Runner run) 
 	{
@@ -122,18 +137,14 @@ public class AccountCreationScreen extends Screen
 		run.setVisible(true);
 	}
 	
-	public void setPatientDoctor(String patientDoctor) //new patients doctor
-	{
-		/*
-		if(Database.addPatient(firstNameTF.getText(), lastNameTF.getText(), emailTF.getText(), passwordTF.getText(), dobTF.getText())){
-			//run.setScreen(new DoctorScreen(run));  THIS IS A BUG RIGHT NOW
-		}
-		*/
+	public void setPatientDoctor(String patientDoctor){ //new patients doctor
+	
 		if(patientDoctor != null)
 		{
 			newPatientDoctor = patientDoctor;
 			run.setTitle("Account Creation " + newPatientDoctor);
-		}else
+		}
+		else
 		{
 			run.setTitle("Account Creation");
 			System.out.println("null doctor for new patient");
@@ -211,13 +222,15 @@ public class AccountCreationScreen extends Screen
 			run.repaint();
 			redraw = false;
 		}
+		
 		if(navBar.backButtonPressed)
 		{
 			DoctorScreen docScreen = new DoctorScreen(run);
 			docScreen.setDoctor(newPatientDoctor);
 			try {
 				docScreen.getPatients();
-			} catch(Exception e){
+			} 
+			catch(Exception e){
 				e.printStackTrace();
 			}
 			run.setScreen(docScreen);
@@ -231,25 +244,29 @@ public class AccountCreationScreen extends Screen
 	}
 
 	@Override
-	public void present(float deltaTime) {
+	public void present(float deltaTime) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void pause() {
+	public void pause() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void resume() {
+	public void resume() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
@@ -258,6 +275,8 @@ public class AccountCreationScreen extends Screen
 	{
 		if(checkContents())  //required basic information
 		{
+			Database.addPatient(firstNameTF.getText(), lastNameTF.getText(), yearTF.getText(), passwordTF.getText(), emailTF.getText(), infoTA.getText());
+				//run.setScreen(new DoctorScreen(run));  THIS IS A BUG RIGHT NOW
 			try 
 			{
 				FileWriter fWriter = new FileWriter("login_information.txt", true);
@@ -267,15 +286,19 @@ public class AccountCreationScreen extends Screen
 							  + " | " + type + " | " + newPatientDoctor + " | " + infoTA.getText() +"\n"); 
 								//all patients created from doctor screen will be type 0
 				bWriter.close();
-			} catch (IOException e)
+			} 
+			catch (IOException e)
 			{
 				e.printStackTrace();
 			}
+			
 			DoctorScreen docScreen = new DoctorScreen(run);
 			docScreen.setDoctor(newPatientDoctor);
+			
 			try {
 				docScreen.getPatients();
-			} catch(Exception e){
+			} 
+			catch(Exception e){
 				e.printStackTrace();
 			}
 			run.setScreen(docScreen);
@@ -291,11 +314,14 @@ public class AccountCreationScreen extends Screen
 			errorMessage.setVisible(true);
 			return false;
 		}
+		
 		if(monthTF.getText().isEmpty() || dayTF.getText().isEmpty() || yearTF.getText().isEmpty())
 		{
 			errorMessage.setVisible(true);
 			return false;
-		}else
+		}
+		
+		else
 		{
 			try
 			{
@@ -303,7 +329,8 @@ public class AccountCreationScreen extends Screen
 				Integer.parseInt(dayTF.getText());
 				Integer.parseInt(yearTF.getText());
 		
-			}catch(Exception e)
+			}
+			catch(Exception e)
 			{
 				monthTF.setText("");
 				dayTF.setText("");
@@ -312,11 +339,12 @@ public class AccountCreationScreen extends Screen
 				return false;
 			}
 		}
+		
 		if(infoTA.getText().isEmpty())
 		{
 			infoTA.setText("N/A");
 		}
-		return true;
 		
+		return true;
 	}
 }

@@ -1,14 +1,5 @@
 package com.groupc.screens;
 
-/*
- * Author(s):		Team C
- * Course: 			CST 316 Spring
- * Instructor:		Dr. Gary
- * Date Changed:	4/1/2015
- * 
- * Description:		Appears when Game 1 button is clicked. Executes Game 1.
- */
-
 import static org.lwjgl.opengl.GL11.*;
 
 import java.awt.Canvas;
@@ -27,30 +18,26 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 import com.groupc.Runner;
-import com.groupc.TextDrawer;
-import com.groupc.game1.Game1Assets;
 import com.groupc.game1.MainMenu;
 import com.groupc.game.GameScreen;
 import com.groupc.math.Resize;
 
 
-public class Game1Screen extends Screen
+public class Game4Screen extends Screen
 {
 	//Variables
-	boolean redraw     	= true;
-	Resize  resize     	= new Resize(run);
-	int     butPressed 	= 0;
-	int testx 			= 0;	
+	boolean redraw     = true;
+	Resize  resize     = new Resize(run);
+	int     butPressed = 0;
+	int testx = 0;	
 
 	//Display Elements
-	NavigationBar navBar = new NavigationBar(run,true,false,"Game 1");
+	NavigationBar navBar = new NavigationBar(run,true,false,"Game 4");
 	
 	Canvas canvas;
 	GameScreen scr;
 	
-	Game1Assets assets;
-	
-	public Game1Screen(Runner run)
+	public Game4Screen(Runner run)
 	{
 		super(run);
 		canvas = new Canvas();
@@ -72,6 +59,8 @@ public class Game1Screen extends Screen
 		
 		canvas.setFocusable(true);
         canvas.requestFocus();
+		//canvas.setSize(400, 400);
+        //canvas.setLocation(64, 64);
         canvas.setIgnoreRepaint(true);
         canvas.setVisible(true);
         
@@ -91,15 +80,13 @@ public class Game1Screen extends Screen
             //Display.setDisplayMode(new DisplayMode(400, 400));
 			Display.setParent(canvas);
 			Display.create();
-			TextDrawer.prepare();
-			assets = new Game1Assets();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.exit(0);
 		}
 		
-		scr = new MainMenu(assets);
+		scr = new MainMenu();
 		
 		         
 	}
@@ -110,12 +97,10 @@ public class Game1Screen extends Screen
 		Display.update();
 		scr.update(deltaTime);
 		Display.sync(60); 
-		
 		if(Display.isCloseRequested())
 		{
 			Display.destroy();
 		}
-		
 		if(scr.isClosing)
 		{
 			scr = scr.getNext();
@@ -131,7 +116,6 @@ public class Game1Screen extends Screen
 			run.repaint();
 			redraw = false;
 		}
-		
 		if(navBar.backButtonPressed)
 		{
 			Display.destroy();
@@ -152,22 +136,19 @@ public class Game1Screen extends Screen
 	}
 
 	@Override
-	public void pause() 
-	{
+	public void pause() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void resume() 
-	{
+	public void resume() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void dispose() 
-	{
+	public void dispose() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,5 +1,7 @@
-edwin@goog.com | edwin | avalos | 19 | password | 0 | null | hello
 bob@bob.com | bob | L | 12 | blh | 0 | null | nkk | knk | kkn | 1 | kn
+dmierke@yahoo.com | david | mierke | 7/12/87 | teamc | 1 | bob@bob.com | blah blah
+user | user | test | 7/12/87 | pass | 1 | doctor | blah blah
+doctor | doctor | test | 7/12/87 | pass | 0 | null | blah blah
 e@goog.com | edwin | avalos | 19/20/21 | pik | 1 | bob@bob.com | d
 testFirst | testLast | 3 | testPass | 1 | bill | test
 nextFirst | nextLast | 4 | nextPass | 1 | bill | test2

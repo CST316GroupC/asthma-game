@@ -22,10 +22,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,6 +35,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 import com.groupc.Database;
@@ -46,28 +49,38 @@ public class LoginScreen extends Screen
 	boolean redraw						= true;
 	boolean loginErrorDrawn				= false;
 	boolean elementMoved				= false;
+	boolean mutePressed					= false;
+	boolean played 					  	= true;
 	int 	type						= 0;
 	Resize 	resize						= new Resize(run);
 	
+	Date date = new Date();
 	
 	//Display Elements
-	JPanel loginBox 					= new JPanel();
 	
-	JPasswordField passwordTF			= new JPasswordField();
+	JPanel loginBox 				= new JPanel();
 	
-	JTextField userNameTF				= new JTextField();
+	JPasswordField passwordTF		= new JPasswordField();
+	
+	JTextField userNameTF			= new JTextField();
 		
 	//Labels
-	JLabel title						= new JLabel("Team C's Asthma Game",SwingConstants.CENTER);
-	JLabel userNameLabel				= new JLabel("Email:");
-	JLabel passwordLabel				= new JLabel("Password:");
-	JLabel passRetrievalLabel			= new JLabel("");
-	JLabel loginErrorMessage			= new JLabel("Incorrect Username/Password");
+	JLabel title					= new JLabel("Team C's Asthma Game",SwingConstants.CENTER);
+	JLabel userNameLabel			= new JLabel("Email:");
+	JLabel passwordLabel			= new JLabel("Password:");
+	JLabel passRetrievalLabel		= new JLabel("");
+	JLabel loginErrorMessage		= new JLabel("Incorrect Username/Password");
+	JLabel background				= new JLabel();
 	
 	//Buttons
 	JRadioButton saveLoginRadio			= new JRadioButton("Remember Password");
 	JButton	loginButton					= new JButton("Login");
 	JButton	passRetrievalButton			= new JButton("Forgot Password?");
+	JToggleButton muteButton     		= new JToggleButton();
+	
+	private ImageIcon 	backgroundImage 	= new ImageIcon("resources/interface/BackgroundArt.png");
+	private ImageIcon 	muteOffIcon 		= new ImageIcon("resources/interface/UnMuteIcon.png");
+	private ImageIcon 	muteOnIcon  		= new ImageIcon("resources/interface/MuteIcon.png");
 	
 	public LoginScreen(Runner run) 
 	{
@@ -95,9 +108,13 @@ public class LoginScreen extends Screen
 		loginBox.setBackground(Color.LIGHT_GRAY);
 		saveLoginRadio.setBackground(Color.LIGHT_GRAY);
 		loginErrorMessage.setForeground(Color.RED);
+		title.setOpaque(true);
+		title.setBackground(Color.WHITE);
 		
 		//Set fonts
-		title.setFont(new Font("Serif", Font.BOLD, 40));		
+		title.setFont(new Font("Serif", Font.BOLD, 40));	
+		
+		muteButton.setToolTipText("Toggle Sound");
 		
 		////Buttons////
 		//Test if Login Button is pushed
@@ -109,7 +126,8 @@ public class LoginScreen extends Screen
 				try 
 				{
 					checkLogin();
-				} catch (IOException e1) 
+				} 
+				catch (IOException e1) 
 				{
 					e1.printStackTrace();
 				}			
@@ -133,10 +151,19 @@ public class LoginScreen extends Screen
 			{
 				try {
 					checkLogin();
-				} catch (IOException e1) {
+				} 
+				catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			}
+		});
+		
+		muteButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				mutePressed = true;				
 			}
 		});
 		
@@ -144,6 +171,7 @@ public class LoginScreen extends Screen
 		
 		//add things to the panel
 		this.add(title);
+		this.add(muteButton);
 		this.add(userNameLabel);
 		this.add(userNameTF);
 		this.add(passwordLabel);
@@ -154,15 +182,81 @@ public class LoginScreen extends Screen
 		this.add(passRetrievalButton);
 		this.add(loginErrorMessage);
 		this.add(loginBox);
+		this.add(background);
 		
 		this.setLayout(null);
 		run.setContentPane(this);
 		run.setVisible(true);
 		
+		//Mute on/off
+		if(run.player.getPausedMusic())
+		{
+			muteButton.setSelected(true);
+		}
+		else
+		{
+			muteButton.setSelected(false);
+		}
+	}
+	
+	private boolean hasNotTakenReadings(String user)
+	{
+		String line = null;
+		String tempString = date.toString();
+		String currentDay = null;
 		
-		//music stuff
-		run.player.loadSong("AMemoryAway.ogg");
-		run.player.playMusic(true);
+		Vector<String> userNames = new Vector<String>();
+		Vector<String> days = new Vector<String>();
+		StringTokenizer st;
+		
+		try
+		{
+			FileReader fr = new FileReader("spirometer_readings.txt");
+			BufferedReader br = new BufferedReader(fr);
+			
+			
+			while((line = br.readLine()) != null)
+			{
+				st = new StringTokenizer(line, " | ");
+				userNames.add(st.nextToken()); //user
+				st.nextToken(); //volume
+				st.nextToken(); //force
+				st.nextToken(); //day of week
+				st.nextToken(); //month
+				days.add(st.nextToken()); //day 
+				st.nextToken(); //time
+				st.nextToken(); //timezone
+				st.nextToken(); //year
+				
+				
+			}
+			br.close();
+		} catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		st = new StringTokenizer(tempString);
+		while(st.hasMoreElements())
+		{
+			st.nextToken(); // day of week
+			st.nextToken(); // month
+			currentDay = st.nextToken(); // day
+			st.nextToken(); // time
+			st.nextToken(); // timezone
+			st.nextToken(); // year
+		}
+		for(int i = 0; i < userNames.size(); i++)
+		{
+			if(userNames.elementAt(i).equals(userNameTF.getText()))
+			{
+				if(days.elementAt(i).equals(currentDay))
+				{
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	@Override
@@ -173,6 +267,17 @@ public class LoginScreen extends Screen
 			//title
 			title.setBounds(resize.locationX(0), resize.locationY(80), resize.width(500), resize.height(50));
 			title.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(40)));
+			title.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+			
+			//MuteButton
+			muteButton.setBounds(resize.locationX(460), resize.locationY(10), resize.width(30), resize.height(30));
+			muteButton.setFont(new Font(muteButton.getFont().getFontName(),muteButton.getFont().getStyle(), resize.font(12)));
+			muteButton.setIcon(new ImageIcon(muteOffIcon.getImage().getScaledInstance(resize.width(30), resize.height(30), java.awt.Image.SCALE_SMOOTH)));
+			muteButton.setSelectedIcon(new ImageIcon(muteOnIcon.getImage().getScaledInstance(resize.width(30), resize.height(30), java.awt.Image.SCALE_SMOOTH)));
+			
+			//Background
+			background.setBounds(resize.locationX(0), resize.locationY(0), resize.width(500), resize.height(500));
+			background.setIcon(new ImageIcon(backgroundImage.getImage().getScaledInstance(resize.width(500), resize.height(500), java.awt.Image.SCALE_SMOOTH)));
 			
 			//loginBox
 			loginBox.setBounds(resize.locationX(100), resize.locationY(200), resize.width(300), resize.height(200));
@@ -211,6 +316,19 @@ public class LoginScreen extends Screen
 			run.repaint();
 			redraw = false;
 		}
+		//mute
+		if(mutePressed)
+		{
+			if(muteButton.getSelectedObjects() != null)
+			{
+				played = !run.player.pauseMusic();
+			}
+			else
+			{
+				played = run.player.resume();
+			}
+		}
+		mutePressed = false;	
 	}
 
 	@Override
@@ -246,7 +364,7 @@ public class LoginScreen extends Screen
 		{
 			run.setScreen(new DoctorScreen(run));
 		}
-		if(Database.getPatient(userNameTF.getText(), passwordTF.getText()))
+		else if(Database.getPatient(userNameTF.getText(), passwordTF.getText()))
 		{
 			run.setScreen(new TutorialScreen(run));
 		}
@@ -301,15 +419,21 @@ public class LoginScreen extends Screen
 					ds.setDoctor(userNameTF.getText());
 					ds.getPatients();
 					run.setScreen(ds);
-				}
+				}else
 				//Patients
 				if(types.elementAt(i).equals("1"))
 				{
-					TutorialScreen ts = new TutorialScreen(run);
-					ts.setPatient(emails.elementAt(i));
-					run.setScreen(ts);
+					if(hasNotTakenReadings(userNameTF.getText()))
+					{
+						TutorialScreen ts = new TutorialScreen(run);
+						ts.setPatient(emails.elementAt(i));
+						run.setScreen(ts);
+					} else 
+					{
+						run.setScreen(new GameHubScreen(run));
+					}
 				}
-		}
+			}
 		
 			if(!loginErrorDrawn)
 			{

@@ -6,7 +6,7 @@ package com.groupc.screens;
  * Instructor:		Dr. Gary
  * Date Changed:	3/29/2015
  * 
- * Description:		TutorialScreen is the first page after the patient logs in. 
+ * Description:		TutorialScreen is the first screen that appears after a patient logs in. 
  * 					This page only appears the first time the patient logs in.
  * 					Instructions on how to use the Spirometer and how to operate/navigate the software.
  */
@@ -61,21 +61,20 @@ public class TutorialScreen extends Screen
 	JButton step7				= new JButton("Step 7");
 	JButton start				= new JButton("Start");
 	
-	ImageIcon image1 			= new ImageIcon("tutorial1.png");
-	ImageIcon image2 			= new ImageIcon("tutorial2.png");
-	ImageIcon image3 			= new ImageIcon("tutorial3.png");
-	ImageIcon image4 			= new ImageIcon("tutorial4.png");
-	ImageIcon image5 			= new ImageIcon("tutorial5.png");
-	ImageIcon image6 			= new ImageIcon("tutorial6.png");
-	ImageIcon image7 			= new ImageIcon("tutorial7.png");
+	ImageIcon imageSet			= new ImageIcon("resources/interface/tutorial/tutorial1.png");
+	ImageIcon image1 			= new ImageIcon("resources/interface/tutorial/tutorial1.png");
+	ImageIcon image2 			= new ImageIcon("resources/interface/tutorial/tutorial2.png");
+	ImageIcon image3 			= new ImageIcon("resources/interface/tutorial/tutorial3.png");
+	ImageIcon image4 			= new ImageIcon("resources/interface/tutorial/tutorial4.png");
+	ImageIcon image5 			= new ImageIcon("resources/interface/tutorial/tutorial5.png");
+	ImageIcon image6 			= new ImageIcon("resources/interface/tutorial/tutorial6.png");
+	ImageIcon image7 			= new ImageIcon("resources/interface/tutorial/tutorial7.png");
 	
 	JLabel stepImage			= new JLabel();
 	
 	public TutorialScreen(Runner run)
 	{
 		super(run);
-		
-		//Basic Frame Settings moved to set patient
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -93,6 +92,8 @@ public class TutorialScreen extends Screen
 		stepsBox.setBackground(Color.GRAY);
 		skipText.setForeground(Color.RED);
 		
+		stepImage.setIcon(new ImageIcon(image1.getImage().getScaledInstance(resize.width(315), resize.height(215), java.awt.Image.SCALE_SMOOTH)));
+		
 		////Buttons////
 		start.addActionListener(new ActionListener()
 		{
@@ -108,7 +109,8 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				stepImage.setIcon(image1);
+				step = 1;
+				//stepImage.setIcon(image1);
 			}
 		});
 				
@@ -118,7 +120,8 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				stepImage.setIcon(image2);
+				step = 2;
+				//stepImage.setIcon(image2);
 			}
 		});
 		
@@ -127,7 +130,8 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				stepImage.setIcon(image3);
+				step = 3;
+				//stepImage.setIcon(image3);
 			}
 		});
 		
@@ -136,7 +140,8 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				stepImage.setIcon(image4);
+				step = 4;
+				//stepImage.setIcon(image4);
 			}
 		});
 		
@@ -145,7 +150,8 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				stepImage.setIcon(image5);
+				step = 5;
+				//stepImage.setIcon(image5);
 			}
 		});
 		step6.addActionListener(new ActionListener()
@@ -153,7 +159,8 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				stepImage.setIcon(image6);
+				step = 6;
+				//stepImage.setIcon(image6);
 			}
 		});
 		
@@ -162,7 +169,8 @@ public class TutorialScreen extends Screen
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				stepImage.setIcon(image7);
+				step = 7;
+				//stepImage.setIcon(image7);
 			}
 		});
 								
@@ -177,7 +185,6 @@ public class TutorialScreen extends Screen
 		this.add(step7);
 		this.add(start);
 		this.add(stepImage);
-		// Panels have to be added last for it to show 
 		this.add(videoBox);
 		this.add(descriptionBox);
 		this.add(stepsBox);
@@ -194,8 +201,8 @@ public class TutorialScreen extends Screen
 			patientUserName = pUserName;
 			run.setTitle(patientUserName + " Tutorial");
 			stepImage.setIcon(image1);
-			
-		} else
+		} 
+		else
 		{
 			run.setTitle("Tutorial");
 		}
@@ -241,7 +248,7 @@ public class TutorialScreen extends Screen
 			
 			//image
 			stepImage.setBounds(resize.locationX(20), resize.locationY(120), resize.width(315), resize.height(215));
-			
+			stepImage.setIcon(new ImageIcon(imageSet.getImage().getScaledInstance(resize.width(315), resize.height(215), java.awt.Image.SCALE_SMOOTH)));
 			
 			//skipText
 			skipText.setBounds(resize.locationX(0), resize.locationY(395), resize.width(500), resize.height(25));
@@ -275,6 +282,31 @@ public class TutorialScreen extends Screen
 				played = true;
 			}
 		}
+		switch(step)
+		{
+			case 1: imageSet = image1;
+				stepImage.setIcon(new ImageIcon(image1.getImage().getScaledInstance(resize.width(315), resize.height(215), java.awt.Image.SCALE_SMOOTH)));
+				break;
+			case 2: imageSet = image2;
+				stepImage.setIcon(new ImageIcon(image2.getImage().getScaledInstance(resize.width(315), resize.height(215), java.awt.Image.SCALE_SMOOTH)));
+				break;
+			case 3: imageSet = image3;
+				stepImage.setIcon(new ImageIcon(image3.getImage().getScaledInstance(resize.width(315), resize.height(215), java.awt.Image.SCALE_SMOOTH)));
+				break;
+			case 4: imageSet = image4;
+				stepImage.setIcon(new ImageIcon(image4.getImage().getScaledInstance(resize.width(315), resize.height(215), java.awt.Image.SCALE_SMOOTH)));
+				break;
+			case 5: imageSet = image5;
+				stepImage.setIcon(new ImageIcon(image5.getImage().getScaledInstance(resize.width(315), resize.height(215), java.awt.Image.SCALE_SMOOTH)));
+				break;
+			case 6: imageSet = image6;
+				stepImage.setIcon(new ImageIcon(image6.getImage().getScaledInstance(resize.width(315), resize.height(215), java.awt.Image.SCALE_SMOOTH)));
+				break;
+			case 7: imageSet = image7;
+				stepImage.setIcon(new ImageIcon(image7.getImage().getScaledInstance(resize.width(315), resize.height(215), java.awt.Image.SCALE_SMOOTH)));
+				break;
+		}
+		step = 0;
 	}
 
 	@Override

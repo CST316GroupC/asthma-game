@@ -1,5 +1,14 @@
 package com.groupc.screens;
 
+/*
+ * Author(s):		Team C
+ * Course: 			CST 316 Spring
+ * Instructor:		Dr. Gary
+ * Date Changed:	4/1/2015
+ * 
+ * Description:		NavigationBar appears at the top of all screens for back, logout, and parental controls button.
+ */
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -36,16 +45,13 @@ public class NavigationBar extends JPanel
 	JToggleButton muteButton     = new JToggleButton();
 	JLabel  pageTitle            = new JLabel("",SwingConstants.CENTER);
 	
-	ImageIcon muteOffIcon = new ImageIcon("UnMuteIcon.png");
-	ImageIcon muteOnIcon  = new ImageIcon("MuteIcon.png");
+	ImageIcon muteOffIcon = new ImageIcon("resources/interface/UnMuteIcon.png");
+	ImageIcon muteOnIcon  = new ImageIcon("resources/interface/MuteIcon.png");
 
 	public NavigationBar(Runner run, boolean backOn, boolean parentControlsOn, String title) 
 	{
 		this.run = run;
 		resize   = new Resize(run);
-		
-		muteButton.setIcon(new ImageIcon("UnMuteIcon.png"));
-		muteButton.setSelectedIcon(new ImageIcon("MuteIcon.png"));
 		
 		//set settings
 		if(backOn == false)
@@ -64,6 +70,8 @@ public class NavigationBar extends JPanel
 		
 		//Set fonts
 		pageTitle.setFont(new Font("Serif", Font.BOLD, 25));
+		
+		muteButton.setToolTipText("Toggle Sound");
 		
 		//Mute on/off
 		if(run.player.getPausedMusic())

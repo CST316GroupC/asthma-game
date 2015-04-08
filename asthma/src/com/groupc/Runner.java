@@ -36,8 +36,10 @@ public class Runner extends JFrame
 		setMinimumSize(new Dimension(SCR_WIDTH, SCR_HEIGHT));
 		setLocationRelativeTo(null);
 		player = new AudioPlayer();
-		//screen = new LoginScreen(this);
-		screen = new GameHubScreen(this);
+		player.loadSong("resources/sounds/AMemoryAway.ogg");
+		player.playMusic(true);
+		screen = new LoginScreen(this);
+		//screen = new GameHubScreen(this);
 		
 	}
 	
