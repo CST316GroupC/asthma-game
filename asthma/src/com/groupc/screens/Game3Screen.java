@@ -19,8 +19,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.groupc.Runner;
 import com.groupc.TextDrawer;
-import com.groupc.game1.Game1Assets;
-import com.groupc.game1.MainMenu;
+import com.groupc.game3.Game3Assets;
+import com.groupc.game3.MainMenu;
 import com.groupc.game.GameScreen;
 import com.groupc.math.Resize;
 
@@ -38,7 +38,7 @@ public class Game3Screen extends Screen
 	
 	Canvas 		canvas;
 	GameScreen 	scr;
-	Game1Assets	assets;
+	Game3Assets	assets;
 	
 	public Game3Screen(Runner run)
 	{
@@ -84,7 +84,7 @@ public class Game3Screen extends Screen
 			Display.setParent(canvas);
 			Display.create();
 			TextDrawer.prepare();
-			assets = new Game1Assets();
+			assets = new Game3Assets();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
