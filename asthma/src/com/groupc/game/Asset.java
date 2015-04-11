@@ -27,7 +27,7 @@ public abstract class Asset
 		return sprites.get(img);
 	}
 		
-	public Texture getTexture(String txt)
+	public Texture getTexture()
 	{
 		return texture;
 	}
@@ -42,11 +42,11 @@ public abstract class Asset
 		props.setProperty(key, value);
 	}
 	
-	public void save()
+	public void save(String fileName)
 	{
 		FileOutputStream out;
 		try {
-			out = new FileOutputStream("res/joey.properties");
+			out = new FileOutputStream(fileName);
 			props.store(out, "---No Comment---");
 			out.close();
 		} catch (IOException e) {

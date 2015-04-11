@@ -86,7 +86,7 @@ public class Game4Screen extends Screen
 			System.exit(0);
 		}
 		
-		scr = new MainMenu();
+		//scr = new MainMenu();
 		
 		         
 	}

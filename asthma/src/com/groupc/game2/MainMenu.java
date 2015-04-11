@@ -70,6 +70,10 @@ public class MainMenu extends GameScreen
 	public void present(float deltaTime)
 	{
 		cam.setCamera();
+		assets.getTexture().bind();
+		assets.getImage("background").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
+		TextDrawer.drawStringinRect("Maze Game", title, false);
+		TextDrawer.drawStringinRect("Play", play, true);
 	}
 
 	
@@ -96,7 +100,7 @@ public class MainMenu extends GameScreen
 	{
 		if(next == 1)
 		{
-			//return new World();
+			return new MazeWorld(assets);
 		}
 		if(next == 2)
 		{
@@ -110,7 +114,7 @@ public class MainMenu extends GameScreen
 		{
 			//return new Instructions();
 		}
-		return null;
+		return new MainMenu(assets); //temp
 	}
 }
 

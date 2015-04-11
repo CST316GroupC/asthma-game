@@ -5,8 +5,7 @@ import com.groupc.game.MovingGameObject;
 public class JoeyRooster extends MovingGameObject
 {
 	public final static float WIDTH = 1.5f;
-	public final static float HEIGHT = .5f;
-	
+	public final static float HEIGHT = .5f;	
 	
 	public final static int STATE_SB = 0;
 	public final static int STATE_RAMP = 1;

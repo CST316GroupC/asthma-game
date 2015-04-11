@@ -91,7 +91,7 @@ public class UpgradeScreen extends GameScreen
 	{
 		cam.setCamera();
 		
-		assets.getTexture("atlas").bind();
+		assets.getTexture().bind();
 
 		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		
@@ -128,7 +128,7 @@ public class UpgradeScreen extends GameScreen
 	@Override
 	public void dispose() 
 	{
-		assets.save();
+		assets.save(Game1Assets.FILENAME);
 		isClosing = true;
 	}
 

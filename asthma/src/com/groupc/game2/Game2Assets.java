@@ -18,9 +18,11 @@ import com.groupc.game.TextureRegion;
 
 public class Game2Assets extends Asset
 {	
+	public final static String FILENAME = "resources/game2/maze.properties";
 	public Game2Assets()
 	{
 		super();
+		load();
 	}
 	
 	public void load()
@@ -29,10 +31,11 @@ public class Game2Assets extends Asset
 		sprites = new Hashtable<String, TextureRegion>();
 		
 		try {
-			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/maze.png"));
+			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game2/maze.png"));
 			
 			sprites.put("player", new TextureRegion(texture, 0, 512-32, 32, 32));
 			sprites.put("wall", new TextureRegion(texture, 0, 512-64, 32, 32));
+			sprites.put("background", new TextureRegion(texture, 0, 512-(32*6), 32, 32));
 						
 		} catch (IOException e) {
 			//TODO Auto-generated catch block
@@ -46,13 +49,16 @@ public class Game2Assets extends Asset
 	{
 		try 
 		{
-			FileInputStream in = new FileInputStream("res/maze.properties");
+			FileInputStream in = new FileInputStream(FILENAME);
 			props.load(in);
 			in.close();
 			String temp = props.getProperty("firstTime", "true");
 			if("true".equals(temp))
 			{
-				save();
+				props.setProperty("firstTime", "false");
+				props.setProperty("x", "0");
+				props.setProperty("y", "0");
+				save(FILENAME);
 			}
 		} 
 		catch (IOException e1)

@@ -18,14 +18,15 @@ import com.groupc.game.TextureRegion;
 
 public class Game1Assets extends Asset
 {	
+	public final static String FILENAME = "resources/game1/joey.properties";
 	private static Texture sheet;
 	
 	public Game1Assets()
 	{
 		super();
 		try {
-			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/atlas.png"));
-			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("mainmenu.png"));
+			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/atlas.png"));
+			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/mainmenu.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +71,7 @@ public class Game1Assets extends Asset
 	public void reload()
 	{
 		try {
-			FileInputStream in = new FileInputStream("res/joey.properties");
+			FileInputStream in = new FileInputStream(FILENAME);
 			props.load(in);
 			in.close();
 			String temp = props.getProperty("firstTime", "true");
@@ -83,7 +84,7 @@ public class Game1Assets extends Asset
 				props.setProperty("seeds", "0");
 				props.setProperty("firstTime", "false");
 				props.setProperty("sound", "true");
-				save();
+				save(FILENAME);
 			}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block

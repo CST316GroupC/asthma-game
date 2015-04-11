@@ -70,7 +70,7 @@ public class Options extends GameScreen
 	public void present(float deltaTime)
 	{
 		cam.setCamera();
-		assets.getTexture("sheet").bind();
+		assets.getTexture().bind();
 		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		assets.getImage("soundLbl").draw(soundLabel);
 		if(sound.equals("true"))
@@ -101,7 +101,7 @@ public class Options extends GameScreen
 	public void dispose() 
 	{
 		assets.setProps("sound", sound);
-		assets.save();
+		assets.save(Game1Assets.FILENAME);
 		isClosing = true;
 	}
 

@@ -1,16 +1,8 @@
 package com.groupc.game1;
 
-import java.awt.Font;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import org.lwjgl.input.Keyboard;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
 
 import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
@@ -157,7 +149,7 @@ public class World extends GameScreen
 						
 		//add the newly gained seeds]
 		assets.getProps().setProperty("seeds", ""+seedsCollected);
-		assets.save();
+		assets.save(Game1Assets.FILENAME);
 	}
 	
 	public void inputHandling()
@@ -246,7 +238,7 @@ public class World extends GameScreen
 		}
 		cam.setCamera();
 		
-		assets.getTexture("atlas").bind();
+		assets.getTexture().bind();
 		assets.getImage("sky").draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
 		assets.getImage("grass").draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
 		renderHud();	
@@ -277,8 +269,8 @@ public class World extends GameScreen
 		//hud
 		assets.getImage("joeyFly").draw(new Rectangle(0, cam.position.y + FRUSTUM_HEIGHT/2 - .35f, WORLD_WIDTH, .35f));
 		
-		TextDrawer.drawStringinRect("score", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE));
-		TextDrawer.drawStringinRect(score +"", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, MAX_SCORE_DIGITS * TEXT_SIZE, TEXT_SIZE));
+		TextDrawer.drawStringinRect("score", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE), false);
+		TextDrawer.drawStringinRect(score +"", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, MAX_SCORE_DIGITS * TEXT_SIZE, TEXT_SIZE), false);
 		TextDrawer.drawString("seeds", cam.position.x, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
 		TextDrawer.drawInt(seedsCollected, cam.position.x +1f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SEED_DIGITS);
 		

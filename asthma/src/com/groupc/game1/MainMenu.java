@@ -69,13 +69,13 @@ public class MainMenu extends GameScreen
 	public void present(float deltaTime)
 	{
 		cam.setCamera();
-		assets.getTexture("sheet").bind();
+		assets.getTexture().bind();
 		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		assets.getImage("title").draw(title);
-		TextDrawer.drawStringinRect("Start", play);
-		TextDrawer.drawStringinRect("Options", options);
-		TextDrawer.drawStringinRect("Upgrade", upgrade);
-		TextDrawer.drawStringinRect("Instructions", instruct);
+		TextDrawer.drawStringinRect("Start", play, true);
+		TextDrawer.drawStringinRect("Options", options, true);
+		TextDrawer.drawStringinRect("Upgrade", upgrade, true);
+		TextDrawer.drawStringinRect("Instructions", instruct, true);
 		//Assets.getImage("playBut").draw(play);
 		//Assets.getImage("optionsBut").draw(options);
 		//Assets.getImage("upgradeBut").draw(upgrade);

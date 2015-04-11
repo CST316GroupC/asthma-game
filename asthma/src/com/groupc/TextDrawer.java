@@ -35,7 +35,7 @@ public final class TextDrawer
 		characters = new Hashtable<String, TextureRegion>(); 
 		try
 		{
-			text = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/text.png"));
+			text = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/text.png"));
 
 			//row 3 0 to 9
 			characters.put("char0", new TextureRegion(text, 39*0 + 1, 512 - 287, 39, 72));
@@ -112,6 +112,9 @@ public final class TextDrawer
 			//space
 			characters.put("char ", new TextureRegion(text, 0, 0, 1, 1));
 			
+			//border
+			characters.put("border", new TextureRegion(text, 470, 512-312, 32, 32));
+			
 		} 
 		catch (IOException e) 
 		{
@@ -175,7 +178,7 @@ public final class TextDrawer
 	 * @param string - String to be drawn
 	 * @param rect - Rectangle to draw string inside of.
 	 */
-	public static void drawStringinRect(String string, Rectangle rect)
+	public static void drawStringinRect(String string, Rectangle rect, Boolean border)
 	{
 		//String str = string.toLowerCase(new Locale("US"));
 		float newWidth = rect.width / string.length();
@@ -183,6 +186,10 @@ public final class TextDrawer
 		{
 			Rectangle let = new Rectangle(rect.lowerLeft.x + i*newWidth, rect.lowerLeft.y, newWidth, rect.height);
 			drawChar(string.charAt(i), let);			
+		}
+		if(border)
+		{
+			characters.get("border").draw(rect);
 		}
 	}
 	
