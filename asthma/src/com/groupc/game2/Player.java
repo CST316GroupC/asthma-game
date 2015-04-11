@@ -30,6 +30,7 @@ public class Player extends MovingGameObject
 		{
 			position.add(velocity.mult(deltaTime));
 			bounds.lowerLeft.set(position.sub(bounds.width / 2, bounds.height / 2));
+			System.out.println("hello");
 		}
 	}
 	
