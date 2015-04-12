@@ -34,8 +34,13 @@ public class Game2Assets extends Asset
 			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game2/maze.png"));
 			
 			sprites.put("player", new TextureRegion(texture, 0, 512-32, 32, 32));
-			sprites.put("wall", new TextureRegion(texture, 0, 512-64, 32, 32));
+			sprites.put("wall", new TextureRegion(texture, 0, 512-32*2, 32, 32));
+			sprites.put("grass", new TextureRegion(texture, 0, 512-32*3, 32, 32));
+			sprites.put("dirt", new TextureRegion(texture, 0, 512-32*4, 32, 32));
+			sprites.put("spikeDown", new TextureRegion(texture, 0, 512-32*5, 32, 32));
+			sprites.put("spikeUp", new TextureRegion(texture, 32, 512-32*5, 32, 32));
 			sprites.put("background", new TextureRegion(texture, 0, 512-(32*6), 32, 32));
+			sprites.put("pit", new TextureRegion(texture, 0, 512-32*7, 32, 32));
 						
 		} catch (IOException e) {
 			//TODO Auto-generated catch block

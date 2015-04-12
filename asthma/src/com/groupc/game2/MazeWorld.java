@@ -12,6 +12,7 @@ import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
 import com.groupc.game1.JoeyRooster;
+import com.groupc.math.CollisionChecker;
 import com.groupc.math.Rectangle;
 import com.groupc.math.Vector;
 
@@ -29,6 +30,7 @@ public class MazeWorld extends GameScreen
 	private Camera cam;
 	public final Player player;
 	public final ArrayList<Wall> walls;
+	public final ArrayList<Pit> pits;
 	private int buttonPresses;
 	private int level;
 	public MazeWorld(Asset asset) 
@@ -39,7 +41,8 @@ public class MazeWorld extends GameScreen
 		buttonPresses = 0;
 		level = Integer.parseInt(assets.getProps().getProperty("level"));
 		walls = new ArrayList<Wall>();
-		generateLevel(1);
+		pits = new ArrayList<Pit>();
+		generateLevel(3);
 	}
 	
 	public void generateLevel(int level)
@@ -68,14 +71,17 @@ public class MazeWorld extends GameScreen
 				for(int j =0; j < 15; j++)
 				{
 					sym = rows[i].charAt(j);
-					System.out.println(sym);
-					if(sym == 'W')
+					if(sym == 'W') //Walls
 					{
 						walls.add(new Wall(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2));
 					}
-					if(sym == 'P')
+					if(sym == 'S') //Player start
 					{
 						player.position.set(j+Player.WIDTH/2, WORLD_HEIGHT-i-Player.HEIGHT/2);
+					}
+					if(sym == 'P') //Pits
+					{
+						pits.add(new Pit(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2)); //Use the same as wall because drawn the same as a wall but bounds are different
 					}
 				}
 			}
@@ -91,6 +97,35 @@ public class MazeWorld extends GameScreen
 	{
 		inputHandling();
 		player.update(deltaTime);
+		collisionChecker();
+	}
+	
+	public void collisionChecker()
+	{
+		collisionWall();
+		collisionPit();
+	}
+	
+	public void collisionWall()
+	{
+		for(int i = 0; i < walls.size(); i++)
+		{
+			if(CollisionChecker.RectToRect(player.bounds, walls.get(i).bounds))
+			{
+				player.hitWall(walls.get(i));
+			}
+		}
+	}
+	
+	public void collisionPit()
+	{
+		for(int i = 0; i < pits.size(); i++)
+		{
+			if(CollisionChecker.RectToRect(player.bounds, pits.get(i).bounds))
+			{
+				player.hitPit(pits.get(i));
+			}
+		}
 	}
 	
 	public void inputHandling()
@@ -147,8 +182,9 @@ public class MazeWorld extends GameScreen
 	{
 		cam.setCamera();
 		renderBackground();
-		renderPlayer();
 		renderWalls();
+		renderPits();
+		renderPlayer();
 	}
 	
 	public void renderWalls()
@@ -158,6 +194,15 @@ public class MazeWorld extends GameScreen
 			assets.getImage("wall").draw(walls.get(i).bounds);
 		}
 	}
+	
+	public void renderPits()
+	{
+		for(int i=0; i < pits.size(); i++)
+		{
+			assets.getImage("pit").draw(new Rectangle(pits.get(i).position.x - .5f, pits.get(i).position.y - .5f, 1, 1));
+		}
+	}
+	
 	public void renderBackground()
 	{
 		assets.getImage("background").draw(new Rectangle(0, 0, WORLD_WIDTH, WORLD_HEIGHT));
