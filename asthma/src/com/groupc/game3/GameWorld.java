@@ -23,8 +23,8 @@ public class GameWorld extends GameScreen
 {
 	public static final float FRUSTUM_WIDTH = 10;
 	public static final float FRUSTUM_HEIGHT = 10;
-	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 500; //400 (the * 100 means the total width is 5000 pixels but only 400 shown)
-	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 25; //400 (the * 20 means the total height is 200 pixels but only 400 shown)
+	public static final float WORLD_WIDTH = 500;
+	public static final float WORLD_HEIGHT = 500;
 	
 	public static final int WORLD_STATE_PAUSED = 0;
 	public static final int WORLD_STATE_PLAYING = 1;
@@ -112,9 +112,7 @@ public class GameWorld extends GameScreen
 	{	
 		cam.setCamera();
 		
-		//assets.getTexture("sheet").bind();
-		assets.getImage("sky").draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
-		assets.getImage("grass").draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
+		assets.getImage("wall").draw(new Rectangle(0, 0, 10, 10));
 		renderHud();
 	}
 	
