@@ -6,11 +6,13 @@ import org.junit.Test;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 
+import com.groupc.game1.Game1Assets;
 import com.groupc.game1.World;
 
 public class Game1Test 
 {
-	World world = new World();	
+	Game1Assets assets = new Game1Assets();
+	World world = new World(assets);	
 	
 	@Before
 	public void setUp()
@@ -22,7 +24,7 @@ public class Game1Test
 			e.printStackTrace();
 		}
 		
-		world = new World();
+		world = new World(assets);
 		world.update(0);
 		world.present(0);
 	}

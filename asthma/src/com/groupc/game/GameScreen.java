@@ -1,11 +1,15 @@
 package com.groupc.game;
 
-import com.groupc.Runner;
-
 public abstract class GameScreen
 {
-	
+
 	public boolean isClosing = false;
+	public Asset assets;
+	
+	public GameScreen(Asset asset)
+	{
+		this.assets = asset;
+	}
 	
 	public abstract void update(float deltaTime);	
 	public abstract void present(float deltaTime);

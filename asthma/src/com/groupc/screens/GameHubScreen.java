@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import com.groupc.Runner;
+import com.groupc.TextDrawer;
 import com.groupc.math.Resize;
 
 public class GameHubScreen extends Screen
@@ -51,7 +52,7 @@ public class GameHubScreen extends Screen
 	
 	public GameHubScreen(Runner run)
 	{
-		super(run);
+		super(run);	
 		//Basic Frame Settings
 		run.setTitle("Game Hub");
 		
