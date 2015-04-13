@@ -65,7 +65,7 @@ public class MainMenu extends GameScreen
 	{
 		cam.setCamera();
 		assets.getTexture("sheet").bind();
-		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
+		assets.getImage("wall").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		//assets.getImage("title").draw(title);
 		TextDrawer.drawStringinRect("Game 3", title);
 		TextDrawer.drawStringinRect("Start", play);
