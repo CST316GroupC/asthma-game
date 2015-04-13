@@ -43,11 +43,11 @@ public class Instructions extends GameScreen
 	public void present(float deltaTime)
 	{
 		cam.setCamera();
-		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
+		assets.getImage("wall").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		assets.getImage("back").draw(back);
-		TextDrawer.drawString("Instructions", 20, 70, 10, 10);
-		TextDrawer.drawString("Line 1", 20, 55, 10, 10);
-		TextDrawer.drawString("Line 2", 20, 40, 10, 10);
+		TextDrawer.drawString("Instructions", 20, 90, 10, 10);
+		TextDrawer.drawString("Use Left and Right keys to move", 15, 60, 8, 8);
+		TextDrawer.drawString("Dodge the water droplets to survive", 15, 40, 8, 8);
 	}
 
 	@Override
