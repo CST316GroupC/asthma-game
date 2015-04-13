@@ -9,7 +9,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 import com.groupc.game.TextureRegion;
-import com.groupc.game1.Assets;
+import com.groupc.game1.Game1Assets;
 import com.groupc.math.Rectangle;
 
 /**
@@ -27,6 +27,9 @@ public final class TextDrawer
 	private static Hashtable<String, TextureRegion> characters;
 	private static Texture text;
 	
+	/**
+	 * Loads all the Textures that will be used when drawing text.
+	 */
 	public static void prepare()
 	{
 		characters = new Hashtable<String, TextureRegion>(); 
@@ -183,6 +186,11 @@ public final class TextDrawer
 		}
 	}
 	
+	/**
+	 * Return the TextureRegion of the char to draw
+	 * @param cha - char that will be drawn
+	 * @return TextureRegion to draw
+	 */
 	private static TextureRegion getChar(String cha)
 	{
 		return characters.get(cha);

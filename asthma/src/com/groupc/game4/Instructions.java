@@ -1,4 +1,4 @@
-package com.groupc.game1;
+package com.groupc.game4;
 
 import org.lwjgl.input.Mouse;
 
@@ -45,9 +45,9 @@ public class Instructions extends GameScreen
 		cam.setCamera();
 		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		assets.getImage("back").draw(back);
-		TextDrawer.drawString("Press w or up to flap wings", 20, 40, 10, 10);
-		TextDrawer.drawString("Press s or down to glide", 20, 55, 10, 10);
-		TextDrawer.drawString("Press p to pause", 20, 70, 10, 10);
+		TextDrawer.drawString("Instructions", 20, 70, 10, 10);
+		TextDrawer.drawString("Line 1", 20, 55, 10, 10);
+		TextDrawer.drawString("Line 2", 20, 40, 10, 10);
 	}
 
 	@Override

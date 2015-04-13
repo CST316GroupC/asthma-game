@@ -4,8 +4,8 @@ import com.groupc.game.MovingGameObject;
 
 public class JoeyRooster extends MovingGameObject
 {
-	public final static float WIDTH = 1f;
-	public final static float HEIGHT = .33f;
+	public final static float WIDTH = 1.5f;
+	public final static float HEIGHT = .5f;
 	
 	
 	public final static int STATE_SB = 0;
@@ -22,7 +22,7 @@ public class JoeyRooster extends MovingGameObject
 	private float stateTime;
 	
 	//upgrades
-	private final static float INITIAL_SPEED = 7;
+	private final static float INITIAL_SPEED = 5;
 	
 	private float currentStatima;
 	

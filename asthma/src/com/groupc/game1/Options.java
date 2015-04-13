@@ -2,6 +2,7 @@ package com.groupc.game1;
 
 import org.lwjgl.input.Mouse;
 
+import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
 import com.groupc.math.CollisionChecker;
@@ -17,9 +18,10 @@ public class Options extends GameScreen
 	private String sound;
 	private final Vector mouseClick;
 	
-	public Options(Camera cam)
+	public Options(Asset assets, Camera cam)
 	{
-		Assets.reload();
+		super(assets);
+		assets.reload();
 		this.cam = cam;
 		this.cam.setCamera();
 		soundLabel = new Rectangle(50, 250, 200, 100);
@@ -68,19 +70,19 @@ public class Options extends GameScreen
 	public void present(float deltaTime)
 	{
 		cam.setCamera();
-		Assets.getTexture("sheet").bind();
-		Assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
-		Assets.getImage("soundLbl").draw(soundLabel);
+		assets.getTexture("sheet").bind();
+		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
+		assets.getImage("soundLbl").draw(soundLabel);
 		if(sound.equals("true"))
 		{
-			Assets.getImage("soundOn").draw(soundOnOff);
+			assets.getImage("soundOn").draw(soundOnOff);
 		}
 		else
 		{
-			Assets.getImage("soundOff").draw(soundOnOff);
+			assets.getImage("soundOff").draw(soundOnOff);
 		}
 		
-		Assets.getImage("back").draw(back);
+		assets.getImage("back").draw(back);
 	}
 
 	@Override
@@ -98,15 +100,15 @@ public class Options extends GameScreen
 	@Override
 	public void dispose() 
 	{
-		Assets.setProps("sound", sound);
-		Assets.save();
+		assets.setProps("sound", sound);
+		assets.save();
 		isClosing = true;
 	}
 
 	@Override
 	public GameScreen getNext()
 	{
-		return new MainMenu();
+		return new MainMenu(assets);
 	}
 
 }

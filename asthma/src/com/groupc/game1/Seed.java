@@ -4,8 +4,8 @@ import com.groupc.game.GameObject;
 
 public class Seed extends GameObject
 {
-	public final static float WIDTH = .2f;
-	public final static float HEIGHT = .4f;
+	public final static float WIDTH = .4f;
+	public final static float HEIGHT = .8f;
 	
 	public Seed(float x, float y) {
 		super(x, y, WIDTH, HEIGHT);

@@ -35,7 +35,6 @@ public class Runner extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(SCR_WIDTH, SCR_HEIGHT));
 		setLocationRelativeTo(null);
-		
 		player = new AudioPlayer();
 		player.loadSong("resources/sounds/AMemoryAway.ogg");
 		player.playMusic(true);

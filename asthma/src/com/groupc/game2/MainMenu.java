@@ -3,6 +3,7 @@ package com.groupc.game2;
 import org.lwjgl.input.Mouse;
 
 import com.groupc.TextDrawer;
+import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
 import com.groupc.math.CollisionChecker;
@@ -20,9 +21,9 @@ public class MainMenu extends GameScreen
 	private final Vector mouseClick;
 	private int next;
 	
-	public MainMenu()
+	public MainMenu(Asset assets)
 	{
-		Assets.load();
+		super(assets);
 		cam = new Camera(400, 400);
 		cam.setCamera();
 		title = new Rectangle(50, 300, 300, 100);

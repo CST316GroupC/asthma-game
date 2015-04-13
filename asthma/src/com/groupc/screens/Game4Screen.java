@@ -18,7 +18,9 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 import com.groupc.Runner;
-import com.groupc.game1.MainMenu;
+import com.groupc.TextDrawer;
+import com.groupc.game4.Game4Assets;
+import com.groupc.game4.MainMenu;
 import com.groupc.game.GameScreen;
 import com.groupc.math.Resize;
 
@@ -34,8 +36,9 @@ public class Game4Screen extends Screen
 	//Display Elements
 	NavigationBar navBar = new NavigationBar(run,true,false,"Game 4");
 	
-	Canvas canvas;
-	GameScreen scr;
+	Canvas 		canvas;
+	GameScreen 	scr;
+	Game4Assets	assets;
 	
 	public Game4Screen(Runner run)
 	{
@@ -80,13 +83,15 @@ public class Game4Screen extends Screen
             //Display.setDisplayMode(new DisplayMode(400, 400));
 			Display.setParent(canvas);
 			Display.create();
+			TextDrawer.prepare();
+			assets = new Game4Assets();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.exit(0);
 		}
 		
-		scr = new MainMenu();
+		scr = new MainMenu(assets);
 		
 		         
 	}
@@ -138,19 +143,16 @@ public class Game4Screen extends Screen
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
 	}
 
 

@@ -13,6 +13,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
 import com.groupc.TextDrawer;
+import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
 import com.groupc.math.CollisionChecker;
@@ -20,16 +21,16 @@ import com.groupc.math.Rectangle;
 
 public class World extends GameScreen
 {
-	public static final float FRUSTUM_WIDTH = 8;
-	public static final float FRUSTUM_HEIGHT = 6;
-	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 700; //400 (the * 100 means the total width is 5000 pixels but only 400 shown)
-	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 30; //400 (the * 20 means the total height is 200 pixels but only 400 shown)
+	public static final float FRUSTUM_WIDTH = 10;
+	public static final float FRUSTUM_HEIGHT = 10;
+	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 500; //400 (the * 100 means the total width is 5000 pixels but only 400 shown)
+	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 25; //400 (the * 20 means the total height is 200 pixels but only 400 shown)
 	
 	public static final int WORLD_STATE_PAUSED = 0;
 	public static final int WORLD_STATE_PLAYING = 1;
 	public static final int WORLD_STATE_OVER = 2;
 	
-	public static final float TEXT_SIZE = .2f;
+	public static final float TEXT_SIZE = .3f;
 	public static final int MAX_SCORE_DIGITS = 8; //99999999 max score
 	public static final int MAX_SEED_DIGITS = 4; //9999 max seeds
 	public static final int MAX_DISTANCE = 4; //9999 max distance
@@ -49,11 +50,12 @@ public class World extends GameScreen
 	public final HayStack hay;
 	private Random rand;
 	
-	public World()
+	public World(Asset assets)
 	{        
-		Assets.reload();
+		super(assets);
+		assets.reload();
 		rand = new Random();
-		this.joey = new JoeyRooster(1, .5f, Float.parseFloat(Assets.getProps().getProperty("speedMult")), Integer.parseInt(Assets.getProps().getProperty("statima")));
+		this.joey = new JoeyRooster(1, .75f, Float.parseFloat(assets.getProps().getProperty("speedMult")), Integer.parseInt(assets.getProps().getProperty("statima")));
 		this.ramp = new Ramp(21, 0.5f, 5);
 		this.seeds = new Seed[5];
 		seeds[0] = new Seed(25, 5);
@@ -64,8 +66,8 @@ public class World extends GameScreen
 		this.cow = new Cow(30, 0.5f);
 		this.state = WORLD_STATE_PLAYING;
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-		score = Integer.parseInt(Assets.getProps().getProperty("score"));
-		seedsCollected = Integer.parseInt(Assets.getProps().getProperty("seeds"));
+		score = Integer.parseInt(assets.getProps().getProperty("score"));
+		seedsCollected = Integer.parseInt(assets.getProps().getProperty("seeds"));
 		this.hay = new HayStack(25, 0.5f);
 	}
 	
@@ -113,8 +115,7 @@ public class World extends GameScreen
 				
 			}
 		}
-	}
-	
+	}	
 	
 	public void update(float deltaTime)
 	{
@@ -146,17 +147,17 @@ public class World extends GameScreen
 	 */
 	private void save()
 	{
-		Assets.getProps().setProperty("score", ""+score);
+		assets.getProps().setProperty("score", ""+score);
 		
 		//set new max distance
-		if( Float.parseFloat(Assets.getProps().getProperty("maxDistance")) < distance)
+		if( Float.parseFloat(assets.getProps().getProperty("maxDistance")) < distance)
 		{
-			Assets.getProps().setProperty("maxDistance", ""+distance);
+			assets.getProps().setProperty("maxDistance", ""+distance);
 		}
 						
 		//add the newly gained seeds]
-		Assets.getProps().setProperty("seeds", ""+seedsCollected);
-		Assets.save();
+		assets.getProps().setProperty("seeds", ""+seedsCollected);
+		assets.save();
 	}
 	
 	public void inputHandling()
@@ -245,9 +246,9 @@ public class World extends GameScreen
 		}
 		cam.setCamera();
 		
-		Assets.getTexture("atlas").bind();
-		Assets.getImage("sky").draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
-		Assets.getImage("grass").draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
+		assets.getTexture("atlas").bind();
+		assets.getImage("sky").draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
+		assets.getImage("grass").draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
 		renderHud();	
 		renderRamp();
 		renderSeeds();
@@ -262,19 +263,19 @@ public class World extends GameScreen
 		if(hay.getHit())
 		{
 			rect = new Rectangle(hay.position.x - .5f, hay.position.y -.5f, 2, 1);
-			Assets.getImage("hayHit").draw(rect);
+			assets.getImage("hayHit").draw(rect);
 		}
 		else
 		{
 			rect = new Rectangle(hay.position.x - .5f, hay.position.y -.5f, 1, 1);
-			Assets.getImage("hay").draw(rect);
+			assets.getImage("hay").draw(rect);
 		}
 	}
 	
 	public void renderHud()
 	{
 		//hud
-		Assets.getImage("joeyFly").draw(new Rectangle(0, cam.position.y + FRUSTUM_HEIGHT/2 - .35f, WORLD_WIDTH, .35f));
+		assets.getImage("joeyFly").draw(new Rectangle(0, cam.position.y + FRUSTUM_HEIGHT/2 - .35f, WORLD_WIDTH, .35f));
 		
 		TextDrawer.drawStringinRect("score", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE));
 		TextDrawer.drawStringinRect(score +"", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, MAX_SCORE_DIGITS * TEXT_SIZE, TEXT_SIZE));
@@ -285,33 +286,33 @@ public class World extends GameScreen
 	
 	public void renderJoey()
 	{
-		Rectangle rect = new Rectangle(joey.position.x - .5f, joey.position.y -.5f, 1, 1);
+		Rectangle rect = new Rectangle(joey.position.x - .5f, joey.position.y -.5f, 1.5f, 1.5f);
 	
 		switch(joey.getState())
 		{
 		case JoeyRooster.STATE_SB:
-			Assets.getImage("joeySk").draw(rect);
+			assets.getImage("joeySk").draw(rect);
 			break;
 		case JoeyRooster.STATE_STOP:
-			Assets.getImage("joeySk").draw(rect);
+			assets.getImage("joeySk").draw(rect);
 			break;
 		case JoeyRooster.STATE_FLYING:
-			Assets.getImage("joeyFly").draw(rect);
+			assets.getImage("joeyFly").draw(rect);
 			break;
 		case JoeyRooster.STATE_FALLING:
-			Assets.getImage("joeyFall").draw(rect);
+			assets.getImage("joeyFall").draw(rect);
 			break;
 		case JoeyRooster.STATE_BOUNCE:
-			Assets.getImage("joeyBou").draw(rect);
+			assets.getImage("joeyBou").draw(rect);
 			break;
 		case JoeyRooster.STATE_RAMP:
-			Assets.getImage("joeyBou").draw(rect);
+			assets.getImage("joeyBou").draw(rect);
 			break;
 		case JoeyRooster.STATE_FLAP:
-			Assets.getImage("joeyFlap").draw(rect);
+			assets.getImage("joeyFlap").draw(rect);
 			break;
 		case JoeyRooster.STATE_GLIDE:
-			Assets.getImage("joeyGlide").draw(rect);
+			assets.getImage("joeyGlide").draw(rect);
 			break;
 		}
 	}
@@ -319,15 +320,15 @@ public class World extends GameScreen
 	public void renderRamp()
 	{
 		Rectangle rect = new Rectangle(ramp.position.x - 2.5f, ramp.position.y - 2.5f, ramp.bounds.width, ramp.bounds.height);
-		Assets.getImage("ramp").draw(rect);
+		assets.getImage("ramp").draw(rect);
 	}
 	
 	public void renderSeeds()
 	{
 		for(int i =0; i < seeds.length; i++)
 		{
-			Rectangle rect = new Rectangle(seeds[i].position.x - .1f, seeds[i].position.y - .2f, .2f, .4f);
-			Assets.getImage("seed").draw(rect);
+			Rectangle rect = new Rectangle(seeds[i].position.x - .2f, seeds[i].position.y - .4f, .4f, .8f);
+			assets.getImage("seed").draw(rect);
 		}
 	}
 	
@@ -337,11 +338,11 @@ public class World extends GameScreen
 		{
 		case Cow.STATE_COW:
 			Rectangle rect = new Rectangle(cow.position.x - 1f, cow.position.y - .5f, 2, 1);
-			Assets.getImage("cow").draw(rect);
+			assets.getImage("cow").draw(rect);
 			break;
 		case Cow.STATE_HIT:
 			rect = new Rectangle(cow.position.x -1f, cow.position.y - 1f, 2, 2);
-			Assets.getImage("cowHit").draw(rect);
+			assets.getImage("cowHit").draw(rect);
 			break;
 		}
 	}
@@ -453,6 +454,6 @@ public class World extends GameScreen
 	@Override
 	public GameScreen getNext()
 	{
-		return new MainMenu();
+		return new MainMenu(assets);
 	}
 }

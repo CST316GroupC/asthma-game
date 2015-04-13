@@ -1,4 +1,4 @@
-package com.groupc.game1;
+package com.groupc.game3;
 
 import org.lwjgl.input.Mouse;
 
@@ -13,53 +13,48 @@ import com.groupc.math.Vector;
 public class MainMenu extends GameScreen
 {	
 	private final Camera cam;
-	private final Rectangle title;
-	private final Rectangle play;
-	private final Rectangle options;
-	private final Rectangle upgrade;
-	private final Rectangle instruct;
-	private final Vector mouseClick;
-	private int next;
 	
-	public MainMenu(Asset asset)
+	//Variables
+	private int 	next;
+	
+	//Display regions
+	private final 	Rectangle	title;
+	private final 	Rectangle	play;
+	private final 	Rectangle	instruct;
+	private final 	Vector 		mouseClick;
+	
+	
+	public MainMenu(Asset assets)
 	{
-		super(asset);
+		super(assets);
 		cam = new Camera(400, 400);
 		cam.setCamera();
-		title = new Rectangle(50, 300, 300, 100);
-		play = new Rectangle(25, 200, 150, 75);
-		options = new Rectangle(200, 200, 150, 75);
-		upgrade = new Rectangle(25, 100, 150, 75);
-		instruct = new Rectangle(200, 100, 150, 75);
-		mouseClick = new Vector();
+		
+		title 		= new Rectangle(50, 300, 300, 100);
+		play 		= new Rectangle(125, 200, 150, 75);
+		instruct 	= new Rectangle(125, 100, 150, 75);
+		
+		mouseClick 	= new Vector();
 	}
 
 	@Override
-	public void update(float deltaTime) {	
+	public void update(float deltaTime) 
+	{	
+		//Mouse Check
 		if(Mouse.isButtonDown(0))
 		{
 			mouseClick.set(Mouse.getX(), Mouse.getY());
 			cam.click(mouseClick);
 			if(CollisionChecker.PointToRect(mouseClick, play))
 			{
+				next = 1; //play display
 				this.dispose();
-				next = 1;
-			}
-			if(CollisionChecker.PointToRect(mouseClick, options))
-			{
-				this.dispose();
-				next = 2;
 				
-			}
-			if(CollisionChecker.PointToRect(mouseClick, upgrade))
-			{
-				this.dispose();
-				next = 3;
 			}
 			if(CollisionChecker.PointToRect(mouseClick, instruct))
 			{
+				next = 2; //instruct display
 				this.dispose();
-				next = 4;
 			}
 		}
 		
@@ -71,14 +66,10 @@ public class MainMenu extends GameScreen
 		cam.setCamera();
 		assets.getTexture("sheet").bind();
 		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
-		assets.getImage("title").draw(title);
+		//assets.getImage("title").draw(title);
+		TextDrawer.drawStringinRect("Game 3", title);
 		TextDrawer.drawStringinRect("Start", play);
-		TextDrawer.drawStringinRect("Options", options);
-		TextDrawer.drawStringinRect("Upgrade", upgrade);
 		TextDrawer.drawStringinRect("Instructions", instruct);
-		//Assets.getImage("playBut").draw(play);
-		//Assets.getImage("optionsBut").draw(options);
-		//Assets.getImage("upgradeBut").draw(upgrade);
 	}
 
 	
@@ -103,19 +94,12 @@ public class MainMenu extends GameScreen
 	@Override
 	public GameScreen getNext() 
 	{
+		
 		if(next == 1)
 		{
-			return new World(assets);
+			return new GameWorld(assets);
 		}
-		if(next == 2)
-		{
-			return new Options(assets, this.cam);
-		}
-		if(next == 3)
-		{
-			return new UpgradeScreen(assets);
-		}
-		if(next == 4)
+		else if(next == 2)
 		{
 			return new Instructions(assets);
 		}
