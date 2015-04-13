@@ -194,6 +194,22 @@ public final class TextDrawer
 	}
 	
 	/**
+	 * Draws a string inside of a specify rectangle
+	 * @param string - String to be drawn
+	 * @param rect - Rectangle to draw string inside of.
+	 */
+	public static void drawStringinRect(String string, Rectangle rect)
+	{
+		//String str = string.toLowerCase(new Locale("US"));
+		float newWidth = rect.width / string.length();
+		for(int i = 0; i < string.length(); i++)
+		{
+			Rectangle let = new Rectangle(rect.lowerLeft.x + i*newWidth, rect.lowerLeft.y, newWidth, rect.height);
+			drawChar(string.charAt(i), let);			
+		}
+	}
+	
+	/**
 	 * Return the TextureRegion of the char to draw
 	 * @param cha - char that will be drawn
 	 * @return TextureRegion to draw

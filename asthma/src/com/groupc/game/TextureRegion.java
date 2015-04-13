@@ -62,7 +62,8 @@ public class TextureRegion
 		float h = rect.height;
 		
 		//Get OpenGL ready to use a texture
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		//GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST); //Gets rid of the blur effect on an image
 		text.bind(); // or GL11.glBind(texture.getTextureID());
 		
 
