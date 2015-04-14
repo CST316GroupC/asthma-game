@@ -31,28 +31,31 @@ public class MazeWorld extends GameScreen
 	public final Player player;
 	public final ArrayList<Wall> walls;
 	public final ArrayList<Pit> pits;
+	public final Goal goal;
 	private int buttonPresses;
 	private int level;
 	public MazeWorld(Asset asset) 
 	{
 		super(asset);
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-		player = new Player(.5f, .5f);
+		player = new Player(0, 0); //place holders
 		buttonPresses = 0;
 		level = Integer.parseInt(assets.getProps().getProperty("level"));
 		walls = new ArrayList<Wall>();
 		pits = new ArrayList<Pit>();
-		generateLevel(3);
+		goal = new Goal(0, 0); //place holder
+		generateLevel(1);
 	}
 	
 	public void generateLevel(int level)
 	{
+		FileReader rd = null;
+		BufferedReader brd = null;
 		try {
 			char sym;
-			FileReader rd = new FileReader("resources/game2/levels.txt");
-			BufferedReader brd = new BufferedReader(rd);
+			rd = new FileReader("resources/game2/levels.txt");
+			brd = new BufferedReader(rd);
 			String[] rows = new String[15]; //Each level is at most 15 rows
-			
 			//Get to point in file that contains the level
 			for(int i =0; i < ((level-1) * 15); i++)
 			{
@@ -78,17 +81,42 @@ public class MazeWorld extends GameScreen
 					if(sym == 'S') //Player start
 					{
 						player.position.set(j+Player.WIDTH/2, WORLD_HEIGHT-i-Player.HEIGHT/2);
+						player.bounds.lowerLeft.set(player.position.sub(player.bounds.width / 2, player.bounds.height / 2));
 					}
 					if(sym == 'P') //Pits
 					{
 						pits.add(new Pit(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2)); //Use the same as wall because drawn the same as a wall but bounds are different
 					}
+					if(sym == 'E') //Goal or end of level
+					{
+						goal.position.set(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2);
+						goal.bounds.lowerLeft.set(goal.position.sub(goal.bounds.width / 2, goal.bounds.height / 2));
+						System.out.println(goal.position.x);
+					}
 				}
 			}
 			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) 
+		{
 			e.printStackTrace();
+		}
+		catch(NullPointerException e)
+		{
+			System.out.println("End of game");
+			this.level = 1;
+			generateLevel(this.level);
+		}
+		finally
+		{			
+			try
+			{
+				rd.close();
+				brd.close();
+			} catch (IOException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -104,6 +132,15 @@ public class MazeWorld extends GameScreen
 	{
 		collisionWall();
 		collisionPit();
+		collisionGoal();
+	}
+	
+	public void collisionGoal()
+	{
+		if(CollisionChecker.RectToRect(player.bounds, goal.bounds))
+		{
+			levelDone();
+		}
 	}
 	
 	public void collisionWall()
@@ -176,6 +213,15 @@ public class MazeWorld extends GameScreen
 			}
 		}
 	}
+	
+	public void levelDone()
+	{
+		level++;
+		System.out.println(level);
+		walls.clear();
+		pits.clear();
+		generateLevel(level);
+	}
 
 	@Override
 	public void present(float deltaTime) 
@@ -184,7 +230,13 @@ public class MazeWorld extends GameScreen
 		renderBackground();
 		renderWalls();
 		renderPits();
+		renderGoal();
 		renderPlayer();
+	}
+	
+	public void renderGoal()
+	{
+		assets.getImage("exit").draw(new Rectangle(goal.position.x -.5f, goal.position.y -.5f, 1, 1));
 	}
 	
 	public void renderWalls()

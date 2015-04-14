@@ -41,6 +41,8 @@ public class Game2Assets extends Asset
 			sprites.put("spikeUp", new TextureRegion(texture, 32, 512-32*5, 32, 32));
 			sprites.put("background", new TextureRegion(texture, 0, 512-(32*6), 32, 32));
 			sprites.put("pit", new TextureRegion(texture, 0, 512-32*7, 32, 32));
+			sprites.put("exit", new TextureRegion(texture, 0, 512-32*8, 32, 32));
+			sprites.put("gem", new TextureRegion(texture, 0, 512-32*9, 32, 32));
 						
 		} catch (IOException e) {
 			//TODO Auto-generated catch block

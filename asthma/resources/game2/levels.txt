@@ -5,7 +5,7 @@ W             W
 W             W
 W             W
 W             W
-WS            W
+WS           EW
 W             W
 W             W
 W             W
@@ -26,10 +26,10 @@ W        PPPPPW
 W             W
 WPPPPP        W
 W             W
-W             W
+W      E      W
 WWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWW
-W   P  S  P   W
+W   P  S  P E W
 W   P     P   W
 WPPPP     P   W
 W         P   W
@@ -42,4 +42,19 @@ W             W
 WPPPPP        W
 W             W
 W             W
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+W   P  E  P S W
+W   P     P   W
+WPPPP     P   W
+W   W     P   W
+W      W  P   W
+W         P   W
+WPPP      P   W
+W    PPPPPP   W
+W    P    P   W
+W         P   W
+WPPPPP    P   W
+WWWWW     P   W
+W   W         W
 WWWWWWWWWWWWWWW

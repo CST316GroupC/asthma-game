@@ -10,8 +10,8 @@ import com.groupc.game.GameObject;
  */
 public class Pit extends GameObject
 {
-	public static final float WIDTH = .05f;
-	public static final float HEIGHT = .05f;
+	public static final float WIDTH = .01f;
+	public static final float HEIGHT = .01f;
 	
 	public Pit(float x, float y)
 	{
