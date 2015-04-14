@@ -37,9 +37,9 @@ public class Game2Screen extends Screen
 	//Display Elements
 	NavigationBar navBar = new NavigationBar(run,true,false,"Game 2");
 	
-	Canvas canvas;
-	GameScreen scr;
-	Game2Assets assets;
+	Canvas 		canvas;
+	GameScreen 	scr;
+	Game2Assets	assets;
 	
 	public Game2Screen(Runner run)
 	{

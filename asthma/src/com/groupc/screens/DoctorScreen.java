@@ -25,6 +25,7 @@ import java.util.Collection;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -57,10 +58,14 @@ public class DoctorScreen extends Screen
 	
 	
 	//Display Elements
-	JPanel  testBox          		= new JPanel();
-	JPanel  navBox           		= new JPanel();
-	JPanel  navBoxBorder     		= new JPanel();
+	JPanel testBox          		= new JPanel();
+	JPanel navBox           		= new JPanel();
+	JPanel navBoxBorder     		= new JPanel();
+	JPanel infoBox					= new JPanel();
+	
 	JButton addPatientButton 		= new JButton("Add Patient");
+	JButton deletePatientButton		= new JButton("Delete Patient");
+	
 	NavigationBar navBar           	= new NavigationBar(run,false,false,"Doctor Page");
 	
 	public DoctorScreen(Runner run) 
@@ -70,6 +75,12 @@ public class DoctorScreen extends Screen
 		//Basic Frame Settings
 		//moved screen name to setDoctor() to make doctor-specific page [Derek]
 		
+		
+		//button font color
+		deletePatientButton.setBackground(Color.RED);
+		deletePatientButton.setForeground(Color.BLACK);
+		deletePatientButton.setBorderPainted(false);
+
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
 		{
@@ -94,9 +105,11 @@ public class DoctorScreen extends Screen
 		
 		//add things to the panel
 		this.add(addPatientButton);
+		this.add(deletePatientButton);
 		this.add(navBox);
 		this.add(testBox);
 		this.add(navBar);
+		this.add(infoBox);
 		
 		this.setLayout(null);		
 		run.setContentPane(this);
@@ -183,8 +196,20 @@ public class DoctorScreen extends Screen
 			navBar.redrawUpdate();
 			
 			//add patientButton
-			addPatientButton.setBounds(resize.locationX(190), resize.locationY(400), resize.width(120), resize.height(40));
+			addPatientButton.setBounds(resize.locationX(100), resize.locationY(400), resize.width(120), resize.height(40));
 			addPatientButton.setFont(new Font(addPatientButton.getFont().getFontName(),addPatientButton.getFont().getStyle(), resize.font(12)));
+			
+
+			//delete patientButton
+			deletePatientButton.setBounds(resize.locationX(290), resize.locationY(400), resize.width(120), resize.height(40));
+			deletePatientButton.setFont(new Font(deletePatientButton.getFont().getFontName(),deletePatientButton.getFont().getStyle(), resize.font(12)));
+			
+			//Patient table
+			jsp.setBounds(resize.locationX(40), resize.locationY(120), resize.width(200), resize.height(250));
+			
+			//loginBox
+			infoBox.setBounds(resize.locationX(270), resize.locationY(120), resize.width(200), resize.height(250));
+			infoBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			run.repaint();
 			redraw = false;
