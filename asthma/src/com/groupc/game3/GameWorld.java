@@ -84,7 +84,7 @@ public class GameWorld extends GameScreen
 	}
 	public void updatePaper(float deltaTime)
 	{
-		//TODO: implement functionality
+		paper.update(deltaTime);
 	}
 	public void update(float deltaTime)
 	{
@@ -151,6 +151,7 @@ public class GameWorld extends GameScreen
 					if(state == WORLD_STATE_PLAYING)
 					{
 						paper.position.x -= 1;
+						
 					}
 				}
 				
@@ -159,6 +160,7 @@ public class GameWorld extends GameScreen
 					if(state == WORLD_STATE_PLAYING)
 					{
 						paper.position.x += 1;
+						
 					}
 				}
 			}
@@ -250,7 +252,8 @@ public class GameWorld extends GameScreen
 			{
 				if(CollisionChecker.RectToRect(paper.bounds, rain[i].bounds))
 				{
-					rain[i].position.y = cam.position.y + FRUSTUM_HEIGHT/2;
+					rain[i].position.set(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
+					rain[i].update();
 					paper.hit();
 				}
 			}
