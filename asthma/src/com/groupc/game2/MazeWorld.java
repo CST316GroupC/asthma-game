@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
 
+import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
@@ -31,6 +32,7 @@ public class MazeWorld extends GameScreen
 	public final Player player;
 	public final ArrayList<Wall> walls;
 	public final ArrayList<Pit> pits;
+	public final ArrayList<Enemy> enemies;
 	public final Goal goal;
 	private int buttonPresses;
 	private int level;
@@ -44,6 +46,7 @@ public class MazeWorld extends GameScreen
 		walls = new ArrayList<Wall>();
 		pits = new ArrayList<Pit>();
 		goal = new Goal(0, 0); //place holder
+		enemies = new ArrayList<Enemy>();
 		generateLevel(1);
 	}
 	
@@ -93,6 +96,11 @@ public class MazeWorld extends GameScreen
 						goal.bounds.lowerLeft.set(goal.position.sub(goal.bounds.width / 2, goal.bounds.height / 2));
 						System.out.println(goal.position.x);
 					}
+					if(sym == '1') //Goal or end of level
+					{
+						enemies.add(new LREnemy(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2));//Use the same as wall because drawn the same as a wall but bounds are different
+					}
+					
 				}
 			}
 			
@@ -125,7 +133,16 @@ public class MazeWorld extends GameScreen
 	{
 		inputHandling();
 		player.update(deltaTime);
+		updateEnemies(deltaTime);
 		collisionChecker();
+	}
+	
+	public void updateEnemies(float deltaTime)
+	{
+		for(int i=0; i < enemies.size(); i++)
+		{
+			enemies.get(i).update(deltaTime);
+		}
 	}
 	
 	public void collisionChecker()
@@ -133,6 +150,32 @@ public class MazeWorld extends GameScreen
 		collisionWall();
 		collisionPit();
 		collisionGoal();
+		collisionEnemy();
+	}
+	
+	public void collisionEnemy()
+	{
+		for(int i=0; i < enemies.size(); i++)
+		{
+			if(CollisionChecker.RectToRect(player.bounds, enemies.get(i).bounds))
+			{
+				System.out.println("Hit by enemy");
+			}
+			for(int j=0; j < walls.size(); j++)
+			{
+				if(CollisionChecker.RectToRect(enemies.get(i).bounds, walls.get(j).bounds))
+				{
+					enemies.get(i).collision();
+				}
+			}
+			for(int k=0; k < pits.size(); k++)
+			{
+				if(CollisionChecker.RectToRect(enemies.get(i).bounds, pits.get(k).bounds))
+				{
+					enemies.get(i).collision();
+				}
+			}
+		}
 	}
 	
 	public void collisionGoal()
@@ -231,7 +274,40 @@ public class MazeWorld extends GameScreen
 		renderWalls();
 		renderPits();
 		renderGoal();
+		renderHint();
+		renderEnemy();
 		renderPlayer();
+	}
+	
+	public void renderEnemy()
+	{
+		for(int i=0; i < enemies.size(); i++)
+		{			
+			if(enemies.get(i) instanceof LREnemy)
+			{
+				assets.getImage("LREnemy").draw(enemies.get(i).bounds);
+			}
+		}
+	}
+	
+	public void renderHint()
+	{
+		if(level==1)
+		{
+			TextDrawer.drawStringinRect("Arrow Keys or WASD to move", new Rectangle(1,1,13, 4), false);
+		}
+		else if(level==2)
+		{
+			TextDrawer.drawStringinRect("Collect Gems", new Rectangle(2,1,12, 4), false);
+		}
+		else if(level==3)
+		{
+			TextDrawer.drawStringinRect("Do not fall in holes", new Rectangle(2,1,12, 4), false);
+		}
+		else if(level==4)
+		{
+			TextDrawer.drawStringinRect("Avoid Baddies", new Rectangle(2,1,12, 4), false);
+		}
 	}
 	
 	public void renderGoal()

@@ -2,6 +2,11 @@ package com.groupc.game2;
 
 import com.groupc.game.GameObject;
 
+/**
+ * 
+ * @author Edwin Avalos
+ *
+ */
 public class Wall extends GameObject
 {
 	public static final float WIDTH = 1f;

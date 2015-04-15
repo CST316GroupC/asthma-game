@@ -80,34 +80,34 @@ public final class TextDrawer
 			characters.put("charz", new TextureRegion(text, 39*12 + 1, 512-192, 39, 85));
 			
 			//row 4 A to M
-			characters.put("charA", new TextureRegion(text, 39*0 + 1, 512-402, 39, 85));
-			characters.put("charB", new TextureRegion(text, 39*1 + 1, 512-402, 39, 85));
-			characters.put("charC", new TextureRegion(text, 39*2 + 1, 512-402, 39, 85));
-			characters.put("charD", new TextureRegion(text, 39*3 + 1, 512-402, 39, 85));
-			characters.put("charE", new TextureRegion(text, 39*4 + 1, 512-402, 39, 85));
-			characters.put("charF", new TextureRegion(text, 39*5 + 1, 512-402, 39, 85));
-			characters.put("charG", new TextureRegion(text, 39*6 + 1, 512-402, 39, 85));
-			characters.put("charH", new TextureRegion(text, 39*7 + 1, 512-402, 39, 85));
-			characters.put("charI", new TextureRegion(text, 39*8 + 1, 512-402, 39, 85));
-			characters.put("charJ", new TextureRegion(text, 39*9 + 1, 512-402, 39, 85));
-			characters.put("charK", new TextureRegion(text, 39*10 + 1, 512-402, 39, 85));
-			characters.put("charL", new TextureRegion(text, 39*11 + 1, 512-402, 39, 85));
-			characters.put("charM", new TextureRegion(text, 39*12 + 1, 512-402, 39, 85));
+			characters.put("charA", new TextureRegion(text, 39*0 + 1, 512-404, 39, 85));
+			characters.put("charB", new TextureRegion(text, 39*1 + 1, 512-404, 39, 85));
+			characters.put("charC", new TextureRegion(text, 39*2 + 1, 512-404, 39, 85));
+			characters.put("charD", new TextureRegion(text, 39*3 + 1, 512-404, 39, 85));
+			characters.put("charE", new TextureRegion(text, 39*4 + 1, 512-404, 39, 85));
+			characters.put("charF", new TextureRegion(text, 39*5 + 1, 512-404, 39, 85));
+			characters.put("charG", new TextureRegion(text, 39*6 + 1, 512-404, 39, 85));
+			characters.put("charH", new TextureRegion(text, 39*7 + 1, 512-404, 39, 85));
+			characters.put("charI", new TextureRegion(text, 39*8 + 1, 512-404, 39, 85));
+			characters.put("charJ", new TextureRegion(text, 39*9 + 1, 512-404, 39, 85));
+			characters.put("charK", new TextureRegion(text, 39*10 + 1, 512-404, 39, 85));
+			characters.put("charL", new TextureRegion(text, 39*11 + 1, 512-404, 39, 85));
+			characters.put("charM", new TextureRegion(text, 39*12 + 1, 512-404, 39, 85));
 			
 			//row 5 N to Z
-			characters.put("charN", new TextureRegion(text, 39*0 + 1, 0, 39, 85));
-			characters.put("charO", new TextureRegion(text, 39*1 + 1, 0, 39, 85));
-			characters.put("charP", new TextureRegion(text, 39*2 + 1, 0, 39, 85));
-			characters.put("charQ", new TextureRegion(text, 39*3 + 1, 0, 39, 85));
-			characters.put("charR", new TextureRegion(text, 39*4 + 1, 0, 39, 85));
-			characters.put("charS", new TextureRegion(text, 39*5 + 1, 0, 39, 85));
-			characters.put("charT", new TextureRegion(text, 39*6 + 1, 0, 39, 85));
-			characters.put("charU", new TextureRegion(text, 39*7 + 1, 0, 39, 85));
-			characters.put("charV", new TextureRegion(text, 39*8 + 1, 0, 39, 85));
-			characters.put("charW", new TextureRegion(text, 39*9 + 1, 0, 39, 85));
-			characters.put("charX", new TextureRegion(text, 39*10 + 1, 0, 39, 85));
-			characters.put("charY", new TextureRegion(text, 39*11 + 1, 0, 39, 85));
-			characters.put("charZ", new TextureRegion(text, 39*12 + 1, 0, 39, 85));
+			characters.put("charN", new TextureRegion(text, 39*0 + 1, 2, 39, 85));
+			characters.put("charO", new TextureRegion(text, 39*1 + 1, 2, 39, 85));
+			characters.put("charP", new TextureRegion(text, 39*2 + 1, 2, 39, 85));
+			characters.put("charQ", new TextureRegion(text, 39*3 + 1, 2, 39, 85));
+			characters.put("charR", new TextureRegion(text, 39*4 + 1, 2, 39, 85));
+			characters.put("charS", new TextureRegion(text, 39*5 + 1, 2, 39, 85));
+			characters.put("charT", new TextureRegion(text, 39*6 + 1, 2, 39, 85));
+			characters.put("charU", new TextureRegion(text, 39*7 + 1, 2, 39, 85));
+			characters.put("charV", new TextureRegion(text, 39*8 + 1, 2, 39, 85));
+			characters.put("charW", new TextureRegion(text, 39*9 + 1, 2, 39, 85));
+			characters.put("charX", new TextureRegion(text, 39*10 + 1,2, 39, 85));
+			characters.put("charY", new TextureRegion(text, 39*11 + 1,2, 39, 85));
+			characters.put("charZ", new TextureRegion(text, 39*12 + 1,2, 39, 85));
 			
 			//space
 			characters.put("char ", new TextureRegion(text, 0, 0, 1, 1));
