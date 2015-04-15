@@ -167,6 +167,9 @@
 	  			<formatter type="html" toFile="pmd-report/pmd_report_fromant.html">
 	    				<param name="linkPrefix" value="http://pmd.sourceforge.net/xref/"/>
 	  			</formatter>
+				<formatter type="xml" toFile="pmd-report/pmd_report.xml">
+					    				<param name="linkPrefix" value="http://pmd.sourceforge.net/xref/"/>
+			  	</formatter>
 	  			<fileset dir="${src}"/>
 	 		</pmd>
 		</target>
