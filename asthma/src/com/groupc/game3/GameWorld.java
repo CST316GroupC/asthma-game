@@ -16,6 +16,9 @@ import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
+import com.groupc.game1.Cow;
+import com.groupc.game3.PaperMan;
+import com.groupc.game3.Rain;
 import com.groupc.math.CollisionChecker;
 import com.groupc.math.Rectangle;
 
@@ -32,34 +35,73 @@ public class GameWorld extends GameScreen
 	
 	public static final float TEXT_SIZE = .3f;
 	public static final int MAX_SCORE_DIGITS = 8; //99999999 max score
-	public static final int MAX_SEED_DIGITS = 4; //9999 max seeds
 	public static final int MAX_DISTANCE = 4; //9999 max distance
 	
 	public static final int GRAVITY = -10;
 	
 	public int state;
-	private int seedsCollected;
 	private int score;
-	private float distance;
 	
 	private Camera cam;
+	public final PaperMan paper;
+	public final Rain[] rain;
 	private Random rand;
-	
+	//TODO: change assets for paperMan and change rain positiong (from array to random objects?)
 	public GameWorld(Asset assets)
 	{        
 		super(assets);
 		assets.reload();
 		rand = new Random();
+		this.paper = new PaperMan(1, .75f, Integer.parseInt(assets.getProps().getProperty("health")));
+
 		this.state = WORLD_STATE_PLAYING;
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+		this.rain = new Rain[10];
+		rain[0] = new Rain(cam.position.x, cam.position.y);
+		rain[1] = new Rain(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y);
+		rain[2] = new Rain(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y);
+		score = Integer.parseInt(assets.getProps().getProperty("score"));
 	}
-	
+	public void updateRain()
+	{
+		for(int i = 0; i < rain.length; i++)
+		{
+			if(rain[i] != null){
+				rain[i].update();
+				if(rain[i].position.y <= cam.position.y - FRUSTUM_HEIGHT /2)
+				{
+					rain[i].position.set(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
+				}
+			}
+			else{
+				int chance = rand.nextInt(10);
+				if(chance < 5)
+				{
+					rain[i] = new Rain(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
+				}
+			}
+		}		
+	}
+	public void updatePaper(float deltaTime)
+	{
+		//TODO: implement functionality
+	}
 	public void update(float deltaTime)
 	{
 		inputHandling();
 		switch(state)
 		{
 			case WORLD_STATE_PLAYING:
+				updateRain();
+				updatePaper(deltaTime);
+				collision();
+				if(paper.getState() == PaperMan.STATE_GONE)
+				{
+					state = WORLD_STATE_OVER;
+					//TODO: Implement scoring based on total time played
+					//score += distance/10;
+					save();				
+				}
 				break;
 			case WORLD_STATE_OVER:
 			case WORLD_STATE_PAUSED:
@@ -72,7 +114,7 @@ public class GameWorld extends GameScreen
 	 */
 	private void save()
 	{
-		
+		//TODO: Implement save feature (requires scoring first and checking proper assets current Assets.java saves to joey)
 	}
 	
 	public void inputHandling()
@@ -104,6 +146,21 @@ public class GameWorld extends GameScreen
 		        		state = WORLD_STATE_PLAYING;
 		        	}
 				}
+				if(Keyboard.getEventKey() == Keyboard.KEY_A || Keyboard.getEventKey() == Keyboard.KEY_LEFT)
+				{
+					if(state == WORLD_STATE_PLAYING)
+					{
+						paper.position.x -= 1;
+					}
+				}
+				
+				if(Keyboard.getEventKey() == Keyboard.KEY_D || Keyboard.getEventKey() == Keyboard.KEY_RIGHT)
+				{
+					if(state == WORLD_STATE_PLAYING)
+					{
+						paper.position.x += 1;
+					}
+				}
 			}
 		}
 	}
@@ -116,23 +173,60 @@ public class GameWorld extends GameScreen
 		assets.getImage("sky").draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
 		assets.getImage("grass").draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
 		renderHud();
+		renderRain();
+		renderPaper();
 	}
 	
+	private void renderPaper()
+	{
+		Rectangle rect = new Rectangle(paper.position.x - .5f, paper.position.y -.5f, 1.5f, 1.5f);
+		
+		switch(paper.getState())
+		{
+		case PaperMan.STATE_NORMAL:
+			assets.getImage("paperMan").draw(rect);
+			break;
+		case PaperMan.STATE_HIT:
+			//TODO: make flicker or give invincibility image. 
+			assets.getImage("paperMan").draw(rect);
+			break;
+		case PaperMan.STATE_GONE:
+			assets.getImage("paperGone").draw(rect);
+			break;
+		}
+		
+	}
+	private void renderRain()
+	{
+		for(int i =0; i < rain.length; i++)
+		{
+			if(rain[i] != null)
+			{
+				Rectangle rect = new Rectangle(rain[i].position.x - .2f, rain[i].position.y - .4f, .4f, .8f);
+				assets.getImage("rain").draw(rect);
+			}
+		}
+		
+	}
+	//TODO: update renderers to properly reflect score for game 3
 	public void renderHud()
 	{
 		//hud
 		
 		TextDrawer.drawStringinRect("score", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE));
 		TextDrawer.drawStringinRect(score +"", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, MAX_SCORE_DIGITS * TEXT_SIZE, TEXT_SIZE));
-		TextDrawer.drawString("seeds", cam.position.x, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
-		TextDrawer.drawInt(seedsCollected, cam.position.x +1f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SEED_DIGITS);
-		
+		//TextDrawer.drawString("seeds", cam.position.x, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
+		//TODO: change to score and add health bar, remove null check
+		if(paper != null)
+		{
+			TextDrawer.drawInt(paper.getCurrentHealth(), cam.position.x +1f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, 2);
+		}
 	}
 	
 	public void renderOver()
 	{
-		TextDrawer.drawString("Distance", cam.position.x - 3, cam.position.y, TEXT_SIZE * 1.5f, TEXT_SIZE * 1.5f);
-		TextDrawer.drawInt((int) distance, cam.position.x - 1, cam.position.y - 1f, TEXT_SIZE * 2, TEXT_SIZE * 2, MAX_DISTANCE);
+		//TextDrawer.drawString("Distance", cam.position.x - 3, cam.position.y, TEXT_SIZE * 1.5f, TEXT_SIZE * 1.5f);
+		//TextDrawer.drawInt((int) distance, cam.position.x - 1, cam.position.y - 1f, TEXT_SIZE * 2, TEXT_SIZE * 2, MAX_DISTANCE);
 		TextDrawer.drawString("Press q to quit", cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - 1, TEXT_SIZE * 2, TEXT_SIZE * 2);
 		
 	}
@@ -141,6 +235,26 @@ public class GameWorld extends GameScreen
 	{
 		TextDrawer.drawString("Paused", cam.position.x-2.5f, cam.position.y, TEXT_SIZE * 3, TEXT_SIZE * 3);
 		TextDrawer.drawString("Press q to quit", cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - 1, TEXT_SIZE * 2, TEXT_SIZE * 2);
+	}
+	
+	public void collision()
+	{
+		collisionRain();
+	}
+	
+	public void collisionRain()
+	{
+		for(int i = 0; i < rain.length; i++)
+		{
+			if(rain[i] != null)
+			{
+				if(CollisionChecker.RectToRect(paper.bounds, rain[i].bounds))
+				{
+					rain[i].position.y = cam.position.y + FRUSTUM_HEIGHT/2;
+					paper.hit();
+				}
+			}
+		}
 	}
 
 	@Override
