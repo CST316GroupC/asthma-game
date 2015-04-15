@@ -119,12 +119,12 @@ public class GameWorld extends GameScreen
 	public void renderHud()
 	{
 		//hud
-		
+		/*
 		TextDrawer.drawStringinRect("score", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE));
 		TextDrawer.drawStringinRect(score +"", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, MAX_SCORE_DIGITS * TEXT_SIZE, TEXT_SIZE));
 		TextDrawer.drawString("seeds", cam.position.x, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
 		TextDrawer.drawInt(seedsCollected, cam.position.x +1f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SEED_DIGITS);
-		
+		*/
 	}
 	
 	public void renderOver()

@@ -42,8 +42,6 @@ public class Game3Assets extends Asset
 		reload();
 		sprites = new Hashtable<String, TextureRegion>();
 		sprites.put("title", new TextureRegion(sheet, 0, 226, 235, 30));
-		sprites.put("grass", new TextureRegion(texture, 32, 512 - 31, 30, 30));
-		sprites.put("sky", new TextureRegion(texture, 0, 512 - 96, 32, 96));
 		sprites.put("back", new TextureRegion(texture, 128, 512 - 64, 32, 32));
 		sprites.put("wall", new TextureRegion(background, 0, 0, 512, 512));
 		
