@@ -19,10 +19,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -258,6 +261,36 @@ public class LoginScreen extends Screen
 		}
 		return true;
 	}
+	
+	private void newProperties()
+	{
+		try
+		{
+			FileInputStream in = new FileInputStream("resources/interface/parent_controls/" + userNameTF.getText() + ".properties");
+			in.close();
+		}catch(Exception e)
+		{
+			Properties properties = new Properties();
+			properties.setProperty("PIN", "9999"); //default settings
+			properties.setProperty("Time", "false");
+			properties.setProperty("Game_1", "true");
+			properties.setProperty("Game_2", "true");
+			properties.setProperty("Game_3", "true");
+			properties.setProperty("Game_4", "true");
+			properties.setProperty("Email_Alerts", "false");
+			properties.setProperty("Email", userNameTF.getText());
+			
+			try
+			{
+				FileWriter write = new FileWriter("resources/interface/parent_controls/" + userNameTF.getText() + ".properties");
+				properties.store(write, "User:" + userNameTF.getText());
+				write.close();
+			}catch(Exception ex)
+			{
+				System.out.println("Failed new properties");
+			}
+		}
+	}
 
 	@Override
 	public void update(float deltaTime)
@@ -423,6 +456,7 @@ public class LoginScreen extends Screen
 				//Patients
 				if(types.elementAt(i).equals("1"))
 				{
+					newProperties();
 					if(hasNotTakenReadings(userNameTF.getText()))
 					{
 						TutorialScreen ts = new TutorialScreen(run);
@@ -430,7 +464,9 @@ public class LoginScreen extends Screen
 						run.setScreen(ts);
 					} else 
 					{
-						run.setScreen(new GameHubScreen(run));
+						GameHubScreen ghs = new GameHubScreen(run);
+						ghs.setUser(emails.elementAt(i));
+						run.setScreen(ghs);
 					}
 				}
 			}

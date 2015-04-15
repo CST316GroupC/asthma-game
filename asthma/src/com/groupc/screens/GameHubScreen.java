@@ -14,15 +14,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.util.Properties;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import com.groupc.Runner;
-import com.groupc.TextDrawer;
 import com.groupc.math.Resize;
 
 public class GameHubScreen extends Screen
@@ -32,6 +33,8 @@ public class GameHubScreen extends Screen
 	private boolean	played		= true;
 	private Resize	resize		= new Resize(run);
 	private int 	butPressed	= 0;
+	private String  userName;
+	private Properties props = new Properties();
 	
 	
 	//Display Elements
@@ -41,6 +44,7 @@ public class GameHubScreen extends Screen
 	private JButton			game3Button 		= new JButton("");
 	private JButton			game4Button 		= new JButton("");
 	private JButton			LeaderBoardButton	= new JButton("Leader Board");
+	private JButton			parentControlsButton = new JButton("Parental Controls");
 	private JLabel			game1Label 			= new JLabel("Game 1",SwingConstants.CENTER);
 	private JLabel 			game2Label 			= new JLabel("Game 2",SwingConstants.CENTER);
 	private JLabel 			game3Label 			= new JLabel("Game 3",SwingConstants.CENTER);
@@ -97,8 +101,15 @@ public class GameHubScreen extends Screen
 				butPressed = 4;
 			}
 		});
+		parentControlsButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				butPressed = 5;				
+			}
+		});
 		
-		//deactivate buttons
+		//deactivate buttons in checkProperties();
 		//game2Button.setEnabled(false);
 		//game3Button.setEnabled(false);
 		//game4Button.setEnabled(false);
@@ -107,6 +118,7 @@ public class GameHubScreen extends Screen
 		this.add(game2Button);
 		this.add(game3Button);
 		this.add(game4Button);
+		this.add(parentControlsButton);
 		this.add(game1Label);
 		this.add(game2Label);
 		this.add(game3Label);
@@ -116,7 +128,36 @@ public class GameHubScreen extends Screen
 		
 		this.setLayout(null);		
 		run.setContentPane(this);
-		run.setVisible(true);		
+		run.setVisible(true);
+	}
+	
+	private void checkProperties()
+	{
+		try
+		{
+			FileInputStream in = new FileInputStream("resources/interface/parent_controls/" + userName + ".properties");
+			props.load(in);
+			in.close();
+		}catch(Exception e)
+		{
+			System.out.println("Failed gamehub properties load");
+		}
+		if(props.getProperty("Game_1").equals("false"))
+		{
+			game1Button.setEnabled(false);
+		}
+		if(props.getProperty("Game_2").equals("false"))
+		{
+			game2Button.setEnabled(false);
+		}
+		if(props.getProperty("Game_3").equals("false"))
+		{
+			game3Button.setEnabled(false);
+		}
+		if(props.getProperty("Game_4").equals("false"))
+		{
+			game4Button.setEnabled(false);
+		}
 	}
 	
 	@Override
@@ -155,6 +196,10 @@ public class GameHubScreen extends Screen
 			LeaderBoardButton.setBounds(resize.locationX(175), resize.locationY(420), resize.width(150), resize.height(30));
 			LeaderBoardButton.setFont(new Font(LeaderBoardButton.getFont().getFontName(),LeaderBoardButton.getFont().getStyle(), resize.font(12)));
 			
+			//parent controls button
+			parentControlsButton.setBounds(resize.locationX(155), resize.locationY(10), resize.width(150), resize.height(30));
+			parentControlsButton.setFont(new Font(parentControlsButton.getFont().getFontName(),parentControlsButton.getFont().getStyle(), resize.font(12)));
+			
 			run.repaint();
 			redraw = false;
 		}
@@ -173,6 +218,12 @@ public class GameHubScreen extends Screen
 		else if(butPressed == 4)
 		{
 			run.setScreen(new Game4Screen(run));
+		}
+		else if(butPressed == 5)
+		{
+			ParentControlsScreen pcs = new ParentControlsScreen(run);
+			pcs.setUser(userName);
+			run.setScreen(pcs);
 		}
 		butPressed = 0;
 		navBar.update();
@@ -203,5 +254,11 @@ public class GameHubScreen extends Screen
 	public void dispose() 
 	{
 		// TODO Auto-generated method stub
+	}
+
+	public void setUser(String uName) 
+	{
+		userName = uName;
+		checkProperties();
 	}
 }

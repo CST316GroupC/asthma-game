@@ -229,7 +229,9 @@ public class RecordingScreen extends Screen
 		{
 			if(submitReadings())
 			{
-				run.setScreen(new RewardScreen(run));
+				RewardScreen rewardScreen = new RewardScreen(run);
+				rewardScreen.setUser(patientUserName);
+				run.setScreen(rewardScreen);
 			}
 		}
 		butPressed = 0;

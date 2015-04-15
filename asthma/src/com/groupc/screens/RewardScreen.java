@@ -33,6 +33,7 @@ public class RewardScreen extends Screen
 	boolean played 		= true;
 	Resize  resize     	= new Resize(run);
 	int     butPressed 	= 0;
+	String userName;
 
 	
 	//Display Elements
@@ -86,7 +87,9 @@ public class RewardScreen extends Screen
 		if(butPressed == 1)
 		{
 			//run.setScreen(new Game1Screen(run));
-			run.setScreen(new GameHubScreen(run));
+			GameHubScreen ghs = new GameHubScreen(run);
+			ghs.setUser(userName);
+			run.setScreen(ghs);
 		}
 		butPressed = 0;
 
@@ -135,5 +138,10 @@ public class RewardScreen extends Screen
 	public void dispose() 
 	{
 		// TODO Auto-generated method stub
+	}
+
+	public void setUser(String patientUserName) 
+	{
+		userName = patientUserName;
 	}
 }
