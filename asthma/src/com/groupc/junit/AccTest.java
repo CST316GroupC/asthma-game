@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -97,6 +98,12 @@ public class AccTest {
 		acc.addCurrentPatient();
 		*/
 		
+	}
+	
+	@After
+	public void cleanUp()
+	{
+		run.close();
 	}
 
 }

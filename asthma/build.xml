@@ -73,15 +73,13 @@
     <mkdir dir="${jac-r}"/>
   	<mkdir dir="${jun-r}"/>
   	<jacoco:coverage>
-  	  <junit printsummary="withOutAndErr" haltonfailure="no" fork="on">
-  	  <jvmarg value="-Djava.library.path=/natives/windows"/>
-  	    <sysproperty key="java.library.path"
-  	                     value="natives/windows"/>
-  	  <classpath>
-  	         <path refid="my_cp"/>
-  	         <path location="${build}"/>
-  	       </classpath>
-  	 
+  	  <junit printsummary="withOutAndErr" haltonfailure="no" fork="yes" forkmode="once" showoutput="yes">
+  	  		<classpath>
+  	          <path refid="my_cp"/>
+  	          <path location="${build}"/>
+  	        </classpath>
+  	  	<sysproperty key="java.library.path"
+  	                     value="${lwjgl_natives.dir}"/>
   	    <formatter type="xml"/>
   	    <batchtest todir="${jun-r}">
   	      <fileset dir="${src}">

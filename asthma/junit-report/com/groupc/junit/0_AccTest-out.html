@@ -1,0 +1,47 @@
+<html xmlns:string="xalan://java.lang.String" xmlns:lxslt="http://xml.apache.org/xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Standard Output from AccTest</title>
+</head>
+<body>
+<pre>Thu Apr 16 15:46:00 MST 2015 INFO:Initialising sounds..
+Thu Apr 16 15:46:00 MST 2015 ERROR:Sound initialisation failure.
+Thu Apr 16 15:46:00 MST 2015 ERROR:Only one OpenAL context may be instantiated at any one time.
+java.lang.IllegalStateException: Only one OpenAL context may be instantiated at any one time.
+	at org.lwjgl.openal.AL.create(AL.java:113)
+	at org.lwjgl.openal.AL.create(AL.java:102)
+	at org.lwjgl.openal.AL.create(AL.java:201)
+	at org.newdawn.slick.openal.SoundStore$1.run(SoundStore.java:295)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.newdawn.slick.openal.SoundStore.init(SoundStore.java:292)
+	at org.newdawn.slick.openal.AudioLoader.init(AudioLoader.java:33)
+	at org.newdawn.slick.openal.AudioLoader.getStreamingAudio(AudioLoader.java:73)
+	at com.groupc.AudioPlayer.loadSong(Unknown Source)
+	at com.groupc.Runner.&lt;init&gt;(Unknown Source)
+	at com.groupc.junit.AccTest.&lt;init&gt;(Unknown Source)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:408)
+	at org.junit.runners.BlockJUnit4ClassRunner.createTest(BlockJUnit4ClassRunner.java:195)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.runReflectiveCall(BlockJUnit4ClassRunner.java:244)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.BlockJUnit4ClassRunner.methodBlock(BlockJUnit4ClassRunner.java:241)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at junit.framework.JUnit4TestAdapter.run(JUnit4TestAdapter.java:38)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:523)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1063)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:887)
+null pat doc
+null doctor for new patient
+1 last element
+</pre>
+</body>
+</html>
