@@ -17,9 +17,9 @@ WWWWWWWWWWWWWWW
 W      S      W
 W             W
 WWWWWWWWWWWW  W
-W             W
+WG  G  G  G  GW
 W  WWWWWWWWWWWW
-W             W
+WG  G  G  G  GW
 WWWWWWWWWWWW  W
 W             W
 W             W
@@ -29,15 +29,15 @@ W             W
 W      E      W
 WWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWW
-W      E      W
-W             W
-WPPPPPPPPPP   W
-W             W
-W             W
-W   PPPPPPPPPPW
+WGG    E      W
+WGG           W
+WPPPPPPPPPPGGGW
 W             W
 W             W
-WPPPPPPPPPP   W
+WGGGPPPPPPPPPPW
+W             W
+W             W
+WPPPPPPPPPPGGGW
 W             W
 W             W
 W             W
@@ -51,10 +51,25 @@ W             W
 W  WWWWWWWWWWWW
 W             W
 WWWWWWWWWWWW  W
-W             W
+WGGG          W
 W1            W
 W             W
 W            1W
 W             W
 W      E      W
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+WGGGGW E WGGGGW
+W    W 2 W    W
+W1           1W
+W             W
+W            1W
+W             W
+W             W
+W1            W
+W             W
+W             W
+W            1W
+W             W
+W      S      W
 WWWWWWWWWWWWWWW

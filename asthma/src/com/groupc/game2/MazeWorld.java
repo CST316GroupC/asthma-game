@@ -33,12 +33,17 @@ public class MazeWorld extends GameScreen
 	public final ArrayList<Wall> walls;
 	public final ArrayList<Pit> pits;
 	public final ArrayList<Enemy> enemies;
+	public final ArrayList<Gem> gems;
 	public final Goal goal;
 	private int buttonPresses;
 	private int level;
+	private int state;
+	private int score;
+	
 	public MazeWorld(Asset asset) 
 	{
 		super(asset);
+		state = WORLD_STATE_PLAYING;
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 		player = new Player(0, 0); //place holders
 		buttonPresses = 0;
@@ -47,7 +52,9 @@ public class MazeWorld extends GameScreen
 		pits = new ArrayList<Pit>();
 		goal = new Goal(0, 0); //place holder
 		enemies = new ArrayList<Enemy>();
-		generateLevel(1);
+		gems = new ArrayList<Gem>();
+		generateLevel(level);
+		score = Integer.parseInt(assets.getProps().getProperty("score"));;
 	}
 	
 	public void generateLevel(int level)
@@ -94,11 +101,19 @@ public class MazeWorld extends GameScreen
 					{
 						goal.position.set(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2);
 						goal.bounds.lowerLeft.set(goal.position.sub(goal.bounds.width / 2, goal.bounds.height / 2));
-						System.out.println(goal.position.x);
+						
+					}
+					if(sym == 'G') //Goal or end of level
+					{
+						gems.add(new Gem(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2));//Use the same as wall because drawn the same as a wall but bounds are different))
 					}
 					if(sym == '1') //Goal or end of level
 					{
 						enemies.add(new LREnemy(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2));//Use the same as wall because drawn the same as a wall but bounds are different
+					}
+					if(sym == '2') //Goal or end of level
+					{
+						enemies.add(new UDEnemy(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2));//Use the same as wall because drawn the same as a wall but bounds are different
 					}
 					
 				}
@@ -132,9 +147,12 @@ public class MazeWorld extends GameScreen
 	public void update(float deltaTime) 
 	{
 		inputHandling();
-		player.update(deltaTime);
-		updateEnemies(deltaTime);
-		collisionChecker();
+		if(state==WORLD_STATE_PLAYING)
+		{
+			player.update(deltaTime);
+			updateEnemies(deltaTime);
+			collisionChecker();
+		}		
 	}
 	
 	public void updateEnemies(float deltaTime)
@@ -151,6 +169,19 @@ public class MazeWorld extends GameScreen
 		collisionPit();
 		collisionGoal();
 		collisionEnemy();
+		collisionGem();
+	}
+	
+	public void collisionGem()
+	{
+		for(int i=0; i < gems.size(); i++)
+		{
+			if(CollisionChecker.RectToRect(player.bounds, gems.get(i).bounds) && gems.get(i).isActive())
+			{
+				score += 10;
+				gems.get(i).setActive(false);
+			}
+		}
 	}
 	
 	public void collisionEnemy()
@@ -159,7 +190,7 @@ public class MazeWorld extends GameScreen
 		{
 			if(CollisionChecker.RectToRect(player.bounds, enemies.get(i).bounds))
 			{
-				System.out.println("Hit by enemy");
+				state = WORLD_STATE_OVER;
 			}
 			for(int j=0; j < walls.size(); j++)
 			{
@@ -263,7 +294,12 @@ public class MazeWorld extends GameScreen
 		System.out.println(level);
 		walls.clear();
 		pits.clear();
+		enemies.clear();
+		gems.clear();
 		generateLevel(level);
+		assets.setProps("level", level+"");
+		assets.setProps("score", score+"");
+		assets.save(Game2Assets.FILENAME);
 	}
 
 	@Override
@@ -276,16 +312,33 @@ public class MazeWorld extends GameScreen
 		renderGoal();
 		renderHint();
 		renderEnemy();
+		renderGem();
 		renderPlayer();
+	}
+	
+	public void renderGem()
+	{
+		for(int i=0; i < gems.size(); i++)
+		{
+			if(gems.get(i).isActive())
+			{
+				assets.getImage("gem").draw(new Rectangle(gems.get(i).position.x -.5f, gems.get(i).position.y -.5f, 1, 1));
+			}
+		}
 	}
 	
 	public void renderEnemy()
 	{
 		for(int i=0; i < enemies.size(); i++)
 		{			
+			Rectangle drawBox = new Rectangle(enemies.get(i).position.x -.5f, enemies.get(i).position.y -.5f, 1, 1);
 			if(enemies.get(i) instanceof LREnemy)
 			{
-				assets.getImage("LREnemy").draw(enemies.get(i).bounds);
+				assets.getImage("LREnemy").draw(drawBox);
+			}
+			else if(enemies.get(i) instanceof UDEnemy)
+			{
+				assets.getImage("UDEnemy").draw(drawBox);
 			}
 		}
 	}

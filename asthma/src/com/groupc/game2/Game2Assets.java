@@ -66,8 +66,8 @@ public class Game2Assets extends Asset
 			if("true".equals(temp))
 			{
 				props.setProperty("firstTime", "false");
-				props.setProperty("x", "0");
-				props.setProperty("y", "0");
+				props.setProperty("level", "1");
+				props.setProperty("score", "0");
 				save(FILENAME);
 			}
 		} 
