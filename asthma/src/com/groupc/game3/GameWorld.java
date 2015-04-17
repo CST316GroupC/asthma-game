@@ -152,8 +152,7 @@ public class GameWorld extends GameScreen
 				{
 					if(state == WORLD_STATE_PLAYING)
 					{
-						if(paper.position.x - .5 > cam.position.x - FRUSTUM_WIDTH/2)
-							paper.position.x -= .5;
+						paper.moveLeft(cam);
 						
 					}
 				}
@@ -162,8 +161,7 @@ public class GameWorld extends GameScreen
 				{
 					if(state == WORLD_STATE_PLAYING)
 					{
-						if(paper.position.x + .5 < cam.position.x + FRUSTUM_WIDTH/2)
-							paper.position.x += .5;
+						paper.moveRight(cam);
 							
 					}
 				}

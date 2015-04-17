@@ -12,11 +12,11 @@ public class Rain extends GameObject
 	{
 		super(x, y, WIDTH, HEIGHT);
 		hit = false;
-		// TODO Auto-generated constructor stub
 	}
 	public void update()
 	{
 		bounds.lowerLeft.set(position.sub(bounds.width / 2, bounds.height / 2));
+		//rain falls
 		this.position.y -= speed;
 	}
 	
