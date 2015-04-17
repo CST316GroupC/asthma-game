@@ -64,9 +64,9 @@ public class Game3Assets extends Asset
 			String temp = props.getProperty("firstTime", "true");
 			if("true".equals(temp))
 			{
-				props.setProperty("health", "10");
+				props.setProperty("paperHealth", "10");
 				props.setProperty("sound", "true");
-				props.setProperty("score", "0");
+				props.setProperty("game3Score", "0");
 				props.setProperty("firstTime", "false");
 				props.setProperty("timeSinceHit", "0");
 				save();

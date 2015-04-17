@@ -52,7 +52,7 @@ public class GameWorld extends GameScreen
 		super(assets);
 		assets.reload();
 		rand = new Random();
-		this.paper = new PaperMan(1, .75f, Integer.parseInt(assets.getProps().getProperty("health")));
+		this.paper = new PaperMan(1, .75f, Integer.parseInt(assets.getProps().getProperty("paperHealth")));
 
 		this.state = WORLD_STATE_PLAYING;
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
@@ -60,7 +60,7 @@ public class GameWorld extends GameScreen
 		rain[0] = new Rain(cam.position.x, cam.position.y);
 		rain[1] = new Rain(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y);
 		rain[2] = new Rain(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y);
-		score = Integer.parseInt(assets.getProps().getProperty("score"));
+		score = Integer.parseInt(assets.getProps().getProperty("game3Score"));
 	}
 	public void updateRain()
 	{
@@ -119,10 +119,12 @@ public class GameWorld extends GameScreen
 	
 	public void inputHandling()
 	{
+		
 		while (Keyboard.next()) 
 		{
 			if(Keyboard.getEventKeyState())
 			{
+
 
 			}
 			else
@@ -146,21 +148,23 @@ public class GameWorld extends GameScreen
 		        		state = WORLD_STATE_PLAYING;
 		        	}
 				}
-				if(Keyboard.getEventKey() == Keyboard.KEY_A || Keyboard.getEventKey() == Keyboard.KEY_LEFT)
+				if(Keyboard.getEventKey() == Keyboard.KEY_LEFT || Keyboard.getEventKey() == Keyboard.KEY_A)
 				{
 					if(state == WORLD_STATE_PLAYING)
 					{
-						paper.position.x -= 1;
+						if(paper.position.x - .5 > cam.position.x - FRUSTUM_WIDTH/2)
+							paper.position.x -= .5;
 						
 					}
 				}
 				
-				if(Keyboard.getEventKey() == Keyboard.KEY_D || Keyboard.getEventKey() == Keyboard.KEY_RIGHT)
+				if(Keyboard.getEventKey() == Keyboard.KEY_RIGHT || Keyboard.getEventKey() == Keyboard.KEY_D)
 				{
 					if(state == WORLD_STATE_PLAYING)
 					{
-						paper.position.x += 1;
-						
+						if(paper.position.x + .5 < cam.position.x + FRUSTUM_WIDTH/2)
+							paper.position.x += .5;
+							
 					}
 				}
 			}
@@ -181,7 +185,7 @@ public class GameWorld extends GameScreen
 	
 	private void renderPaper()
 	{
-		Rectangle rect = new Rectangle(paper.position.x - .5f, paper.position.y -.5f, 1.5f, 1.5f);
+		Rectangle rect = new Rectangle(paper.position.x - .75f, paper.position.y -.75f, 1.5f, 1.5f);
 		
 		switch(paper.getState())
 		{

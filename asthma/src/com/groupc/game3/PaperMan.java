@@ -4,8 +4,8 @@ import com.groupc.game.MovingGameObject;
 
 public class PaperMan extends MovingGameObject
 {
-	public final static float WIDTH = .15f;
-	public final static float HEIGHT = .15f;
+	public final static float WIDTH = 1f;
+	public final static float HEIGHT = 1f;
 	
 	
 	public final static int STATE_NORMAL = 0;
