@@ -11,6 +11,7 @@ import org.newdawn.slick.openal.SoundStore;
 import com.groupc.screens.Game1Screen;
 import com.groupc.screens.GameHubScreen;
 import com.groupc.screens.LoginScreen;
+import com.groupc.screens.RewardScreen;
 import com.groupc.screens.Screen;
 
 
@@ -38,8 +39,9 @@ public class Runner extends JFrame
 		player = new AudioPlayer();
 		player.loadSong("resources/sounds/AMemoryAway.ogg");
 		player.playMusic(true);
-		screen = new LoginScreen(this);
+		//screen = new LoginScreen(this);
 		//screen = new GameHubScreen(this);
+		screen = new RewardScreen(this);
 		
 	}
 	
