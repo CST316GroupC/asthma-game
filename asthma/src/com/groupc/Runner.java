@@ -38,8 +38,8 @@ public class Runner extends JFrame
 		player = new AudioPlayer();
 		player.loadSong("resources/sounds/AMemoryAway.ogg");
 		player.playMusic(true);
-		screen = new LoginScreen(this);
-		//screen = new GameHubScreen(this);
+		//screen = new LoginScreen(this);
+		screen = new GameHubScreen(this);
 		
 	}
 	

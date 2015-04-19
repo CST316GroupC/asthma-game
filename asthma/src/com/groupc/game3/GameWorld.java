@@ -56,7 +56,7 @@ public class GameWorld extends GameScreen
 		
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 		
-		this.paper = new PaperMan(1, .75f, Integer.parseInt(assets.getProps().getProperty("health")));
+		this.paper = new PaperMan(1, .75f, Integer.parseInt(assets.getProps().getProperty("paperHealth")));
 
 		this.state = WORLD_STATE_PLAYING;
 		
@@ -64,7 +64,7 @@ public class GameWorld extends GameScreen
 		rain[0] = new Rain(cam.position.x, cam.position.y);
 		rain[1] = new Rain(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y);
 		rain[2] = new Rain(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y);
-		score = Integer.parseInt(assets.getProps().getProperty("score"));
+		score = Integer.parseInt(assets.getProps().getProperty("game3Score"));
 	}
 	
 	public void updateRain()
@@ -131,10 +131,12 @@ public class GameWorld extends GameScreen
 	
 	public void inputHandling()
 	{
+		
 		while (Keyboard.next()) 
 		{
 			if(Keyboard.getEventKeyState())
 			{
+
 
 			}
 			else
@@ -158,22 +160,22 @@ public class GameWorld extends GameScreen
 		        		state = WORLD_STATE_PLAYING;
 		        	}
 				}
-				
-				if(Keyboard.getEventKey() == Keyboard.KEY_A || Keyboard.getEventKey() == Keyboard.KEY_LEFT)
+
+				if(Keyboard.getEventKey() == Keyboard.KEY_LEFT || Keyboard.getEventKey() == Keyboard.KEY_A)
 				{
 					if(state == WORLD_STATE_PLAYING)
 					{
-						paper.position.x -= 1;
+						paper.moveLeft(cam);
 						
 					}
 				}
 				
-				if(Keyboard.getEventKey() == Keyboard.KEY_D || Keyboard.getEventKey() == Keyboard.KEY_RIGHT)
+				if(Keyboard.getEventKey() == Keyboard.KEY_RIGHT || Keyboard.getEventKey() == Keyboard.KEY_D)
 				{
 					if(state == WORLD_STATE_PLAYING)
 					{
-						paper.position.x += 1;
-						
+						paper.moveRight(cam);
+							
 					}
 				}
 			}
@@ -192,7 +194,7 @@ public class GameWorld extends GameScreen
 	
 	private void renderPaper()
 	{
-		Rectangle rect = new Rectangle(paper.position.x - .5f, paper.position.y -.5f, 1.5f, 1.5f);
+		Rectangle rect = new Rectangle(paper.position.x - .75f, paper.position.y -.75f, 1.5f, 1.5f);
 		
 		switch(paper.getState())
 		{
@@ -228,13 +230,15 @@ public class GameWorld extends GameScreen
 	{
 		//hud
 		
-		//TextDrawer.drawStringinRect("score", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE));
-		//TextDrawer.drawStringinRect(score +"", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, MAX_SCORE_DIGITS * TEXT_SIZE, TEXT_SIZE));
-		//TextDrawer.drawString("seeds", cam.position.x, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
-		//TODO: change to score and add health bar, remove null check
 		if(paper != null)
 		{
-			TextDrawer.drawInt(paper.getCurrentHealth(), cam.position.x +1f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, 2);
+			TextDrawer.drawString("Health", cam.position.x - FRUSTUM_WIDTH/2 + 0.1f, cam.position.y + FRUSTUM_HEIGHT/2 - 0.65f, 0.2f, 0.6f);
+			
+			for(float i=0; i<paper.getCurrentHealth(); i++)		
+			{
+				Rectangle healthRect = new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 1.5f + i/2, cam.position.y + FRUSTUM_HEIGHT/2 - 1.0f, 0.6f, 1.0f);
+				assets.getImage("healthBar").draw(healthRect);
+			}
 		}
 	}
 	

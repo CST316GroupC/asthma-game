@@ -1,11 +1,12 @@
 package com.groupc.game3;
 
+import com.groupc.game.Camera;
 import com.groupc.game.MovingGameObject;
 
 public class PaperMan extends MovingGameObject
 {
-	public final static float WIDTH = .15f;
-	public final static float HEIGHT = .15f;
+	public final static float WIDTH = 1f;
+	public final static float HEIGHT = 1f;
 	
 	
 	public final static int STATE_NORMAL = 0;
@@ -13,6 +14,7 @@ public class PaperMan extends MovingGameObject
 	public final static int STATE_GONE = 2;
 	
 	private int state;
+	private float speed = 1.0f;
 	private float stateTime;
 	
 	private int currentHealth;
@@ -33,6 +35,18 @@ public class PaperMan extends MovingGameObject
 			state = STATE_NORMAL;
 		}
 		stateTime += deltaTime;
+	}
+	
+	public void moveLeft(Camera cam)
+	{
+		if(this.position.x - speed > cam.position.x - cam.frustumWidth/2)
+			this.position.x -= speed;
+	}
+	
+	public void moveRight(Camera cam)
+	{
+		if(this.position.x + speed < cam.position.x + cam.frustumWidth/2)
+			this.position.x += speed;
 	}
 	
 	public void hit()
