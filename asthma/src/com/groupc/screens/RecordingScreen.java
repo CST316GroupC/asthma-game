@@ -219,7 +219,9 @@ public class RecordingScreen extends Screen
 		}
 		if(navBar.backButtonPressed)
 		{	
-			run.setScreen(new TutorialScreen(run));
+			TutorialScreen ts = new TutorialScreen(run);
+			ts.setPatient(patientUserName);
+			run.setScreen(ts);
 		}
 		else if(butPressed == 2)
 		{
