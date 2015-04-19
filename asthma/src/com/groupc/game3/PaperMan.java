@@ -14,7 +14,7 @@ public class PaperMan extends MovingGameObject
 	public final static int STATE_GONE = 2;
 	
 	private int state;
-	private float speed = 1.0f;
+	private float speed = 0.8f;
 	private float stateTime;
 	
 	private int currentHealth;
@@ -29,7 +29,8 @@ public class PaperMan extends MovingGameObject
 	
 	public void update(float deltaTime)
 	{
-		bounds.lowerLeft.set(position.sub(bounds.width / 2, bounds.height / 2));
+		bounds.lowerLeft.set(position.sub(bounds.width / 2 , bounds.height / 2));
+		
 		if(stateTime > 1f && state == STATE_HIT)
 		{
 			state = STATE_NORMAL;

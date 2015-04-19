@@ -56,11 +56,11 @@ public class GameWorld extends GameScreen
 		
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 		
-		this.paper = new PaperMan(1, .75f, Integer.parseInt(assets.getProps().getProperty("paperHealth")));
+		this.paper = new PaperMan(0.75f, .75f, Integer.parseInt(assets.getProps().getProperty("paperHealth")));
 
 		this.state = WORLD_STATE_PLAYING;
 		
-		this.rain = new Rain[8];
+		this.rain = new Rain[6];
 		rain[0] = new Rain(cam.position.x, cam.position.y);
 		rain[1] = new Rain(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y);
 		rain[2] = new Rain(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y);
@@ -194,7 +194,7 @@ public class GameWorld extends GameScreen
 	
 	private void renderPaper()
 	{
-		Rectangle rect = new Rectangle(paper.position.x - .75f, paper.position.y -.75f, 1.5f, 1.5f);
+		Rectangle rect = new Rectangle(paper.position.x -0.75f, paper.position.y -0.75f, 1.5f, 1.5f);
 		
 		switch(paper.getState())
 		{
