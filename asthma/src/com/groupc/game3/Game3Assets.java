@@ -51,7 +51,7 @@ public class Game3Assets extends Asset
 		sprites.put("treasure", new TextureRegion(g3texture, 0, 600 - 2*58, 58, 58));
 		sprites.put("paperMan", new TextureRegion(g3texture, 0, 600 - 3*58, 58, 58));
 		sprites.put("paperGone", new TextureRegion(g3texture, 0, 600 - 4*58, 58, 58));
-		sprites.put("healthBar", new TextureRegion(g3texture, 0, 600 - 5*58, 58, 58));
+		sprites.put("healthBar", new TextureRegion(g3texture, 0, 600 - 5*57, 58, 58));
 		sprites.put("healthGlobe", new TextureRegion(g3texture, 0, 600 - 5*66, 58, 58));
 		
 		TextDrawer.prepare();
@@ -68,7 +68,7 @@ public class Game3Assets extends Asset
 			if("true".equals(temp))
 			{
 				save("res/maze.properties");
-				props.setProperty("paperHealth", "10");
+				props.setProperty("paperHealth", "3");
 				props.setProperty("sound", "true");
 				props.setProperty("game3Score", "0");
 				props.setProperty("firstTime", "false");
