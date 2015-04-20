@@ -30,9 +30,9 @@ public class MainMenu extends GameScreen
 		cam = new Camera(400, 400);
 		cam.setCamera();
 		
-		title 		= new Rectangle(50, 300, 300, 100);
-		play 		= new Rectangle(125, 200, 150, 75);
-		instruct 	= new Rectangle(125, 100, 150, 75);
+		title 		= new Rectangle(50, 280, 300, 100);
+		play 		= new Rectangle(125, 180, 150, 65);
+		instruct 	= new Rectangle(125, 100, 150, 55);
 		
 		mouseClick 	= new Vector();
 	}
@@ -67,7 +67,7 @@ public class MainMenu extends GameScreen
 
 		assets.getImage("wall").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 
-		TextDrawer.drawStringinRect("Game 3", title);
+		TextDrawer.drawStringinRect("Water dodgelets", title);
 		TextDrawer.drawStringinRect("Start", play);
 		TextDrawer.drawStringinRect("Instructions", instruct);
 	}
