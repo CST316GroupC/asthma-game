@@ -18,6 +18,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Properties;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -39,6 +44,8 @@ public class ParentControlsScreen extends Screen
 	boolean redraw     = true;
 	Resize  resize     = new Resize(run);
 	int     butPressed = 0;
+	String userName;	
+	Properties props = new Properties();
 	
 	//Display Elements
 	NavigationBar navBar      	= new NavigationBar(run,true,false,"Parental Controls");
@@ -64,6 +71,7 @@ public class ParentControlsScreen extends Screen
 	JLabel  hourLabel         	= new JLabel("hr",SwingConstants.CENTER);
 	JLabel  minuteLabel       	= new JLabel("min",SwingConstants.CENTER);
 	JLabel  emailFieldLabel   	= new JLabel("Email: ",SwingConstants.RIGHT);
+	JLabel  message				= new JLabel("Please insert a valid pin [xxxx]");
 	
 	JCheckBox timeCB   			= new JCheckBox("Time (per day)");
 	JCheckBox Game1CB    		= new JCheckBox("Game 1");
@@ -98,6 +106,7 @@ public class ParentControlsScreen extends Screen
 		
 		//Enable/disable Elemenst
 		pinErrorLabel.setVisible(false);
+		message.setVisible(false);
 		enableControls(false);
 		enablePin(true);
 		pinForgotButton.setEnabled(false);
@@ -113,6 +122,7 @@ public class ParentControlsScreen extends Screen
 		Game3CB.setBackground(Color.LIGHT_GRAY);
 		Game4CB.setBackground(Color.LIGHT_GRAY);
 		EmailCB.setBackground(Color.LIGHT_GRAY);
+		message.setForeground(Color.RED);
 		
 		////Buttons////
 		
@@ -124,6 +134,7 @@ public class ParentControlsScreen extends Screen
 				checkPin();				
 			}
 		});
+		
 		
 		//saveButton
 		saveButton.addActionListener(new ActionListener()
@@ -143,12 +154,23 @@ public class ParentControlsScreen extends Screen
 			}
 		});
 		
+		//EmailCB
+		EmailCB.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				butPressed = 3;				
+			}
+		});
+		
+		
 		//add things to the panel
 		this.add(pinErrorLabel);
 		this.add(pinLabel);
 		this.add(pinPF);
 		this.add(pinButton);
 		this.add(pinForgotButton);
+		this.add(message);
 		this.add(pinBox);
 		this.add(timeControlsSep);
 		this.add(timeControlsLabel);
@@ -176,7 +198,7 @@ public class ParentControlsScreen extends Screen
 		this.setLayout(null);		
 		run.setContentPane(this);
 		run.setVisible(true);
-	}
+	}	
 
 	@Override
 	public void update(float deltaTime)
@@ -194,6 +216,11 @@ public class ParentControlsScreen extends Screen
 			pinLabel.setBounds(resize.locationX(170), resize.locationY(220), resize.width(160), resize.height(20));
 			pinLabel.setFont(new Font(pinLabel.getFont().getFontName(),pinLabel.getFont().getStyle(), resize.font(12)));
 			
+			//message
+			message.setBounds(resize.locationX(160), resize.locationY(260), resize.width(180), resize.height(20));
+			message.setFont(new Font(message.getFont().getFontName(),message.getFont().getStyle(), resize.font(12)));
+			
+			
 			//pinPF
 			pinPF.setBounds(resize.locationX(230), resize.locationY(240), resize.width(40), resize.height(20));
 			pinPF.setFont(new Font(pinPF.getFont().getFontName(),pinPF.getFont().getStyle(), resize.font(12)));
@@ -203,17 +230,13 @@ public class ParentControlsScreen extends Screen
 			pinButton.setFont(new Font(pinButton.getFont().getFontName(),pinButton.getFont().getStyle(), resize.font(12)));
 			
 			//pinForgotButton
-			pinForgotButton.setBounds(resize.locationX(170), resize.locationY(320), resize.width(160), resize.height(20));
+			pinForgotButton.setBounds(resize.locationX(170), resize.locationY(310), resize.width(160), resize.height(20));
 			pinForgotButton.setFont(new Font(pinForgotButton.getFont().getFontName(),pinForgotButton.getFont().getStyle(), resize.font(12)));
 			
 			//pinError
 			pinErrorLabel.setBounds(resize.locationX(100), resize.locationY(200), resize.width(300), resize.height(20));
 			pinErrorLabel.setFont(new Font(pinErrorLabel.getFont().getFontName(),pinErrorLabel.getFont().getStyle(), resize.font(12)));
-			
-			
-			
-			
-			
+					
 			//pageBox
 			pageBox.setBounds(resize.locationX(80), resize.locationY(100), resize.width(340), resize.height(300));
 			pageBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
@@ -285,11 +308,19 @@ public class ParentControlsScreen extends Screen
 		if(butPressed == 1)
 		{
 			saveInfo();
-			run.setScreen(new GameHubScreen(run));
+			GameHubScreen ghs = new GameHubScreen(run);
+			ghs.setUser(userName);
+			run.setScreen(ghs);
 		}
 		else if(butPressed == 2 || navBar.backButtonPressed)
 		{
-			run.setScreen(new GameHubScreen(run));
+			GameHubScreen ghs = new GameHubScreen(run);
+			ghs.setUser(userName);
+			run.setScreen(ghs);
+		}
+		else if(butPressed == 3 && !emailTF.isEnabled())
+		{
+			emailTF.setEnabled(true);
 		}
 		navBar.update();
 	}
@@ -322,14 +353,121 @@ public class ParentControlsScreen extends Screen
 		
 	}
 	
-	public void saveInfo()
+	private void checkInfo()
 	{
+		if(props.getProperty("Time").equals("true"))
+		{
+			timeCB.setSelected(true);
+		}
+		if(props.getProperty("Game_1").equals("false"))
+		{
+			Game1CB.setSelected(true);
+		}
+		if(props.getProperty("Game_2").equals("false"))
+		{
+			Game2CB.setSelected(true);
+		}
+		if(props.getProperty("Game_3").equals("false"))
+		{
+			Game3CB.setSelected(true);
+		}
+		if(props.getProperty("Game_4").equals("false"))
+		{
+			Game4CB.setSelected(true);
+		}
+		if(props.getProperty("Email_Alerts").equals("true"))
+		{
+			EmailCB.setSelected(true);
+			emailTF.setText(props.getProperty("Email"));
+		}
+		else
+		{
+			EmailCB.setSelected(false);
+			emailTF.setEnabled(false);
+		}
 		
+			
 	}
-	public void checkPin()
+	
+	private void saveInfo()
 	{
-		enablePin(false);
-		enableControls(true);
+		if(timeCB.isSelected())
+		{
+			props.setProperty("Time", "true");
+		}
+		else
+		{
+			props.setProperty("Time", "false");
+		}
+		if(Game1CB.isSelected())
+		{
+			props.setProperty("Game_1", "false");
+		}
+		else
+		{
+			props.setProperty("Game_1", "true");
+		}
+		if(Game2CB.isSelected())
+		{
+			props.setProperty("Game_2", "false");
+		}
+		else
+		{
+			props.setProperty("Game_2", "true");
+		}
+		if(Game3CB.isSelected())
+		{
+			props.setProperty("Game_3", "false");
+		}
+		else
+		{
+			props.setProperty("Game_3", "true");
+		}
+		if(Game4CB.isSelected())
+		{
+			props.setProperty("Game_4", "false");
+		}
+		else
+		{
+			props.setProperty("Game_4", "true");
+		}
+		if(EmailCB.isSelected() && !emailTF.getText().isEmpty())
+		{
+			props.setProperty("Email_Alerts", "true");
+			props.setProperty("Email", emailTF.getText());
+		}
+		try
+		{
+			FileWriter write = new FileWriter("resources/interface/parent_controls/" + userName + ".properties");
+			props.store(write, "User:" + userName);
+			write.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println("Failed to save");
+		}
+	}
+	
+	private void checkPin() 
+	{
+		try
+		{
+			FileInputStream in = new FileInputStream("resources/interface/parent_controls/" + userName + ".properties");
+			props.load(in);
+			in.close();
+		}
+		//String pin = props.getProperty("PIN");
+		catch(Exception e)
+		{
+			System.out.println("Failed to load parent controls properties");
+		}
+		
+		if(pinPF.getText().equals(props.getProperty("PIN")))
+		{
+			enablePin(false);
+			enableControls(true);
+			checkInfo();
+		}
 	}
 	
 	public void enableControls(boolean yes)
@@ -363,5 +501,10 @@ public class ParentControlsScreen extends Screen
 		pinPF.setVisible(yes);
 		pinButton.setVisible(yes);
 		pinForgotButton.setVisible(yes);
+	}
+
+	public void setUser(String uName)
+	{
+		userName = uName;
 	}
 }

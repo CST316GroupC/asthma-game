@@ -156,7 +156,8 @@ public class RewardScreen extends Screen
 	{
 		if(butPressed == 1)
 		{
-			run.setScreen(new GameHubScreen(run));
+			GameHubScreen ghs = new GameHubScreen(run);
+			run.setScreen(ghs);
 		}
 		butPressed = 0;
 

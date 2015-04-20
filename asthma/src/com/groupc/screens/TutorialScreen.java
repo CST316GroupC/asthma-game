@@ -40,7 +40,7 @@ public class TutorialScreen extends Screen
 	int 	butPressed			= 0;	
 	int 	step				= 0;
 	Resize  resize				= new Resize(run);
-	String patientUserName;
+	String patientUserName = run.getUserName();
 	
 	//Display Elements
 	NavigationBar navBar		= new NavigationBar(run,false,false,"Tutorial");
@@ -196,20 +196,6 @@ public class TutorialScreen extends Screen
 		run.setContentPane(this);
 		run.setVisible(true);
 	}
-	
-	public void setPatient(String pUserName)
-	{
-		if(pUserName != null)
-		{
-			patientUserName = pUserName;
-			//run.setTitle(patientUserName + " Tutorial");
-			stepImage.setIcon(image1);
-		} 
-		else
-		{
-			//run.setTitle("Tutorial");
-		}
-	}
 
 	@Override
 	public void update(float deltaTime)
@@ -269,7 +255,6 @@ public class TutorialScreen extends Screen
 		if(butPressed == 1)
 		{
 			RecordingScreen rs = new RecordingScreen(run);
-			rs.setPatient(patientUserName);
 			run.setScreen(rs);
 		}
 		else if(butPressed == 3)
