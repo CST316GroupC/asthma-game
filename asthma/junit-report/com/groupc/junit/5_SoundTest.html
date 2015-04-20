@@ -1,13 +1,13 @@
 <html xmlns:string="xalan://java.lang.String" xmlns:lxslt="http://xml.apache.org/xslt">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Unit Test Results: com.groupc.junit.DatabaseTest</title>
+<title>Unit Test Results: com.groupc.junit.SoundTest</title>
 <link rel="stylesheet" type="text/css" title="Style" href="../../../stylesheet.css">
 <script type="text/javascript" language="JavaScript">
         var TestCases = new Array();
         var cur;
         
-    cur = TestCases['com.groupc.junit.DatabaseTest'] = new Array();
+    cur = TestCases['com.groupc.junit.SoundTest'] = new Array();
     
         cur['_jacoco.agentFile'] = 'C:\\Users\\EDWINA~1\\AppData\\Local\\Temp\\jacocoagent7639932343988159214.jar';
     
@@ -198,13 +198,13 @@
 </tr>
 </table>
 <hr size="1">
-<h3>Class com.groupc.junit.DatabaseTest</h3>
+<h3>Class com.groupc.junit.SoundTest</h3>
 <table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
 <tr valign="top">
 <th width="80%">Name</th><th>Tests</th><th>Errors</th><th>Failures</th><th>Skipped</th><th nowrap>Time(s)</th><th nowrap>Time Stamp</th><th>Host</th>
 </tr>
-<tr valign="top" class="Failure">
-<td><a title="Display all tests" href="1_DatabaseTest.html">DatabaseTest</a></td><td><a title="Display all tests" href="1_DatabaseTest.html">1</a></td><td>0</td><td><a title="Display only failures" href="1_DatabaseTest-fails.html">1</a></td><td>0</td><td>2.494</td><td>2015-04-20T06:10:14</td><td>EdwinAvalos-PC</td>
+<tr valign="top" class="Error">
+<td><a title="Display all tests" href="5_SoundTest.html">SoundTest</a></td><td><a title="Display all tests" href="5_SoundTest.html">3</a></td><td><a title="Display only errors" href="5_SoundTest-errors.html">1</a></td><td>0</td><td>0</td><td>0.146</td><td>2015-04-20T06:10:18</td><td>EdwinAvalos-PC</td>
 </tr>
 </table>
 <h2>Tests</h2>
@@ -212,26 +212,27 @@
 <tr valign="top">
 <th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
 </tr>
-<tr valign="top" class="Failure">
-<td><a name="testget_doctor"></a>testget_doctor</td><td>Failure</td><td>N/A<br>
+<tr valign="top" class="Error">
+<td><a name="LoadMusicTest"></a>LoadMusicTest</td><td>Error</td><td>Resource not found: badfile.txt<br>
 <br>
-<code>junit.framework.AssertionFailedError<br>	at com.groupc.junit.DatabaseTest.testget_doctor(Unknown Source)<br>
-</code></td><td>2.478</td>
+<code>java.lang.RuntimeException: Resource not found: badfile.txt<br>	at org.newdawn.slick.util.ResourceLoader.getResource(ResourceLoader.java:115)<br>	at com.groupc.AudioPlayer.loadSong(Unknown Source)<br>	at com.groupc.junit.SoundTest.LoadMusicTest(Unknown Source)<br>
+</code></td><td>0.051</td>
+</tr>
+<tr valign="top" class="TableRowColor">
+<td><a name="WAVfileTypeTest"></a>WAVfileTypeTest</td><td>Success</td><td></td><td>0.048</td>
+</tr>
+<tr valign="top" class="TableRowColor">
+<td><a name="OGGfileTypeTest"></a>OGGfileTypeTest</td><td>Success</td><td></td><td>0.047</td>
 </tr>
 </table>
 <div class="Properties">
-<a href="javascript:displayProperties('com.groupc.junit.DatabaseTest');">
+<a href="javascript:displayProperties('com.groupc.junit.SoundTest');">
                     Properties &raquo;
                 </a>
 </div>
 <div class="Properties">
-<a href="./1_DatabaseTest-out.html">
+<a href="./5_SoundTest-out.html">
                         System.out &raquo;
-                    </a>
-</div>
-<div class="Properties">
-<a href="./1_DatabaseTest-err.html">
-                        System.err &raquo;
                     </a>
 </div>
 </body>

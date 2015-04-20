@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="5.2.3" timestamp="2015-04-19T17:36:06.876">
+<pmd version="5.2.3" timestamp="2015-04-19T23:10:11.111">
 <file name="com\groupc\Database.java">
 <violation beginline="8" endline="238" begincolumn="23" endcolumn="1" rule="UseUtilityClass" ruleset="Design" package="com.groupc" class="Database" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#UseUtilityClass" priority="3">
 All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
@@ -141,8 +141,11 @@ Private field 'hasGem' could be made final; it is only initialized in the declar
 </violation>
 </file>
 <file name="com\groupc\game2\MazeWorld.java">
-<violation beginline="1" endline="544" begincolumn="1" endcolumn="3" rule="GodClass" ruleset="Design" package="com.groupc.game2" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#GodClass" priority="3">
-Possible God class (WMC=106, ATFD=114, TCC=0.019704433497536946)
+<violation beginline="1" endline="557" begincolumn="1" endcolumn="3" rule="GodClass" ruleset="Design" package="com.groupc.game2" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#GodClass" priority="3">
+Possible God class (WMC=109, ATFD=113, TCC=0.02217741935483871)
+</violation>
+<violation beginline="62" endline="62" begincolumn="31" endcolumn="40" rule="ConstructorCallsOverridableMethod" ruleset="Design" package="com.groupc.game2" class="MazeWorld" method="MazeWorld" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConstructorCallsOverridableMethod" priority="1">
+Overridable method 'getLevel' called during object construction
 </violation>
 </file>
 <file name="com\groupc\game3\Game3Assets.java">

@@ -1,4 +1,19 @@
 WWWWWWWWWWWWWWW
+W   W  E W    W   //This is a level for testing purposes
+W   W    W    W
+W   W    W    W
+W   W    W    W
+W   WDDDDW    W
+WWWWW    W    W
+WS       W    W
+WWWWWWWWWWWWWWW
+W             W
+W             W
+W             W
+W             W
+W             W
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
 W   W  E W    W
 W   W    W    W
 W   W    W    W

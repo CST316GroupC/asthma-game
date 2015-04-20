@@ -36,7 +36,7 @@ public class MazeWorld extends GameScreen
 	public final ArrayList<Gem> gems;
 	public final ArrayList<Spike> spikes;
 	public final ArrayList<Dirt> dirts;
-	private PlayerDig playerDig;
+	public PlayerDig playerDig;
 	public final Goal goal;
 	private int buttonPresses;
 	private int level;
@@ -50,7 +50,7 @@ public class MazeWorld extends GameScreen
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 		player = new Player(0, 0); //place holders
 		buttonPresses = 0;
-		level = Integer.parseInt(assets.getProps().getProperty("level"));
+		setLevel(Integer.parseInt(assets.getProps().getProperty("level")));
 		walls = new ArrayList<Wall>();
 		pits = new ArrayList<Pit>();
 		goal = new Goal(0, 0); //place holder
@@ -59,7 +59,7 @@ public class MazeWorld extends GameScreen
 		dirts = new ArrayList<Dirt>();
 		spikes = new ArrayList<Spike>();
 		playerDig = new PlayerDig(-1,0); //placeHolder
-		generateLevel(level);
+		generateLevel(getLevel());
 		score = Integer.parseInt(assets.getProps().getProperty("score"));
 	}
 	
@@ -73,7 +73,7 @@ public class MazeWorld extends GameScreen
 			brd = new BufferedReader(rd);
 			String[] rows = new String[15]; //Each level is at most 15 rows
 			//Get to point in file that contains the level
-			for(int i =0; i < ((level-1) * 15); i++)
+			for(int i =0; i < ((level) * 15); i++)
 			{
 				brd.readLine();
 			}
@@ -362,16 +362,16 @@ public class MazeWorld extends GameScreen
 	
 	public void levelDone()
 	{
-		level++;
-		System.out.println(level);
+		setLevel(getLevel() + 1);
+		System.out.println(getLevel());
 		walls.clear();
 		pits.clear();
 		enemies.clear();
 		gems.clear();
 		spikes.clear();
 		dirts.clear();
-		generateLevel(level);
-		assets.setProps("level", level+"");
+		generateLevel(getLevel());
+		assets.setProps("level", getLevel()+"");
 		assets.setProps("score", score+"");
 		assets.save(Game2Assets.FILENAME);
 	}
@@ -447,19 +447,19 @@ public class MazeWorld extends GameScreen
 	
 	public void renderHint()
 	{
-		if(level==1)
+		if(getLevel()==1)
 		{
 			TextDrawer.drawStringinRect("Arrow Keys or WASD to move", new Rectangle(1,1,13, 4), false);
 		}
-		else if(level==2)
+		else if(getLevel()==2)
 		{
 			TextDrawer.drawStringinRect("Collect Gems", new Rectangle(2,1,12, 4), false);
 		}
-		else if(level==3)
+		else if(getLevel()==3)
 		{
 			TextDrawer.drawStringinRect("Do not fall in holes", new Rectangle(2,1,12, 4), false);
 		}
-		else if(level==4)
+		else if(getLevel()==4)
 		{
 			TextDrawer.drawStringinRect("Avoid Baddies", new Rectangle(2,1,12, 4), false);
 		}
@@ -539,6 +539,19 @@ public class MazeWorld extends GameScreen
 	public GameScreen getNext() 
 	{
 		return new MainMenu(assets);
+	}
+	
+	public int getState()
+	{
+		return state;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 }
