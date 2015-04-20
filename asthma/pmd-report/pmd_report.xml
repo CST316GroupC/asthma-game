@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="5.2.3" timestamp="2015-04-16T16:49:48.593">
+<pmd version="5.2.3" timestamp="2015-04-19T17:11:08.521">
 <file name="com\groupc\Database.java">
 <violation beginline="8" endline="238" begincolumn="23" endcolumn="1" rule="UseUtilityClass" ruleset="Design" package="com.groupc" class="Database" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#UseUtilityClass" priority="3">
 All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
@@ -135,6 +135,11 @@ Switch statements should have a default label
 Switch statements should have a default label
 </violation>
 </file>
+<file name="com\groupc\game2\Dirt.java">
+<violation beginline="12" endline="12" begincolumn="25" endcolumn="30" rule="ImmutableField" ruleset="Design" package="com.groupc.game2" class="Dirt" variable="hasGem" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'hasGem' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+</file>
 <file name="com\groupc\game2\Game2Assets.java">
 <violation beginline="25" endline="25" begincolumn="17" endcolumn="22" rule="ConstructorCallsOverridableMethod" ruleset="Design" package="com.groupc.game2" class="Game2Assets" method="Game2Assets" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConstructorCallsOverridableMethod" priority="1">
 Overridable method 'load' called during object construction
@@ -152,39 +157,33 @@ Avoid empty if statements
 </violation>
 </file>
 <file name="com\groupc\game2\MazeWorld.java">
-<violation beginline="1" endline="427" begincolumn="1" endcolumn="3" rule="GodClass" ruleset="Design" package="com.groupc.game2" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#GodClass" priority="3">
-Possible God class (WMC=83, ATFD=89, TCC=0.021739130434782608)
+<violation beginline="1" endline="546" begincolumn="1" endcolumn="3" rule="GodClass" ruleset="Design" package="com.groupc.game2" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#GodClass" priority="3">
+Possible God class (WMC=110, ATFD=114, TCC=0.019704433497536946)
 </violation>
 <violation beginline="31" endline="31" begincolumn="24" endcolumn="26" rule="ImmutableField" ruleset="Design" package="com.groupc.game2" class="MazeWorld" variable="cam" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
 Private field 'cam' could be made final; it is only initialized in the declaration or constructor.
 </violation>
-<violation beginline="57" endline="57" begincolumn="82" endcolumn="82" rule="EmptyStatementNotInLoop" ruleset="Empty Code" package="com.groupc.game2" class="MazeWorld" method="MazeWorld" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/empty.html#EmptyStatementNotInLoop" priority="3">
+<violation beginline="63" endline="63" begincolumn="82" endcolumn="82" rule="EmptyStatementNotInLoop" ruleset="Empty Code" package="com.groupc.game2" class="MazeWorld" method="MazeWorld" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/empty.html#EmptyStatementNotInLoop" priority="3">
 An empty statement (semicolon) not part of a loop
 </violation>
-<violation beginline="275" endline="275" begincolumn="37" endcolumn="121" rule="UselessParentheses" ruleset="Unnecessary" package="com.groupc.game2" class="MazeWorld" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
+<violation beginline="341" endline="341" begincolumn="37" endcolumn="121" rule="UselessParentheses" ruleset="Unnecessary" package="com.groupc.game2" class="MazeWorld" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
 Useless parentheses.
 </violation>
-<violation beginline="276" endline="276" begincolumn="53" endcolumn="139" rule="UselessParentheses" ruleset="Unnecessary" package="com.groupc.game2" class="MazeWorld" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
+<violation beginline="342" endline="342" begincolumn="53" endcolumn="139" rule="UselessParentheses" ruleset="Unnecessary" package="com.groupc.game2" class="MazeWorld" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
 Useless parentheses.
 </violation>
-<violation beginline="277" endline="277" begincolumn="53" endcolumn="139" rule="UselessParentheses" ruleset="Unnecessary" package="com.groupc.game2" class="MazeWorld" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
+<violation beginline="343" endline="343" begincolumn="53" endcolumn="139" rule="UselessParentheses" ruleset="Unnecessary" package="com.groupc.game2" class="MazeWorld" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
 Useless parentheses.
 </violation>
-<violation beginline="278" endline="278" begincolumn="53" endcolumn="140" rule="UselessParentheses" ruleset="Unnecessary" package="com.groupc.game2" class="MazeWorld" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
+<violation beginline="344" endline="344" begincolumn="53" endcolumn="140" rule="UselessParentheses" ruleset="Unnecessary" package="com.groupc.game2" class="MazeWorld" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
 Useless parentheses.
-</violation>
-<violation beginline="396" endline="400" begincolumn="17" endcolumn="17" rule="MissingBreakInSwitch" ruleset="Design" package="com.groupc.game2" class="MazeWorld" method="renderPlayer" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#MissingBreakInSwitch" priority="3">
-A switch statement does not contain a break
-</violation>
-<violation beginline="396" endline="400" begincolumn="17" endcolumn="17" rule="TooFewBranchesForASwitchStatement" ruleset="Design" package="com.groupc.game2" class="MazeWorld" method="renderPlayer" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#TooFewBranchesForASwitchStatement" priority="3">
-A switch with less than three branches is inefficient, use a if statement instead.
 </violation>
 </file>
 <file name="com\groupc\game2\Player.java">
-<violation beginline="19" endline="19" begincolumn="17" endcolumn="32" rule="SingularField" ruleset="Design" package="com.groupc.game2" class="Player" variable="stateTime" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SingularField" priority="3">
+<violation beginline="22" endline="22" begincolumn="17" endcolumn="32" rule="SingularField" ruleset="Design" package="com.groupc.game2" class="Player" variable="stateTime" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SingularField" priority="3">
 Perhaps 'stateTime' could be replaced by a local variable.
 </violation>
-<violation beginline="19" endline="19" begincolumn="23" endcolumn="31" rule="ImmutableField" ruleset="Design" package="com.groupc.game2" class="Player" variable="stateTime" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+<violation beginline="22" endline="22" begincolumn="23" endcolumn="31" rule="ImmutableField" ruleset="Design" package="com.groupc.game2" class="Player" variable="stateTime" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
 Private field 'stateTime' could be made final; it is only initialized in the declaration or constructor.
 </violation>
 </file>

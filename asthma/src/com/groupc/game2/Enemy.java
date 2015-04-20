@@ -1,5 +1,6 @@
 package com.groupc.game2;
 
+import com.groupc.game.GameObject;
 import com.groupc.game.MovingGameObject;
 
 public abstract class Enemy extends MovingGameObject
@@ -18,6 +19,6 @@ public abstract class Enemy extends MovingGameObject
 		bounds.lowerLeft.set(position.sub(bounds.width / 2, bounds.height / 2));
 	}
 	
-	public abstract void collision();
+	public abstract void collision(GameObject other);
 
 }

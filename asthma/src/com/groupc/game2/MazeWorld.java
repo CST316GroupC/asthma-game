@@ -34,6 +34,9 @@ public class MazeWorld extends GameScreen
 	public final ArrayList<Pit> pits;
 	public final ArrayList<Enemy> enemies;
 	public final ArrayList<Gem> gems;
+	public final ArrayList<Spike> spikes;
+	public final ArrayList<Dirt> dirts;
+	private PlayerDig playerDig;
 	public final Goal goal;
 	private int buttonPresses;
 	private int level;
@@ -53,6 +56,9 @@ public class MazeWorld extends GameScreen
 		goal = new Goal(0, 0); //place holder
 		enemies = new ArrayList<Enemy>();
 		gems = new ArrayList<Gem>();
+		dirts = new ArrayList<Dirt>();
+		spikes = new ArrayList<Spike>();
+		playerDig = new PlayerDig(-1,0); //placeHolder
 		generateLevel(level);
 		score = Integer.parseInt(assets.getProps().getProperty("score"));;
 	}
@@ -88,30 +94,38 @@ public class MazeWorld extends GameScreen
 					{
 						walls.add(new Wall(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2));
 					}
-					if(sym == 'S') //Player start
+					else if(sym == 'S') //Player start
 					{
 						player.position.set(j+Player.WIDTH/2, WORLD_HEIGHT-i-Player.HEIGHT/2);
 						player.bounds.lowerLeft.set(player.position.sub(player.bounds.width / 2, player.bounds.height / 2));
 					}
-					if(sym == 'P') //Pits
+					else if(sym == 'P') //Pits
 					{
 						pits.add(new Pit(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2)); //Use the same as wall because drawn the same as a wall but bounds are different
 					}
-					if(sym == 'E') //Goal or end of level
+					else if(sym == 'E') //Goal or end of level
 					{
 						goal.position.set(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2);
 						goal.bounds.lowerLeft.set(goal.position.sub(goal.bounds.width / 2, goal.bounds.height / 2));
 						
 					}
-					if(sym == 'G') //Goal or end of level
+					else if(sym == 'G') //Goal or end of level
 					{
 						gems.add(new Gem(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2));//Use the same as wall because drawn the same as a wall but bounds are different))
 					}
-					if(sym == '1') //Goal or end of level
+					else if(sym == 'A') //Goal or end of level
+					{
+						spikes.add(new Spike(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2));//Use the same as wall because drawn the same as a wall but bounds are different))
+					}
+					else if(sym == 'D') //Goal or end of level
+					{
+						dirts.add(new Dirt(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2));//Use the same as wall because drawn the same as a wall but bounds are different))
+					}
+					else if(sym == '1') //Goal or end of level
 					{
 						enemies.add(new LREnemy(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2));//Use the same as wall because drawn the same as a wall but bounds are different
 					}
-					if(sym == '2') //Goal or end of level
+					else if(sym == '2') //Goal or end of level
 					{
 						enemies.add(new UDEnemy(j+Wall.WIDTH/2, WORLD_HEIGHT-i-Wall.HEIGHT/2));//Use the same as wall because drawn the same as a wall but bounds are different
 					}
@@ -150,9 +164,19 @@ public class MazeWorld extends GameScreen
 		if(state==WORLD_STATE_PLAYING)
 		{
 			player.update(deltaTime);
+			playerDig.update(deltaTime);
 			updateEnemies(deltaTime);
+			updateSpikes(deltaTime);
 			collisionChecker();
 		}		
+	}
+	
+	public void updateSpikes(float deltaTime)
+	{
+		for(int i=0; i < spikes.size(); i++)
+		{
+			spikes.get(i).update(deltaTime);
+		}
 	}
 	
 	public void updateEnemies(float deltaTime)
@@ -169,7 +193,42 @@ public class MazeWorld extends GameScreen
 		collisionPit();
 		collisionGoal();
 		collisionEnemy();
+		collisionSpike();
 		collisionGem();
+		collisionDirt();
+	}
+	
+	public void collisionDirt()
+	{
+		for(int i = 0; i < dirts.size(); i++)
+		{
+			if(dirts.get(i).isActive())
+			{
+				if(CollisionChecker.RectToRect(player.bounds, dirts.get(i).bounds))
+				{
+					player.hitWall(dirts.get(i));
+				}
+				if(CollisionChecker.RectToRect(playerDig.bounds, dirts.get(i).bounds))
+				{
+					if(dirts.get(i).getHasGem())
+					{
+						gems.add(new Gem(dirts.get(i).position.x-.5f, dirts.get(i).position.y-.5f));
+					}
+					dirts.get(i).setActive(false);
+				}
+			}
+		}
+	}
+	
+	public void collisionSpike()
+	{
+		for(int i=0; i < spikes.size(); i++)
+		{
+			if(CollisionChecker.RectToRect(player.bounds, spikes.get(i).bounds) && spikes.get(i).getState() == Spike.STATE_UP)
+			{
+				state = WORLD_STATE_OVER;
+			}
+		}
 	}
 	
 	public void collisionGem()
@@ -196,14 +255,21 @@ public class MazeWorld extends GameScreen
 			{
 				if(CollisionChecker.RectToRect(enemies.get(i).bounds, walls.get(j).bounds))
 				{
-					enemies.get(i).collision();
+					enemies.get(i).collision(walls.get(j));
 				}
 			}
 			for(int k=0; k < pits.size(); k++)
 			{
 				if(CollisionChecker.RectToRect(enemies.get(i).bounds, pits.get(k).bounds))
 				{
-					enemies.get(i).collision();
+					enemies.get(i).collision(pits.get(k));
+				}
+			}
+			for(int l=0; l < spikes.size(); l++)
+			{
+				if(CollisionChecker.RectToRect(enemies.get(i).bounds, spikes.get(l).bounds))
+				{
+					enemies.get(i).collision(spikes.get(l));
 				}
 			}
 		}
@@ -283,7 +349,15 @@ public class MazeWorld extends GameScreen
 						player.setState(Player.STATE_STILL);
 						player.setDirection(new Vector(0, 0));
 					}
-				}				
+				}
+				if(Keyboard.getEventKey() == Keyboard.KEY_SPACE)
+				{
+					player.align();
+				}
+				if(Keyboard.getEventKey() == Keyboard.KEY_V && player.getState() == Player.STATE_STILL)
+				{
+					playerDig = player.dig();
+				}
 			}
 		}
 	}
@@ -296,6 +370,8 @@ public class MazeWorld extends GameScreen
 		pits.clear();
 		enemies.clear();
 		gems.clear();
+		spikes.clear();
+		dirts.clear();
 		generateLevel(level);
 		assets.setProps("level", level+"");
 		assets.setProps("score", score+"");
@@ -312,8 +388,36 @@ public class MazeWorld extends GameScreen
 		renderGoal();
 		renderHint();
 		renderEnemy();
+		renderSpikes();
 		renderGem();
+		renderDirt();
 		renderPlayer();
+	}
+	
+	public void renderDirt()
+	{
+		for(int i=0; i < dirts.size(); i++)
+		{
+			if(dirts.get(i).isActive())
+			{
+				assets.getImage("dirt").draw(new Rectangle(dirts.get(i).position.x -.5f, dirts.get(i).position.y -.5f, 1, 1));
+			}
+		}
+	}
+	
+	public void renderSpikes()
+	{
+		for(int i=0; i < spikes.size(); i++)
+		{
+			if(spikes.get(i).getState() == Spike.STATE_DOWN)
+			{
+				assets.getImage("spikeDown").draw(new Rectangle(spikes.get(i).position.x -.5f, spikes.get(i).position.y -.5f, 1, 1));
+			}
+			else
+			{
+				assets.getImage("spikeUp").draw(new Rectangle(spikes.get(i).position.x -.5f, spikes.get(i).position.y -.5f, 1, 1));
+			}
+		}
 	}
 	
 	public void renderGem()
@@ -393,10 +497,25 @@ public class MazeWorld extends GameScreen
 	{
 		Rectangle rect = new Rectangle(player.position.x - Player.WIDTH/2, player.position.y - Player.HEIGHT/2, 1f, 1f);
 		
-		switch(player.getState())
+		if(player.getLastDirection() == 0)//left
 		{
-		default:
-			assets.getImage("player").draw(rect);
+			assets.getImage("playerLeft").draw(rect);
+			assets.getImage("playerDigLeft").draw(playerDig.bounds);
+		}
+		else if(player.getLastDirection() == 1)//up
+		{
+			assets.getImage("playerUp").draw(rect);
+			assets.getImage("playerDigUp").draw(playerDig.bounds);
+		}
+		else if(player.getLastDirection() == 2)//right
+		{
+			assets.getImage("playerRight").draw(rect);
+			assets.getImage("playerDigRight").draw(playerDig.bounds);
+		}
+		else //down
+		{
+			assets.getImage("playerDown").draw(rect);
+			assets.getImage("playerDigDown").draw(playerDig.bounds);
 		}
 	}
 
