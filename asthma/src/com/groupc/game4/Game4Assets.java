@@ -20,6 +20,8 @@ import com.groupc.math.Rectangle;
 public class Game4Assets extends Asset
 {	
 	private static Texture sheet;
+	private static Texture background;
+	private static Texture g4texture;
 	
 	public Game4Assets()
 	{
@@ -27,6 +29,8 @@ public class Game4Assets extends Asset
 		try {
 			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/atlas.png"));
 			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/mainmenu.png"));
+			background = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game3/wall.png"));
+			g4texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game4/game4assets.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,15 +44,20 @@ public class Game4Assets extends Asset
 		reload();
 		sprites = new Hashtable<String, TextureRegion>();
 		sprites.put("title", new TextureRegion(sheet, 0, 226, 235, 30));
-		sprites.put("grass", new TextureRegion(texture, 32, 512 - 31, 30, 30));
-		sprites.put("sky", new TextureRegion(texture, 0, 512 - 96, 32, 96));
 		sprites.put("back", new TextureRegion(texture, 128, 512 - 64, 32, 32));
+		sprites.put("wall", new TextureRegion(background, 0, 0, 512, 512));
+		
+		sprites.put("broccoli", new TextureRegion(g4texture, 0, 256 - 1*58, 58, 58));
+		sprites.put("orange", new TextureRegion(g4texture, 58, 256 - 1*58, 58, 58));
+		sprites.put("cake", new TextureRegion(g4texture, 0, 256 - 2*58, 58, 58));
+		sprites.put("cookie", new TextureRegion(g4texture, 58, 256 - 2*58, 58, 58));
 		
 		TextDrawer.prepare();
 	}
 	
 	public void reload()
 	{
+		//TODO: update for game4
 		try 
 		{
 			FileInputStream in = new FileInputStream("res/maze.properties");
