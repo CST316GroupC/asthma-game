@@ -45,7 +45,7 @@ public class AccountCreationScreen extends Screen
 	int     butPressed = 0;
 	int     type       = 1;
 	boolean played 	   = true;
-	public String newPatientDoctor;
+	private String newPatientDoctor;
 	
 	//Display Elements
 	NavigationBar 	navBar       	= new NavigationBar(run,true,false,"Account Creation Page");
@@ -60,13 +60,13 @@ public class AccountCreationScreen extends Screen
 	JLabel     		errorMessage    	= new JLabel("Missing Information*",SwingConstants.CENTER);
 	JLabel	   		invalidInputMessage = new JLabel("Please insert a valid Date*");
 	
-	JTextField 		firstNameTF     = new JTextField();
-	JTextField 		lastNameTF      = new JTextField();
-	JTextField 		monthTF         = new JTextField();
-	JTextField 		dayTF           = new JTextField();
-	JTextField 		yearTF          = new JTextField();
-	JTextField 		emailTF		   	= new JTextField();
-	JTextField 		passwordTF      = new JTextField();
+	private JTextField 		firstNameTF     = new JTextField();
+	private JTextField 		lastNameTF      = new JTextField();
+	private JTextField 		monthTF         = new JTextField();
+	private JTextField 		dayTF           = new JTextField();
+	private JTextField 		yearTF          = new JTextField();
+	private JTextField 		emailTF		   	= new JTextField();
+	private JTextField 		passwordTF      = new JTextField();
 	
 	JTextArea  		infoTA          = new JTextArea();
 	
@@ -346,5 +346,80 @@ public class AccountCreationScreen extends Screen
 		}
 		
 		return true;
+	}
+
+	public String getFirstNameTF() 
+	{
+		return firstNameTF.getText();
+	}
+
+	public void setFirstNameTF(String firstNameTF)
+	{
+		this.firstNameTF.setText(firstNameTF);
+	}
+
+	public String getLastNameTF() 
+	{
+		return lastNameTF.getText();
+	}
+
+	public void setLastNameTF(String lastNameTF) 
+	{
+		this.lastNameTF.setText(lastNameTF);
+	}
+
+	public String getMonthTF() 
+	{
+		return monthTF.getText();
+	}
+
+	public void setMonthTF(String monthTF) 
+	{
+		this.monthTF.setText(monthTF);
+	}
+
+	public String getDayTF()
+	{
+		return dayTF.getText();
+	}
+
+	public void setDayTF(String dayTF) 
+	{
+		this.dayTF.setText(dayTF);
+	}
+
+	public String getYearTF() 
+	{
+		return yearTF.getText();
+	}
+
+	public void setYearTF(String yearTF)
+	{
+		this.yearTF.setText(yearTF);
+	}
+
+	public String getEmailTF() 
+	{
+		return emailTF.getText();
+	}
+
+	public void setEmailTF(String emailTF)
+	{
+		this.emailTF.setText(emailTF);
+	}
+
+	public String getPasswordTF()
+	{
+		return passwordTF.getText();
+	}
+
+	public void setPasswordTF(String passwordTF) 
+	{
+		this.passwordTF.setText(passwordTF);
+	}
+	
+	public String getPatientDoctor()
+	{
+		return newPatientDoctor;
 	}
 }
