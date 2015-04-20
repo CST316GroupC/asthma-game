@@ -47,10 +47,10 @@ public class Game4Assets extends Asset
 		sprites.put("back", new TextureRegion(texture, 128, 512 - 64, 32, 32));
 		sprites.put("wall", new TextureRegion(background, 0, 0, 512, 512));
 		
-		sprites.put("broccoli", new TextureRegion(g4texture, 0, 256 - 1*58, 58, 58));
-		sprites.put("orange", new TextureRegion(g4texture, 58, 256 - 1*58, 58, 58));
-		sprites.put("cake", new TextureRegion(g4texture, 0, 256 - 2*58, 58, 58));
-		sprites.put("cookie", new TextureRegion(g4texture, 58, 256 - 2*58, 58, 58));
+		sprites.put("broccoli", new TextureRegion(g4texture, 0, 256 - 1*68, 68, 68));
+		sprites.put("orange", new TextureRegion(g4texture, 68, 256 - 1*68, 68, 68));
+		sprites.put("cake", new TextureRegion(g4texture, 0, 256 - 2*68, 68, 68));
+		sprites.put("cookie", new TextureRegion(g4texture, 68, 256 - 2*68, 68, 68));
 		
 		TextDrawer.prepare();
 	}
@@ -60,13 +60,13 @@ public class Game4Assets extends Asset
 		//TODO: update for game4
 		try 
 		{
-			FileInputStream in = new FileInputStream("res/game4.properties");
+			FileInputStream in = new FileInputStream("res/joey.properties");
 			props.load(in);
 			in.close();
 			String temp = props.getProperty("firstTime", "true");
 			if("true".equals(temp))
 			{
-				save("res/game4.properties");
+				save("res/joey.properties");
 			}
 		} 
 		catch (IOException e1)
