@@ -19,6 +19,7 @@ import com.groupc.game.GameScreen;
 import com.groupc.game1.Cow;
 import com.groupc.game3.PaperMan;
 import com.groupc.game3.Rain;
+import com.groupc.game3.HealthGlobe;
 import com.groupc.math.CollisionChecker;
 import com.groupc.math.Rectangle;
 
@@ -41,10 +42,14 @@ public class GameWorld extends GameScreen
 	
 	public int state;
 	private int score;
+	private int hitCounter;
 	
 	private Camera cam;
 	public final PaperMan paper;
+	public final Rain rainHit;
 	public final Rain[] rain;
+	public final HealthGlobe[] healthGlobe;
+	public final Treasure[] treasure;
 	private Random rand;
 	
 	//TODO: change assets for paperMan and change rain positiong (from array to random objects?)
@@ -54,17 +59,26 @@ public class GameWorld extends GameScreen
 		assets.reload();
 		rand = new Random();
 		
+		hitCounter = 0;
+		
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 		
 		this.paper = new PaperMan(0.75f, .75f, Integer.parseInt(assets.getProps().getProperty("paperHealth")));
 
+		this.rainHit = new Rain(0, 0);
+		
 		this.state = WORLD_STATE_PLAYING;
 		
 		this.rain = new Rain[6];
 		rain[0] = new Rain(cam.position.x, cam.position.y);
 		rain[1] = new Rain(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y);
 		rain[2] = new Rain(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y);
-		score = Integer.parseInt(assets.getProps().getProperty("game3Score"));
+		
+		this.healthGlobe = new HealthGlobe[1];
+		healthGlobe[0] = new HealthGlobe(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y);
+		
+		this.treasure = new Treasure[1];
+		treasure[0] = new Treasure(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y);
 	}
 	
 	public void updateRain()
@@ -97,6 +111,57 @@ public class GameWorld extends GameScreen
 		paper.update(deltaTime);
 	}
 	
+	public void updateHealthGlobe()
+	{
+		for(int i = 0; i < healthGlobe.length; i++)
+		{
+			if(healthGlobe[i] != null)
+			{
+				healthGlobe[i].update();
+				
+				if(healthGlobe[i].position.y <= cam.position.y - FRUSTUM_HEIGHT /2)
+				{
+					healthGlobe[i].position.set(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
+				}
+			}
+			else
+			{
+				int chance = rand.nextInt(10);
+				
+				if(chance < 5)
+				{
+					healthGlobe[i] = new HealthGlobe(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
+				}
+			}
+		}		
+	}
+	
+	public void updateTreasure()
+	{
+		for(int i = 0; i < treasure.length; i++)
+		{
+			if(treasure[i] != null)
+			{
+				treasure[i].update();
+				
+				if(treasure[i].position.y <= cam.position.y - FRUSTUM_HEIGHT /2)
+				{
+					treasure[i].position.set(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
+				}
+			}
+			else
+			{
+				int chance = rand.nextInt(10);
+				
+				if(chance < 5)
+				{
+					treasure[i] = new Treasure(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
+				}
+			}
+		}		
+	}
+	
+	
 	public void update(float deltaTime)
 	{
 		inputHandling();
@@ -104,6 +169,8 @@ public class GameWorld extends GameScreen
 		{
 			case WORLD_STATE_PLAYING:
 				updateRain();
+				updateHealthGlobe();
+				updateTreasure();
 				updatePaper(deltaTime);
 				collision();
 				if(paper.getState() == PaperMan.STATE_GONE)
@@ -120,6 +187,7 @@ public class GameWorld extends GameScreen
 				break;
 		}
 	}
+	
 	
 	/**
 	 * Prepares the property file to store all the relevent player data at moment of method called.
@@ -190,6 +258,8 @@ public class GameWorld extends GameScreen
 		renderHud();
 		renderRain();
 		renderPaper();
+		renderHealthGlobe();
+		renderTreasure();
 	}
 	
 	private void renderPaper()
@@ -213,6 +283,7 @@ public class GameWorld extends GameScreen
 		}
 		
 	}
+	
 	private void renderRain()
 	{
 		for(int i =0; i < rain.length; i++)
@@ -225,6 +296,33 @@ public class GameWorld extends GameScreen
 		}
 		
 	}
+	
+	private void renderHealthGlobe()
+	{
+		for(int i =0; i < healthGlobe.length; i++)
+		{
+			if(healthGlobe[i] != null)
+			{
+				Rectangle rect = new Rectangle(healthGlobe[i].position.x - .2f, healthGlobe[i].position.y - .4f, 1f, 1f);
+				assets.getImage("healthGlobe").draw(rect);
+			}
+		}
+		
+	}
+	
+	private void renderTreasure()
+	{
+		for(int i =0; i < treasure.length; i++)
+		{
+			if(treasure[i] != null)
+			{
+				Rectangle rect = new Rectangle(treasure[i].position.x - .2f, treasure[i].position.y - .4f, 1f, 1f);
+				assets.getImage("treasure").draw(rect);
+			}
+		}
+		
+	}
+	
 	//TODO: update renderers to properly reflect score for game 3
 	public void renderHud()
 	{
@@ -259,6 +357,8 @@ public class GameWorld extends GameScreen
 	public void collision()
 	{
 		collisionRain();
+		collisionHealthGlobe();
+		collisionTreasure();
 	}
 	
 	public void collisionRain()
@@ -272,11 +372,50 @@ public class GameWorld extends GameScreen
 					rain[i].position.set(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
 					rain[i].update();
 					paper.hit();
+					hitCounter += 1;
+				}
+			}
+		}
+		
+		if( hitCounter >= 5)
+		{
+			rainHit.speedIncrease();
+			hitCounter = 0;
+		}
+	}
+
+	public void collisionHealthGlobe()
+	{
+		for(int i = 0; i < healthGlobe.length; i++)
+		{
+			if(healthGlobe[i] != null)
+			{
+				if(CollisionChecker.RectToRect(paper.bounds, healthGlobe[i].bounds))
+				{
+					healthGlobe[i].position.set(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
+					healthGlobe[i].update();
+					paper.hitHealthGlobe();
 				}
 			}
 		}
 	}
-
+	
+	public void collisionTreasure()
+	{
+		for(int i = 0; i < treasure.length; i++)
+		{
+			if(treasure[i] != null)
+			{
+				if(CollisionChecker.RectToRect(paper.bounds, treasure[i].bounds))
+				{
+					treasure[i].position.set(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
+					treasure[i].update();
+					rainHit.speedDecrease();
+				}
+			}
+		}
+	}
+	
 	@Override
 	public void present(float deltaTime) 
 	{

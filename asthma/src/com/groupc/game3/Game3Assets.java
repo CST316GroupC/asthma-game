@@ -52,6 +52,7 @@ public class Game3Assets extends Asset
 		sprites.put("paperMan", new TextureRegion(g3texture, 0, 600 - 3*58, 58, 58));
 		sprites.put("paperGone", new TextureRegion(g3texture, 0, 600 - 4*58, 58, 58));
 		sprites.put("healthBar", new TextureRegion(g3texture, 0, 600 - 5*58, 58, 58));
+		sprites.put("healthGlobe", new TextureRegion(g3texture, 0, 600 - 5*66, 58, 58));
 		
 		TextDrawer.prepare();
 	}
