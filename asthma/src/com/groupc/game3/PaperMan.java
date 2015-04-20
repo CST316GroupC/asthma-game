@@ -5,7 +5,7 @@ import com.groupc.game.MovingGameObject;
 
 public class PaperMan extends MovingGameObject
 {
-	public final static float WIDTH = 1f;
+	public final static float WIDTH = 0.1f;
 	public final static float HEIGHT = 1f;
 	
 	
@@ -29,7 +29,7 @@ public class PaperMan extends MovingGameObject
 	
 	public void update(float deltaTime)
 	{
-		bounds.lowerLeft.set(position.sub(bounds.width / 2 , bounds.height / 2));
+		bounds.lowerLeft.set(position.sub(bounds.width / 2 + 0.5f , bounds.height / 2));
 		
 		if(stateTime > 1f && state == STATE_HIT)
 		{
@@ -41,24 +41,55 @@ public class PaperMan extends MovingGameObject
 	public void moveLeft(Camera cam)
 	{
 		if(this.position.x - speed > cam.position.x - cam.frustumWidth/2)
+		{
 			this.position.x -= speed;
+		}
 	}
 	
 	public void moveRight(Camera cam)
 	{
 		if(this.position.x + speed < cam.position.x + cam.frustumWidth/2)
+		{
 			this.position.x += speed;
+		}
 	}
 	
 	public void hit()
 	{
 		currentHealth -= 1;
+		
 		if(currentHealth <= 0)
+		{
 			state = STATE_GONE;
+		}
 		else
+		{
 			state = STATE_HIT;
+		}
+		
 		stateTime = 0;
 	}
+	
+	public void hitHealthGlobe()
+	{
+		if( currentHealth < 12 )
+		{
+			currentHealth += 1;
+			
+			if(currentHealth <= 0)
+			{
+				state = STATE_GONE;
+			}
+			else
+			{
+				state = STATE_HIT;
+			}
+			
+			stateTime = 0;
+		}
+	}
+	
+	
 	public void hitTreasure()
 	{
 		//TODO: add functionality or decide to remove treasure powerups
