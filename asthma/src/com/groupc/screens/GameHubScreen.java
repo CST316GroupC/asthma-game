@@ -24,6 +24,7 @@ import javax.swing.SwingConstants;
 import com.groupc.Runner;
 import com.groupc.TextDrawer;
 import com.groupc.math.Resize;
+import com.groupc.math.Tokens;
 
 public class GameHubScreen extends Screen
 {
@@ -32,10 +33,12 @@ public class GameHubScreen extends Screen
 	private boolean	played		= true;
 	private Resize	resize		= new Resize(run);
 	private int 	butPressed	= 0;
+	private	Tokens 	tokens 		= new Tokens(run.getUserName());
 	
 	
 	//Display Elements
 	private NavigationBar	navBar				= new NavigationBar(run,false,true,"Game Hub");	
+	private TokenPanel		tokenPanel			= new TokenPanel(run);
 	
 	private JButton			game1Button 		= new JButton("");
 	private JButton			game2Button 		= new JButton("");
@@ -59,7 +62,7 @@ public class GameHubScreen extends Screen
 	{
 		super(run);	
 		//Basic Frame Settings
-		run.setTitle("Game Hub");
+		run.setTitle(run.getUserName()+" | Game Hub");
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -72,6 +75,9 @@ public class GameHubScreen extends Screen
 		
 		//Set colors
 		this.setBackground(Color.WHITE);
+		
+		//get token count
+		tokenPanel.RefreshCount(tokens.getTokens());
 		
 		////Buttons////
 		game1Button.addActionListener(new ActionListener()
@@ -129,6 +135,7 @@ public class GameHubScreen extends Screen
 		this.add(game3Label);
 		this.add(game4Label);
 		this.add(LeaderBoardButton);
+		this.add(tokenPanel);
 		this.add(navBar);
 		
 		this.setLayout(null);		
@@ -143,6 +150,7 @@ public class GameHubScreen extends Screen
 		{
 			//navBar
 			navBar.redrawUpdate();
+			tokenPanel.redrawUpdate();
 			
 			//Game 1
 			game1Button.setBounds(resize.locationX(50), resize.locationY(125), resize.width(175), resize.height(100));

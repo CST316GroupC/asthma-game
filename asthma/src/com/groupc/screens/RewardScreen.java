@@ -17,6 +17,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -31,6 +32,7 @@ import javax.swing.SwingConstants;
 
 import com.groupc.Runner;
 import com.groupc.math.Resize;
+import com.groupc.math.Tokens;
 
 public class RewardScreen extends Screen
 {
@@ -39,15 +41,18 @@ public class RewardScreen extends Screen
 	boolean played 		= true;
 	Resize  resize     	= new Resize(run);
 	int     butPressed 	= 0;
-	int		tokenCount;
+	int		rewardTokens;
 	Date 	date 		= new Date();
+	Tokens 	tokens 		= new Tokens(run.getUserName());
 
 	
 	//Display Elements
 	NavigationBar 	navBar         	= new NavigationBar(run,false,false,"Rewards");
+	TokenPanel		tokenPanel		= new TokenPanel(run);
 	JPanel        	rewardBox      	= new JPanel();
 	JButton       	continueButton 	= new JButton("Continue");
-	JLabel			rewardText 		= new JLabel("5 x Tokens",SwingConstants.CENTER);
+	JLabel			rewardText 		= new JLabel("0 Tokens",SwingConstants.CENTER);
+	JLabel			infoText 		= new JLabel("Do your recordings daily for increased Rewards",SwingConstants.CENTER);
 	JLabel 			token1			= new JLabel();
 	JLabel 			token2			= new JLabel();
 	JLabel 			token3			= new JLabel();
@@ -60,8 +65,9 @@ public class RewardScreen extends Screen
 	public RewardScreen(Runner run) 
 	{
 		super(run);
+		
 		//Basic Frame Settings
-		run.setTitle("Rewards");
+		run.setTitle(run.getUserName()+" | Rewards");
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -79,15 +85,22 @@ public class RewardScreen extends Screen
 		this.setBackground(Color.WHITE);
 		rewardBox.setBackground(Color.LIGHT_GRAY);
 		
+		//getTokens
+		rewardTokens = tokens.getRewardTokens();
+		tokens.addTokens(rewardTokens);
+		tokens.save();
+		tokenPanel.RefreshCount(tokens.getTokens());
+		
+		System.out.println("Tokens: "+tokens.getTokens());
+		
 		//set reward Text
-		tokenCount = getTokens();
-		if(tokenCount == 1)
+		if(rewardTokens == 1)
 		{
-			rewardText.setText(tokenCount+" Token");
+			rewardText.setText("+"+rewardTokens+" Token");
 		}
 		else
 		{
-			rewardText.setText(tokenCount+" Tokens");
+			rewardText.setText("+"+rewardTokens+" Tokens");
 		}
 
 		////Buttons////
@@ -106,7 +119,7 @@ public class RewardScreen extends Screen
 		token2.setVisible(false);
 		token1.setVisible(false);
 		
-		switch(tokenCount)
+		switch(rewardTokens)
 		{
 			case 5:
 				token5.setVisible(true);
@@ -125,8 +138,10 @@ public class RewardScreen extends Screen
 		this.add(token3);
 		this.add(token2);
 		this.add(token1);
+		this.add(infoText);
 		this.add(rewardText);
 		this.add(continueButton);
+		this.add(tokenPanel);
 		this.add(rewardBox);
 		this.add(navBar);
 		
@@ -141,7 +156,6 @@ public class RewardScreen extends Screen
 	{
 		if(butPressed == 1)
 		{
-			//run.setScreen(new Game1Screen(run));
 			run.setScreen(new GameHubScreen(run));
 		}
 		butPressed = 0;
@@ -150,6 +164,7 @@ public class RewardScreen extends Screen
 		{	
 			//navBar
 			navBar.redrawUpdate();
+			tokenPanel.redrawUpdate();
 			
 			//rewardBox
 			rewardBox.setBounds(resize.locationX(100), resize.locationY(100), resize.width(300), resize.height(300));
@@ -174,6 +189,10 @@ public class RewardScreen extends Screen
 			//token5
 			token5.setBounds(resize.locationX(250), resize.locationY(225), resize.width(100), resize.height(100));
 			token5.setIcon(new ImageIcon(tokenImage.getImage().getScaledInstance(resize.width(100), resize.height(100), java.awt.Image.SCALE_SMOOTH)));
+			
+			//infoText
+			infoText.setBounds(resize.locationX(100), resize.locationY(375), resize.width(300), resize.height(20));
+			infoText.setFont(new Font(infoText.getFont().getFontName(),infoText.getFont().getStyle(), resize.font(12)));
 			
 			//continueButton
 			continueButton.setBounds(resize.locationX(200), resize.locationY(420), resize.width(100), resize.height(30));
@@ -210,75 +229,7 @@ public class RewardScreen extends Screen
 	@Override
 	public void dispose() 
 	{
+		
 		// TODO Auto-generated method stub
-	}
-	
-	private int getTokens()
-	{
-		int count = 0;
-		int daysAgo;
-		String line = null;
-		String tempString = date.toString();
-		String currentDay = null;
-		
-		Vector<String> userNames = new Vector<String>();
-		Vector<String> days = new Vector<String>();
-		StringTokenizer stringT;
-		
-		try
-		{
-			FileReader fileReader = new FileReader("spirometer_readings.txt");
-			BufferedReader bufferReader = new BufferedReader(fileReader);
-			
-			
-			while((line = bufferReader.readLine()) != null)
-			{
-				stringT = new StringTokenizer(line, " | ");
-				userNames.add(stringT.nextToken()); //user
-				stringT.nextToken(); //volume
-				stringT.nextToken(); //force
-				stringT.nextToken(); //day of week
-				stringT.nextToken(); //month
-				days.add(stringT.nextToken()); //day 
-				stringT.nextToken(); //time
-				stringT.nextToken(); //timezone
-				stringT.nextToken(); //year
-			}
-			bufferReader.close();
-		} 
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		stringT = new StringTokenizer(tempString);
-		while(stringT.hasMoreElements())
-		{
-			stringT.nextToken(); // day of week
-			stringT.nextToken(); // month
-			currentDay = stringT.nextToken(); // day
-			stringT.nextToken(); // time
-			stringT.nextToken(); // timezone
-			stringT.nextToken(); // year
-		}
-		for(int i = 0; i < userNames.size(); i++)
-		{
-			System.out.println(userNames.size());
-			if(userNames.elementAt(i).equals("user"))
-			{
-				/////////get days TODO
-				daysAgo = 5; //days.elementAt(i).equals(currentDay);
-				if(daysAgo == 4 || daysAgo == 3 || daysAgo == 2 || daysAgo == 1 || daysAgo == 0)//4 days ago
-				{
-					count += 1;
-				}
-				else
-				{
-					count = 0;
-				}
-			}
-		}
-		//return true;
-		return count;
 	}
 }

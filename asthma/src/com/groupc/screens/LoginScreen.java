@@ -86,11 +86,11 @@ public class LoginScreen extends Screen
 	{
 		super(run);
 		
+		//unload user
+		run.setUserName("null");
+		
 		//Basic Frame Settings
 		run.setTitle("Login");
-		//run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//run.setMinimumSize(new Dimension(run.SCR_WIDTH, run.SCR_HEIGHT));
-		//run.setLocationRelativeTo(null);
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -362,10 +362,12 @@ public class LoginScreen extends Screen
 	{
 		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText()))
 		{
+			run.setUserName(userNameTF.getText());
 			run.setScreen(new DoctorScreen(run));
 		}
 		else if(Database.getPatient(userNameTF.getText(), passwordTF.getText()))
 		{
+			run.setUserName(userNameTF.getText());
 			run.setScreen(new TutorialScreen(run));
 		}
 
@@ -415,6 +417,7 @@ public class LoginScreen extends Screen
 				//Doctors
 				if(types.elementAt(i).equals("0"))
 				{
+					run.setUserName(userNameTF.getText());
 					DoctorScreen ds = new DoctorScreen(run);
 					ds.setDoctor(userNameTF.getText());
 					ds.getPatients();
@@ -425,11 +428,13 @@ public class LoginScreen extends Screen
 				{
 					if(hasNotTakenReadings(userNameTF.getText()))
 					{
+						run.setUserName(userNameTF.getText());
 						TutorialScreen ts = new TutorialScreen(run);
 						ts.setPatient(emails.elementAt(i));
 						run.setScreen(ts);
 					} else 
 					{
+						run.setUserName(userNameTF.getText());
 						run.setScreen(new GameHubScreen(run));
 					}
 				}

@@ -85,7 +85,7 @@ public class ParentControlsScreen extends Screen
 		super(run);
 		
 		//Basic Frame Settings
-		run.setTitle("Parental Controls");
+		run.setTitle(run.getUserName()+" | Parental Controls");
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()

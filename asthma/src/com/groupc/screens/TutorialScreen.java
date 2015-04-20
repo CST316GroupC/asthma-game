@@ -76,6 +76,9 @@ public class TutorialScreen extends Screen
 	{
 		super(run);
 		
+		//Basic Frame Settings
+		run.setTitle(run.getUserName()+" | Tutorial");
+		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
 		{
@@ -199,12 +202,12 @@ public class TutorialScreen extends Screen
 		if(pUserName != null)
 		{
 			patientUserName = pUserName;
-			run.setTitle(patientUserName + " Tutorial");
+			//run.setTitle(patientUserName + " Tutorial");
 			stepImage.setIcon(image1);
 		} 
 		else
 		{
-			run.setTitle("Tutorial");
+			//run.setTitle("Tutorial");
 		}
 	}
 

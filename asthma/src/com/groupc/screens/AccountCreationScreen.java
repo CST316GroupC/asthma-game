@@ -78,7 +78,7 @@ public class AccountCreationScreen extends Screen
 		super(run);
 		
 		//Basic Frame Settings
-		//run.setTitle("Account Creation");
+		run.setTitle(run.getUserName()+" | Account Creation");
 		
 		
 		//resize stuff
@@ -142,11 +142,11 @@ public class AccountCreationScreen extends Screen
 		if(patientDoctor != null)
 		{
 			newPatientDoctor = patientDoctor;
-			run.setTitle("Account Creation " + newPatientDoctor);
+			//run.setTitle("Account Creation " + newPatientDoctor);
 		}
 		else
 		{
-			run.setTitle("Account Creation");
+			//run.setTitle("Account Creation");
 			System.out.println("null doctor for new patient");
 		}
 	}

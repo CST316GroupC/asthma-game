@@ -18,6 +18,9 @@ public class AccountScreen extends Screen
 	{
 		super(run);
 		
+		//Basic Frame Settings
+		run.setTitle(run.getUserName()+" | Account");
+		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
 		{

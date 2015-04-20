@@ -65,7 +65,8 @@ public class RecordingScreen extends Screen
 	public RecordingScreen(Runner run)
 	{
 		super(run);
-		//Basic Frame Settings moved to setpatient
+		//Basic Frame Settings
+		run.setTitle(run.getUserName()+" | Spirometer Input");
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -118,12 +119,12 @@ public class RecordingScreen extends Screen
 		if(pUserName != null)
 		{
 			patientUserName = pUserName;
-			run.setTitle(patientUserName + " Spirometer Input");
+			//run.setTitle(patientUserName + " Spirometer Input");
 			
 		} 
 		else
 		{
-			run.setTitle("Spriometer Input");
+			//run.setTitle("Spriometer Input");
 		}
 	}
 	
@@ -229,6 +230,7 @@ public class RecordingScreen extends Screen
 		{
 			if(submitReadings())
 			{
+				
 				run.setScreen(new RewardScreen(run));
 			}
 		}

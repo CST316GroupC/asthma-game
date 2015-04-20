@@ -28,7 +28,10 @@ public class Runner extends JFrame
 	public final static int SCR_WIDTH = 500;
 	public final static int SCR_HEIGHT = 500;
 	public final static long FPS = (long) (1.0/60.0);
+	private String userName = "null";
 	
+	
+
 	boolean isClosing = false;
 	
 	public Runner()
@@ -76,5 +79,14 @@ public class Runner extends JFrame
 		Display.destroy();
 		AL.destroy();
 	}
+	
+	public String getUserName() 
+	{
+		return userName;
+	}
 
+	public void setUserName(String userName) 
+	{
+		this.userName = userName;
+	}
 }

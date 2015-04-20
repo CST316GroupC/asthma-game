@@ -73,7 +73,7 @@ public class DoctorScreen extends Screen
 		super(run);
 		
 		//Basic Frame Settings
-		//moved screen name to setDoctor() to make doctor-specific page [Derek]
+		run.setTitle(run.getUserName()+" | Doctor Page");
 		
 		
 		//button font color
@@ -121,12 +121,12 @@ public class DoctorScreen extends Screen
 		if(docName != null)
 		{
 			doctor = docName;
-			run.setTitle(doctor + "s' page");
+			//run.setTitle(doctor + "s' page");
 		}else
 		{
 			System.out.println("null doctor name");
 			doctor = "doctor";
-			run.setTitle(doctor);
+			//run.setTitle(doctor);
 		}
 	}
 	
