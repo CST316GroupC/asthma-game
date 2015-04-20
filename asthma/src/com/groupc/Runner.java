@@ -2,6 +2,7 @@ package com.groupc;
 
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import org.lwjgl.openal.AL;
@@ -29,7 +30,7 @@ public class Runner extends JFrame
 	public final static int SCR_HEIGHT = 500;
 	public final static long FPS = (long) (1.0/60.0);
 	private String userName = "null";
-	
+	ImageIcon windowIcon = new ImageIcon("resources/interface/Token.png");
 	
 
 	boolean isClosing = false;
@@ -42,10 +43,10 @@ public class Runner extends JFrame
 		player = new AudioPlayer();
 		player.loadSong("resources/sounds/AMemoryAway.ogg");
 		player.playMusic(true);
-		//screen = new LoginScreen(this);
+		screen = new LoginScreen(this);
 		//screen = new GameHubScreen(this);
-		screen = new RewardScreen(this);
-		
+		//screen = new RewardScreen(this);
+		setIconImage(windowIcon.getImage());
 	}
 	
 	public void run() throws InterruptedException
