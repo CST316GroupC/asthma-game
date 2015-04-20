@@ -1,6 +1,9 @@
 package com.groupc.game4;
 
-public class UnhealthyFood
+public abstract class UnhealthyFood extends Food
 {
-
+	@Override
+	public int clicked(){
+		return -points;
+	}
 }
