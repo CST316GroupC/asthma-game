@@ -60,13 +60,13 @@ public class Game4Assets extends Asset
 		//TODO: update for game4
 		try 
 		{
-			FileInputStream in = new FileInputStream("res/maze.properties");
+			FileInputStream in = new FileInputStream("res/game4.properties");
 			props.load(in);
 			in.close();
 			String temp = props.getProperty("firstTime", "true");
 			if("true".equals(temp))
 			{
-				save("res/maze.properties");
+				save("res/game4.properties");
 			}
 		} 
 		catch (IOException e1)

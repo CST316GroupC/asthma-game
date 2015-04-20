@@ -1,7 +1,15 @@
 package com.groupc.game4;
 
-public abstract class Food
+import com.groupc.game.GameObject;
+
+public abstract class Food extends GameObject
 {
+
+	public Food(float x, float y, float width2, float height2)
+	{
+		super(x, y, width2, height2);
+	}
+
 	protected int points;
 	private float stateTime;
 	protected float maxTime = 3;
@@ -18,5 +26,10 @@ public abstract class Food
 		}
 		stateTime += deltaTime;
 		return false;
+	}
+
+	public void update()
+	{
+		bounds.lowerLeft.set(position.sub(bounds.width / 2, bounds.height / 2));
 	}
 }
