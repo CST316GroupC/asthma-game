@@ -86,6 +86,7 @@ public class Game2Screen extends Screen
 			Display.create();
 			TextDrawer.prepare();
 			assets = new Game2Assets();
+			assets.load();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,7 +1,5 @@
 package com.groupc.game2;
 
-import java.util.ArrayList;
-
 import com.groupc.game.GameObject;
 import com.groupc.game.MovingGameObject;
 import com.groupc.math.Vector;
@@ -19,13 +17,10 @@ public class Player extends MovingGameObject
 	private int state;
 	private int lastDirection; //0 = left 1 = up 2 = right 3 = down
 
-	private float stateTime;
-
 	public Player(float x, float y) 
 	{
 		super(x, y, WIDTH, HEIGHT);
 		state = STATE_STILL;
-		stateTime = 0;
 		lastDirection = 0;
 	}
 	

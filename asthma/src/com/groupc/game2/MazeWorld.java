@@ -28,7 +28,7 @@ public class MazeWorld extends GameScreen
 	public static final int WORLD_STATE_PLAYING = 1;
 	public static final int WORLD_STATE_OVER = 2;
 	
-	private Camera cam;
+	private final Camera cam;
 	public final Player player;
 	public final ArrayList<Wall> walls;
 	public final ArrayList<Pit> pits;
@@ -60,7 +60,7 @@ public class MazeWorld extends GameScreen
 		spikes = new ArrayList<Spike>();
 		playerDig = new PlayerDig(-1,0); //placeHolder
 		generateLevel(level);
-		score = Integer.parseInt(assets.getProps().getProperty("score"));;
+		score = Integer.parseInt(assets.getProps().getProperty("score"));
 	}
 	
 	public void generateLevel(int level)
@@ -139,9 +139,7 @@ public class MazeWorld extends GameScreen
 		}
 		catch(NullPointerException e)
 		{
-			System.out.println("End of game");
-			this.level = 1;
-			generateLevel(this.level);
+			e.printStackTrace();
 		}
 		finally
 		{			
@@ -338,10 +336,10 @@ public class MazeWorld extends GameScreen
 			}
 			else //released
 			{
-				if((Keyboard.getEventKey() == Keyboard.KEY_W || Keyboard.getEventKey() == Keyboard.KEY_UP) 
-						|| (Keyboard.getEventKey() == Keyboard.KEY_S || Keyboard.getEventKey() == Keyboard.KEY_DOWN) 
-						|| (Keyboard.getEventKey() == Keyboard.KEY_A || Keyboard.getEventKey() == Keyboard.KEY_LEFT) 
-						|| (Keyboard.getEventKey() == Keyboard.KEY_D || Keyboard.getEventKey() == Keyboard.KEY_RIGHT))
+				if(Keyboard.getEventKey() == Keyboard.KEY_W || Keyboard.getEventKey() == Keyboard.KEY_UP
+						|| Keyboard.getEventKey() == Keyboard.KEY_S || Keyboard.getEventKey() == Keyboard.KEY_DOWN
+						|| Keyboard.getEventKey() == Keyboard.KEY_A || Keyboard.getEventKey() == Keyboard.KEY_LEFT 
+						|| Keyboard.getEventKey() == Keyboard.KEY_D || Keyboard.getEventKey() == Keyboard.KEY_RIGHT)
 				{
 					buttonPresses--;
 					if(buttonPresses <= 0)
@@ -532,15 +530,15 @@ public class MazeWorld extends GameScreen
 	}
 
 	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
+	public void dispose() 
+	{
+		isClosing = true;
 	}
 
 	@Override
-	public GameScreen getNext() {
-		// TODO Auto-generated method stub
-		return null;
+	public GameScreen getNext() 
+	{
+		return new MainMenu(assets);
 	}
 
 }

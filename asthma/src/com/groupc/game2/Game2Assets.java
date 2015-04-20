@@ -22,7 +22,6 @@ public class Game2Assets extends Asset
 	public Game2Assets()
 	{
 		super();
-		load();
 	}
 	
 	public void load()
@@ -57,18 +56,17 @@ public class Game2Assets extends Asset
 		} catch (IOException e) {
 			//TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 		TextDrawer.prepare();
 	}
 	
 	public void reload()
 	{
+		FileInputStream in = null;
 		try 
 		{
-			FileInputStream in = new FileInputStream(FILENAME);
+			in = new FileInputStream(FILENAME);
 			props.load(in);
-			in.close();
 			String temp = props.getProperty("firstTime", "true");
 			if("true".equals(temp))
 			{
@@ -83,5 +81,15 @@ public class Game2Assets extends Asset
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} 
+		finally
+		{
+			try {
+				in.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 }

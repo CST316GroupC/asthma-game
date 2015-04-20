@@ -19,7 +19,7 @@ public class MainMenu extends GameScreen
 	private final Rectangle upgrade;
 	private final Rectangle instruct;
 	private final Vector mouseClick;
-	private int next;
+	//private int next;
 	
 	public MainMenu(Asset assets)
 	{
@@ -44,23 +44,22 @@ public class MainMenu extends GameScreen
 			if(CollisionChecker.PointToRect(mouseClick, play))
 			{
 				this.dispose();
-				next = 1;
+			//	next = 1;
 			}
 			if(CollisionChecker.PointToRect(mouseClick, options))
 			{
 				this.dispose();
-				next = 2;
-				
+			//	next = 2;
 			}
 			if(CollisionChecker.PointToRect(mouseClick, upgrade))
 			{
 				this.dispose();
-				next = 3;
+			//	next = 3;
 			}
 			if(CollisionChecker.PointToRect(mouseClick, instruct))
 			{
 				this.dispose();
-				next = 4;
+			//	next = 4;
 			}
 		}
 		
@@ -98,23 +97,7 @@ public class MainMenu extends GameScreen
 	@Override
 	public GameScreen getNext() 
 	{
-		if(next == 1)
-		{
-			return new MazeWorld(assets);
-		}
-		if(next == 2)
-		{
-			//return new Options(this.cam);
-		}
-		if(next == 3)
-		{
-			//return new UpgradeScreen();
-		}
-		if(next == 4)
-		{
-			//return new Instructions();
-		}
-		return new MainMenu(assets); //temp
+		return new MazeWorld(assets);
 	}
 }
 
