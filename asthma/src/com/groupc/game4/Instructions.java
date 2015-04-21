@@ -43,11 +43,11 @@ public class Instructions extends GameScreen
 	public void present(float deltaTime)
 	{
 		cam.setCamera();
-		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
+		assets.getImage("wall").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		assets.getImage("back").draw(back);
 		TextDrawer.drawString("Instructions", 20, 70, 10, 10);
-		TextDrawer.drawString("Line 1", 20, 55, 10, 10);
-		TextDrawer.drawString("Line 2", 20, 40, 10, 10);
+		TextDrawer.drawString("Clicking on healthy food earns you points", 20, 55, 10, 10);
+		TextDrawer.drawString("Clicking on unhealthy food causes you to lose both points and time", 20, 40, 10, 10);
 	}
 
 	@Override

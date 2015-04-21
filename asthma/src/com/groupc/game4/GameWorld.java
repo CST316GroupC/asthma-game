@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
@@ -16,8 +17,11 @@ import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
+import com.groupc.game4.*;
 import com.groupc.math.CollisionChecker;
 import com.groupc.math.Rectangle;
+import com.groupc.math.Vector;
+
 
 public class GameWorld extends GameScreen
 {
@@ -30,43 +34,133 @@ public class GameWorld extends GameScreen
 	public static final int WORLD_STATE_PLAYING = 1;
 	public static final int WORLD_STATE_OVER = 2;
 	
-	public static final float TEXT_SIZE = .3f;
-	public static final int MAX_SCORE_DIGITS = 8; //99999999 max score
-	public static final int MAX_SEED_DIGITS = 4; //9999 max seeds
-	public static final int MAX_DISTANCE = 4; //9999 max distance
+    public static final float TEXT_SIZE = .3f;
+    public static final int MAX_SCORE_DIGITS = 8; //99999999 max score
+    public static final int MAX_SEED_DIGITS = 4; //9999 max seeds
+    public static final int MAX_DISTANCE = 4; //9999 max distance
+    public static final int MAX_TIME = 60;
+
 	
 	public static final int GRAVITY = -10;
 	
-	public int state;
-	private int seedsCollected;
-	private int score;
-	private float distance;
-	
-	private Camera cam;
-	private Random rand;
+    public int state;
+    public float timeLeft;
+    public final Food[] food;
+    private int score;
+    private float distance;
+    
+    private Camera cam;
+    private Random rand;
+
 	
 	public GameWorld(Asset assets)
 	{        
-		super(assets);
-		assets.reload();
-		rand = new Random();
-		this.state = WORLD_STATE_PLAYING;
-		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+        super(assets);
+        assets.reload();
+        timeLeft = MAX_TIME;
+        rand = new Random();
+        this.state = WORLD_STATE_PLAYING;
+        cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+        
+        food = new Food[5];
+
 	}
 	
 	public void update(float deltaTime)
 	{
-		inputHandling();
-		switch(state)
-		{
-			case WORLD_STATE_PLAYING:
-				break;
-			case WORLD_STATE_OVER:
-			case WORLD_STATE_PAUSED:
-				break;
-		}
+        inputHandling();
+        switch(state)
+        {
+            case WORLD_STATE_PLAYING:
+                updateFood();
+    			for(int i = 0; i < food.length; i++)
+    			{
+    				if(food[i] != null)
+    				{
+    					if(food[i].timedOut(deltaTime))
+    						{
+    						//if good food times out, subtractPoints, if bad food, add points.
+    							score -= food[i].clicked();
+    							food[i] = null;
+    						};
+    				}
+    			}
+    			timeLeft -= deltaTime;
+                collision();
+                if(timeLeft <= 0)
+                {
+                    state = WORLD_STATE_OVER;
+                    //TODO: Implement scoring based on total time played
+                    //score += distance/10;
+                    save();                
+                }
+                break;
+            case WORLD_STATE_OVER:
+            case WORLD_STATE_PAUSED:
+        }
+
 	}
 	
+    private void collision()
+	{
+    	collisionFood();
+		// TODO Auto-generated method stub
+		
+	}
+	public void collisionFood()
+	{
+		Vector mouseClick = new Vector();
+		if(Mouse.isButtonDown(0))
+		{
+			mouseClick.set(Mouse.getX(), Mouse.getY());
+			cam.click(mouseClick);
+			for(int i = 0; i < food.length; i++)
+			{
+				if(food[i] != null)
+				{
+					if(CollisionChecker.PointToRect(mouseClick, food[i].bounds))
+					{
+						//clicked returns postive time for healty food, negative for unhealthy food
+						score += food[i].clicked();
+						if(score <= 0)
+						{
+							score = 0;
+						}
+						if(food[i].clicked() <=0)
+							timeLeft += food[i].clicked();
+						food[i] = null;
+					}
+				}
+			}
+		}
+	}
+
+	public void updateFood()
+    {
+        for(int i = 0; i < food.length; i++)
+        {
+            if(food[i] != null)
+            {
+                food[i].update();
+            }
+            else
+            {
+                int chance = rand.nextInt(4);
+                switch(chance){
+                case 0: food[i] = new Orange(0.5f + (rand.nextFloat() * (FRUSTUM_WIDTH - 1)), 0.5f + (rand.nextFloat() * (FRUSTUM_HEIGHT - 1)));
+                    break;
+                case 1: food[i] = new Broccoli(0.5f + (rand.nextFloat() * (FRUSTUM_WIDTH - 1)), 0.5f + (rand.nextFloat() * (FRUSTUM_HEIGHT - 1)));
+                    break;
+                case 2: food[i] = new Cake(0.5f + (rand.nextFloat() * (FRUSTUM_WIDTH - 1)), 0.5f + (rand.nextFloat() * (FRUSTUM_HEIGHT - 1)));
+                    break;
+                case 3: food[i] = new Cookie(0.5f + (rand.nextFloat() * (FRUSTUM_WIDTH - 1)), 0.5f + (rand.nextFloat() * (FRUSTUM_HEIGHT - 1)));
+                    break;
+                
+                }
+            }
+        }        
+    }
+
 	/**
 	 * Prepares the property file to store all the relevent player data at moment of method called.
 	 */
@@ -113,28 +207,58 @@ public class GameWorld extends GameScreen
 		cam.setCamera();
 		
 		//assets.getTexture("sheet").bind();
-		assets.getImage("sky").draw(new Rectangle(0, 3, WORLD_WIDTH, WORLD_HEIGHT));
-		assets.getImage("grass").draw(new Rectangle(0, 0, WORLD_WIDTH, 3));
+		assets.getImage("wall").draw(new Rectangle(0, 0, 10, 10));
 		renderHud();
+		renderFood();
 	}
 	
+	 private void renderFood()
+	    {
+	        for(int i =0; i < food.length; i++)
+	        {
+	            if(food[i] != null)
+	            {
+	                Rectangle rect = new Rectangle(food[i].position.x - .2f, food[i].position.y - .4f, 1f, 1f);
+	                if(food[i] instanceof Orange){
+	                    assets.getImage("orange").draw(rect);
+	                }
+	                else if(food[i] instanceof Broccoli){
+	                    assets.getImage("broccoli").draw(rect);
+	                }
+	                else if(food[i] instanceof Cake){
+	                    assets.getImage("cake").draw(rect);
+	                }
+	                else if(food[i] instanceof Cookie){
+	                    assets.getImage("cookie").draw(rect);
+	                }
+	                
+	            }
+	        }
+	        
+	    }
+
 	public void renderHud()
 	{
 		//hud
 		
 		TextDrawer.drawStringinRect("score", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE));
-		TextDrawer.drawStringinRect(score +"", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, MAX_SCORE_DIGITS * TEXT_SIZE, TEXT_SIZE));
-		TextDrawer.drawString("seeds", cam.position.x, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE);
-		TextDrawer.drawInt(seedsCollected, cam.position.x +1f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE, MAX_SEED_DIGITS);
-		
+        if(score <= 0){
+        	score = 0;
+        }
+		TextDrawer.drawStringinRect(score +"", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE));
+		TextDrawer.drawStringinRect("time", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - 2 * TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE));
+        if(timeLeft <= 0){
+        	timeLeft = 0;
+        }
+        int time = (int) timeLeft;
+		TextDrawer.drawStringinRect(time +"  seconds", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - 2 * TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE));
 	}
 	
 	public void renderOver()
 	{
-		TextDrawer.drawString("Distance", cam.position.x - 3, cam.position.y, TEXT_SIZE * 1.5f, TEXT_SIZE * 1.5f);
-		TextDrawer.drawInt((int) distance, cam.position.x - 1, cam.position.y - 1f, TEXT_SIZE * 2, TEXT_SIZE * 2, MAX_DISTANCE);
-		TextDrawer.drawString("Press q to quit", cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - 1, TEXT_SIZE * 2, TEXT_SIZE * 2);
-		
+		TextDrawer.drawString("Game Over", cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - 4 * TEXT_SIZE, TEXT_SIZE * 2, TEXT_SIZE * 2);
+        TextDrawer.drawString("Press q to quit", cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - 6 * TEXT_SIZE, TEXT_SIZE * 2, TEXT_SIZE * 2);
+
 	}
 	
 	public void renderPaused()
