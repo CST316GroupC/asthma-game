@@ -85,7 +85,7 @@ public class Game2Screen extends Screen
 			Display.setParent(canvas);
 			Display.create();
 			TextDrawer.prepare();
-			assets = new Game2Assets();
+			assets = new Game2Assets(run);
 			assets.load();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block

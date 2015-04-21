@@ -50,7 +50,7 @@ public class MazeWorld extends GameScreen
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 		player = new Player(0, 0); //place holders
 		buttonPresses = 0;
-		setLevel(Integer.parseInt(assets.getProps().getProperty("level")));
+		setLevel(Integer.parseInt(assets.getProps().getProperty("mazeLevel")));
 		walls = new ArrayList<Wall>();
 		pits = new ArrayList<Pit>();
 		goal = new Goal(0, 0); //place holder
@@ -60,7 +60,7 @@ public class MazeWorld extends GameScreen
 		spikes = new ArrayList<Spike>();
 		playerDig = new PlayerDig(-1,0); //placeHolder
 		generateLevel(getLevel());
-		score = Integer.parseInt(assets.getProps().getProperty("score"));
+		score = Integer.parseInt(assets.getProps().getProperty("mazeScore"));
 	}
 	
 	public void generateLevel(int level)
@@ -270,6 +270,13 @@ public class MazeWorld extends GameScreen
 					enemies.get(i).collision(spikes.get(l));
 				}
 			}
+			for(int m=0; m < dirts.size(); m++)
+			{
+				if(CollisionChecker.RectToRect(enemies.get(i).bounds, dirts.get(m).bounds) && dirts.get(m).isActive())
+				{
+					enemies.get(i).collision(dirts.get(m));
+				}
+			}
 		}
 	}
 	
@@ -348,13 +355,27 @@ public class MazeWorld extends GameScreen
 						player.setDirection(new Vector(0, 0));
 					}
 				}
-				if(Keyboard.getEventKey() == Keyboard.KEY_SPACE)
+				if(state == WORLD_STATE_PLAYING)
 				{
-					player.align();
+					if(Keyboard.getEventKey() == Keyboard.KEY_SPACE)
+					{
+						player.align();
+					}
+					if(Keyboard.getEventKey() == Keyboard.KEY_V && player.getState() == Player.STATE_STILL)
+					{
+						playerDig = player.dig();
+					}
 				}
-				if(Keyboard.getEventKey() == Keyboard.KEY_V && player.getState() == Player.STATE_STILL)
+				if(Keyboard.getEventKey() == Keyboard.KEY_P)
 				{
-					playerDig = player.dig();
+					if(state == WORLD_STATE_PLAYING)
+					{
+						pause();
+					}
+					else if(state == WORLD_STATE_PAUSED)
+					{
+						resume();
+					}
 				}
 			}
 		}
@@ -371,9 +392,9 @@ public class MazeWorld extends GameScreen
 		spikes.clear();
 		dirts.clear();
 		generateLevel(getLevel());
-		assets.setProps("level", getLevel()+"");
-		assets.setProps("score", score+"");
-		assets.save(Game2Assets.FILENAME);
+		assets.setProps("mazeLevel", getLevel()+"");
+		assets.setProps("mazeScore", score+"");
+		assets.save(assets.getFilename());
 	}
 
 	@Override
@@ -390,6 +411,17 @@ public class MazeWorld extends GameScreen
 		renderGem();
 		renderDirt();
 		renderPlayer();
+		
+		if(state == WORLD_STATE_PAUSED)
+		{
+			renderPaused();
+		}
+	}
+	
+	public void renderPaused()
+	{
+		TextDrawer.drawStringinRect("Game Paused", new Rectangle(2, 12, 10,2));
+		TextDrawer.drawStringinRect("Press P to continue", new Rectangle(2, 9, 10,2));
 	}
 	
 	public void renderDirt()
@@ -518,15 +550,16 @@ public class MazeWorld extends GameScreen
 	}
 
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
+	public void pause() 
+	{
+		state = WORLD_STATE_PAUSED;
+		assets.save(assets.getFilename());
 	}
 
 	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
+	public void resume() 
+	{
+		state = WORLD_STATE_PLAYING;
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 
+import com.groupc.Runner;
 import com.groupc.TextDrawer;
 import com.groupc.game2.Game2Assets;
 import com.groupc.game2.MazeWorld;
@@ -15,11 +16,14 @@ import com.groupc.math.Vector;
 public class Game2Test 
 {
 	Game2Assets assets;
-	MazeWorld world;	
+	MazeWorld world;
+	Runner run;
 	
 	@Before
 	public void setUp()
 	{
+		run = new Runner();
+		run.setUserName("test");
 		try {
 			Display.create();
 			TextDrawer.prepare();
@@ -27,7 +31,7 @@ public class Game2Test
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assets = new Game2Assets();
+		assets = new Game2Assets(run);
 		assets.load();
 		world = new MazeWorld(assets);
 		world.setLevel(0);
@@ -93,5 +97,6 @@ public class Game2Test
 	public void cleanUp()
 	{
 		Display.destroy();
+		run.dispose();
 	}
 }

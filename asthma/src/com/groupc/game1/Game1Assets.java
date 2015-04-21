@@ -91,4 +91,10 @@ public class Game1Assets extends Asset
 			e1.printStackTrace();
 		} 
 	}
+
+	@Override
+	public String getFilename() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

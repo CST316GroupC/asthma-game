@@ -54,7 +54,7 @@ public class Game4Assets extends Asset
 			FileInputStream in = new FileInputStream("res/maze.properties");
 			props.load(in);
 			in.close();
-			String temp = props.getProperty("firstTime", "true");
+			String temp = props.getProperty("mazefirstTime", "true");
 			if("true".equals(temp))
 			{
 				save("res/maze.properties");
@@ -65,5 +65,11 @@ public class Game4Assets extends Asset
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} 
+	}
+
+	@Override
+	public String getFilename() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -12,16 +12,18 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
+import com.groupc.Runner;
 import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
 import com.groupc.game.TextureRegion;
 
 public class Game2Assets extends Asset
 {	
-	public final static String FILENAME = "resources/game2/maze.properties";
-	public Game2Assets()
+	private String filename;
+	public Game2Assets(Runner run)
 	{
 		super();
+		setFilename("resources/interface/parent_controls/"+run.getUserName() + ".properties");
 	}
 	
 	public void load()
@@ -65,15 +67,16 @@ public class Game2Assets extends Asset
 		FileInputStream in = null;
 		try 
 		{
-			in = new FileInputStream(FILENAME);
+			in = new FileInputStream(filename);
 			props.load(in);
-			String temp = props.getProperty("firstTime", "true");
+			String temp = props.getProperty("mazefirstTime", "true");
 			if("true".equals(temp))
 			{
-				props.setProperty("firstTime", "false");
-				props.setProperty("level", "1");
-				props.setProperty("score", "0");
-				save(FILENAME);
+				props.setProperty("mazefirstTime", "false");
+				props.setProperty("mazeLevel", "1");
+				props.setProperty("mazeScore", "0");
+				props.setProperty("mazeLives", "3");
+				save(filename);
 			}
 		} 
 		catch (IOException e1)
@@ -91,5 +94,13 @@ public class Game2Assets extends Asset
 			}
 		}
 		
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 }
