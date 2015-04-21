@@ -46,7 +46,7 @@ public class Instructions extends GameScreen
 		assets.getImage("wall").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		assets.getImage("back").draw(back);
 		TextDrawer.drawString("Instructions", 20, 85, 10, 10);
-		TextDrawer.drawString("Use Left (A) and Right (D) keys to move", 14, 76, 5, 5);
+		TextDrawer.drawString("Use Left or A and Right or D keys to move", 14, 76, 5, 5);
 		TextDrawer.drawString("Dodge the water droplets to survive", 14, 70, 5, 5);
 		TextDrawer.drawString("Heart shape increases health by 1", 14, 59, 5, 5);
 		TextDrawer.drawString("Treasure chest decreased water droplets speed", 14, 52, 5, 5);
