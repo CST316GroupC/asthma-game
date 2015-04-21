@@ -25,59 +25,62 @@ import com.groupc.math.Rectangle;
 
 public class GameWorld extends GameScreen
 {
-	public static final float FRUSTUM_WIDTH = 10;
-	public static final float FRUSTUM_HEIGHT = 10;
-	public static final float WORLD_WIDTH = 500;
-	public static final float WORLD_HEIGHT = 500;
+	public static final float 	FRUSTUM_WIDTH 		= 10;
+	public static final float 	FRUSTUM_HEIGHT 		= 10;
 	
-	public static final int WORLD_STATE_PAUSED = 0;
-	public static final int WORLD_STATE_PLAYING = 1;
-	public static final int WORLD_STATE_OVER = 2;
+	public static final int 	WORLD_STATE_PAUSED 	= 0;
+	public static final int 	WORLD_STATE_PLAYING = 1;
+	public static final int 	WORLD_STATE_OVER 	= 2;
 	
-	public static final float TEXT_SIZE = .3f;
-	public static final int MAX_SCORE_DIGITS = 8; //99999999 max score
-	public static final int MAX_DISTANCE = 4; //9999 max distance
+	public static final float 	TEXT_SIZE 			= .3f;
+
+	public int 		state;
 	
-	public static final int GRAVITY = -10;
+	private int 	score;
+	private int 	hitCounter;
 	
-	public int state;
-	private int score;
-	private int hitCounter;
+	public float 	time;
 	
-	private Camera cam;
-	public final PaperMan paper;
-	public final Rain rainHit;
-	public final Rain[] rain;
-	public final HealthGlobe[] healthGlobe;
-	public final Treasure[] treasure;
-	private Random rand;
+	private Camera 				cam;
+	private Random 				rand;
+	
+	public final PaperMan 		paper;
+	public final Rain 			rainHit;
+	public final Rain[] 		rain;
+	public final HealthGlobe[] 	healthGlobe;
+	public final Treasure[] 	treasure;
 	
 	//TODO: change assets for paperMan and change rain positiong (from array to random objects?)
 	public GameWorld(Asset assets)
 	{        
 		super(assets);
 		assets.reload();
-		rand = new Random();
 		
-		hitCounter = 0;
+		hitCounter = 	0;
+		time = 			0;
 		
-		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+		rand = 			new Random();
 		
-		this.paper = new PaperMan(0.75f, .75f, Integer.parseInt(assets.getProps().getProperty("paperHealth")));
+		cam = 			new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+		
+		this.paper = 	new PaperMan(0.75f, .75f, Integer.parseInt(assets.getProps().getProperty("paperHealth")));
 
-		this.rainHit = new Rain(0, 0);
+		this.rainHit = 	new Rain(0, 0);
 		
-		this.state = WORLD_STATE_PLAYING;
+		this.state = 	WORLD_STATE_PLAYING;
 		
-		this.rain = new Rain[6];
+		// Rain droplets initializations
+		this.rain = 	new Rain[6];
 		rain[0] = new Rain(cam.position.x, cam.position.y);
 		rain[1] = new Rain(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y);
 		rain[2] = new Rain(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y + 2);
 		rain[3] = new Rain(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y - 3);
 		
+		// Health globe initialization
 		this.healthGlobe = new HealthGlobe[1];
 		healthGlobe[0] = new HealthGlobe(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y);
 		
+		// Treasure initialization
 		this.treasure = new Treasure[1];
 		treasure[0] = new Treasure(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y);
 	}
@@ -181,6 +184,7 @@ public class GameWorld extends GameScreen
 					//score += distance/10;
 					save();				
 				}
+				time += deltaTime;
 				break;
 				
 			case WORLD_STATE_OVER:
@@ -332,6 +336,8 @@ public class GameWorld extends GameScreen
 		if(paper != null)
 		{
 			TextDrawer.drawString("Health", cam.position.x - FRUSTUM_WIDTH/2 + 0.1f, cam.position.y + FRUSTUM_HEIGHT/2 - 0.70f, 0.2f, 0.6f);
+			score = (int) time;
+			TextDrawer.drawString("Seconds survived  " + score , cam.position.x - FRUSTUM_WIDTH/2 + 6.7f, cam.position.y + FRUSTUM_HEIGHT/2 - 0.70f, 0.15f, 0.6f);
 			
 			for(float i=0; i<paper.getCurrentHealth(); i++)		
 			{
@@ -344,6 +350,7 @@ public class GameWorld extends GameScreen
 	public void renderOver()
 	{
 		TextDrawer.drawString("Press q to quit", cam.position.x - FRUSTUM_WIDTH/2 + 0.5f, cam.position.y + FRUSTUM_HEIGHT/2 - 2.5f, TEXT_SIZE * 2, TEXT_SIZE * 2);	
+		TextDrawer.drawString("Score " + score, cam.position.x - FRUSTUM_WIDTH/2 + 0.5f, cam.position.y + FRUSTUM_HEIGHT/2 - 4, TEXT_SIZE * 2, TEXT_SIZE * 2);				
 	}
 	
 	public void renderPaused()
