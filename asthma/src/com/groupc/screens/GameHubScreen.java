@@ -14,16 +14,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.util.Properties;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import com.groupc.Runner;
-import com.groupc.TextDrawer;
 import com.groupc.math.Resize;
+import com.groupc.math.Tokens;
 
 public class GameHubScreen extends Screen
 {
@@ -32,10 +34,14 @@ public class GameHubScreen extends Screen
 	private boolean	played		= true;
 	private Resize	resize		= new Resize(run);
 	private int 	butPressed	= 0;
+	private	Tokens 	tokens 		= new Tokens(run.getUserName());
+	private String  userName = run.getUserName();
+	private Properties props 	= new Properties();
 	
 	
 	//Display Elements
 	private NavigationBar	navBar				= new NavigationBar(run,false,true,"Game Hub");	
+	private TokenPanel		tokenPanel			= new TokenPanel(run);
 	
 	private JButton			game1Button 		= new JButton("");
 	private JButton			game2Button 		= new JButton("");
@@ -43,7 +49,7 @@ public class GameHubScreen extends Screen
 	private JButton			game4Button 		= new JButton("");
 	private JButton			LeaderBoardButton	= new JButton("Leader Board");
 	private JButton			accountButton		= new JButton();
-	
+	private JButton			parentControlsButton = new JButton("Parental Controls");
 	private JLabel			game1Label 			= new JLabel("Game 1",SwingConstants.CENTER);
 	private JLabel 			game2Label 			= new JLabel("Game 2",SwingConstants.CENTER);
 	private JLabel 			game3Label 			= new JLabel("Game 3",SwingConstants.CENTER);
@@ -59,7 +65,9 @@ public class GameHubScreen extends Screen
 	{
 		super(run);	
 		//Basic Frame Settings
-		run.setTitle("Game Hub");
+		run.setTitle(run.getUserName()+" | Game Hub");
+		
+		checkProperties();
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -72,6 +80,9 @@ public class GameHubScreen extends Screen
 		
 		//Set colors
 		this.setBackground(Color.WHITE);
+		
+		//get token count
+		tokenPanel.RefreshCount(tokens.getTokens());
 		
 		////Buttons////
 		game1Button.addActionListener(new ActionListener()
@@ -105,6 +116,13 @@ public class GameHubScreen extends Screen
 				butPressed = 4;
 			}
 		});
+		parentControlsButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				butPressed = 6;				
+			}
+		});
 		
 		accountButton.addActionListener(new ActionListener()
 		{
@@ -115,6 +133,7 @@ public class GameHubScreen extends Screen
 		});
 		
 		//deactivate buttons
+		//deactivate buttons in checkProperties();
 		//game2Button.setEnabled(false);
 		//game3Button.setEnabled(false);
 		//game4Button.setEnabled(false);
@@ -124,16 +143,47 @@ public class GameHubScreen extends Screen
 		this.add(game3Button);
 		this.add(game4Button);
 		this.add(accountButton);
+		this.add(parentControlsButton);
 		this.add(game1Label);
 		this.add(game2Label);
 		this.add(game3Label);
 		this.add(game4Label);
 		this.add(LeaderBoardButton);
+		this.add(tokenPanel);
 		this.add(navBar);
 		
 		this.setLayout(null);		
 		run.setContentPane(this);
-		run.setVisible(true);		
+		run.setVisible(true);
+	}
+	
+	private void checkProperties()
+	{
+		try
+		{
+			FileInputStream in = new FileInputStream("resources/interface/parent_controls/" + userName + ".properties");
+			props.load(in);
+			in.close();
+		}catch(Exception e)
+		{
+			System.out.println("Failed gamehub properties load");
+		}
+		if(props.getProperty("Game_1").equals("false"))
+		{
+			game1Button.setEnabled(false);
+		}
+		if(props.getProperty("Game_2").equals("false"))
+		{
+			game2Button.setEnabled(false);
+		}
+		if(props.getProperty("Game_3").equals("false"))
+		{
+			game3Button.setEnabled(false);
+		}
+		if(props.getProperty("Game_4").equals("false"))
+		{
+			game4Button.setEnabled(false);
+		}
 	}
 	
 	@Override
@@ -143,6 +193,7 @@ public class GameHubScreen extends Screen
 		{
 			//navBar
 			navBar.redrawUpdate();
+			tokenPanel.redrawUpdate();
 			
 			//Game 1
 			game1Button.setBounds(resize.locationX(50), resize.locationY(125), resize.width(175), resize.height(100));
@@ -176,6 +227,10 @@ public class GameHubScreen extends Screen
 			LeaderBoardButton.setBounds(resize.locationX(175), resize.locationY(420), resize.width(150), resize.height(30));
 			LeaderBoardButton.setFont(new Font(LeaderBoardButton.getFont().getFontName(),LeaderBoardButton.getFont().getStyle(), resize.font(12)));
 			
+			//parent controls button
+			parentControlsButton.setBounds(resize.locationX(155), resize.locationY(10), resize.width(150), resize.height(30));
+			parentControlsButton.setFont(new Font(parentControlsButton.getFont().getFontName(),parentControlsButton.getFont().getStyle(), resize.font(12)));
+			
 			run.repaint();
 			redraw = false;
 		}
@@ -200,7 +255,12 @@ public class GameHubScreen extends Screen
 		{
 			run.setScreen(new AccountScreen(run));
 		}
-		
+		else if(butPressed == 6)
+		{
+			ParentControlsScreen pcs = new ParentControlsScreen(run);
+			pcs.setUser(userName);
+			run.setScreen(pcs);
+		}
 		butPressed = 0;
 		navBar.update();
 	}
@@ -230,5 +290,11 @@ public class GameHubScreen extends Screen
 	public void dispose() 
 	{
 		// TODO Auto-generated method stub
+	}
+
+	public void setUser(String uName) 
+	{
+		userName = uName;
+		checkProperties();
 	}
 }
