@@ -19,15 +19,14 @@ import com.groupc.math.Rectangle;
 
 public class Game3Assets extends Asset
 {	
-	public final static String FILENAME = "resources/game3/paper.properties";
 	
 	private static Texture sheet;
 	private static Texture background;
 	private static Texture g3texture;
 	
-	public Game3Assets()
+	public Game3Assets(String user)
 	{
-		super("test");
+		super(user);
 		try {
 			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/atlas.png"));
 			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/mainmenu.png"));
@@ -64,7 +63,7 @@ public class Game3Assets extends Asset
 	{
 		try 
 		{
-			FileInputStream in = new FileInputStream(FILENAME);
+			FileInputStream in = new FileInputStream(getFilename());
 			props.load(in);
 			in.close();
 			String temp = props.getProperty("game3FirstTime", "true");
@@ -87,11 +86,5 @@ public class Game3Assets extends Asset
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} 
-	}
-
-	@Override
-	public String getFilename() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

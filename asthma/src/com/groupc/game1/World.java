@@ -47,7 +47,7 @@ public class World extends GameScreen
 		super(assets);
 		assets.reload();
 		rand = new Random();
-		this.joey = new JoeyRooster(1, .75f, Float.parseFloat(assets.getProps().getProperty("speedMult")), Integer.parseInt(assets.getProps().getProperty("statima")));
+		this.joey = new JoeyRooster(1, .75f, Float.parseFloat(assets.getProps().getProperty("joeyspeedMult")), Integer.parseInt(assets.getProps().getProperty("joeystatima")));
 		this.ramp = new Ramp(21, 0.5f, 5);
 		this.seeds = new Seed[5];
 		seeds[0] = new Seed(25, 5);
@@ -58,8 +58,8 @@ public class World extends GameScreen
 		this.cow = new Cow(30, 0.5f);
 		this.state = WORLD_STATE_PLAYING;
 		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-		score = Integer.parseInt(assets.getProps().getProperty("score"));
-		seedsCollected = Integer.parseInt(assets.getProps().getProperty("seeds"));
+		score = Integer.parseInt(assets.getProps().getProperty("joeyscore"));
+		seedsCollected = Integer.parseInt(assets.getProps().getProperty("joeyseeds"));
 		this.hay = new HayStack(25, 0.5f);
 	}
 	
@@ -139,16 +139,16 @@ public class World extends GameScreen
 	 */
 	private void save()
 	{
-		assets.getProps().setProperty("score", ""+score);
+		assets.getProps().setProperty("joeyscore", ""+score);
 		
 		//set new max distance
-		if( Float.parseFloat(assets.getProps().getProperty("maxDistance")) < distance)
+		if( Float.parseFloat(assets.getProps().getProperty("joeymaxDistance")) < distance)
 		{
-			assets.getProps().setProperty("maxDistance", ""+distance);
+			assets.getProps().setProperty("joeymaxDistance", ""+distance);
 		}
 						
 		//add the newly gained seeds]
-		assets.getProps().setProperty("seeds", ""+seedsCollected);
+		assets.getProps().setProperty("joeyseeds", ""+seedsCollected);
 		assets.save();
 	}
 	
