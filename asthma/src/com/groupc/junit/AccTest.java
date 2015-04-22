@@ -20,6 +20,7 @@ public class AccTest {
 	private AccountCreationScreen acc = new AccountCreationScreen(run);
 	
 	String line = null;
+	Vector<String> patientEmails = new Vector<String>();
 	Vector<String> patientFirstNames = new Vector<String>();
 	Vector<String> patientLastNames = new Vector<String>();
 	Vector<String> types = new Vector<String>();
@@ -30,14 +31,15 @@ public class AccTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		/*	
-		acc.firstNameTF.setText("testFirst");
-		acc.lastNameTF.setText("testLast");
-		acc.dobTF.setText("3");
-		acc.passwordTF.setText("testPass");
-		acc.infoTA.setText("test");
-		acc.newPatientDoctor = "bill";
-		*/
+		
+		acc.setFirstNameTF("testFirst");
+		acc.setLastNameTF("testLast");
+		acc.setDayTF("2");
+		acc.setMonthTF("4");
+		acc.setYearTF("94");
+		acc.setPasswordTF("testPass");
+		acc.setEmailTF("test@test.com");
+		
 		
 		
 		FileReader fr = new FileReader("login_information.txt");
@@ -47,13 +49,13 @@ public class AccTest {
 		while((line = br.readLine()) != null)
 		{
 			st = new StringTokenizer(line, " | ");
+			patientEmails.add(counter, st.nextToken()); //email
 			patientFirstNames.add(counter, st.nextToken()); //fname
 			patientLastNames.add(st.nextToken());  //last name
-			newAge.add(st.nextToken());  // age
+			newAge.add(st.nextToken());  // dob
 			newPass.add(st.nextToken());  //password
 			types.add(counter, st.nextToken()); //type
 			patDoctors.add(counter, st.nextToken()); //doctor for patient
-			
 			counter += 1;
 			
 			
@@ -63,40 +65,35 @@ public class AccTest {
 
 	@Test
 	public void setPatientDoctorTest(){
-		System.out.println(acc.newPatientDoctor + " pat doc");
-		acc.setPatientDoctor(acc.newPatientDoctor);		
+		System.out.println(acc.getPatientDoctor() + " pat doc");
+		//acc.setPatientDoctor("bill");		
 		
 		System.out.println(patDoctors.lastElement() + " last element");
-
-		assertTrue(patDoctors.lastElement().equals("bill"));
-		assertTrue(!patDoctors.lastElement().equals("Bob"));
-		assertTrue(!patDoctors.lastElement().equals("bil1"));
-		assertTrue(!patDoctors.lastElement().equals("b i l l"));
-		assertTrue(!patDoctors.lastElement().equals(" bill"));
-		assertTrue(!(patDoctors.lastElement() == null));
 		
-		acc.newPatientDoctor = null;
+		//acc.setPatientDoctor(null);
 		
-		acc.setPatientDoctor(acc.newPatientDoctor);
+		//acc.setPatientDoctor(acc.newPatientDoctor);
 		
 	}
 	
 	@Test
 	public void addCurrentPatientTest(){
-		/*
-		acc.firstNameTF.setText("");
+		
+		acc.setFirstNameTF("");
 		acc.addCurrentPatient();
 		
 		
-		acc.firstNameTF.setText("nextFirst");
-		acc.lastNameTF.setText("nextLast");
-		//acc.dobTF.setText("4");
-		acc.passwordTF.setText("nextPass");
-		acc.infoTA.setText("test2");
-		acc.newPatientDoctor = "bill";
+		acc.setFirstNameTF("nextFirst");
+		acc.setLastNameTF("nextLast");
+		acc.setMonthTF("3");
+		acc.setDayTF("2");
+		acc.setYearTF("91");
+		acc.setPasswordTF("nextPass");
+		//acc.setPatientDoctor("bill");
 		
 		acc.addCurrentPatient();
-		*/
+		
+		
 		
 	}
 	

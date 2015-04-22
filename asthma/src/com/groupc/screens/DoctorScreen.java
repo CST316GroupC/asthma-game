@@ -45,7 +45,7 @@ public class DoctorScreen extends Screen
 	Resize  resize     	= new Resize(run);
 	int     butPressed 	= 0; //0 is none, 1 is add patient, 2 is back and logout for now
 	
-	String doctor;
+	String doctor = run.getUserName();
 	
 	//Patient information
 	Vector<String> patientFirstNames 	= new Vector<String>();
@@ -73,7 +73,7 @@ public class DoctorScreen extends Screen
 		super(run);
 		
 		//Basic Frame Settings
-		//moved screen name to setDoctor() to make doctor-specific page [Derek]
+		run.setTitle(run.getUserName()+" | Doctor Page");
 		
 		
 		//button font color
@@ -114,20 +114,6 @@ public class DoctorScreen extends Screen
 		this.setLayout(null);		
 		run.setContentPane(this);
 		run.setVisible(true);
-	}
-	
-	protected void setDoctor(String docName)
-	{
-		if(docName != null)
-		{
-			doctor = docName;
-			run.setTitle(doctor + "s' page");
-		}else
-		{
-			System.out.println("null doctor name");
-			doctor = "doctor";
-			run.setTitle(doctor);
-		}
 	}
 	
 	protected void getPatients() throws IOException
@@ -218,9 +204,7 @@ public class DoctorScreen extends Screen
 		if(butPressed == 1)
 		{
 			AccountCreationScreen acs = new AccountCreationScreen(run);
-			acs.setPatientDoctor(doctor);
 			run.setScreen(acs);
-			System.out.println("changing screen");
 		}
 		else if(butPressed == 2)
 		{

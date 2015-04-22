@@ -46,7 +46,7 @@ public class Game3Screen extends Screen
 		canvas = new Canvas();
 		
 		//Basic Frame Settings
-		run.setTitle("GameScreen");
+		run.setTitle(run.getUserName()+" | GameScreen");
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()

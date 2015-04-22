@@ -19,10 +19,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -86,11 +89,11 @@ public class LoginScreen extends Screen
 	{
 		super(run);
 		
+		//unload user
+		run.setUserName("null");
+		
 		//Basic Frame Settings
 		run.setTitle("Login");
-		//run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//run.setMinimumSize(new Dimension(run.SCR_WIDTH, run.SCR_HEIGHT));
-		//run.setLocationRelativeTo(null);
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -258,6 +261,36 @@ public class LoginScreen extends Screen
 		}
 		return true;
 	}
+	
+	private void newProperties()
+	{
+		try
+		{
+			FileInputStream in = new FileInputStream("resources/interface/parent_controls/" + userNameTF.getText() + ".properties");
+			in.close();
+		}catch(Exception e)
+		{
+			Properties properties = new Properties();
+			properties.setProperty("PIN", "9999"); //default settings
+			properties.setProperty("Time", "false");
+			properties.setProperty("Game_1", "true");
+			properties.setProperty("Game_2", "true");
+			properties.setProperty("Game_3", "true");
+			properties.setProperty("Game_4", "true");
+			properties.setProperty("Email_Alerts", "false");
+			properties.setProperty("Email", userNameTF.getText());
+			
+			try
+			{
+				FileWriter write = new FileWriter("resources/interface/parent_controls/" + userNameTF.getText() + ".properties");
+				properties.store(write, "User:" + userNameTF.getText());
+				write.close();
+			}catch(Exception ex)
+			{
+				System.out.println("Failed new properties");
+			}
+		}
+	}
 
 	@Override
 	public void update(float deltaTime)
@@ -362,13 +395,15 @@ public class LoginScreen extends Screen
 	{
 		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText()))
 		{
+			run.setUserName(userNameTF.getText());
 			DoctorScreen ds = new DoctorScreen(run);
-			ds.setDoctor(userNameTF.getText());
 			ds.getPatients();
 			run.setScreen(ds);
+			
 		}
 		else if(Database.getPatient(userNameTF.getText(), passwordTF.getText()))
 		{
+			run.setUserName(userNameTF.getText());
 			run.setScreen(new TutorialScreen(run));
 		}
 		else{
@@ -408,33 +443,29 @@ public class LoginScreen extends Screen
 			
 			for(int i = 0; i < emails.size(); ++i)
 			{
-				tempString = new String (passWords[i]);
-				tempString = tempString.trim();
-				passWords[i] = tempString.toCharArray();
-				
-				if(userNameTF.getText().equals(emails.elementAt(i)) && Arrays.equals(passwordTF.getPassword(),passWords[i]))
+
+				//Use variable type at the top to switch between doctor login and patient login
+				//Doctors
+				if(types.elementAt(i).equals("0"))
 				{
-					//Use variable type at the top to switch between doctor login and patient login
-					//Doctors
-					if(types.elementAt(i).equals("0"))
+					run.setUserName(userNameTF.getText());
+					DoctorScreen ds = new DoctorScreen(run);
+					ds.getPatients();
+					run.setScreen(ds);
+				}else
+				//Patients
+				if(types.elementAt(i).equals("1"))
+				{
+					newProperties();
+					run.setUserName(userNameTF.getText());
+					if(hasNotTakenReadings(userNameTF.getText()))
 					{
-						DoctorScreen ds = new DoctorScreen(run);
-						ds.setDoctor(userNameTF.getText());
-						ds.getPatients();
-						run.setScreen(ds);
-					}else
-					//Patients
-					if(types.elementAt(i).equals("1"))
+						TutorialScreen ts = new TutorialScreen(run);
+						run.setScreen(ts);
+					} else 
 					{
-						if(hasNotTakenReadings(userNameTF.getText()))
-						{
-							TutorialScreen ts = new TutorialScreen(run);
-							ts.setPatient(emails.elementAt(i));
-							run.setScreen(ts);
-						} else 
-						{
-							run.setScreen(new GameHubScreen(run));
-						}
+						GameHubScreen ghs = new GameHubScreen(run);
+						run.setScreen(ghs);
 					}
 				}
 			

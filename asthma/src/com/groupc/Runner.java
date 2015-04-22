@@ -2,6 +2,7 @@ package com.groupc;
 
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import org.lwjgl.LWJGLException;
@@ -12,6 +13,7 @@ import org.newdawn.slick.openal.SoundStore;
 import com.groupc.screens.Game1Screen;
 import com.groupc.screens.GameHubScreen;
 import com.groupc.screens.LoginScreen;
+import com.groupc.screens.RewardScreen;
 import com.groupc.screens.Screen;
 
 
@@ -28,7 +30,10 @@ public class Runner extends JFrame
 	public final static int SCR_WIDTH = 500;
 	public final static int SCR_HEIGHT = 500;
 	public final static long FPS = (long) (1.0/60.0);
+	private String userName = "null";
+	ImageIcon windowIcon = new ImageIcon("resources/interface/Token.png");
 	
+
 	boolean isClosing = false;
 	
 	public Runner()
@@ -41,7 +46,8 @@ public class Runner extends JFrame
 		player.playMusic(true);
 		screen = new LoginScreen(this);
 		//screen = new GameHubScreen(this);
-		
+		//screen = new RewardScreen(this);
+		setIconImage(windowIcon.getImage());
 	}
 	
 	public void run() throws InterruptedException
@@ -75,5 +81,14 @@ public class Runner extends JFrame
 		Display.destroy();
 		AL.destroy();
 	}
+	
+	public String getUserName() 
+	{
+		return userName;
+	}
 
+	public void setUserName(String userName) 
+	{
+		this.userName = userName;
+	}
 }
