@@ -216,7 +216,7 @@ public class GameWorld extends GameScreen
 		cam.setCamera();
 		
 		//assets.getTexture("sheet").bind();
-		assets.getImage("wall").draw(new Rectangle(0, 0, 10, 10));
+		assets.getImage("table").draw(new Rectangle(0, 0, 10, 10));
 		renderHud();
 		renderFood();
 	}
