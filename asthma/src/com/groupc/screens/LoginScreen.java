@@ -208,7 +208,7 @@ public class LoginScreen extends Screen
 		String tempString = date.toString();
 		String currentDay = null;
 		
-		Vector<String> userNames = new Vector<String>();
+		Vector<String> emails = new Vector<String>();
 		Vector<String> days = new Vector<String>();
 		StringTokenizer st;
 		
@@ -221,7 +221,7 @@ public class LoginScreen extends Screen
 			while((line = br.readLine()) != null)
 			{
 				st = new StringTokenizer(line, " | ");
-				userNames.add(st.nextToken()); //user
+				emails.add(st.nextToken()); //user
 				st.nextToken(); //volume
 				st.nextToken(); //force
 				st.nextToken(); //day of week
@@ -249,10 +249,10 @@ public class LoginScreen extends Screen
 			st.nextToken(); // timezone
 			st.nextToken(); // year
 		}
-		for(int i = 0; i < userNames.size(); i++)
+		for(int i = 0; i < emails.size(); i++)
 		{
-			if(userNames.elementAt(i).equals(userNameTF.getText()))
-			{
+			if(emails.elementAt(i).equals(userNameTF.getText()))
+			{		
 				if(days.elementAt(i).equals(currentDay))
 				{
 					return false;
@@ -426,7 +426,7 @@ public class LoginScreen extends Screen
 			run.setScreen(new TutorialScreen(run));
 			
 		}
-		else{
+
 			String line = null;
 			char[][] passWords = new char[20][30];  //need to make dynamic otherwise only 20 patients allowed!!
 			int counter = 0;
@@ -464,11 +464,15 @@ public class LoginScreen extends Screen
 			for(int i = 0; i < emails.size(); ++i)
 			{
 
-				//Use variable type at the top to switch between doctor login and patient login
-				//Doctors
-				if(types.elementAt(i).equals("0"))
+				tempString = new String(passWords[i]);
+				tempString = tempString.trim();
+				passWords[i] = tempString.toCharArray();
+				
+				if(userNameTF.getText().equals(emails.elementAt(i)) && Arrays.equals(passwordTF.getPassword(), passWords[i]))
 				{
-					if(userNameTF.getText().indexOf(".com") == -1)
+					//Use variable type at the top to switch between doctor login and patient login
+					//Doctors
+					if(types.elementAt(i).equals("0"))
 					{
 						run.setUserName(userNameTF.getText());
 					}
@@ -485,8 +489,11 @@ public class LoginScreen extends Screen
 				{
 					
 					if(userNameTF.getText().indexOf(".com") == -1)
+
 					{
+						newProperties();
 						run.setUserName(userNameTF.getText());
+
 					}
 					else
 					{
@@ -503,7 +510,6 @@ public class LoginScreen extends Screen
 						run.setScreen(ghs);
 					}
 				}
-			
 				if(!loginErrorDrawn)
 				{
 					loginErrorMessage.setVisible(true);
@@ -511,6 +517,6 @@ public class LoginScreen extends Screen
 					loginErrorDrawn = true;
 				}
 			}
-		}
+		
 	}
 }

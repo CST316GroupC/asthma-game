@@ -46,7 +46,7 @@ public class Game4Screen extends Screen
 		canvas = new Canvas();
 		
 		//Basic Frame Settings
-		run.setTitle(run.getUserName()+" | GameScreen");
+		run.setTitle(run.getUserName()+" | Food Clicker");
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
