@@ -77,19 +77,32 @@ public class UpgradeScreen extends GameScreen
 		            cam.click(mouseClick);
 					if(CollisionChecker.PointToRect(mouseClick, upgradeAxes))
 					{
-						
+						if(gems >= 10)
+						{
+							gems -= 10;
+							axes++;
+						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, back))
 					{
-						
+						dispose();
+						assets.save();
 					}
 					if(CollisionChecker.PointToRect(mouseClick, upgradeLives))
 					{
-						
+						if(gems >= 25)
+						{
+							gems -= 25;
+							lives++;
+						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, buyGems))
 					{
-						
+						if(tokens >= 1)
+						{
+							tokens -= 1;
+							gems+= 5;
+						}
 					}
 		        }
 		    }
@@ -104,9 +117,9 @@ public class UpgradeScreen extends GameScreen
 		
 		assets.getTexture().bind();
 		assets.getImage("background").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
-		TextDrawer.drawStringinRect("Buy an Axe for 10Gems", lblAxes);
-		TextDrawer.drawStringinRect("Buy a Live for 25Gems", lblLives);
-		TextDrawer.drawStringinRect("Buy Gems for 1 token", lblGems);
+		TextDrawer.drawStringinRect("Buy an Axe for 10 Gems", lblAxes);
+		TextDrawer.drawStringinRect("Buy a Live for 25 Gems", lblLives);
+		TextDrawer.drawStringinRect("Buy 5 Gems for 1 token", lblGems);
 		TextDrawer.drawStringinRect("Buy", upgradeAxes);
 		TextDrawer.drawStringinRect("Buy", upgradeLives);
 		TextDrawer.drawStringinRect("Buy", buyGems);
@@ -132,7 +145,7 @@ public class UpgradeScreen extends GameScreen
 	public void dispose() 
 	{
 		isClosing = true;
-		assets.save(assets.getFilename());
+		assets.save();
 	}
 
 	@Override

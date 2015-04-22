@@ -23,7 +23,7 @@ public class Game4Assets extends Asset
 	
 	public Game4Assets()
 	{
-		super();
+		super("test");
 		try {
 			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/atlas.png"));
 			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/mainmenu.png"));
@@ -57,7 +57,7 @@ public class Game4Assets extends Asset
 			String temp = props.getProperty("mazefirstTime", "true");
 			if("true".equals(temp))
 			{
-				save("res/maze.properties");
+				save();
 			}
 		} 
 		catch (IOException e1)

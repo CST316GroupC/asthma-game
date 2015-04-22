@@ -23,7 +23,7 @@ public class Game1Assets extends Asset
 	
 	public Game1Assets()
 	{
-		super();
+		super("test");
 		try {
 			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/atlas.png"));
 			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/mainmenu.png"));
@@ -84,7 +84,7 @@ public class Game1Assets extends Asset
 				props.setProperty("seeds", "0");
 				props.setProperty("firstTime", "false");
 				props.setProperty("sound", "true");
-				save(FILENAME);
+				save();
 			}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block

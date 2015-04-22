@@ -31,7 +31,7 @@ public class Game2Test
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assets = new Game2Assets(run);
+		assets = new Game2Assets(run.getUserName());
 		assets.load();
 		world = new MazeWorld(assets);
 		world.setLevel(0);

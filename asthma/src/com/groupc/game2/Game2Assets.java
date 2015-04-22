@@ -19,11 +19,9 @@ import com.groupc.game.TextureRegion;
 
 public class Game2Assets extends Asset
 {	
-	private String filename;
-	public Game2Assets(Runner run)
+	public Game2Assets(String user)
 	{
-		super();
-		setFilename("resources/interface/parent_controls/"+run.getUserName() + ".properties");
+		super(user);
 	}
 	
 	public void load()
@@ -67,7 +65,7 @@ public class Game2Assets extends Asset
 		FileInputStream in = null;
 		try 
 		{
-			in = new FileInputStream(filename);
+			in = new FileInputStream(getFilename());
 			props.load(in);
 			String temp = props.getProperty("mazefirstTime", "true");
 			if("true".equals(temp))
@@ -78,7 +76,9 @@ public class Game2Assets extends Asset
 				props.setProperty("mazeLives", "3");
 				props.setProperty("mazeGems", "0");
 				props.setProperty("mazeAxes", "0");
-				save(filename);
+				props.setProperty("mazeMaxLives", "3");
+				props.setProperty("mazeMaxAxes", "0");
+				save();
 			}
 		} 
 		catch (IOException e1)
@@ -96,13 +96,5 @@ public class Game2Assets extends Asset
 			}
 		}
 		
-	}
-
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
 	}
 }

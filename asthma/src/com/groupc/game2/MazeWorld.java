@@ -177,11 +177,16 @@ public class MazeWorld extends GameScreen
 		}	
 		if(state == WORLD_STATE_DEAD)
 		{
+			assets.setProps("mazeGems", collectedGems+"");
+			assets.setProps("mazelives", lives+"");
+			assets.setProps("mazeAxes", axes+"");
+			assets.save();
 			if(lives <= 0)
 			{
 				state = WORLD_STATE_OVER;
 				level = 1;
-				setLives(Integer.parseInt(assets.getProps().getProperty("mazeLives")));
+				setLives(Integer.parseInt(assets.getProps().getProperty("mazeMaxLives")));
+				setAxes(Integer.parseInt(assets.getProps().getProperty("mazeMaxAxes")));
 				
 			}
 			else
@@ -406,7 +411,7 @@ public class MazeWorld extends GameScreen
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_Q && (state == WORLD_STATE_OVER || state == WORLD_STATE_READY))
 				{
-					assets.save(assets.getFilename());
+					assets.save();
 					dispose();
 				}
 			}
@@ -426,7 +431,7 @@ public class MazeWorld extends GameScreen
 		generateLevel(getLevel());
 		assets.setProps("mazeLevel", getLevel()+"");
 		assets.setProps("mazeScore", score+"");
-		assets.save(assets.getFilename());
+		assets.save();
 	}
 
 	@Override
@@ -598,7 +603,7 @@ public class MazeWorld extends GameScreen
 	public void pause() 
 	{
 		state = WORLD_STATE_PAUSED;
-		assets.save(assets.getFilename());
+		assets.save();
 	}
 
 	@Override
@@ -611,6 +616,7 @@ public class MazeWorld extends GameScreen
 	public void dispose() 
 	{
 		isClosing = true;
+		assets.save();
 	}
 
 	@Override
