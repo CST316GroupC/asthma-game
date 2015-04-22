@@ -66,7 +66,7 @@ public class ParentControlsScreen extends Screen
 	JLabel  pinLabel      		= new JLabel("Enter Your Parent Pin",SwingConstants.CENTER);
 	JLabel  pinErrorLabel 		= new JLabel("Incorrect Pin",SwingConstants.CENTER);
 	JLabel  timeControlsLabel 	= new JLabel("Time Controls");
-	JLabel  gameControlsLabel 	= new JLabel("Game Controls");
+	JLabel  gameControlsLabel 	= new JLabel("Lock/Unlock Games");
 	JLabel  alertsLabel       	= new JLabel("Alerts");
 	JLabel  hourLabel         	= new JLabel("hr",SwingConstants.CENTER);
 	JLabel  minuteLabel       	= new JLabel("min",SwingConstants.CENTER);
@@ -125,6 +125,15 @@ public class ParentControlsScreen extends Screen
 		message.setForeground(Color.RED);
 		
 		////Buttons////
+		//Enter Key is Pressed
+		pinPF.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				checkPin();
+			}
+		});
 		
 		//pinButton
 		pinButton.addActionListener(new ActionListener()
@@ -269,10 +278,13 @@ public class ParentControlsScreen extends Screen
 			//GameCB
 			Game1CB.setBounds(resize.locationX(100), resize.locationY(210), resize.width(150), resize.height(20));
 			Game1CB.setFont(new Font(Game1CB.getFont().getFontName(),Game1CB.getFont().getStyle(), resize.font(12)));
-			Game2CB.setBounds(resize.locationX(100), resize.locationY(240), resize.width(150), resize.height(20));
+			
+			Game2CB.setBounds(resize.locationX(250), resize.locationY(210), resize.width(150), resize.height(20));
 			Game2CB.setFont(new Font(Game2CB.getFont().getFontName(),Game2CB.getFont().getStyle(), resize.font(12)));
-			Game3CB.setBounds(resize.locationX(250), resize.locationY(210), resize.width(150), resize.height(20));
+			
+			Game3CB.setBounds(resize.locationX(100), resize.locationY(240), resize.width(150), resize.height(20));
 			Game3CB.setFont(new Font(Game3CB.getFont().getFontName(),Game3CB.getFont().getStyle(), resize.font(12)));
+			
 			Game4CB.setBounds(resize.locationX(250), resize.locationY(240), resize.width(150), resize.height(20));
 			Game4CB.setFont(new Font(Game4CB.getFont().getFontName(),Game4CB.getFont().getStyle(), resize.font(12)));
 			
