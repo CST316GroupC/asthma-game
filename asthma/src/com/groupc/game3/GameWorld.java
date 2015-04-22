@@ -39,8 +39,10 @@ public class GameWorld extends GameScreen
 	
 	private int		healthGlobeAmount;
 	private int		chestAmount;
+	private int 	previousGameScore;
 	private int 	gameScore;
 	private int 	hitCounter;
+	private int		updatedScore;
 	
 	public float 	time;
 	
@@ -72,7 +74,9 @@ public class GameWorld extends GameScreen
 		
 		this.state = 	WORLD_STATE_PLAYING;
 	
-		gameScore = Integer.parseInt(assets.getProps().getProperty("game3Score"));
+		previousGameScore = Integer.parseInt(assets.getProps().getProperty("game3Score"));
+		
+		gameScore = previousGameScore;
 		
 		// Rain droplets initializations
 		this.rain = 	new Rain[6];
@@ -206,13 +210,13 @@ public class GameWorld extends GameScreen
 	 */
 	private void save()
 	{
-		System.out.println(gameScore);
-		assets.getProps().setProperty("game3Score", ""+gameScore);
+		updatedScore = gameScore + previousGameScore;
+		assets.getProps().setProperty("game3Score", ""+updatedScore);
 		
 		//set new max score
-		if( Float.parseFloat(assets.getProps().getProperty("game3MaxScore")) < gameScore)
+		if( Float.parseFloat(assets.getProps().getProperty("game3MaxScore")) < updatedScore)
 		{
-			assets.getProps().setProperty("game3MaxScore", ""+gameScore);
+			assets.getProps().setProperty("game3MaxScore", ""+updatedScore);
 		}
 		
 		assets.save();
