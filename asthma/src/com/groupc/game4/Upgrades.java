@@ -180,7 +180,7 @@ public class Upgrades extends GameScreen
 	@Override
 	public void dispose() 
 	{
-		assets.save(Game4Assets.FILENAME);
+		assets.save();
 		isClosing = true;
 	}
 

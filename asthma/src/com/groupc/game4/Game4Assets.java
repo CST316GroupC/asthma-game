@@ -22,11 +22,10 @@ public class Game4Assets extends Asset
 	private static Texture sheet;
 	private static Texture background;
 	private static Texture g4texture;
-	public final static String FILENAME = "resources/game4/foodGame.properties";
 	
-	public Game4Assets()
+	public Game4Assets(String user)
 	{
-		super("test");
+		super(user);
 		try {
 			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/atlas.png"));
 			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/mainmenu.png"));
@@ -62,7 +61,7 @@ public class Game4Assets extends Asset
 		//TODO: update for game4
 		try 
 		{
-			FileInputStream in = new FileInputStream(FILENAME);
+			FileInputStream in = new FileInputStream(getFilename());
 			props.load(in);
 			in.close();
 
@@ -88,9 +87,4 @@ public class Game4Assets extends Asset
 		} 
 	}
 
-	@Override
-	public String getFilename() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

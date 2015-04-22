@@ -175,7 +175,7 @@ public class GameWorld extends GameScreen
 			assets.getProps().setProperty("game4MaxScore", ""+score);
 		}
 		
-		assets.save(Game4Assets.FILENAME);
+		assets.save();
 	}
 	
 	public void inputHandling()
