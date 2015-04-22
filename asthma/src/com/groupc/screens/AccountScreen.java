@@ -15,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+import com.groupc.Database;
 import com.groupc.Runner;
 import com.groupc.math.Resize;
 
@@ -219,11 +220,11 @@ public class AccountScreen extends Screen
 		}
 		else if(butPressed == 1) //Change password button
 		{
-			
+			Database.updatepass(run.getUserName(), passwordOldPF.getText(), passwordNewPF.getText());
 		}
 		else if(butPressed == 2) //Change pin button
 		{
-			
+			Database.updatepin(run.getUserName(), pinOldPF.getText(), pinNewPF.getText());
 		}
 		
 		butPressed = 0;

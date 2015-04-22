@@ -262,7 +262,9 @@ public class Database {
 			      //STEP 4: Execute a query
 			      stmt = conn.createStatement();
 			      String sql;
-			      sql = "select pat_id from patients where pat_email = '" + patient_email + "' and pin = "+patient_oldpin+";";
+			      System.out.println("email: " + patient_email);
+			      System.out.println("old pin: " + patient_oldpin);
+			      sql = "select pin from patients where pat_email = '" + patient_email + ".com' and pin = "+patient_oldpin+";";
 			   
 			      ResultSet rs = stmt.executeQuery(sql);
 			      
@@ -270,11 +272,11 @@ public class Database {
 			      while(rs.next()){
 			    	 System.out.println("valid old pin");
 			         //Retrieve by column name
-			         String id  = rs.getString("oldpin");
+			         String id  = rs.getString("pin");
 			         
 			         String sql2;
-					 sql2 = "update patients set pin="+patient_newpin+"where pat_email = '"+patient_email+"';";
-					     stmt.executeUpdate(sql2);
+					 sql2 = "update patients set pin = "+ patient_newpin + " where pat_email = '"+patient_email+".com';";
+					 stmt.executeUpdate(sql2);
 			         //Display values
 					 System.out.println("old pin: " + id);
 			         System.out.println("new pin: " + patient_newpin);
@@ -306,7 +308,72 @@ public class Database {
 			         se.printStackTrace();
 			      }//end finally try
 			   }//end try
-		   System.out.println("Invalid login");
+		   System.out.println("Invalid pin");
+		   return false;
+	   }
+	   
+	   public static boolean updatepass(String patient_email, String patient_oldpass, String patient_newpass){
+		   Connection conn = null;
+		   Statement stmt = null;	
+		   
+		   try{
+			      //STEP 2: Register JDBC driver
+			      Class.forName(JDBC_DRIVER);
+
+			      //STEP 3: Open a connection
+			      System.out.println("Connecting to database...");
+			      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+			      //STEP 4: Execute a query
+			      stmt = conn.createStatement();
+			      String sql;
+			      System.out.println("email: " + patient_email);
+			      System.out.println("old pass: " + patient_oldpass);
+			      sql = "select pat_password from patients where pat_email = '" + patient_email + ".com' and pat_password = '"+patient_oldpass+"';";
+			   
+			      ResultSet rs = stmt.executeQuery(sql);
+			      
+			      //STEP 5: Extract data from result set
+			      while(rs.next()){
+			    	 System.out.println("valid old pass");
+			         //Retrieve by column name
+			         String id  = rs.getString("pat_password");
+			         
+			         String sql2;
+					 sql2 = "update patients set pat_password = '"+ patient_newpass + "' where pat_email = '"+patient_email+".com';";
+					 stmt.executeUpdate(sql2);
+			         //Display values
+					 System.out.println("old pass: " + id);
+			         System.out.println("new pass: " + patient_newpass);
+			         return true;
+			         
+			      }
+			      
+			      //STEP 6: Clean-up environment
+			      rs.close();
+			      stmt.close();
+			      conn.close();
+			   }catch(SQLException se){
+			      //Handle errors for JDBC
+			      se.printStackTrace();
+			   }catch(Exception e){
+			      //Handle errors for Class.forName
+			      e.printStackTrace();
+			   }finally{
+			      //finally block used to close resources
+			      try{
+			         if(stmt!=null)
+			            stmt.close();
+			      }catch(SQLException se2){
+			      }// nothing we can do
+			      try{
+			         if(conn!=null)
+			            conn.close();
+			      }catch(SQLException se){
+			         se.printStackTrace();
+			      }//end finally try
+			   }//end try
+		   System.out.println("Invalid old password");
 		   return false;
 	   }
 	   
