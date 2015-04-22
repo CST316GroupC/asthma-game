@@ -362,84 +362,88 @@ public class LoginScreen extends Screen
 	{
 		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText()))
 		{
-			run.setScreen(new DoctorScreen(run));
+			DoctorScreen ds = new DoctorScreen(run);
+			ds.setDoctor(userNameTF.getText());
+			ds.getPatients();
+			run.setScreen(ds);
 		}
 		else if(Database.getPatient(userNameTF.getText(), passwordTF.getText()))
 		{
 			run.setScreen(new TutorialScreen(run));
 		}
-
-		String line = null;
-		char[][] passWords = new char[20][30];  //need to make dynamic otherwise only 20 patients allowed!!
-		int counter = 0;
-		String tempString;
-		char tempChar;
-		//can create a patients' doctor with new text file
-		
-		Vector<String> types = new Vector<String>();
-		Vector<String> emails = new Vector<String>();
-		
-		
-		FileReader fr = new FileReader("login_information.txt");  //maybe create an 'onStart()' function for runner
-		BufferedReader br = new BufferedReader(fr);
-		StringTokenizer st;
-		
-		
-		while((line = br.readLine()) != null)
-		{
-			st = new StringTokenizer(line, " | ");
-			emails.add(counter, st.nextToken());
-			st.nextToken();  //first name
-			st.nextToken();  //last name
-			st.nextToken();  //dob
-			tempString = st.nextToken();  //password
-			types.add(counter, st.nextToken()); //type
-			for(int i = 0; i < tempString.length(); ++i)
-			{
-				 passWords[counter][i] = tempString.charAt(i);
-
-			}
-			counter += 1;
-		}
-		br.close();
-		
-		for(int i = 0; i < emails.size(); ++i)
-		{
-			tempString = new String (passWords[i]);
-			tempString = tempString.trim();
-			passWords[i] = tempString.toCharArray();
+		else{
+			String line = null;
+			char[][] passWords = new char[20][30];  //need to make dynamic otherwise only 20 patients allowed!!
+			int counter = 0;
+			String tempString;
+			char tempChar;
+			//can create a patients' doctor with new text file
 			
-			if(userNameTF.getText().equals(emails.elementAt(i)) && Arrays.equals(passwordTF.getPassword(),passWords[i]))
+			Vector<String> types = new Vector<String>();
+			Vector<String> emails = new Vector<String>();
+			
+			
+			FileReader fr = new FileReader("login_information.txt");  //maybe create an 'onStart()' function for runner
+			BufferedReader br = new BufferedReader(fr);
+			StringTokenizer st;
+			
+			
+			while((line = br.readLine()) != null)
 			{
-				//Use variable type at the top to switch between doctor login and patient login
-				//Doctors
-				if(types.elementAt(i).equals("0"))
+				st = new StringTokenizer(line, " | ");
+				emails.add(counter, st.nextToken());
+				st.nextToken();  //first name
+				st.nextToken();  //last name
+				st.nextToken();  //dob
+				tempString = st.nextToken();  //password
+				types.add(counter, st.nextToken()); //type
+				for(int i = 0; i < tempString.length(); ++i)
 				{
-					DoctorScreen ds = new DoctorScreen(run);
-					ds.setDoctor(userNameTF.getText());
-					ds.getPatients();
-					run.setScreen(ds);
-				}else
-				//Patients
-				if(types.elementAt(i).equals("1"))
+					 passWords[counter][i] = tempString.charAt(i);
+	
+				}
+				counter += 1;
+			}
+			br.close();
+			
+			for(int i = 0; i < emails.size(); ++i)
+			{
+				tempString = new String (passWords[i]);
+				tempString = tempString.trim();
+				passWords[i] = tempString.toCharArray();
+				
+				if(userNameTF.getText().equals(emails.elementAt(i)) && Arrays.equals(passwordTF.getPassword(),passWords[i]))
 				{
-					if(hasNotTakenReadings(userNameTF.getText()))
+					//Use variable type at the top to switch between doctor login and patient login
+					//Doctors
+					if(types.elementAt(i).equals("0"))
 					{
-						TutorialScreen ts = new TutorialScreen(run);
-						ts.setPatient(emails.elementAt(i));
-						run.setScreen(ts);
-					} else 
+						DoctorScreen ds = new DoctorScreen(run);
+						ds.setDoctor(userNameTF.getText());
+						ds.getPatients();
+						run.setScreen(ds);
+					}else
+					//Patients
+					if(types.elementAt(i).equals("1"))
 					{
-						run.setScreen(new GameHubScreen(run));
+						if(hasNotTakenReadings(userNameTF.getText()))
+						{
+							TutorialScreen ts = new TutorialScreen(run);
+							ts.setPatient(emails.elementAt(i));
+							run.setScreen(ts);
+						} else 
+						{
+							run.setScreen(new GameHubScreen(run));
+						}
 					}
 				}
-			}
-		
-			if(!loginErrorDrawn)
-			{
-				loginErrorMessage.setVisible(true);
-				run.repaint();
-				loginErrorDrawn = true;
+			
+				if(!loginErrorDrawn)
+				{
+					loginErrorMessage.setVisible(true);
+					run.repaint();
+					loginErrorDrawn = true;
+				}
 			}
 		}
 	}
