@@ -1,13 +1,18 @@
 package com.groupc.screens;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
 import com.groupc.Runner;
@@ -18,40 +23,50 @@ public class AccountScreen extends Screen
 	boolean redraw			= true;
 	int		butPressed		= 0;
 	Resize  resize     		= new Resize(run);
-	NavigationBar navBar    = new NavigationBar(run,true,false,"User Account");
+	NavigationBar navBar    = new NavigationBar(run,true,false,"Account Settings");
 	
 	//Display Elements
-	JPanel 		passwordBox     = new JPanel();
-	JPanel      pinBox      	= new JPanel();
-	JPanel      highScoreBox    = new JPanel();
+	JPanel		accountBox    	= new JPanel();
 	
-	JLabel 		passwordChangeLabel 	= new JLabel("Change Password");
-	JLabel 		passwordCurrentLabel	= new JLabel("Current Password",SwingConstants.RIGHT);
-	JLabel 		passwordNewLabel 		= new JLabel("New Password",SwingConstants.RIGHT);
-	JLabel 		passwordNewRepeatLabel 	= new JLabel("Retype New Password",SwingConstants.RIGHT);
-	JLabel 		pinChangeLabel 			= new JLabel("Change Parent Pin");
-	JLabel 		pinCurrentLabel			= new JLabel("Current Pin",SwingConstants.RIGHT);
-	JLabel 		pinNewLabel 			= new JLabel("New Pin",SwingConstants.RIGHT);
-	JLabel 		pinNewRepeatLabel 		= new JLabel("Retype New Pin",SwingConstants.RIGHT);
-	JLabel 		highScoresLabel 		= new JLabel("HighScores");
-	JLabel 		highScoresGame1Label 	= new JLabel("Game 1:",SwingConstants.RIGHT);
-	JLabel 		highScoresGame2Label 	= new JLabel("Game 2:",SwingConstants.RIGHT);
-	JLabel 		highScoresGame3Label 	= new JLabel("Game 3:",SwingConstants.RIGHT);
-	JLabel 		highScoresGame4Label 	= new JLabel("Game 4:",SwingConstants.RIGHT);
-	JLabel 		highScoresGame1OutPut 	= new JLabel("0");
-	JLabel 		highScoresGame2OutPut 	= new JLabel("0");
-	JLabel 		highScoresGame3OutPut 	= new JLabel("0");
-	JLabel 		highScoresGame4OutPut 	= new JLabel("0");
+	JLabel 		passwordChangeLabel 	= new JLabel("Change Password",SwingConstants.CENTER);
+	JLabel 		passwordCurrentLabel	= new JLabel("Current: ",SwingConstants.RIGHT);
+	JLabel 		passwordNewLabel 		= new JLabel("New: ",SwingConstants.RIGHT);
+	JLabel 		passwordNewRepeatLabel 	= new JLabel("Retype New: ",SwingConstants.RIGHT);
+	JLabel 		pinChangeLabel 			= new JLabel("Change Parent Pin",SwingConstants.CENTER);
+	JLabel 		pinCurrentLabel			= new JLabel("Current: ",SwingConstants.RIGHT);
+	JLabel 		pinNewLabel 			= new JLabel("New: ",SwingConstants.RIGHT);
+	JLabel 		pinNewRepeatLabel 		= new JLabel("Retype New: ",SwingConstants.RIGHT);
+	JLabel 		highScoresLabel 		= new JLabel("HighScores",SwingConstants.CENTER);
+	JLabel 		highScoresGame1Label 	= new JLabel("Game 1:",SwingConstants.CENTER);
+	JLabel 		highScoresGame2Label 	= new JLabel("Game 2:",SwingConstants.CENTER);
+	JLabel 		highScoresGame3Label 	= new JLabel("Game 3:",SwingConstants.CENTER);
+	JLabel 		highScoresGame4Label 	= new JLabel("Game 4:",SwingConstants.CENTER);
 	
-	JButton		changePasswordButton 	= new JButton("Change Password");
-	JButton		changePinButton 		= new JButton("Change Pin");
+	JLabel 		highScoresGame1OutPut 	= new JLabel("0",SwingConstants.CENTER);
+	JLabel 		highScoresGame2OutPut 	= new JLabel("0",SwingConstants.CENTER);
+	JLabel 		highScoresGame3OutPut 	= new JLabel("0",SwingConstants.CENTER);
+	JLabel 		highScoresGame4OutPut 	= new JLabel("0",SwingConstants.CENTER);
+	
+	JPasswordField passwordOldPF   	= new JPasswordField();
+	JPasswordField passwordNewPF   	= new JPasswordField();
+	JPasswordField passwordRetypePF = new JPasswordField();
+	JPasswordField pinOldPF   		= new JPasswordField();
+	JPasswordField pinNewPF   		= new JPasswordField();
+	JPasswordField pinRetypePF   	= new JPasswordField();
+	
+	JButton		changePasswordButton 	= new JButton("Change");
+	JButton		changePinButton 		= new JButton("Change");
+	
+	JSeparator highScoreSep			= new JSeparator();
+	JSeparator passwordChangeSep	= new JSeparator();
+	JSeparator pinChangeSep			= new JSeparator();
 	
 	public AccountScreen(Runner run) 
 	{
 		super(run);
 		
 		//Basic Frame Settings
-		run.setTitle(run.getUserName()+" | User Account");
+		run.setTitle(run.getUserName()+" | Account Settings");
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -59,6 +74,28 @@ public class AccountScreen extends Screen
 			public void componentResized(ComponentEvent e)
 			{
 				redraw = true;
+			}
+		});
+		
+		//Set colors
+		this.setBackground(Color.WHITE);
+		accountBox.setBackground(Color.LIGHT_GRAY);
+		
+		//Button Presses
+		changePasswordButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				butPressed = 1;				
+			}
+		});
+		changePinButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				butPressed = 2;				
 			}
 		});
 		
@@ -79,8 +116,18 @@ public class AccountScreen extends Screen
 		this.add(highScoresGame2OutPut);
 		this.add(highScoresGame3OutPut);
 		this.add(highScoresGame4OutPut);
+		this.add(highScoreSep);
+		this.add(passwordOldPF);
+		this.add(passwordNewPF);
+		this.add(passwordRetypePF);
+		this.add(pinOldPF);
+		this.add(pinNewPF);
+		this.add(pinRetypePF);
+		this.add(passwordChangeSep);
+		this.add(pinChangeSep);
 		this.add(changePasswordButton);
 		this.add(changePinButton);
+		this.add(accountBox);
 		this.add(navBar);
 		
 		this.setLayout(null);
@@ -96,31 +143,70 @@ public class AccountScreen extends Screen
 		{	
 			//navBar
 			navBar.redrawUpdate();
+			accountBox.setBounds(resize.locationX(50), resize.locationY(100), resize.width(400), resize.height(350));
+			accountBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			//Password Change
-			/*passwordChangeLabel.setBounds(resize.locationX(0), resize.locationY(0), resize.width(300), resize.height(30));
-			passwordCurrentLabel
-			passwordNewLabel
-			passwordNewRepeatLabel
-			changePasswordButton
+			passwordChangeLabel.setBounds(resize.locationX(50), resize.locationY(275), resize.width(200), resize.height(20));
+			passwordChangeLabel.setFont(new Font(passwordChangeLabel.getFont().getFontName(),passwordChangeLabel.getFont().getStyle(), resize.font(12)));
+			passwordChangeSep.setBounds(resize.locationX(55), resize.locationY(295), resize.width(190), resize.height(20));
+			passwordCurrentLabel.setBounds(resize.locationX(50), resize.locationY(315), resize.width(100), resize.height(20));
+			passwordCurrentLabel.setFont(new Font(passwordChangeLabel.getFont().getFontName(),passwordChangeLabel.getFont().getStyle(), resize.font(12)));
+			passwordNewLabel.setBounds(resize.locationX(50), resize.locationY(335), resize.width(100), resize.height(20));
+			passwordNewLabel.setFont(new Font(passwordChangeLabel.getFont().getFontName(),passwordChangeLabel.getFont().getStyle(), resize.font(12)));
+			passwordNewRepeatLabel.setBounds(resize.locationX(50), resize.locationY(355), resize.width(100), resize.height(20));
+			passwordNewRepeatLabel.setFont(new Font(passwordChangeLabel.getFont().getFontName(),passwordChangeLabel.getFont().getStyle(), resize.font(12)));
+			changePasswordButton.setBounds(resize.locationX(100), resize.locationY(395), resize.width(100), resize.height(30));
+			changePasswordButton.setFont(new Font(passwordChangeLabel.getFont().getFontName(),passwordChangeLabel.getFont().getStyle(), resize.font(12)));
+			
+			passwordOldPF.setBounds(resize.locationX(150), resize.locationY(315), resize.width(95), resize.height(20));
+			passwordOldPF.setFont(new Font(passwordChangeLabel.getFont().getFontName(),passwordChangeLabel.getFont().getStyle(), resize.font(12)));
+			passwordNewPF.setBounds(resize.locationX(150), resize.locationY(335), resize.width(95), resize.height(20));
+			passwordNewPF.setFont(new Font(passwordChangeLabel.getFont().getFontName(),passwordChangeLabel.getFont().getStyle(), resize.font(12)));
+			passwordRetypePF.setBounds(resize.locationX(150), resize.locationY(355), resize.width(95), resize.height(20));
+			passwordRetypePF.setFont(new Font(passwordChangeLabel.getFont().getFontName(),passwordChangeLabel.getFont().getStyle(), resize.font(12)));
 			
 			//Pin Change
-			pinChangeLabel
-			pinCurrentLabel
-			pinNewLabel
-			pinNewRepeatLabel
-			changePinButton
+			pinChangeLabel.setBounds(resize.locationX(250), resize.locationY(275), resize.width(200), resize.height(20));
+			pinChangeLabel.setFont(new Font(pinChangeLabel.getFont().getFontName(),pinChangeLabel.getFont().getStyle(), resize.font(12)));
+			pinChangeSep.setBounds(resize.locationX(255), resize.locationY(295), resize.width(190), resize.height(20));
+			pinCurrentLabel.setBounds(resize.locationX(250), resize.locationY(315), resize.width(100), resize.height(20));
+			pinCurrentLabel.setFont(new Font(pinChangeLabel.getFont().getFontName(),pinChangeLabel.getFont().getStyle(), resize.font(12)));
+			pinNewLabel.setBounds(resize.locationX(250), resize.locationY(335), resize.width(100), resize.height(20));
+			pinNewLabel.setFont(new Font(pinChangeLabel.getFont().getFontName(),pinChangeLabel.getFont().getStyle(), resize.font(12)));
+			pinNewRepeatLabel.setBounds(resize.locationX(250), resize.locationY(355), resize.width(100), resize.height(20));
+			pinNewRepeatLabel.setFont(new Font(pinChangeLabel.getFont().getFontName(),pinChangeLabel.getFont().getStyle(), resize.font(12)));
+			changePinButton.setBounds(resize.locationX(300), resize.locationY(395), resize.width(100), resize.height(30));
+			changePinButton.setFont(new Font(pinChangeLabel.getFont().getFontName(),pinChangeLabel.getFont().getStyle(), resize.font(12)));
+			
+			pinOldPF.setBounds(resize.locationX(350), resize.locationY(315), resize.width(95), resize.height(20));
+			pinOldPF.setFont(new Font(pinChangeLabel.getFont().getFontName(),pinChangeLabel.getFont().getStyle(), resize.font(12)));
+			pinNewPF.setBounds(resize.locationX(350), resize.locationY(335), resize.width(95), resize.height(20));
+			pinNewPF.setFont(new Font(pinChangeLabel.getFont().getFontName(),pinChangeLabel.getFont().getStyle(), resize.font(12)));
+			pinRetypePF.setBounds(resize.locationX(350), resize.locationY(355), resize.width(95), resize.height(20));
+			pinRetypePF.setFont(new Font(pinChangeLabel.getFont().getFontName(),pinChangeLabel.getFont().getStyle(), resize.font(12)));
 			
 			//HighScores
-			highScoresLabel
-			highScoresGame1Label
-			highScoresGame2Label
-			highScoresGame3Label
-			highScoresGame4Label
-			highScoresGame1OutPut
-			highScoresGame2OutPut
-			highScoresGame3OutPut
-			highScoresGame4OutPut*/
+			highScoresLabel.setBounds(resize.locationX(50), resize.locationY(100), resize.width(400), resize.height(20));
+			highScoresLabel.setFont(new Font(highScoresLabel.getFont().getFontName(),highScoresLabel.getFont().getStyle(), resize.font(12)));
+			highScoreSep.setBounds(resize.locationX(55), resize.locationY(120), resize.width(390), resize.height(20));
+			
+			highScoresGame1Label.setBounds(resize.locationX(50), resize.locationY(140), resize.width(200), resize.height(20));
+			highScoresGame1Label.setFont(new Font(highScoresGame1Label.getFont().getFontName(),highScoresGame1Label.getFont().getStyle(), resize.font(12)));
+			highScoresGame2Label.setBounds(resize.locationX(250), resize.locationY(140), resize.width(200), resize.height(20));
+			highScoresGame2Label.setFont(new Font(highScoresGame1Label.getFont().getFontName(),highScoresGame1Label.getFont().getStyle(), resize.font(12)));
+			highScoresGame3Label.setBounds(resize.locationX(50), resize.locationY(200), resize.width(200), resize.height(20));
+			highScoresGame3Label.setFont(new Font(highScoresGame1Label.getFont().getFontName(),highScoresGame1Label.getFont().getStyle(), resize.font(12)));
+			highScoresGame4Label.setBounds(resize.locationX(250), resize.locationY(200), resize.width(200), resize.height(20));
+			highScoresGame4Label.setFont(new Font(highScoresGame1Label.getFont().getFontName(),highScoresGame1Label.getFont().getStyle(), resize.font(12)));
+			highScoresGame1OutPut.setBounds(resize.locationX(50), resize.locationY(160), resize.width(200), resize.height(20));
+			highScoresGame1OutPut.setFont(new Font(highScoresGame1Label.getFont().getFontName(),highScoresGame1Label.getFont().getStyle(), resize.font(12)));
+			highScoresGame2OutPut.setBounds(resize.locationX(250), resize.locationY(160), resize.width(200), resize.height(20));
+			highScoresGame2OutPut.setFont(new Font(highScoresGame1Label.getFont().getFontName(),highScoresGame1Label.getFont().getStyle(), resize.font(12)));
+			highScoresGame3OutPut.setBounds(resize.locationX(50), resize.locationY(220), resize.width(200), resize.height(20));
+			highScoresGame3OutPut.setFont(new Font(highScoresGame1Label.getFont().getFontName(),highScoresGame1Label.getFont().getStyle(), resize.font(12)));
+			highScoresGame4OutPut.setBounds(resize.locationX(250), resize.locationY(220), resize.width(200), resize.height(20));
+			highScoresGame4OutPut.setFont(new Font(highScoresGame1Label.getFont().getFontName(),highScoresGame1Label.getFont().getStyle(), resize.font(12)));
 			
 			run.repaint();
 			redraw = false;
@@ -131,9 +217,13 @@ public class AccountScreen extends Screen
 		{
 			run.setScreen(new GameHubScreen(run));
 		}
-		else if(butPressed == 2)
+		else if(butPressed == 1) //Change password button
 		{
-			run.setScreen(new LoginScreen(run));
+			
+		}
+		else if(butPressed == 2) //Change pin button
+		{
+			
 		}
 		
 		butPressed = 0;

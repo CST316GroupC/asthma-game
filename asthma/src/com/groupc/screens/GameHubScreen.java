@@ -228,7 +228,7 @@ public class GameHubScreen extends Screen
 			LeaderBoardButton.setFont(new Font(LeaderBoardButton.getFont().getFontName(),LeaderBoardButton.getFont().getStyle(), resize.font(12)));
 			
 			//parent controls button
-			parentControlsButton.setBounds(resize.locationX(155), resize.locationY(10), resize.width(150), resize.height(30));
+			parentControlsButton.setBounds(resize.locationX(175), resize.locationY(10), resize.width(150), resize.height(30));
 			parentControlsButton.setFont(new Font(parentControlsButton.getFont().getFontName(),parentControlsButton.getFont().getStyle(), resize.font(12)));
 			
 			run.repaint();

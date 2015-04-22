@@ -9,6 +9,7 @@ import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.openal.SoundStore;
 
+import com.groupc.screens.AccountScreen;
 import com.groupc.screens.Game1Screen;
 import com.groupc.screens.GameHubScreen;
 import com.groupc.screens.LoginScreen;
@@ -45,7 +46,7 @@ public class Runner extends JFrame
 		player.playMusic(true);
 		screen = new LoginScreen(this);
 		//screen = new GameHubScreen(this);
-		//screen = new RewardScreen(this);
+		//screen = new AccountScreen(this);
 		setIconImage(windowIcon.getImage());
 	}
 	
