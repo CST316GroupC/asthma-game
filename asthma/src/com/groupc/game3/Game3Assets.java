@@ -67,7 +67,7 @@ public class Game3Assets extends Asset
 			FileInputStream in = new FileInputStream(FILENAME);
 			props.load(in);
 			in.close();
-			String temp = props.getProperty("firstTime", "true");
+			String temp = props.getProperty("game3FirstTime", "true");
 			if("true".equals(temp))
 			{
 				props.setProperty("game3PaperHealth", "3");
