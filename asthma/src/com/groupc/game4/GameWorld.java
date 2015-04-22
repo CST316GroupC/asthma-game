@@ -17,6 +17,7 @@ import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
+import com.groupc.game3.Game3Assets;
 import com.groupc.game4.*;
 import com.groupc.math.CollisionChecker;
 import com.groupc.math.Rectangle;
@@ -27,8 +28,6 @@ public class GameWorld extends GameScreen
 {
 	public static final float FRUSTUM_WIDTH = 10;
 	public static final float FRUSTUM_HEIGHT = 10;
-	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 500; //400 (the * 100 means the total width is 5000 pixels but only 400 shown)
-	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 25; //400 (the * 20 means the total height is 200 pixels but only 400 shown)
 	
 	public static final int WORLD_STATE_PAUSED = 0;
 	public static final int WORLD_STATE_PLAYING = 1;
@@ -36,9 +35,7 @@ public class GameWorld extends GameScreen
 	
     public static final float TEXT_SIZE = .3f;
     public static final int MAX_SCORE_DIGITS = 8; //99999999 max score
-    public static final int MAX_SEED_DIGITS = 4; //9999 max seeds
-    public static final int MAX_DISTANCE = 4; //9999 max distance
-    public static final int MAX_TIME = 60;
+    
 
 	
 	public static final int GRAVITY = -10;
@@ -46,8 +43,10 @@ public class GameWorld extends GameScreen
     public int state;
     public float timeLeft;
     public final Food[] food;
+    private static int maxTime;
     private int score;
     private float distance;
+    private int foodTimeBonus, foodScoreBonus;
     
     private Camera cam;
     private Random rand;
@@ -57,10 +56,14 @@ public class GameWorld extends GameScreen
 	{        
         super(assets);
         assets.reload();
-        timeLeft = MAX_TIME;
+        maxTime = Integer.parseInt(assets.getProps().getProperty("game4Timer"));
+        foodTimeBonus = Integer.parseInt(assets.getProps().getProperty("healthyFoodTimeBonus"));
+        foodScoreBonus = Integer.parseInt(assets.getProps().getProperty("healthyFoodScoreBonus"));
+        timeLeft = maxTime;
         rand = new Random();
         this.state = WORLD_STATE_PLAYING;
         cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+        score = Integer.parseInt(assets.getProps().getProperty("game4Score"));
         
         food = new Food[5];
 
@@ -90,8 +93,6 @@ public class GameWorld extends GameScreen
                 if(timeLeft <= 0)
                 {
                     state = WORLD_STATE_OVER;
-                    //TODO: Implement scoring based on total time played
-                    //score += distance/10;
                     save();                
                 }
                 break;
@@ -104,7 +105,6 @@ public class GameWorld extends GameScreen
     private void collision()
 	{
     	collisionFood();
-		// TODO Auto-generated method stub
 		
 	}
 	public void collisionFood()
@@ -147,9 +147,9 @@ public class GameWorld extends GameScreen
             {
                 int chance = rand.nextInt(4);
                 switch(chance){
-                case 0: food[i] = new Orange(0.5f + (rand.nextFloat() * (FRUSTUM_WIDTH - 1)), 0.5f + (rand.nextFloat() * (FRUSTUM_HEIGHT - 1)));
+                case 0: food[i] = new Orange(0.5f + (rand.nextFloat() * (FRUSTUM_WIDTH - 1)), 0.5f + (rand.nextFloat() * (FRUSTUM_HEIGHT - 1)), foodTimeBonus, foodScoreBonus);
                     break;
-                case 1: food[i] = new Broccoli(0.5f + (rand.nextFloat() * (FRUSTUM_WIDTH - 1)), 0.5f + (rand.nextFloat() * (FRUSTUM_HEIGHT - 1)));
+                case 1: food[i] = new Broccoli(0.5f + (rand.nextFloat() * (FRUSTUM_WIDTH - 1)), 0.5f + (rand.nextFloat() * (FRUSTUM_HEIGHT - 1)), foodTimeBonus, foodScoreBonus);
                     break;
                 case 2: food[i] = new Cake(0.5f + (rand.nextFloat() * (FRUSTUM_WIDTH - 1)), 0.5f + (rand.nextFloat() * (FRUSTUM_HEIGHT - 1)));
                     break;
@@ -166,7 +166,16 @@ public class GameWorld extends GameScreen
 	 */
 	private void save()
 	{
+		System.out.println(score);
+		assets.getProps().setProperty("game4Score", ""+score);
 		
+		//set new max score
+		if( Float.parseFloat(assets.getProps().getProperty("game4MaxScore")) < score)
+		{
+			assets.getProps().setProperty("game4MaxScore", ""+score);
+		}
+		
+		assets.save(Game4Assets.FILENAME);
 	}
 	
 	public void inputHandling()
@@ -218,7 +227,7 @@ public class GameWorld extends GameScreen
 	        {
 	            if(food[i] != null)
 	            {
-	                Rectangle rect = new Rectangle(food[i].position.x - .2f, food[i].position.y - .4f, 1f, 1f);
+	                Rectangle rect = new Rectangle(food[i].position.x - .5f, food[i].position.y - .5f, 1f, 1f);
 	                if(food[i] instanceof Orange){
 	                    assets.getImage("orange").draw(rect);
 	                }

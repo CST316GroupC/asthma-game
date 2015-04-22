@@ -6,12 +6,15 @@ import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
+import com.groupc.game4.Upgrades;
 import com.groupc.math.CollisionChecker;
 import com.groupc.math.Rectangle;
 import com.groupc.math.Vector;
 
 public class MainMenu extends GameScreen
 {	
+	public static final float FRUSTUM_WIDTH = 10;
+	public static final float FRUSTUM_HEIGHT = 10;
 	private final Camera cam;
 	
 	//Variables
@@ -21,18 +24,20 @@ public class MainMenu extends GameScreen
 	private final 	Rectangle	title;
 	private final 	Rectangle	play;
 	private final 	Rectangle	instruct;
+	private final	Rectangle	upgrades;
 	private final 	Vector 		mouseClick;
 	
 	
 	public MainMenu(Asset assets)
 	{
 		super(assets);
-		cam = new Camera(400, 400);
+		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 		cam.setCamera();
 		
-		title 		= new Rectangle(50, 300, 300, 100);
-		play 		= new Rectangle(125, 200, 150, 75);
-		instruct 	= new Rectangle(125, 100, 150, 75);
+		title 		= new Rectangle(0.8f, 6.5f, 9, 3);
+		play 		= new Rectangle(3.5f, 4, 3, 1.5f);
+		instruct 	= new Rectangle(3.5f, 2.5f, 3, 1.5f);
+		upgrades	= new Rectangle(3.5f, 1, 3, 1.5f);
 		
 		mouseClick 	= new Vector();
 	}
@@ -51,9 +56,14 @@ public class MainMenu extends GameScreen
 				this.dispose();
 				
 			}
-			if(CollisionChecker.PointToRect(mouseClick, instruct))
+			else if(CollisionChecker.PointToRect(mouseClick, instruct))
 			{
 				next = 2; //instruct display
+				this.dispose();
+			}
+			else if(CollisionChecker.PointToRect(mouseClick, upgrades))
+			{
+				next = 3; //upgrades display
 				this.dispose();
 			}
 		}
@@ -70,6 +80,7 @@ public class MainMenu extends GameScreen
 		TextDrawer.drawStringinRect("Game 4", title);
 		TextDrawer.drawStringinRect("Start", play);
 		TextDrawer.drawStringinRect("Instructions", instruct);
+		TextDrawer.drawStringinRect("Upgrades", upgrades);
 	}
 
 	
@@ -102,6 +113,10 @@ public class MainMenu extends GameScreen
 		else if(next == 2)
 		{
 			return new Instructions(assets);
+		}
+		else if(next == 3)
+		{
+			return new Upgrades(assets);
 		}
 		return null;
 	}
