@@ -28,7 +28,7 @@ public class Game1Test
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assets = new Game1Assets();
+		assets = new Game1Assets("test");
 		world = new World(assets);
 		world.update(0);
 		world.present(0);

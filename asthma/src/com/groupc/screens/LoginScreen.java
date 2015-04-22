@@ -208,7 +208,7 @@ public class LoginScreen extends Screen
 		String tempString = date.toString();
 		String currentDay = null;
 		
-		Vector<String> userNames = new Vector<String>();
+		Vector<String> emails = new Vector<String>();
 		Vector<String> days = new Vector<String>();
 		StringTokenizer st;
 		
@@ -221,7 +221,7 @@ public class LoginScreen extends Screen
 			while((line = br.readLine()) != null)
 			{
 				st = new StringTokenizer(line, " | ");
-				userNames.add(st.nextToken()); //user
+				emails.add(st.nextToken()); //user
 				st.nextToken(); //volume
 				st.nextToken(); //force
 				st.nextToken(); //day of week
@@ -249,10 +249,10 @@ public class LoginScreen extends Screen
 			st.nextToken(); // timezone
 			st.nextToken(); // year
 		}
-		for(int i = 0; i < userNames.size(); i++)
+		for(int i = 0; i < emails.size(); i++)
 		{
-			if(userNames.elementAt(i).equals(userNameTF.getText()))
-			{
+			if(emails.elementAt(i).equals(userNameTF.getText()))
+			{		
 				if(days.elementAt(i).equals(currentDay))
 				{
 					return false;

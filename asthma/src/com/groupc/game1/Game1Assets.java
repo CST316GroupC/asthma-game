@@ -18,12 +18,11 @@ import com.groupc.game.TextureRegion;
 
 public class Game1Assets extends Asset
 {	
-	public final static String FILENAME = "resources/game1/joey.properties";
 	private static Texture sheet;
 	
-	public Game1Assets()
+	public Game1Assets(String user)
 	{
-		super("test");
+		super(user);
 		try {
 			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/atlas.png"));
 			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/mainmenu.png"));
@@ -71,7 +70,7 @@ public class Game1Assets extends Asset
 	public void reload()
 	{
 		try {
-			FileInputStream in = new FileInputStream(FILENAME);
+			FileInputStream in = new FileInputStream(getFilename());
 			props.load(in);
 			in.close();
 			String temp = props.getProperty("firstTime", "true");
@@ -92,9 +91,4 @@ public class Game1Assets extends Asset
 		} 
 	}
 
-	@Override
-	public String getFilename() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
