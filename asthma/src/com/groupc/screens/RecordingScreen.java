@@ -84,11 +84,28 @@ public class RecordingScreen extends Screen
 		this.setBackground(Color.WHITE);
 		errorMessage.setForeground(Color.RED);
 		invalidInputMessage.setForeground(Color.RED);
+
 		
+		//Enter Key is Pressed
+		volumeTF.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				volumeTF.transferFocus();
+			}
+		});
+		
+		forceTF.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				butPressed = 4;
+			}
+		});
 		
 		////Buttons////
-		
-		
 		manualInputButton.addActionListener(new ActionListener()
 		{
 			@Override
