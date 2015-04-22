@@ -30,6 +30,7 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import com.groupc.Runner;
 import com.groupc.math.Resize;
@@ -50,12 +51,12 @@ public class RecordingScreen extends Screen
 	//Display Elements
 	NavigationBar 	navBar			= new NavigationBar(run,true,false,"Spirometer Input");
 	
-	JLabel 			text2			= new JLabel("No Spirometer detected");
-	JLabel 			text3			= new JLabel("Check connection or submit manual input");
-	JLabel     		errorMessage    = new JLabel("Missing Information*");
-	JLabel     		invalidInputMessage    = new JLabel("Please insert a number*");
-	JLabel 			volumeLabel		= new JLabel("Volume*:");
-	JLabel 			forceLabel		= new JLabel("Force*:");
+	JLabel 		text2					= new JLabel("No Spirometer detected");
+	JLabel 		text3					= new JLabel("Check connection or submit manual input");
+	JLabel     	errorMessage    		= new JLabel("Missing Information*",SwingConstants.CENTER);
+	JLabel     	invalidInputMessage    	= new JLabel("Please insert a number*",SwingConstants.CENTER);
+	JLabel 		volumeLabel				= new JLabel("Volume*: ",SwingConstants.RIGHT);
+	JLabel 		forceLabel				= new JLabel("Force*: ",SwingConstants.RIGHT);
 	
 	JButton 		manualInputButton		= new JButton("Manual Input");
 	
@@ -83,11 +84,28 @@ public class RecordingScreen extends Screen
 		this.setBackground(Color.WHITE);
 		errorMessage.setForeground(Color.RED);
 		invalidInputMessage.setForeground(Color.RED);
+
 		
+		//Enter Key is Pressed
+		volumeTF.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				volumeTF.transferFocus();
+			}
+		});
+		
+		forceTF.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				butPressed = 4;
+			}
+		});
 		
 		////Buttons////
-		
-		
 		manualInputButton.addActionListener(new ActionListener()
 		{
 			@Override
@@ -99,8 +117,8 @@ public class RecordingScreen extends Screen
 		errorMessage.setVisible(false);
 		invalidInputMessage.setVisible(false);
 		
-		this.add(text2);
-		this.add(text3);
+		//this.add(text2);
+		//this.add(text3);
 		this.add(manualInputButton);
 		this.add(volumeTF);
 		this.add(forceTF);
@@ -181,25 +199,25 @@ public class RecordingScreen extends Screen
 			text3.setFont(new Font(text3.getFont().getFontName(),text3.getFont().getStyle(), resize.font(12)));	
 			
 			//manualInputButton
-			manualInputButton.setBounds(resize.locationX(170), resize.locationY(400), resize.width(130), resize.height(25));
+			manualInputButton.setBounds(resize.locationX(175), resize.locationY(400), resize.width(150), resize.height(30));
 			manualInputButton.setFont(new Font(manualInputButton.getFont().getFontName(),manualInputButton.getFont().getStyle(), resize.font(12)));	
 			
-			errorMessage.setBounds(resize.locationX(170), resize.locationY(380), resize.width(150), resize.height(20));
+			errorMessage.setBounds(resize.locationX(175), resize.locationY(380), resize.width(150), resize.height(20));
 			errorMessage.setFont(new Font(errorMessage.getFont().getFontName(),errorMessage.getFont().getStyle(), resize.font(12)));
 			
-			invalidInputMessage.setBounds(resize.locationX(165), resize.locationY(380), resize.width(150), resize.height(20));
+			invalidInputMessage.setBounds(resize.locationX(175), resize.locationY(380), resize.width(150), resize.height(20));
 			invalidInputMessage.setFont(new Font(invalidInputMessage.getFont().getFontName(),invalidInputMessage.getFont().getStyle(), resize.font(12)));
 			
-			volumeTF.setBounds(resize.locationX(170), resize.locationY(331), resize.width(130), resize.height(20));
+			volumeTF.setBounds(resize.locationX(175), resize.locationY(250), resize.width(150), resize.height(20));
 			volumeTF.setFont(new Font(volumeTF.getFont().getFontName(),volumeTF.getFont().getStyle(), resize.font(12)));
 			
-			forceTF.setBounds(resize.locationX(170), resize.locationY(361), resize.width(130), resize.height(20));
+			forceTF.setBounds(resize.locationX(175), resize.locationY(280), resize.width(150), resize.height(20));
 			forceTF.setFont(new Font(forceTF.getFont().getFontName(),forceTF.getFont().getStyle(), resize.font(12)));
 			
-			volumeLabel.setBounds(resize.locationX(107), resize.locationY(330), resize.width(130), resize.height(20));
+			volumeLabel.setBounds(resize.locationX(75), resize.locationY(250), resize.width(100), resize.height(20));
 			volumeLabel.setFont(new Font(volumeLabel.getFont().getFontName(),volumeLabel.getFont().getStyle(), resize.font(12)));
 			
-			forceLabel.setBounds(resize.locationX(120), resize.locationY(360), resize.width(130), resize.height(20));
+			forceLabel.setBounds(resize.locationX(75), resize.locationY(280), resize.width(100), resize.height(20));
 			forceLabel.setFont(new Font(forceLabel.getFont().getFontName(),forceLabel.getFont().getStyle(), resize.font(12)));
 			
 			run.repaint();

@@ -158,17 +158,17 @@ public class Tokens
 	{
 		try 
 		{
-			FileInputStream in = new FileInputStream("tokens.properties");
+			FileInputStream in = new FileInputStream("resources/interface/parent_controls/"+user+".properties");
 			props.load(in);
 			in.close();
-			String temp = props.getProperty("firstTime", "true");
+			String temp = props.getProperty("tokenfirstTime", "true");
 			if("true".equals(temp))
 			{
-				props.setProperty(user, ""+tokenTotal);
-				props.setProperty("firstTime", "false");
+				props.setProperty("tokens", ""+tokenTotal);
+				props.setProperty("tokenfirstTime", "false");
 				save();
 			}
-			tokenTotal = Integer.parseInt(props.getProperty(user, "0"));
+			tokenTotal = Integer.parseInt(props.getProperty("tokens", "0"));
 		} 
 		catch (IOException e1) 
 		{
@@ -181,8 +181,8 @@ public class Tokens
 		FileOutputStream out;
 		try
 		{
-			props.setProperty(user, ""+tokenTotal);
-			out = new FileOutputStream("tokens.properties");
+			props.setProperty("tokens", ""+tokenTotal);
+			out = new FileOutputStream("resources/interface/parent_controls/"+user+".properties");
 			props.store(out, "---No Comment---");
 			out.close();
 		}
