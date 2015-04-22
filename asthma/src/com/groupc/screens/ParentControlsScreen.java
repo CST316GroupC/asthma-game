@@ -66,7 +66,7 @@ public class ParentControlsScreen extends Screen
 	JLabel  pinLabel      		= new JLabel("Enter Your Parent Pin",SwingConstants.CENTER);
 	JLabel  pinErrorLabel 		= new JLabel("Incorrect Pin",SwingConstants.CENTER);
 	JLabel  timeControlsLabel 	= new JLabel("Time Controls");
-	JLabel  gameControlsLabel 	= new JLabel("Game Controls");
+	JLabel  gameControlsLabel 	= new JLabel("Lock/Unlock Games");
 	JLabel  alertsLabel       	= new JLabel("Alerts");
 	JLabel  hourLabel         	= new JLabel("hr",SwingConstants.CENTER);
 	JLabel  minuteLabel       	= new JLabel("min",SwingConstants.CENTER);
@@ -125,6 +125,15 @@ public class ParentControlsScreen extends Screen
 		message.setForeground(Color.RED);
 		
 		////Buttons////
+		//Enter Key is Pressed
+		pinPF.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				checkPin();
+			}
+		});
 		
 		//pinButton
 		pinButton.addActionListener(new ActionListener()
@@ -169,27 +178,27 @@ public class ParentControlsScreen extends Screen
 		this.add(pinLabel);
 		this.add(pinPF);
 		this.add(pinButton);
-		this.add(pinForgotButton);
+		//this.add(pinForgotButton);
 		this.add(message);
 		this.add(pinBox);
-		this.add(timeControlsSep);
-		this.add(timeControlsLabel);
+		//this.add(timeControlsSep);
+		//this.add(timeControlsLabel);
 		this.add(gameControlsLabel);
 		this.add(gameControlsSep);
-		this.add(alertsLabel);
-		this.add(alertsSep);
-		this.add(timeCB);
-		this.add(hourTF);
-		this.add(minuteTF);
-		this.add(hourLabel);
-		this.add(minuteLabel);
+		//this.add(alertsLabel);
+		//this.add(alertsSep);
+		//this.add(timeCB);
+		//this.add(hourTF);
+		//this.add(minuteTF);
+		//this.add(hourLabel);
+		//this.add(minuteLabel);
 		this.add(Game1CB);
 		this.add(Game2CB);
 		this.add(Game3CB);
 		this.add(Game4CB);
-		this.add(EmailCB);
-		this.add(emailTF);
-		this.add(emailFieldLabel);	
+		//this.add(EmailCB);
+		//this.add(emailTF);
+		//this.add(emailFieldLabel);	
 		this.add(cancelButton);
 		this.add(saveButton);
 		this.add(pageBox);
@@ -226,7 +235,7 @@ public class ParentControlsScreen extends Screen
 			pinPF.setFont(new Font(pinPF.getFont().getFontName(),pinPF.getFont().getStyle(), resize.font(12)));
 			
 			//pinButton
-			pinButton.setBounds(resize.locationX(170), resize.locationY(280), resize.width(160), resize.height(30));
+			pinButton.setBounds(resize.locationX(170), resize.locationY(300), resize.width(160), resize.height(30));
 			pinButton.setFont(new Font(pinButton.getFont().getFontName(),pinButton.getFont().getStyle(), resize.font(12)));
 			
 			//pinForgotButton
@@ -234,11 +243,11 @@ public class ParentControlsScreen extends Screen
 			pinForgotButton.setFont(new Font(pinForgotButton.getFont().getFontName(),pinForgotButton.getFont().getStyle(), resize.font(12)));
 			
 			//pinError
-			pinErrorLabel.setBounds(resize.locationX(100), resize.locationY(200), resize.width(300), resize.height(20));
+			pinErrorLabel.setBounds(resize.locationX(100), resize.locationY(280), resize.width(300), resize.height(20));
 			pinErrorLabel.setFont(new Font(pinErrorLabel.getFont().getFontName(),pinErrorLabel.getFont().getStyle(), resize.font(12)));
 					
 			//pageBox
-			pageBox.setBounds(resize.locationX(80), resize.locationY(100), resize.width(340), resize.height(300));
+			pageBox.setBounds(resize.locationX(80), resize.locationY(160), resize.width(340), resize.height(150));
 			pageBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			//timeControls
@@ -269,10 +278,13 @@ public class ParentControlsScreen extends Screen
 			//GameCB
 			Game1CB.setBounds(resize.locationX(100), resize.locationY(210), resize.width(150), resize.height(20));
 			Game1CB.setFont(new Font(Game1CB.getFont().getFontName(),Game1CB.getFont().getStyle(), resize.font(12)));
-			Game2CB.setBounds(resize.locationX(100), resize.locationY(240), resize.width(150), resize.height(20));
+			
+			Game2CB.setBounds(resize.locationX(250), resize.locationY(210), resize.width(150), resize.height(20));
 			Game2CB.setFont(new Font(Game2CB.getFont().getFontName(),Game2CB.getFont().getStyle(), resize.font(12)));
-			Game3CB.setBounds(resize.locationX(250), resize.locationY(210), resize.width(150), resize.height(20));
+			
+			Game3CB.setBounds(resize.locationX(100), resize.locationY(240), resize.width(150), resize.height(20));
 			Game3CB.setFont(new Font(Game3CB.getFont().getFontName(),Game3CB.getFont().getStyle(), resize.font(12)));
+			
 			Game4CB.setBounds(resize.locationX(250), resize.locationY(240), resize.width(150), resize.height(20));
 			Game4CB.setFont(new Font(Game4CB.getFont().getFontName(),Game4CB.getFont().getStyle(), resize.font(12)));
 			
@@ -468,6 +480,10 @@ public class ParentControlsScreen extends Screen
 			enableControls(true);
 			checkInfo();
 		}
+		else
+		{
+			pinErrorLabel.setVisible(true);
+		}
 	}
 	
 	public void enableControls(boolean yes)
@@ -501,6 +517,7 @@ public class ParentControlsScreen extends Screen
 		pinPF.setVisible(yes);
 		pinButton.setVisible(yes);
 		pinForgotButton.setVisible(yes);
+		pinErrorLabel.setVisible(false);
 	}
 
 	public void setUser(String uName)

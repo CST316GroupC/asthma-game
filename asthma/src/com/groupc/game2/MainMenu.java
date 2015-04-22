@@ -19,7 +19,7 @@ public class MainMenu extends GameScreen
 	private final Rectangle upgrade;
 	private final Rectangle instruct;
 	private final Vector mouseClick;
-	//private int next;
+	private int next;
 	
 	public MainMenu(Asset assets)
 	{
@@ -44,7 +44,7 @@ public class MainMenu extends GameScreen
 			if(CollisionChecker.PointToRect(mouseClick, play))
 			{
 				this.dispose();
-			//	next = 1;
+				next = 1;
 			}
 			if(CollisionChecker.PointToRect(mouseClick, options))
 			{
@@ -54,7 +54,7 @@ public class MainMenu extends GameScreen
 			if(CollisionChecker.PointToRect(mouseClick, upgrade))
 			{
 				this.dispose();
-			//	next = 3;
+				next = 3;
 			}
 			if(CollisionChecker.PointToRect(mouseClick, instruct))
 			{
@@ -73,6 +73,7 @@ public class MainMenu extends GameScreen
 		assets.getImage("background").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		TextDrawer.drawStringinRect("Maze Game", title, false);
 		TextDrawer.drawStringinRect("Play", play, true);
+		TextDrawer.drawStringinRect("upgrade", upgrade, true);
 	}
 
 	
@@ -97,7 +98,14 @@ public class MainMenu extends GameScreen
 	@Override
 	public GameScreen getNext() 
 	{
-		return new MazeWorld(assets);
+		if(next == 1)
+		{
+			return new MazeWorld(assets);
+		}
+		else
+		{
+			return new UpgradeScreen(assets);
+		}
 	}
 }
 

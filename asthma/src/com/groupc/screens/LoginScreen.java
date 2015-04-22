@@ -179,10 +179,10 @@ public class LoginScreen extends Screen
 		this.add(userNameTF);
 		this.add(passwordLabel);
 		this.add(passwordTF);
-		this.add(saveLoginRadio);
+		//this.add(saveLoginRadio);
 		this.add(loginButton);
-		this.add(passRetrievalLabel);
-		this.add(passRetrievalButton);
+		//this.add(passRetrievalLabel);
+		//this.add(passRetrievalButton);
 		this.add(loginErrorMessage);
 		this.add(loginBox);
 		this.add(background);
@@ -313,7 +313,7 @@ public class LoginScreen extends Screen
 			background.setIcon(new ImageIcon(backgroundImage.getImage().getScaledInstance(resize.width(500), resize.height(500), java.awt.Image.SCALE_SMOOTH)));
 			
 			//loginBox
-			loginBox.setBounds(resize.locationX(100), resize.locationY(200), resize.width(300), resize.height(200));
+			loginBox.setBounds(resize.locationX(100), resize.locationY(200), resize.width(300), resize.height(175));
 			loginBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			//UserName
@@ -393,92 +393,94 @@ public class LoginScreen extends Screen
 
 	public void checkLogin() throws IOException
 	{
-		/*if(Database.getDoctor(userNameTF.getText(), passwordTF.getText()))
+		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText()))
 		{
-			run.setUserName(userNameTF.getText());
-			run.setScreen(new DoctorScreen(run));
+			DoctorScreen ds = new DoctorScreen(run);
+			ds.getPatients();
+			run.setScreen(ds);
+
 		}
 		else if(Database.getPatient(userNameTF.getText(), passwordTF.getText()))
 		{
 			run.setUserName(userNameTF.getText());
 			run.setScreen(new TutorialScreen(run));
-		}*/
-
-		String line = null;
-		char[][] passWords = new char[20][30];  //need to make dynamic otherwise only 20 patients allowed!!
-		int counter = 0;
-		String tempString;
-		char tempChar;
-		//can create a patients' doctor with new text file
-		
-		Vector<String> types = new Vector<String>();
-		Vector<String> emails = new Vector<String>();
-		
-		
-		FileReader fr = new FileReader("login_information.txt");  //maybe create an 'onStart()' function for runner
-		BufferedReader br = new BufferedReader(fr);
-		StringTokenizer st;
-		
-		
-		while((line = br.readLine()) != null)
-		{
-			st = new StringTokenizer(line, " | ");
-			emails.add(counter, st.nextToken());
-			st.nextToken();  //first name
-			st.nextToken();  //last name
-			st.nextToken();  //dob
-			tempString = st.nextToken();  //password
-			types.add(counter, st.nextToken()); //type
-			for(int i = 0; i < tempString.length(); ++i)
-			{
-				 passWords[counter][i] = tempString.charAt(i);
-
-			}
-			counter += 1;
 		}
-		br.close();
-		
-		for(int i = 0; i < emails.size(); ++i)
-		{
-			tempString = new String (passWords[i]);
-			tempString = tempString.trim();
-			passWords[i] = tempString.toCharArray();
+
+			String line = null;
+			char[][] passWords = new char[20][30];  //need to make dynamic otherwise only 20 patients allowed!!
+			int counter = 0;
+			String tempString;
+			char tempChar;
+			//can create a patients' doctor with new text file
 			
-			if(userNameTF.getText().equals(emails.elementAt(i)) && Arrays.equals(passwordTF.getPassword(),passWords[i]))
+			Vector<String> types = new Vector<String>();
+			Vector<String> emails = new Vector<String>();
+			
+			
+			FileReader fr = new FileReader("login_information.txt");  //maybe create an 'onStart()' function for runner
+			BufferedReader br = new BufferedReader(fr);
+			StringTokenizer st;
+			
+			
+			while((line = br.readLine()) != null)
 			{
-				//Use variable type at the top to switch between doctor login and patient login
-				//Doctors
-				if(types.elementAt(i).equals("0"))
+				st = new StringTokenizer(line, " | ");
+				emails.add(counter, st.nextToken());
+				st.nextToken();  //first name
+				st.nextToken();  //last name
+				st.nextToken();  //dob
+				tempString = st.nextToken();  //password
+				types.add(counter, st.nextToken()); //type
+				for(int i = 0; i < tempString.length(); ++i)
 				{
-					run.setUserName(userNameTF.getText());
-					DoctorScreen ds = new DoctorScreen(run);
-					ds.getPatients();
-					run.setScreen(ds);
-				}else
-				//Patients
-				if(types.elementAt(i).equals("1"))
+					 passWords[counter][i] = tempString.charAt(i);
+	
+				}
+				counter += 1;
+			}
+			br.close();
+			
+			for(int i = 0; i < emails.size(); ++i)
+			{
+				tempString = new String(passWords[i]);
+				tempString = tempString.trim();
+				passWords[i] = tempString.toCharArray();
+				
+				if(userNameTF.getText().equals(emails.elementAt(i)) && Arrays.equals(passwordTF.getPassword(), passWords[i]))
 				{
-					newProperties();
-					run.setUserName(userNameTF.getText());
-					if(hasNotTakenReadings(userNameTF.getText()))
+					//Use variable type at the top to switch between doctor login and patient login
+					//Doctors
+					if(types.elementAt(i).equals("0"))
 					{
-						
-						TutorialScreen ts = new TutorialScreen(run);
-						run.setScreen(ts);
-					} else 
+						run.setUserName(userNameTF.getText());
+						DoctorScreen ds = new DoctorScreen(run);
+						ds.getPatients();
+						run.setScreen(ds);
+					}else
+					//Patients
+					if(types.elementAt(i).equals("1"))
 					{
-						GameHubScreen ghs = new GameHubScreen(run);
-						run.setScreen(ghs);
+						newProperties();
+						run.setUserName(userNameTF.getText());
+						if(hasNotTakenReadings(userNameTF.getText()))
+						{
+							
+							TutorialScreen ts = new TutorialScreen(run);
+							run.setScreen(ts);
+						} else 
+						{
+							GameHubScreen ghs = new GameHubScreen(run);
+							run.setScreen(ghs);
+						}
 					}
+				}
+				if(!loginErrorDrawn)
+				{
+					loginErrorMessage.setVisible(true);
+					run.repaint();
+					loginErrorDrawn = true;
 				}
 			}
 		
-			if(!loginErrorDrawn)
-			{
-				loginErrorMessage.setVisible(true);
-				run.repaint();
-				loginErrorDrawn = true;
-			}
-		}
 	}
 }

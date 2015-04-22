@@ -101,7 +101,7 @@ public class Options extends GameScreen
 	public void dispose() 
 	{
 		assets.setProps("sound", sound);
-		assets.save(Game1Assets.FILENAME);
+		assets.save();
 		isClosing = true;
 	}
 

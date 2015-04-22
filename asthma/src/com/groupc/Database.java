@@ -16,9 +16,7 @@ public class Database {
 	   
 	   public static boolean getDoctor(String doctor_email, String doctor_password){
 		   Connection conn = null;
-		   Statement stmt = null;	
-		   String doc_e = doctor_email;
-		   String doc_pw = doctor_password;
+		   Statement stmt = null;
 		   
 		   try{
 			      //STEP 2: Register JDBC driver
@@ -32,7 +30,7 @@ public class Database {
 			      System.out.println("Validating login...");
 			      stmt = conn.createStatement();
 			      String sql;
-			      sql = "select doctor_id from doctors where doctor_email = '" + doc_e + "' and doctor_password = '" + doc_pw + "'";
+			      sql = "select doc_id from doctors where doc_email = '" + doctor_email + "' and doc_password = '" + doctor_password + "';";
 			   
 			      ResultSet rs = stmt.executeQuery(sql);
 			      
@@ -40,10 +38,10 @@ public class Database {
 			      while(rs.next()){
 			    	 System.out.println("valid");
 			         //Retrieve by column name
-			         String id  = rs.getString("doctor_id");
+			         String id  = rs.getString("doc_id");
 
 			         //Display values
-			         System.out.print("ID: " + id);
+			         System.out.println("ID: " + id);
 			         return true;
 			         
 			      }
@@ -104,7 +102,7 @@ public class Database {
 			         String id  = rs.getString("pat_id");
 
 			         //Display values
-			         System.out.print("ID: " + id);
+			         System.out.println("ID: " + id);
 			         return true;
 			         
 			      }
@@ -136,15 +134,13 @@ public class Database {
 		   System.out.println("Invalid login");
 		   return false;
 	   }
-	   public static boolean addPatient(String patient_fname, String patient_lname, String patient_yob, String patient_password, String patient_email, String patient_contact){
+	   public static boolean addPatient(String patient_fname, String patient_lname, String patient_mob, String patient_dob, String patient_yob, String patient_password, String patient_email, String patient_contact){
 		   Connection conn = null;
 		   Statement stmt = null;	
-		   String pat_f = patient_fname;
-		   String pat_l = patient_lname;
-		   String pat_pw = patient_password;
-		   String pat_yob = patient_yob;
-		   String pat_email = patient_email;
-		   String pat_cont = patient_contact;
+		   Statement stmt2 = null;
+		   String patient_birth = (patient_mob+"/"+patient_dob+"/"+patient_yob);
+		   
+		   
 		   
 		   try{
 			      //STEP 2: Register JDBC driver
@@ -153,18 +149,33 @@ public class Database {
 			      //STEP 3: Open a connection
 			      System.out.println("Connecting to database...");
 			      conn = DriverManager.getConnection(DB_URL,USER,PASS);
-
+			      
 			      //STEP 4: Execute a query
-			      System.out.println("Updating database...");
+			      
+			      System.out.println("Validating unique email...");
 			      stmt = conn.createStatement();
 			      String sql;
-			      sql = "insert into patients values (0, '" + pat_f + "', '" + pat_l + "', '" + pat_yob + "', '" + pat_email + "', '" + pat_pw +"', '" + pat_cont + "');";
+			      sql = "select pat_email from patients where pat_email = '" + patient_email + "';";
 			   
-			      stmt.executeUpdate(sql);
+			      ResultSet rs = stmt.executeQuery(sql);
+			      
+			      while(rs.next()){
+			    	 System.out.println("email already registered");
+			         //Retrieve by column name
+			         stmt.close();
+			         return false;
+			      }
+			      
+			      System.out.println("Updating database...");
+			      stmt2 = conn.createStatement();
+			      String sql2;
+			      sql2 = "insert into patients values (0, '" + patient_fname + "', '" + patient_lname + "', '" + patient_birth + "', '" + patient_email + "', '" + patient_password +"', '" + patient_contact + "', '0', '0', '0', '0', '9999');";
+			   
+			      stmt2.executeUpdate(sql2);
 			     
 			      
 			      //STEP 6: Clean-up environment
-			      stmt.close();
+			      stmt2.close();
 			      conn.close();
 			   }catch(SQLException se){
 			      //Handle errors for JDBC
@@ -234,6 +245,135 @@ public class Database {
 			      }//end finally try
 			   }//end try
 		   return true;
+	   }
+	   
+	   public static boolean updatepin(String patient_email, String patient_oldpin, String patient_newpin){
+		   Connection conn = null;
+		   Statement stmt = null;	
+		   
+		   try{
+			      //STEP 2: Register JDBC driver
+			      Class.forName(JDBC_DRIVER);
+
+			      //STEP 3: Open a connection
+			      System.out.println("Connecting to database...");
+			      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+			      //STEP 4: Execute a query
+			      stmt = conn.createStatement();
+			      String sql;
+			      sql = "select pat_id from patients where pat_email = '" + patient_email + "' and pin = "+patient_oldpin+";";
+			   
+			      ResultSet rs = stmt.executeQuery(sql);
+			      
+			      //STEP 5: Extract data from result set
+			      while(rs.next()){
+			    	 System.out.println("valid old pin");
+			         //Retrieve by column name
+			         String id  = rs.getString("oldpin");
+			         
+			         String sql2;
+					 sql2 = "update patients set pin="+patient_newpin+"where pat_email = '"+patient_email+"';";
+					     stmt.executeUpdate(sql2);
+			         //Display values
+					 System.out.println("old pin: " + id);
+			         System.out.println("new pin: " + patient_newpin);
+			         return true;
+			         
+			      }
+			      
+			      //STEP 6: Clean-up environment
+			      rs.close();
+			      stmt.close();
+			      conn.close();
+			   }catch(SQLException se){
+			      //Handle errors for JDBC
+			      se.printStackTrace();
+			   }catch(Exception e){
+			      //Handle errors for Class.forName
+			      e.printStackTrace();
+			   }finally{
+			      //finally block used to close resources
+			      try{
+			         if(stmt!=null)
+			            stmt.close();
+			      }catch(SQLException se2){
+			      }// nothing we can do
+			      try{
+			         if(conn!=null)
+			            conn.close();
+			      }catch(SQLException se){
+			         se.printStackTrace();
+			      }//end finally try
+			   }//end try
+		   System.out.println("Invalid login");
+		   return false;
+	   }
+	   
+	   public static boolean updateg1(String patient_email, String score){
+		   Connection conn = null;
+		   Statement stmt = null;	
+		   
+		   try{
+			      //STEP 2: Register JDBC driver
+			      Class.forName(JDBC_DRIVER);
+
+			      //STEP 3: Open a connection
+			      System.out.println("Connecting to database...");
+			      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+			      //STEP 4: Execute a query
+			      stmt = conn.createStatement();
+			      String sql;
+			      sql = "select gm_1 from patients where pat_email = '" + patient_email + "';";
+			   
+			      ResultSet rs = stmt.executeQuery(sql);
+			      
+			      //STEP 5: Extract data from result set
+			      while(rs.next()){
+			    	 System.out.println("valid");
+			         //Retrieve by column name
+			         String id  = rs.getString("gm_1");
+			         int aInt = Integer.parseInt(id);
+			         int bInt = Integer.parseInt(score);
+			         
+			         if (bInt>aInt){
+			        	 String sql2;
+					     sql2 = "update patients set gm_1="+score+"where pat_email = '"+patient_email+"';";
+					     stmt.executeUpdate(sql2);
+			         }
+			         //Display values
+			         System.out.println("Old score: " + id);
+			         return true;
+			         
+			      }
+			      
+			      //STEP 6: Clean-up environment
+			      rs.close();
+			      stmt.close();
+			      conn.close();
+			   }catch(SQLException se){
+			      //Handle errors for JDBC
+			      se.printStackTrace();
+			   }catch(Exception e){
+			      //Handle errors for Class.forName
+			      e.printStackTrace();
+			   }finally{
+			      //finally block used to close resources
+			      try{
+			         if(stmt!=null)
+			            stmt.close();
+			      }catch(SQLException se2){
+			      }// nothing we can do
+			      try{
+			         if(conn!=null)
+			            conn.close();
+			      }catch(SQLException se){
+			         se.printStackTrace();
+			      }//end finally try
+			   }//end try
+		   System.out.println("Invalid login");
+		   return false;
 	   }
 }
 	   /*

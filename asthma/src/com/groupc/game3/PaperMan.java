@@ -8,7 +8,8 @@ public class PaperMan extends MovingGameObject
 	public final static float WIDTH = 0.1f;
 	public final static float HEIGHT = 1f;
 	
-	
+
+	public final static int MAX_HEALTH = 10;
 	public final static int STATE_NORMAL = 0;
 	public final static int STATE_HIT = 1;
 	public final static int STATE_GONE = 2;
@@ -72,7 +73,7 @@ public class PaperMan extends MovingGameObject
 	
 	public void hitHealthGlobe()
 	{
-		if( currentHealth < 12 )
+		if( currentHealth < MAX_HEALTH )
 		{
 			currentHealth += 1;
 			
