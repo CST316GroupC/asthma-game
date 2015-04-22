@@ -73,16 +73,16 @@ public class Game1Assets extends Asset
 			FileInputStream in = new FileInputStream(getFilename());
 			props.load(in);
 			in.close();
-			String temp = props.getProperty("firstTime", "true");
+			String temp = props.getProperty("joeyfirstTime", "true");
 			if("true".equals(temp))
 			{
-				props.setProperty("speedMult", "1");
-				props.setProperty("statima", "1");
-				props.setProperty("score", "0");
-				props.setProperty("maxDistance", "0");
-				props.setProperty("seeds", "0");
-				props.setProperty("firstTime", "false");
-				props.setProperty("sound", "true");
+				props.setProperty("joeyspeedMult", "1");
+				props.setProperty("joeystatima", "1");
+				props.setProperty("joeyscore", "0");
+				props.setProperty("joeymaxDistance", "0");
+				props.setProperty("joeyseeds", "0");
+				props.setProperty("joeyfirstTime", "false");
+				props.setProperty("joeysound", "true");
 				save();
 			}
 		} catch (IOException e1) {

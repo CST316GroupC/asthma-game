@@ -38,9 +38,9 @@ public class UpgradeScreen extends GameScreen
 		mouseClick = new Vector();
 		
 		//get the current saved data
-		seeds = Integer.parseInt(assets.getProps().getProperty("seeds"));
-		speedMult = Integer.parseInt(assets.getProps().getProperty("speedMult"));
-		flaps = Integer.parseInt(assets.getProps().getProperty("statima"));
+		seeds = Integer.parseInt(assets.getProps().getProperty("joeyseeds"));
+		speedMult = Integer.parseInt(assets.getProps().getProperty("joeyspeedMult"));
+		flaps = Integer.parseInt(assets.getProps().getProperty("joeystatima"));
 	}
 
 	
@@ -63,7 +63,7 @@ public class UpgradeScreen extends GameScreen
 						{
 							seeds -= prices[speedMult];
 							speedMult++;
-							assets.getProps().setProperty("speedMult", "" + speedMult);
+							assets.getProps().setProperty("joeyspeedMult", "" + speedMult);
 						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, upgradeFlaps))
@@ -72,7 +72,7 @@ public class UpgradeScreen extends GameScreen
 						{
 							seeds -= prices[flaps];
 							flaps++;
-							assets.getProps().setProperty("statima", "" + flaps);
+							assets.getProps().setProperty("joeystatima", "" + flaps);
 						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, back))
@@ -80,7 +80,7 @@ public class UpgradeScreen extends GameScreen
 						dispose();
 					}
 					
-					assets.getProps().setProperty("seeds", "" + seeds);
+					assets.getProps().setProperty("joeyseeds", "" + seeds);
 		        }
 		    }
 		}

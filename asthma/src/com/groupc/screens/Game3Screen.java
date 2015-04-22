@@ -84,7 +84,7 @@ public class Game3Screen extends Screen
 			Display.setParent(canvas);
 			Display.create();
 			TextDrawer.prepare();
-			assets = new Game3Assets();
+			assets = new Game3Assets(run.getUserName());
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

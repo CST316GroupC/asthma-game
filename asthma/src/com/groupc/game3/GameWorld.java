@@ -185,6 +185,7 @@ public class GameWorld extends GameScreen
 		switch(state)
 		{
 			case WORLD_STATE_PLAYING:
+				save();
 				updateRain();
 				updateHealthGlobe();
 				updateTreasure();

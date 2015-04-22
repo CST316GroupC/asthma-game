@@ -75,6 +75,7 @@ public class GameWorld extends GameScreen
         switch(state)
         {
             case WORLD_STATE_PLAYING:
+            	save();
                 updateFood();
     			for(int i = 0; i < food.length; i++)
     			{

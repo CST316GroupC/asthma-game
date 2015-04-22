@@ -90,17 +90,17 @@ W      S      W
 WWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWW
 W      SW    EW   //Level 6, meant to be slightly difficult
-W       W PPPPW
+W       WAPPPPW
 W  PPPPPW     W
-W       WPPPP W
+W       WPPPPAW
 W       W     W
-WPPPPP  W PPPPW
+WPPPPP  WAPPPPW
 W       W     W
-W       WPPPP W
+W       WPPPPAW
 W  PPPPPW     W
-W       W PPPPW
+W       WAPPPPW
 W       W     W
-WPPPPP  WPPPP W
+WPPPPP  WPPPPAW
 WGGGGG        W
 WWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWW
@@ -165,15 +165,15 @@ W2     S    DEW
 WWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWW
 WGGG 2       EW   //Level 11, This level will have an easy path and a hard one
-WGGGP       W W   //I was able to beat the hard path
+WGGGP       WAW   //I was able to beat the hard path
 WPPPP       W W
-W           W W
+W           WAW
 W    WWWWWWWW W
-W        1  W W
+W        1  WAW
 W  PPPGPPP  W W
-W   1   1   W W
+W   1   1   WAW
 W  PPPGPPP  W W
-W          1W W
+W          1WAW
 W  PPPGPPP  W W
 W1          WDW
 W            SW
@@ -200,7 +200,7 @@ WP           PW
 WP PPPPPPPPP PW
 WP P       P PW
 WP P       P PW
-WP P  WWW  P PW
+WP PAAWWWAAPAPW
 WP P  WSW  P PW
 WP P  W W  P PW
 WP P    P  P PW
@@ -224,12 +224,12 @@ W111111111W2  W
 W         EWS W
 WWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWW
-W             W   //Level 15, Last Level for now
-W             W
-W             W
-W             W
-W             W
-W             W
+WE            W   //Level 15, Last Level for now
+WAWAWAWAWAWAGAW
+WGAGAGAGAGAGAGW
+WAGAWAWAWAWAWAW
+W A A A A A A W
+WAWAWAWAWAWA AW
 W             W
 W             W
 W             W
@@ -237,4 +237,19 @@ W             W
 W             W
 W             W
 W          S  W
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+WS            W   //Level 16, Last Level for now
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
 WWWWWWWWWWWWWWW
