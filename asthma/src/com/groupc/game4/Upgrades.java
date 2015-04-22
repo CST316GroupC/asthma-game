@@ -17,6 +17,7 @@ public class Upgrades extends GameScreen
 	private final Rectangle increaseTimer;
 	private final Rectangle increaseFoodBonus;
 	private final Rectangle increaseFoodTime;
+	private final Rectangle convertTokens;
 	private final Rectangle back;
 	
 	private int score;
@@ -26,6 +27,7 @@ public class Upgrades extends GameScreen
 	private int chestAmount;
 	private int healthGlobeAmount;
 	private int originalTime;
+	private int tokens;
 	
 	private int[] prices = {10, 20, 40, 70, 110, 160, 220, 290, 370, 500};
 	
@@ -38,6 +40,7 @@ public class Upgrades extends GameScreen
 		increaseTimer = new Rectangle(310, 270, 50, 50);
 		increaseFoodBonus = new Rectangle(310, 210, 50, 50);
 		increaseFoodTime = new Rectangle(310, 210 - 60, 50, 50);
+		convertTokens = new Rectangle(310, 210 - 60*2, 50, 50);
 		
 		back = new Rectangle(300, 0, 100, 100);
 		
@@ -50,7 +53,7 @@ public class Upgrades extends GameScreen
 		timer = Integer.parseInt(assets.getProps().getProperty("game4BonusTime"));
 		foodBonus = Integer.parseInt(assets.getProps().getProperty("healthyFoodScoreBonus"));
 		foodTime = Integer.parseInt(assets.getProps().getProperty("healthyFoodTimeBonus"));
-		
+		tokens = Integer.parseInt(assets.getProps().getProperty("tokens"));
 		
 	}
 
@@ -123,6 +126,14 @@ public class Upgrades extends GameScreen
 							}
 						 }
 					}
+					if(CollisionChecker.PointToRect(mouseClick, convertTokens))
+					{
+						if(tokens >= 1)
+						{
+							tokens -= 1;
+							score+= 50;
+						}
+					}
 					assets.getProps().setProperty("game4Score", "" +score);
 					if(CollisionChecker.PointToRect(mouseClick, back))
 					{
@@ -142,16 +153,20 @@ public class Upgrades extends GameScreen
 		
 		assets.getTexture().bind();
 
-		assets.getImage("wall").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
+		assets.getImage("table").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		
 		//draw arrows
 		assets.getImage("upgrade").draw(increaseTimer);
 		assets.getImage("upgrade").draw(increaseFoodBonus);
 		assets.getImage("upgrade").draw(increaseFoodTime);
+		assets.getImage("upgrade").draw(convertTokens);
 		assets.getImage("back").draw(back);
 		
-		TextDrawer.drawString("Score", 25, 350, 40, 40);
-		TextDrawer.drawInt(score, 250, 350, 20, 40, 5);
+		TextDrawer.drawString("Score", 25, 350, 20, 20);
+		TextDrawer.drawInt(score, 250, 350, 20, 20, 5);
+		
+		TextDrawer.drawString("Tokens", 25, 320, 20, 20);
+		TextDrawer.drawInt(tokens, 250, 320, 20, 20, 5);
 		
 		TextDrawer.drawString("Extra time", 50, 290, 15, 20);
 		TextDrawer.drawInt(prices[timer], 250, 290, 10, 20, 4);
@@ -161,6 +176,9 @@ public class Upgrades extends GameScreen
 		
 		TextDrawer.drawString("Extra time for healthy food", 50, 230-60, 6, 20);
 		TextDrawer.drawInt(prices[foodTime], 250, 230-60, 10, 20, 4);
+		
+		TextDrawer.drawString("Convert 1 token into 50 points", 50, 230-60*2, 6, 20);
+		TextDrawer.drawInt(1, 250, 230-60 * 2, 10, 20, 4);
 	}
 
 	@Override

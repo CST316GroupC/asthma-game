@@ -18,8 +18,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.StringTokenizer;
@@ -42,6 +46,7 @@ public class DoctorScreen extends Screen
 	//Variables
 	boolean redraw		= true;
 	boolean played 		= true;
+	boolean isDeleting  = false;
 	Resize  resize     	= new Resize(run);
 	int     butPressed 	= 0; //0 is none, 1 is add patient, 2 is back and logout for now
 	
@@ -51,6 +56,7 @@ public class DoctorScreen extends Screen
 	Vector<String> patientFirstNames 	= new Vector<String>();
 	Vector<String> patientLastNames 	= new Vector<String>();
 	Vector<String> patDoctors 			= new Vector<String>();
+	Vector<Character> newInfo			= new Vector<Character>();
 	
 	//Table elements
 	JTable patientTable;
@@ -90,6 +96,8 @@ public class DoctorScreen extends Screen
 			}
 		});
 		
+		
+		
 		//Set colors
 		this.setBackground(Color.WHITE);
 
@@ -102,6 +110,17 @@ public class DoctorScreen extends Screen
 				butPressed = 1;				
 			}
 		});		
+		
+		//delete patient button
+		deletePatientButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				tableListener(patientTable.getSelectedRow());
+				isDeleting = true;
+			}
+		});	
+		
 		
 		//add things to the panel
 		this.add(addPatientButton);
@@ -121,6 +140,11 @@ public class DoctorScreen extends Screen
 		String line = null;
 		int counter = 0;
 		
+		patientFirstNames.clear();
+		patientLastNames.clear();
+		patDoctors.clear();
+		newInfo.clear();
+		
 		FileReader fr = new FileReader("login_information.txt");
 		BufferedReader br = new BufferedReader(fr);
 		StringTokenizer st;
@@ -136,6 +160,8 @@ public class DoctorScreen extends Screen
 			st.nextToken();  //password
 			st.nextToken(); //type
 			patDoctors.add(counter, st.nextToken()); //doctor for patient
+			
+			newInfo.add(counter, '1');
 			
 			counter += 1;
 			
@@ -165,12 +191,121 @@ public class DoctorScreen extends Screen
 			}
 		}
 		
+		
 		//set table contents
 		patientTable = new JTable(rowData, collumnNames);
 		jsp = new JScrollPane(patientTable);
 		//set table size
-		jsp.setBounds(resize.locationX(150), resize.locationY(200), resize.width(200), resize.height(200));
+		jsp.setBounds(resize.locationX(40), resize.locationY(120), resize.width(200), resize.height(250));
 		this.add(jsp);
+	}
+	
+	private void deleteFromTable(String fname, String lname)
+	{
+		
+		String FILENAME = "login_information.txt";
+		
+		String line = null;
+		Vector<String> firstName = new Vector<String>();
+		Vector<String> lastName = new Vector<String>();
+		int counter = 0;
+		
+		File file = new File(FILENAME);
+		File tempFile = new File(file.getAbsolutePath() + ".tmp");
+		StringTokenizer st;
+		
+		try 
+		{
+			BufferedReader br = new BufferedReader(new FileReader(FILENAME));
+			PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+			
+			while((line = br.readLine()) != null)
+			{
+				
+				st = new StringTokenizer(line, " | ");
+				st.nextToken(); //email
+				firstName.add(st.nextToken()); //fname
+				lastName.add(st.nextToken());  //last name
+				st.nextToken();  //dob
+				st.nextToken();  //password
+				st.nextToken(); //type
+				st.nextToken(); //doctor for patient
+				
+				if(!firstName.elementAt(counter).equals(fname) && !lastName.elementAt(counter).equals(lname))
+				{
+					pw.write(line + "\n");
+				}
+				counter += 1;
+				
+			}
+			pw.close();
+			br.close();
+			
+			 
+		      if (!file.delete()) 
+		      {
+		        System.out.println("Could not delete file");
+		        return;
+		      }
+
+		     
+		      if (!tempFile.renameTo(file))
+		      {
+		        System.out.println("Could not rename file");
+		      }
+		      
+		} 
+		catch (FileNotFoundException e) 
+		{
+			System.out.println(FILENAME + " is an invalid file path");
+		} catch (IOException e) 
+		{
+			System.out.println(tempFile.getAbsolutePath() + " is an invalid file path");
+		}
+	      
+	      
+	    try 
+	    {
+	    	patientTable.removeAll();
+			getPatients();
+		} catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void displayInformation(String fname, String lname, int row)
+	{
+		System.out.println(fname + " " + lname + " " + row);
+	}
+	
+	private boolean tableListener(int row) 
+	{
+		
+		if(isDeleting)
+		{
+			String fname = (String)patientTable.getValueAt(row, 0);
+			String lname = (String) patientTable.getValueAt(row, 1);
+			deleteFromTable(fname, lname);
+			isDeleting = false;
+			return false;
+		}
+		
+		if(row >= 0 && !isDeleting)
+		{
+			if(newInfo.elementAt(row).equals('1'))
+			{
+				String fname = (String)patientTable.getValueAt(row, 0);
+				String lname = (String) patientTable.getValueAt(row, 1);
+				displayInformation(fname, lname, row);
+				newInfo.set(row, '0');
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	@Override
@@ -213,7 +348,15 @@ public class DoctorScreen extends Screen
 		
 		butPressed = 0;
 		navBar.update();
+		
+		if(tableListener(patientTable.getSelectedRow()))
+		{
+			
+		}
+		
+		
 	}
+
 
 	@Override
 	public void present(float deltaTime)
