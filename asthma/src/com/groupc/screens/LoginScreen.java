@@ -264,10 +264,13 @@ public class LoginScreen extends Screen
 	
 	private void newProperties()
 	{
+
 		try
 		{
-			FileInputStream in = new FileInputStream("resources/interface/parent_controls/" + userNameTF.getText() + ".properties");
+			FileInputStream in = new FileInputStream("resources/interface/parent_controls/" + run.getUserName() + ".properties");
 			in.close();
+				
+			
 		}catch(Exception e)
 		{
 			Properties properties = new Properties();
@@ -279,16 +282,18 @@ public class LoginScreen extends Screen
 			properties.setProperty("Game_4", "true");
 			properties.setProperty("Email_Alerts", "false");
 			properties.setProperty("Email", userNameTF.getText());
+			System.out.println("failed to read file");
 			
 			try
 			{
-				FileWriter write = new FileWriter("resources/interface/parent_controls/" + userNameTF.getText() + ".properties");
+				FileWriter write = new FileWriter("resources/interface/parent_controls/" + run.getUserName() + ".properties");
 				properties.store(write, "User:" + userNameTF.getText());
 				write.close();
 			}catch(Exception ex)
 			{
 				System.out.println("Failed new properties");
 			}
+			
 		}
 	}
 
@@ -417,7 +422,9 @@ public class LoginScreen extends Screen
 			{
 				run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
 			}
+			newProperties();
 			run.setScreen(new TutorialScreen(run));
+			
 		}
 		else{
 			String line = null;
@@ -476,7 +483,7 @@ public class LoginScreen extends Screen
 				//Patients
 				if(types.elementAt(i).equals("1"))
 				{
-					newProperties();
+					
 					if(userNameTF.getText().indexOf(".com") == -1)
 					{
 						run.setUserName(userNameTF.getText());
@@ -485,6 +492,7 @@ public class LoginScreen extends Screen
 					{
 						run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
 					}
+					newProperties();
 					if(hasNotTakenReadings(userNameTF.getText()))
 					{
 						TutorialScreen ts = new TutorialScreen(run);

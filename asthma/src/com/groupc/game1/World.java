@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.lwjgl.input.Keyboard;
 
+import com.groupc.Database;
 import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
 import com.groupc.game.Camera;
@@ -129,6 +130,7 @@ public class World extends GameScreen
 				}
 				break;
 			case WORLD_STATE_OVER:
+				Database.updateg1(assets.getProps().getProperty("Email"), assets.getProps().getProperty("joeymaxDistance"));
 			case WORLD_STATE_PAUSED:
 				break;
 		}
