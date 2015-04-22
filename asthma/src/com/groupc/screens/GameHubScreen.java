@@ -15,7 +15,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.swing.ImageIcon;
@@ -167,6 +170,34 @@ public class GameHubScreen extends Screen
 		}catch(Exception e)
 		{
 			System.out.println("Failed gamehub properties load");
+		}
+		if(props.getProperty("ghfirstTime", "true").equals("true"))
+		{
+			props.setProperty("ghfirstTime","false");
+			props.setProperty("Game_1","true");
+			props.setProperty("Game_2","true");
+			props.setProperty("Game_3","true");
+			props.setProperty("Game_4","true");
+			FileOutputStream out = null;
+			try {
+				out = new FileOutputStream("resources/interface/parent_controls/" + userName + ".properties");
+				props.store(out, "---No Comment---");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					out.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 		}
 		if(props.getProperty("Game_1").equals("false"))
 		{

@@ -395,14 +395,28 @@ public class LoginScreen extends Screen
 	{
 		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText()))
 		{
-			run.setUserName(userNameTF.getText());
+			if(userNameTF.getText().indexOf(".com") == -1)
+			{
+				run.setUserName(userNameTF.getText());
+			}
+			else
+			{
+				run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
+			}
 			DoctorScreen ds = new DoctorScreen(run);
 			ds.getPatients();
 			run.setScreen(ds);
 		}
 		else if(Database.getPatient(userNameTF.getText(), passwordTF.getText()))
 		{
-			run.setUserName(userNameTF.getText());
+			if(userNameTF.getText().indexOf(".com") == -1)
+			{
+				run.setUserName(userNameTF.getText());
+			}
+			else
+			{
+				run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
+			}
 			run.setScreen(new TutorialScreen(run));
 		}
 		else{
@@ -447,7 +461,14 @@ public class LoginScreen extends Screen
 				//Doctors
 				if(types.elementAt(i).equals("0"))
 				{
-					run.setUserName(userNameTF.getText());
+					if(userNameTF.getText().indexOf(".com") == -1)
+					{
+						run.setUserName(userNameTF.getText());
+					}
+					else
+					{
+						run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
+					}
 					DoctorScreen ds = new DoctorScreen(run);
 					ds.getPatients();
 					run.setScreen(ds);
@@ -456,7 +477,14 @@ public class LoginScreen extends Screen
 				if(types.elementAt(i).equals("1"))
 				{
 					newProperties();
-					run.setUserName(userNameTF.getText());
+					if(userNameTF.getText().indexOf(".com") == -1)
+					{
+						run.setUserName(userNameTF.getText());
+					}
+					else
+					{
+						run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
+					}
 					if(hasNotTakenReadings(userNameTF.getText()))
 					{
 						TutorialScreen ts = new TutorialScreen(run);
