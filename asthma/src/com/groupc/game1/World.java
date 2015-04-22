@@ -149,7 +149,7 @@ public class World extends GameScreen
 						
 		//add the newly gained seeds]
 		assets.getProps().setProperty("seeds", ""+seedsCollected);
-		assets.save(Game1Assets.FILENAME);
+		assets.save();
 	}
 	
 	public void inputHandling()

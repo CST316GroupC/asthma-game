@@ -47,7 +47,7 @@ public class Game2Screen extends Screen
 		canvas = new Canvas();
 		
 		//Basic Frame Settings
-		run.setTitle("GameScreen");
+		run.setTitle(run.getUserName()+" | GameScreen");
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -85,7 +85,7 @@ public class Game2Screen extends Screen
 			Display.setParent(canvas);
 			Display.create();
 			TextDrawer.prepare();
-			assets = new Game2Assets();
+			assets = new Game2Assets(run.getUserName());
 			assets.load();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block

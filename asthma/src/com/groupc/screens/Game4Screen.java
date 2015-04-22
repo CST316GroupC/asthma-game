@@ -46,7 +46,7 @@ public class Game4Screen extends Screen
 		canvas = new Canvas();
 		
 		//Basic Frame Settings
-		run.setTitle("GameScreen");
+		run.setTitle(run.getUserName()+" | GameScreen");
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -84,7 +84,7 @@ public class Game4Screen extends Screen
 			Display.setParent(canvas);
 			Display.create();
 			TextDrawer.prepare();
-			assets = new Game4Assets();
+			assets = new Game4Assets(run.getUserName());
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
