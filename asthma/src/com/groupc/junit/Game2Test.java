@@ -35,7 +35,7 @@ public class Game2Test
 		assets.load();
 		world = new MazeWorld(assets);
 		world.setLevel(0);
-		world.levelDone();
+		world.levelSet();
 		world.update(0);
 		world.present(0);
 	}

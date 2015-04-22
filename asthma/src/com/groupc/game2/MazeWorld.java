@@ -20,13 +20,15 @@ import com.groupc.math.Vector;
 public class MazeWorld extends GameScreen
 {
 	public static final float FRUSTUM_WIDTH = 15;
-	public static final float FRUSTUM_HEIGHT = 15;
-	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 1; //400 (the * 100 means the total width is 5000 pixels but only 400 shown)
-	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT *1; //400 (the * 20 means the total height is 200 pixels but only 400 shown)
+	public static final float FRUSTUM_HEIGHT = 17;
+	public static final float WORLD_WIDTH = FRUSTUM_WIDTH * 1; 
+	public static final float WORLD_HEIGHT = 15; 
 	
 	public static final int WORLD_STATE_PAUSED = 0;
 	public static final int WORLD_STATE_PLAYING = 1;
-	public static final int WORLD_STATE_OVER = 2;
+	public static final int WORLD_STATE_DEAD = 2;
+	public static final int WORLD_STATE_READY = 3;
+	public static final int WORLD_STATE_OVER = 4;
 	
 	private final Camera cam;
 	public final Player player;
@@ -42,6 +44,9 @@ public class MazeWorld extends GameScreen
 	private int level;
 	private int state;
 	private int score;
+	private int lives;
+	private int collectedGems;
+	private int axes;
 	
 	public MazeWorld(Asset asset) 
 	{
@@ -51,6 +56,9 @@ public class MazeWorld extends GameScreen
 		player = new Player(0, 0); //place holders
 		buttonPresses = 0;
 		setLevel(Integer.parseInt(assets.getProps().getProperty("mazeLevel")));
+		setLives(Integer.parseInt(assets.getProps().getProperty("mazeLives")));
+		setGems(Integer.parseInt(assets.getProps().getProperty("mazeGems")));
+		setAxes(Integer.parseInt(assets.getProps().getProperty("mazeAxes")));
 		walls = new ArrayList<Wall>();
 		pits = new ArrayList<Pit>();
 		goal = new Goal(0, 0); //place holder
@@ -166,7 +174,24 @@ public class MazeWorld extends GameScreen
 			updateEnemies(deltaTime);
 			updateSpikes(deltaTime);
 			collisionChecker();
-		}		
+		}	
+		if(state == WORLD_STATE_DEAD)
+		{
+			if(lives <= 0)
+			{
+				state = WORLD_STATE_OVER;
+				level = 1;
+				setLives(Integer.parseInt(assets.getProps().getProperty("mazeLives")));
+				
+			}
+			else
+			{
+				lives--;
+				level--;
+				levelSet();
+				state = WORLD_STATE_READY;
+			}
+		}
 	}
 	
 	public void updateSpikes(float deltaTime)
@@ -224,7 +249,7 @@ public class MazeWorld extends GameScreen
 		{
 			if(CollisionChecker.RectToRect(player.bounds, spikes.get(i).bounds) && spikes.get(i).getState() == Spike.STATE_UP)
 			{
-				state = WORLD_STATE_OVER;
+				state = WORLD_STATE_DEAD;
 			}
 		}
 	}
@@ -237,6 +262,7 @@ public class MazeWorld extends GameScreen
 			{
 				score += 10;
 				gems.get(i).setActive(false);
+				setGems(getCollectedGems()+1);
 			}
 		}
 	}
@@ -247,7 +273,7 @@ public class MazeWorld extends GameScreen
 		{
 			if(CollisionChecker.RectToRect(player.bounds, enemies.get(i).bounds))
 			{
-				state = WORLD_STATE_OVER;
+				state = WORLD_STATE_DEAD;
 			}
 			for(int j=0; j < walls.size(); j++)
 			{
@@ -284,7 +310,8 @@ public class MazeWorld extends GameScreen
 	{
 		if(CollisionChecker.RectToRect(player.bounds, goal.bounds))
 		{
-			levelDone();
+			levelSet();
+			score += 100*level;
 		}
 	}
 	
@@ -305,7 +332,7 @@ public class MazeWorld extends GameScreen
 		{
 			if(CollisionChecker.RectToRect(player.bounds, pits.get(i).bounds))
 			{
-				player.hitPit(pits.get(i));
+				state = WORLD_STATE_DEAD;
 			}
 		}
 	}
@@ -372,25 +399,30 @@ public class MazeWorld extends GameScreen
 					{
 						pause();
 					}
-					else if(state == WORLD_STATE_PAUSED)
+					else if(state == WORLD_STATE_PAUSED || state == WORLD_STATE_READY)
 					{
 						resume();
 					}
+				}
+				if(Keyboard.getEventKey() == Keyboard.KEY_Q && (state == WORLD_STATE_OVER || state == WORLD_STATE_READY))
+				{
+					assets.save(assets.getFilename());
+					dispose();
 				}
 			}
 		}
 	}
 	
-	public void levelDone()
+	public void levelSet()
 	{
 		setLevel(getLevel() + 1);
-		System.out.println(getLevel());
 		walls.clear();
 		pits.clear();
 		enemies.clear();
 		gems.clear();
 		spikes.clear();
 		dirts.clear();
+		goal.position = new Vector(-1, -1); //move it offscreen temp
 		generateLevel(getLevel());
 		assets.setProps("mazeLevel", getLevel()+"");
 		assets.setProps("mazeScore", score+"");
@@ -402,22 +434,47 @@ public class MazeWorld extends GameScreen
 	{
 		cam.setCamera();
 		renderBackground();
-		renderWalls();
-		renderPits();
-		renderGoal();
-		renderHint();
-		renderEnemy();
-		renderSpikes();
-		renderGem();
-		renderDirt();
-		renderPlayer();
+		renderHUD();
 		
-		if(state == WORLD_STATE_PAUSED)
+		if(state == WORLD_STATE_PLAYING)
+		{
+			renderWalls();
+			renderPits();
+			renderGoal();
+			renderEnemy();
+			renderSpikes();
+			renderGem();
+			renderDirt();
+			renderPlayer();
+		}
+		else if(state == WORLD_STATE_PAUSED)
 		{
 			renderPaused();
 		}
+		else if(state == WORLD_STATE_READY)
+		{
+			renderReady();
+		}
+		else if(state == WORLD_STATE_OVER)
+		{
+			renderOver();
+		}
 	}
 	
+	public void renderReady()
+	{
+		TextDrawer.drawStringinRect("Lost a life", new Rectangle(2, 12, 10,2));
+		TextDrawer.drawStringinRect("Only " +lives + " remain", new Rectangle(2, 9, 10,2));
+		TextDrawer.drawStringinRect("Press P to continue", new Rectangle(2, 6, 10,2));
+		TextDrawer.drawStringinRect("Press Q to Quit", new Rectangle(2, 3, 10,2));
+	}
+	
+	public void renderOver()
+	{
+		TextDrawer.drawStringinRect("Game OVER", new Rectangle(2, 12, 10,2));
+		TextDrawer.drawStringinRect("Press Q to return", new Rectangle(2, 9, 10,2));
+		TextDrawer.drawStringinRect("to the main menu", new Rectangle(2, 6, 10,2));
+	}
 	public void renderPaused()
 	{
 		TextDrawer.drawStringinRect("Game Paused", new Rectangle(2, 12, 10,2));
@@ -477,24 +534,12 @@ public class MazeWorld extends GameScreen
 		}
 	}
 	
-	public void renderHint()
+	public void renderHUD()
 	{
-		if(getLevel()==1)
-		{
-			TextDrawer.drawStringinRect("Arrow Keys or WASD to move", new Rectangle(1,1,13, 4), false);
-		}
-		else if(getLevel()==2)
-		{
-			TextDrawer.drawStringinRect("Collect Gems", new Rectangle(2,1,12, 4), false);
-		}
-		else if(getLevel()==3)
-		{
-			TextDrawer.drawStringinRect("Do not fall in holes", new Rectangle(2,1,12, 4), false);
-		}
-		else if(getLevel()==4)
-		{
-			TextDrawer.drawStringinRect("Avoid Baddies", new Rectangle(2,1,12, 4), false);
-		}
+		TextDrawer.drawStringinRect("lives "+ lives, new Rectangle(0, 16, 5, 1));
+		TextDrawer.drawStringinRect("Score "+ score, new Rectangle(7, 16, 5, 1));
+		TextDrawer.drawStringinRect("Gems "+ collectedGems, new Rectangle(0, 15, 5, 1));
+		TextDrawer.drawStringinRect("Axes "+ axes, new Rectangle(7, 15, 5, 1));		
 	}
 	
 	public void renderGoal()
@@ -520,7 +565,7 @@ public class MazeWorld extends GameScreen
 	
 	public void renderBackground()
 	{
-		assets.getImage("background").draw(new Rectangle(0, 0, WORLD_WIDTH, WORLD_HEIGHT));
+		assets.getImage("background").draw(new Rectangle(0, 0, FRUSTUM_WIDTH, FRUSTUM_HEIGHT));
 	}
 	
 	public void renderPlayer()
@@ -585,6 +630,27 @@ public class MazeWorld extends GameScreen
 
 	public void setLevel(int level) {
 		this.level = level;
+	}
+	
+	public void setLives(int lives)
+	{
+		this.lives = lives;
+	}
+
+	public int getCollectedGems() {
+		return collectedGems;
+	}
+
+	public void setGems(int collectedGems) {
+		this.collectedGems = collectedGems;
+	}
+	
+	public int getAxes() {
+		return axes;
+	}
+
+	public void setAxes(int axes) {
+		this.axes = axes;
 	}
 
 }

@@ -76,6 +76,8 @@ public class Game2Assets extends Asset
 				props.setProperty("mazeLevel", "1");
 				props.setProperty("mazeScore", "0");
 				props.setProperty("mazeLives", "3");
+				props.setProperty("mazeGems", "0");
+				props.setProperty("mazeAxes", "0");
 				save(filename);
 			}
 		} 

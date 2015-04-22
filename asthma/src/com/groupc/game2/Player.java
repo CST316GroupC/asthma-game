@@ -27,6 +27,7 @@ public class Player extends MovingGameObject
 	public void align()
 	{
 		position.set(new Vector(Math.round(position.x+.5f) -.5f, Math.round(position.y+.5f) -.5f));
+		bounds.lowerLeft.set(position.sub(bounds.width / 2, bounds.height / 2));
 	}
 	
 	public void update(float deltaTime)
@@ -102,30 +103,7 @@ public class Player extends MovingGameObject
 
 		bounds.lowerLeft.set(position.sub(bounds.width / 2, bounds.height / 2));
 	}
-	
-	public void hitPit(Pit pit)
-	{
-		System.out.println("dead");
-		if(lastDirection == 0) //left
-		{
-			position.x = pit.position.x + 1;
-		}
-		else if (lastDirection == 1) //up
-		{
-			position.y = pit.position.y - 1;
-		}
-		else if (lastDirection == 2) //right
-		{
-			position.x = pit.position.x - 1;
-		}
-		else if (lastDirection == 3)//down
-		{
-			position.y = pit.position.y + 1;
-		}
-
-		bounds.lowerLeft.set(position.sub(bounds.width / 2, bounds.height / 2));
-	}
-	
+		
 	public int getState() 
 	{
 		return state;
