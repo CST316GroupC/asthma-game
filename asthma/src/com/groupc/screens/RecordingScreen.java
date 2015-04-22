@@ -42,7 +42,8 @@ public class RecordingScreen extends Screen
 	Resize  resize		= new Resize(run);
 	int		butPressed	= 0;
 
-	String patientUserName;
+	String patientUserName = run.getUserName();
+	
 	
 	Date date = new Date();
 	
@@ -65,7 +66,8 @@ public class RecordingScreen extends Screen
 	public RecordingScreen(Runner run)
 	{
 		super(run);
-		//Basic Frame Settings moved to setpatient
+		//Basic Frame Settings
+		run.setTitle(run.getUserName()+" | Spirometer Input");
 		
 		//resize stuff
 		run.addComponentListener(new ComponentAdapter()
@@ -111,20 +113,6 @@ public class RecordingScreen extends Screen
 		this.setLayout(null);		
 		run.setContentPane(this);
 		run.setVisible(true);		
-	}
-	
-	public void setPatient(String pUserName)
-	{
-		if(pUserName != null)
-		{
-			patientUserName = pUserName;
-			run.setTitle(patientUserName + " Spirometer Input");
-			
-		} 
-		else
-		{
-			run.setTitle("Spriometer Input");
-		}
 	}
 	
 	private boolean validInputs()
@@ -220,7 +208,6 @@ public class RecordingScreen extends Screen
 		if(navBar.backButtonPressed)
 		{	
 			TutorialScreen ts = new TutorialScreen(run);
-			ts.setPatient(patientUserName);
 			run.setScreen(ts);
 		}
 		else if(butPressed == 2)
@@ -231,7 +218,8 @@ public class RecordingScreen extends Screen
 		{
 			if(submitReadings())
 			{
-				run.setScreen(new RewardScreen(run));
+				RewardScreen rewardScreen = new RewardScreen(run);
+				run.setScreen(rewardScreen);
 			}
 		}
 		butPressed = 0;

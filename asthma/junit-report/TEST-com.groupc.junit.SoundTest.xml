@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="1" failures="0" hostname="EdwinAvalos-PC" name="com.groupc.junit.SoundTest" skipped="0" tests="3" time="0.146" timestamp="2015-04-20T06:10:18">
+  <properties>
+    <property name="java.vendor" value="Oracle Corporation" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="sun.management.compiler" value="HotSpot Client Compiler" />
+    <property name="lib" value="lib" />
+    <property name="build.sysclasspath" value="last" />
+    <property name="os.name" value="Windows 7" />
+    <property name="sun.boot.class.path" value="C:\Program Files (x86)\Java\jdk1.8.0_31\jre\lib\resources.jar;C:\Program Files (x86)\Java\jdk1.8.0_31\jre\lib\rt.jar;C:\Program Files (x86)\Java\jdk1.8.0_31\jre\lib\sunrsasign.jar;C:\Program Files (x86)\Java\jdk1.8.0_31\jre\lib\jsse.jar;C:\Program Files (x86)\Java\jdk1.8.0_31\jre\lib\jce.jar;C:\Program Files (x86)\Java\jdk1.8.0_31\jre\lib\charsets.jar;C:\Program Files (x86)\Java\jdk1.8.0_31\jre\lib\jfr.jar;C:\Program Files (x86)\Java\jdk1.8.0_31\jre\classes" />
+    <property name="sun.desktop" value="windows" />
+    <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+    <property name="ant.home" value="C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502" />
+    <property name="java.runtime.version" value="1.8.0_31-b13" />
+    <property name="user.name" value="Edwin Avalos" />
+    <property name="lwjgl_natives.dir" value="natives/windows" />
+    <property name="ant.file.asthma-game" value="C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\build.xml" />
+    <property name="user.language" value="en" />
+    <property name="build" value="bin" />
+    <property name="sun.boot.library.path" value="C:\Program Files (x86)\Java\jdk1.8.0_31\jre\bin" />
+    <property name="ant.project.name" value="asthma-game" />
+    <property name="java.version" value="1.8.0_31" />
+    <property name="user.timezone" value="America/Phoenix" />
+    <property name="edu.umd.cs.findbugs.FindBugs2.executeReturnCode.58188ab0-a82a-4ae0-b26d-d06386df5c14" value="1" />
+    <property name="sun.arch.data.model" value="32" />
+    <property name="java.endorsed.dirs" value="C:\Program Files (x86)\Java\jdk1.8.0_31\jre\lib\endorsed" />
+    <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86" />
+    <property name="ant.file.type.asthma-game" value="file" />
+    <property name="sun.jnu.encoding" value="Cp1252" />
+    <property name="file.encoding.pkg" value="sun.io" />
+    <property name="file.separator" value="\" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="java.class.version" value="52.0" />
+    <property name="src" value="src" />
+    <property name="user.country" value="US" />
+    <property name="java.home" value="C:\Program Files (x86)\Java\jdk1.8.0_31\jre" />
+    <property name="java.vm.info" value="mixed mode, sharing" />
+    <property name="ant.file" value="C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\build.xml" />
+    <property name="os.version" value="6.1" />
+    <property name="path.separator" value=";" />
+    <property name="java.vm.version" value="25.31-b07" />
+    <property name="findbug" value="C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\findbugs" />
+    <property name="user.variant" value="" />
+    <property name="ant.library.dir" value="C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib" />
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob" />
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
+    <property name="_jacoco.agentFile" value="C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent7639932343988159214.jar" />
+    <property name="user.script" value="" />
+    <property name="jac-r" value="jacoco-report" />
+    <property name="user.home" value="C:\Users\Edwin Avalos" />
+    <property name="java.specification.vendor" value="Oracle Corporation" />
+    <property name="java.library.path" value="natives/windows" />
+    <property name="java.vendor.url" value="http://java.oracle.com/" />
+    <property name="java.vm.vendor" value="Oracle Corporation" />
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testsfile=C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\junittestcases3950810380679431181.properties filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\junit-report\IGNORETHIS.xml crashfile=C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\junitvmwatcher8909002162087655957.properties propsfile=C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\junit7209353003876520178.properties" />
+    <property name="java.class.path" value="C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\lwjgl.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\lwjgl_util.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\jogg-0.0.7.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\jorbis-0.0.15.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\slick-util.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\jacocoant.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\junit.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\org.hamcrest.core_1.3.0.v201303031735.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\mysql-connector-java-5.1.34-bin.jar;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\bin;C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma;C:\PROGRA~2\JMF21~1.1E\lib\sound.jar;C:\PROGRA~2\JMF21~1.1E\lib\jmf.jar;C:\PROGRA~2\JMF21~1.1E\lib;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-launcher.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-junit.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-junit4.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-antlr.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-bcel.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-bsf.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-log4j.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-oro.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-regexp.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-resolver.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-apache-xalan2.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-commons-logging.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-commons-net.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-jai.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-javamail.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-jdepend.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-jmf.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-jsch.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-netrexx.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-swing.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant-testutil.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\57\0\.cp\lib\antdebug.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\57\0\.cp\lib\remote.jar;C:\Users\Edwin Avalos\Desktop\eclipse\configuration\org.eclipse.osgi\58\0\.cp\lib\remoteAnt.jar;C:\Program Files (x86)\Java\jdk1.8.0_31\lib\tools.jar;C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.eclipse.swt.win32.win32.x86_3.103.2.v20150203-1351.jar;C:\Users\EDWINA~1\AppData\Local\Temp\jacocoagent7639932343988159214.jar" />
+    <property name="ant.version" value="Apache Ant(TM) version 1.9.2 compiled on July 8 2013" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="java.vm.specification.version" value="1.8" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="jun-r" value="junit-report" />
+    <property name="sun.os.patch.level" value="Service Pack 1" />
+    <property name="java.io.tmpdir" value="C:\Users\EDWINA~1\AppData\Local\Temp\" />
+    <property name="pmd.home" value="C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma\lib\pmd" />
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+    <property name="os.arch" value="x86" />
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment" />
+    <property name="java.ext.dirs" value="C:\Program Files (x86)\Java\jdk1.8.0_31\jre\lib\ext;C:\Windows\Sun\Java\lib\ext" />
+    <property name="user.dir" value="C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma" />
+    <property name="line.separator" value="&#xd;&#xa;" />
+    <property name="java.vm.name" value="Java HotSpot(TM) Client VM" />
+    <property name="basedir" value="C:\Users\Edwin Avalos\Desktop\spring 2015\CST316\asthma-game\asthma" />
+    <property name="ant.java.version" value="1.8" />
+    <property name="ant.core.lib" value="C:\Users\Edwin Avalos\Desktop\eclipse\plugins\org.apache.ant_1.9.2.v201404171502\lib\ant.jar" />
+    <property name="file.encoding" value="Cp1252" />
+    <property name="java.specification.version" value="1.8" />
+    <property name="ant.project.invoked-targets" value="clean,compile,run,jar,findbugs,pmd,junit" />
+  </properties>
+  <testcase classname="com.groupc.junit.SoundTest" name="LoadMusicTest" time="0.051">
+    <error message="Resource not found: badfile.txt" type="java.lang.RuntimeException">java.lang.RuntimeException: Resource not found: badfile.txt
+	at org.newdawn.slick.util.ResourceLoader.getResource(ResourceLoader.java:115)
+	at com.groupc.AudioPlayer.loadSong(Unknown Source)
+	at com.groupc.junit.SoundTest.LoadMusicTest(Unknown Source)
+</error>
+  </testcase>
+  <testcase classname="com.groupc.junit.SoundTest" name="WAVfileTypeTest" time="0.048" />
+  <testcase classname="com.groupc.junit.SoundTest" name="OGGfileTypeTest" time="0.047" />
+  <system-out><![CDATA[OGG
+TXT
+WAV
+OGG
+TXT
+WAV
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

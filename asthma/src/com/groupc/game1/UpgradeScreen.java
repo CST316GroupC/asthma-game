@@ -128,7 +128,7 @@ public class UpgradeScreen extends GameScreen
 	@Override
 	public void dispose() 
 	{
-		assets.save(Game1Assets.FILENAME);
+		assets.save();
 		isClosing = true;
 	}
 

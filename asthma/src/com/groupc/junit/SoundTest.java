@@ -5,12 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.lwjgl.openal.AL;
 
 import com.groupc.AudioPlayer;
 
 public class SoundTest {
 	AudioPlayer player;
-	String[] files = {"AMemoryAway.ogg", "badfile.txt", "music.wav"};
+	String[] files = {"resources/sounds/AMemoryAway.ogg", "badfile.txt", "music.wav"};
 	@Before
 	public void setUp()
 	{
@@ -62,7 +63,7 @@ public class SoundTest {
 	@After
 	public void cleanUp()
 	{
-		
+		AL.destroy();
 	}
 
 }

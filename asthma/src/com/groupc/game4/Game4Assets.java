@@ -26,7 +26,7 @@ public class Game4Assets extends Asset
 	
 	public Game4Assets()
 	{
-		super();
+		super("test");
 		try {
 			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/atlas.png"));
 			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/mainmenu.png"));
@@ -65,6 +65,7 @@ public class Game4Assets extends Asset
 			FileInputStream in = new FileInputStream(FILENAME);
 			props.load(in);
 			in.close();
+
 			String temp = props.getProperty("game4FirstTime", "true");
 			if("true".equals(temp))
 			{
@@ -76,7 +77,8 @@ public class Game4Assets extends Asset
 				props.setProperty("game4FirstTime", "false");
 				props.setProperty("healthyFoodScoreBonus", "0");
 				props.setProperty("healthyFoodTimeBonus", "0");
-				save(FILENAME);
+				save();
+
 			}
 		} 
 		catch (IOException e1)
@@ -84,5 +86,11 @@ public class Game4Assets extends Asset
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} 
+	}
+
+	@Override
+	public String getFilename() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

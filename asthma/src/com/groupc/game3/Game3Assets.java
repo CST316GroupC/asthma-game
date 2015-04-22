@@ -27,7 +27,7 @@ public class Game3Assets extends Asset
 	
 	public Game3Assets()
 	{
-		super();
+		super("test");
 		try {
 			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/atlas.png"));
 			sheet = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("resources/game1/mainmenu.png"));
@@ -70,6 +70,7 @@ public class Game3Assets extends Asset
 			String temp = props.getProperty("firstTime", "true");
 			if("true".equals(temp))
 			{
+
 				props.setProperty("game3PaperHealth", "3");
 				props.setProperty("game3Sound", "true");
 				props.setProperty("game3Score", "0");
@@ -77,7 +78,8 @@ public class Game3Assets extends Asset
 				props.setProperty("game3FirstTime", "false");
 				props.setProperty("game3Chest", "1");
 				props.setProperty("game3HealthGlobe", "1");
-				save(FILENAME);
+				save();
+
 			}
 		} 
 		catch (IOException e1)
@@ -85,5 +87,11 @@ public class Game3Assets extends Asset
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} 
+	}
+
+	@Override
+	public String getFilename() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

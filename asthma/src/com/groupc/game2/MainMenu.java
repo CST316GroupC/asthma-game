@@ -49,8 +49,7 @@ public class MainMenu extends GameScreen
 			if(CollisionChecker.PointToRect(mouseClick, options))
 			{
 				this.dispose();
-				next = 2;
-				
+			//	next = 2;
 			}
 			if(CollisionChecker.PointToRect(mouseClick, upgrade))
 			{
@@ -60,7 +59,7 @@ public class MainMenu extends GameScreen
 			if(CollisionChecker.PointToRect(mouseClick, instruct))
 			{
 				this.dispose();
-				next = 4;
+			//	next = 4;
 			}
 		}
 		
@@ -74,6 +73,7 @@ public class MainMenu extends GameScreen
 		assets.getImage("background").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		TextDrawer.drawStringinRect("Maze Game", title, false);
 		TextDrawer.drawStringinRect("Play", play, true);
+		TextDrawer.drawStringinRect("upgrade", upgrade, true);
 	}
 
 	
@@ -102,19 +102,10 @@ public class MainMenu extends GameScreen
 		{
 			return new MazeWorld(assets);
 		}
-		if(next == 2)
+		else
 		{
-			//return new Options(this.cam);
+			return new UpgradeScreen(assets);
 		}
-		if(next == 3)
-		{
-			//return new UpgradeScreen();
-		}
-		if(next == 4)
-		{
-			//return new Instructions();
-		}
-		return new MainMenu(assets); //temp
 	}
 }
 

@@ -41,7 +41,7 @@ public class NavigationBar extends JPanel
 	JPanel  navBox               = new JPanel();
 	JButton backButton           = new JButton("Back");
 	JButton logoutButton         = new JButton("Logout");
-	JButton parentControlsButton = new JButton("Parental Controls");
+	//JButton parentControlsButton = new JButton("Parental Controls");
 	JToggleButton muteButton     = new JToggleButton();
 	JLabel  pageTitle            = new JLabel("",SwingConstants.CENTER);
 	
@@ -60,7 +60,7 @@ public class NavigationBar extends JPanel
 		}
 		if(parentControlsOn == false)
 		{
-			parentControlsButton.setVisible(false);
+			//parentControlsButton.setVisible(false);
 		}
 		pageTitle.setText(title);
 		
@@ -100,14 +100,14 @@ public class NavigationBar extends JPanel
 				buttonPressed = 2;				
 			}
 		});
-		//parentControlsButton
+		/*/parentControlsButton
 		parentControlsButton.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				buttonPressed = 3;				
 			}
-		});
+		});*/
 		//backButton
 		backButton.addActionListener(new ActionListener()
 		{
@@ -119,7 +119,7 @@ public class NavigationBar extends JPanel
 		
 		//add things to the panel
 		navBox.add(backButton);
-		navBox.add(parentControlsButton);
+		//navBox.add(parentControlsButton);
 		navBox.add(muteButton);
 		navBox.add(logoutButton);
 		navBox.setLayout(null);
@@ -143,8 +143,8 @@ public class NavigationBar extends JPanel
 		backButton.setFont(new Font(backButton.getFont().getFontName(),backButton.getFont().getStyle(), resize.font(12)));
 		
 		//parentControlsButton
-		parentControlsButton.setBounds(resize.width(155), resize.height(10), resize.width(150), resize.height(30));
-		parentControlsButton.setFont(new Font(parentControlsButton.getFont().getFontName(),parentControlsButton.getFont().getStyle(), resize.font(12)));
+		//parentControlsButton.setBounds(resize.width(155), resize.height(10), resize.width(150), resize.height(30));
+		//parentControlsButton.setFont(new Font(parentControlsButton.getFont().getFontName(),parentControlsButton.getFont().getStyle(), resize.font(12)));
 		
 		//MuteButton
 		muteButton.setBounds(resize.width(330), resize.height(10), resize.width(30), resize.height(30));

@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.openal.AL;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioImpl;
 import org.newdawn.slick.openal.AudioLoader;
@@ -17,8 +19,14 @@ public class AudioPlayer
 	public Audio music;
 	public ArrayList<Audio> sounds;
 	
-	public AudioPlayer()
+	public AudioPlayer() 
 	{
+		try {
+			AL.create();
+		} catch (LWJGLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		sounds = new ArrayList<Audio>();
 	}
 	
