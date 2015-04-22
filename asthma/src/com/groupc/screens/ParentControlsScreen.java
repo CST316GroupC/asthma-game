@@ -226,7 +226,7 @@ public class ParentControlsScreen extends Screen
 			pinPF.setFont(new Font(pinPF.getFont().getFontName(),pinPF.getFont().getStyle(), resize.font(12)));
 			
 			//pinButton
-			pinButton.setBounds(resize.locationX(170), resize.locationY(280), resize.width(160), resize.height(30));
+			pinButton.setBounds(resize.locationX(170), resize.locationY(300), resize.width(160), resize.height(30));
 			pinButton.setFont(new Font(pinButton.getFont().getFontName(),pinButton.getFont().getStyle(), resize.font(12)));
 			
 			//pinForgotButton
@@ -234,7 +234,7 @@ public class ParentControlsScreen extends Screen
 			pinForgotButton.setFont(new Font(pinForgotButton.getFont().getFontName(),pinForgotButton.getFont().getStyle(), resize.font(12)));
 			
 			//pinError
-			pinErrorLabel.setBounds(resize.locationX(100), resize.locationY(200), resize.width(300), resize.height(20));
+			pinErrorLabel.setBounds(resize.locationX(100), resize.locationY(280), resize.width(300), resize.height(20));
 			pinErrorLabel.setFont(new Font(pinErrorLabel.getFont().getFontName(),pinErrorLabel.getFont().getStyle(), resize.font(12)));
 					
 			//pageBox
@@ -468,6 +468,10 @@ public class ParentControlsScreen extends Screen
 			enableControls(true);
 			checkInfo();
 		}
+		else
+		{
+			pinErrorLabel.setVisible(true);
+		}
 	}
 	
 	public void enableControls(boolean yes)
@@ -501,6 +505,7 @@ public class ParentControlsScreen extends Screen
 		pinPF.setVisible(yes);
 		pinButton.setVisible(yes);
 		pinForgotButton.setVisible(yes);
+		pinErrorLabel.setVisible(false);
 	}
 
 	public void setUser(String uName)
