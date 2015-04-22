@@ -45,9 +45,13 @@ public class Instructions extends GameScreen
 		cam.setCamera();
 		assets.getImage("wall").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		assets.getImage("back").draw(back);
-		TextDrawer.drawString("Instructions", 20, 70, 10, 10);
-		TextDrawer.drawString("Clicking on healthy food earns you points", 20, 55, 10, 10);
-		TextDrawer.drawString("Clicking on unhealthy food causes you to lose both points and time", 20, 40, 10, 10);
+		TextDrawer.drawString("Instructions", 20, 85, 10, 10);
+		TextDrawer.drawString("Clicking on healthy food earns you points", 20, 70, 6, 10);
+		TextDrawer.drawString("You lose both points and time for clicking on", 20, 55, 6, 10);
+		TextDrawer.drawString("unhealthy food", 20, 45, 6, 10);
+		TextDrawer.drawString("You lose points if you let healthy food rot", 20, 30, 6, 10);
+		TextDrawer.drawString("You gain points if you avoid clicking", 20, 15, 6, 10);
+		TextDrawer.drawString("on unhealthy food", 20, 5, 6, 10);
 	}
 
 	@Override
