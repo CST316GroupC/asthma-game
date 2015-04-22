@@ -148,7 +148,7 @@ public class GameHubScreen extends Screen
 		this.add(game2Label);
 		this.add(game3Label);
 		this.add(game4Label);
-		this.add(LeaderBoardButton);
+		//this.add(LeaderBoardButton);
 		this.add(tokenPanel);
 		this.add(navBar);
 		

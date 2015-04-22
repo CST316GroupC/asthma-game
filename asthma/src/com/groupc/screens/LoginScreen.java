@@ -179,10 +179,10 @@ public class LoginScreen extends Screen
 		this.add(userNameTF);
 		this.add(passwordLabel);
 		this.add(passwordTF);
-		this.add(saveLoginRadio);
+		//this.add(saveLoginRadio);
 		this.add(loginButton);
-		this.add(passRetrievalLabel);
-		this.add(passRetrievalButton);
+		//this.add(passRetrievalLabel);
+		//this.add(passRetrievalButton);
 		this.add(loginErrorMessage);
 		this.add(loginBox);
 		this.add(background);
@@ -313,7 +313,7 @@ public class LoginScreen extends Screen
 			background.setIcon(new ImageIcon(backgroundImage.getImage().getScaledInstance(resize.width(500), resize.height(500), java.awt.Image.SCALE_SMOOTH)));
 			
 			//loginBox
-			loginBox.setBounds(resize.locationX(100), resize.locationY(200), resize.width(300), resize.height(200));
+			loginBox.setBounds(resize.locationX(100), resize.locationY(200), resize.width(300), resize.height(175));
 			loginBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			//UserName

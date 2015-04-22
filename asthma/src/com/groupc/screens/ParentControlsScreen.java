@@ -169,27 +169,27 @@ public class ParentControlsScreen extends Screen
 		this.add(pinLabel);
 		this.add(pinPF);
 		this.add(pinButton);
-		this.add(pinForgotButton);
+		//this.add(pinForgotButton);
 		this.add(message);
 		this.add(pinBox);
-		this.add(timeControlsSep);
-		this.add(timeControlsLabel);
+		//this.add(timeControlsSep);
+		//this.add(timeControlsLabel);
 		this.add(gameControlsLabel);
 		this.add(gameControlsSep);
-		this.add(alertsLabel);
-		this.add(alertsSep);
-		this.add(timeCB);
-		this.add(hourTF);
-		this.add(minuteTF);
-		this.add(hourLabel);
-		this.add(minuteLabel);
+		//this.add(alertsLabel);
+		//this.add(alertsSep);
+		//this.add(timeCB);
+		//this.add(hourTF);
+		//this.add(minuteTF);
+		//this.add(hourLabel);
+		//this.add(minuteLabel);
 		this.add(Game1CB);
 		this.add(Game2CB);
 		this.add(Game3CB);
 		this.add(Game4CB);
-		this.add(EmailCB);
-		this.add(emailTF);
-		this.add(emailFieldLabel);	
+		//this.add(EmailCB);
+		//this.add(emailTF);
+		//this.add(emailFieldLabel);	
 		this.add(cancelButton);
 		this.add(saveButton);
 		this.add(pageBox);
@@ -238,7 +238,7 @@ public class ParentControlsScreen extends Screen
 			pinErrorLabel.setFont(new Font(pinErrorLabel.getFont().getFontName(),pinErrorLabel.getFont().getStyle(), resize.font(12)));
 					
 			//pageBox
-			pageBox.setBounds(resize.locationX(80), resize.locationY(100), resize.width(340), resize.height(300));
+			pageBox.setBounds(resize.locationX(80), resize.locationY(160), resize.width(340), resize.height(150));
 			pageBox.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			
 			//timeControls
