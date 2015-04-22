@@ -31,6 +31,8 @@ public class MainMenu extends GameScreen
 	private final 	Rectangle	title;
 	private final 	Rectangle	play;
 	private final 	Rectangle	instruct;
+	private final	Rectangle	upgrades;
+	
 	private final 	Vector 		mouseClick;
 	
 	private Random rand;
@@ -47,8 +49,9 @@ public class MainMenu extends GameScreen
 		this.state = WORLD_STATE_PLAYING;
 		
 		title 		= new Rectangle(0.8f, 6.5f, 9, 3);
-		play 		= new Rectangle(2.8f, 4, 4, 2);
-		instruct 	= new Rectangle(2.8f, 2, 4, 2);
+		play 		= new Rectangle(3.5f, 4, 3, 1.5f);
+		instruct 	= new Rectangle(3.5f, 2.5f, 3, 1.5f);
+		upgrades	= new Rectangle(3.5f, 1, 3, 1.5f);
 		
 		mouseClick 	= new Vector();
 		
@@ -98,15 +101,21 @@ public class MainMenu extends GameScreen
 		{
 			mouseClick.set(Mouse.getX(), Mouse.getY());
 			cam.click(mouseClick);
+			
 			if(CollisionChecker.PointToRect(mouseClick, play))
 			{
 				next = 1; //play display
 				this.dispose();
 				
 			}
-			if(CollisionChecker.PointToRect(mouseClick, instruct))
+			else if(CollisionChecker.PointToRect(mouseClick, instruct))
 			{
 				next = 2; //instruct display
+				this.dispose();
+			}
+			else if(CollisionChecker.PointToRect(mouseClick, upgrades))
+			{
+				next = 3; //upgrades display
 				this.dispose();
 			}
 		}
@@ -141,7 +150,7 @@ public class MainMenu extends GameScreen
 		TextDrawer.drawStringinRect("Water dodgelets", title);
 		TextDrawer.drawStringinRect("Start", play);
 		TextDrawer.drawStringinRect("Instructions", instruct);
-		
+		TextDrawer.drawStringinRect("Upgrades", upgrades);
 	}
 
 	public void renderPlaying()
@@ -181,6 +190,10 @@ public class MainMenu extends GameScreen
 		else if(next == 2)
 		{
 			return new Instructions(assets);
+		}
+		else if(next == 3)
+		{
+			return new Upgrades(assets);
 		}
 		return null;
 	}

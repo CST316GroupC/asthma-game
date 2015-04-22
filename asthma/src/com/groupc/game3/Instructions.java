@@ -21,7 +21,7 @@ public class Instructions extends GameScreen
 		super(assets);
 		cam = new Camera(300, 100);
 		cam.setCamera();
-		back = new Rectangle(250, 0, 50, 30);
+		back = new Rectangle(280, 0, 15, 15);
 		mouseClick = new Vector();
 	}
 
@@ -46,11 +46,13 @@ public class Instructions extends GameScreen
 		assets.getImage("wall").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		assets.getImage("back").draw(back);
 		TextDrawer.drawString("Instructions", 20, 85, 10, 10);
-		TextDrawer.drawString("Use Left (A) and Right (D) keys to move", 14, 76, 5, 5);
-		TextDrawer.drawString("Dodge the water droplets to survive", 14, 70, 5, 5);
-		TextDrawer.drawString("Heart shape increases health by 1", 14, 59, 5, 5);
-		TextDrawer.drawString("Treasure chest decreased water droplets speed", 14, 52, 5, 5);
-		TextDrawer.drawString("Water droplets speed increases if paper gets hit 5 times", 14, 40, 5, 5);
+		TextDrawer.drawString("Use Left or A and Right or D keys to move", 11, 76, 5, 5);
+		TextDrawer.drawString("Dodge the water droplets to survive", 11, 70, 5, 5);
+		TextDrawer.drawString("Score is gain by each second or from Treasure Chest", 11, 59, 5, 5);
+		TextDrawer.drawString("Heart shape increases health by 1", 11, 52, 5, 5);
+		TextDrawer.drawString("Treasure chest decreased water droplets speed", 11, 42, 5, 5);
+		TextDrawer.drawString("Treasure chest can also increase score at full health", 11, 36, 5, 5);
+		TextDrawer.drawString("Water droplets speed increases if paper gets hit 5 times", 11, 26, 5, 5);
 	}
 
 	@Override

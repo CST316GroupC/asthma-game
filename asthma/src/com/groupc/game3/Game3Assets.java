@@ -19,6 +19,8 @@ import com.groupc.math.Rectangle;
 
 public class Game3Assets extends Asset
 {	
+	public final static String FILENAME = "resources/game3/paper.properties";
+	
 	private static Texture sheet;
 	private static Texture background;
 	private static Texture g3texture;
@@ -45,14 +47,15 @@ public class Game3Assets extends Asset
 		sprites = new Hashtable<String, TextureRegion>();
 		sprites.put("title", new TextureRegion(sheet, 0, 226, 235, 30));
 		sprites.put("back", new TextureRegion(texture, 128, 512 - 64, 32, 32));
+		sprites.put("upgrade", new TextureRegion(texture, 160, 512 - 64, 32, 32));
 		sprites.put("wall", new TextureRegion(background, 0, 0, 512, 512));
 		
 		sprites.put("rain", new TextureRegion(g3texture, 0, 600 - 1*58, 58, 58));
-		sprites.put("treasure", new TextureRegion(g3texture, 0, 600 - 2*58, 58, 58));
+		sprites.put("treasure", new TextureRegion(g3texture, 0, 600 - 2*58, 62, 44));
 		sprites.put("paperMan", new TextureRegion(g3texture, 0, 600 - 3*58, 58, 58));
 		sprites.put("paperGone", new TextureRegion(g3texture, 0, 600 - 4*58, 58, 58));
 		sprites.put("healthBar", new TextureRegion(g3texture, 0, 600 - 5*57, 58, 58));
-		sprites.put("healthGlobe", new TextureRegion(g3texture, 0, 600 - 5*66, 58, 58));
+		sprites.put("healthGlobe", new TextureRegion(g3texture, 0, 600 - 5*66, 62, 58));
 		
 		TextDrawer.prepare();
 	}
@@ -61,19 +64,20 @@ public class Game3Assets extends Asset
 	{
 		try 
 		{
-			FileInputStream in = new FileInputStream("res/paperMan.properties");
+			FileInputStream in = new FileInputStream(FILENAME);
 			props.load(in);
 			in.close();
 			String temp = props.getProperty("firstTime", "true");
 			if("true".equals(temp))
 			{
-				save("res/maze.properties");
-				props.setProperty("paperHealth", "3");
-				props.setProperty("sound", "true");
+				props.setProperty("game3PaperHealth", "3");
+				props.setProperty("game3Sound", "true");
 				props.setProperty("game3Score", "0");
-				props.setProperty("firstTime", "false");
-				props.setProperty("timeSinceHit", "0");
-				save(temp);
+				props.setProperty("game3MaxScore", "0");
+				props.setProperty("game3FirstTime", "false");
+				props.setProperty("game3Chest", "1");
+				props.setProperty("game3HealthGlobe", "1");
+				save(FILENAME);
 			}
 		} 
 		catch (IOException e1)

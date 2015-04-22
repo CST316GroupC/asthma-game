@@ -20,7 +20,7 @@ public abstract class Food extends GameObject
 	}
 	
 	//Checks to see if the object has existed longer than 3 seconds. If so, the world will remove it.
-	public boolean timedOut(int deltaTime){
+	public boolean timedOut(float deltaTime){
 		if(stateTime > maxTime){
 			return true;
 		}
