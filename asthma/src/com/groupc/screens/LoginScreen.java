@@ -393,7 +393,7 @@ public class LoginScreen extends Screen
 
 	public void checkLogin() throws IOException
 	{
-		if(Database.getDoctor(userNameTF.getText(), passwordTF.getText()))
+		/*if(Database.getDoctor(userNameTF.getText(), passwordTF.getText()))
 		{
 			run.setUserName(userNameTF.getText());
 			run.setScreen(new DoctorScreen(run));
@@ -402,7 +402,7 @@ public class LoginScreen extends Screen
 		{
 			run.setUserName(userNameTF.getText());
 			run.setScreen(new TutorialScreen(run));
-		}
+		}*/
 
 		String line = null;
 		char[][] passWords = new char[20][30];  //need to make dynamic otherwise only 20 patients allowed!!
