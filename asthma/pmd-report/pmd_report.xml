@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="5.2.3" timestamp="2015-04-19T23:10:11.111">
+<file name="com\groupc\Database.java">
+<violation beginline="8" endline="238" begincolumn="23" endcolumn="1" rule="UseUtilityClass" ruleset="Design" package="com.groupc" class="Database" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#UseUtilityClass" priority="3">
+All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
+</violation>
+<violation beginline="37" endline="37" begincolumn="41" endcolumn="42" rule="CloseResource" ruleset="Design" package="com.groupc" class="Database" method="getDoctor" variable="rs" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#CloseResource" priority="3">
+Ensure that resources like this ResultSet object are closed after use
+</violation>
+<violation beginline="47" endline="47" begincolumn="34" endcolumn="45" rule="AvoidBranchingStatementAsLastInLoop" ruleset="Basic" package="com.groupc" class="Database" method="getDoctor" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#AvoidBranchingStatementAsLastInLoop" priority="2">
+Avoid using a branching statement as the last in a loop.
+</violation>
+<violation beginline="66" endline="67" begincolumn="32" endcolumn="31" rule="EmptyCatchBlock" ruleset="Empty Code" package="com.groupc" class="Database" method="getDoctor" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/empty.html#EmptyCatchBlock" priority="3">
+Avoid empty catch blocks
+</violation>
+<violation beginline="98" endline="98" begincolumn="41" endcolumn="42" rule="CloseResource" ruleset="Design" package="com.groupc" class="Database" method="getPatient" variable="rs" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#CloseResource" priority="3">
+Ensure that resources like this ResultSet object are closed after use
+</violation>
+<violation beginline="108" endline="108" begincolumn="34" endcolumn="45" rule="AvoidBranchingStatementAsLastInLoop" ruleset="Basic" package="com.groupc" class="Database" method="getPatient" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#AvoidBranchingStatementAsLastInLoop" priority="2">
+Avoid using a branching statement as the last in a loop.
+</violation>
+<violation beginline="127" endline="128" begincolumn="32" endcolumn="31" rule="EmptyCatchBlock" ruleset="Empty Code" package="com.groupc" class="Database" method="getPatient" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/empty.html#EmptyCatchBlock" priority="3">
+Avoid empty catch blocks
+</violation>
+<violation beginline="180" endline="181" begincolumn="32" endcolumn="31" rule="EmptyCatchBlock" ruleset="Empty Code" package="com.groupc" class="Database" method="addPatient" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/empty.html#EmptyCatchBlock" priority="3">
+Avoid empty catch blocks
+</violation>
+<violation beginline="227" endline="228" begincolumn="32" endcolumn="31" rule="EmptyCatchBlock" ruleset="Empty Code" package="com.groupc" class="Database" method="deletePatient" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/empty.html#EmptyCatchBlock" priority="3">
+Avoid empty catch blocks
+</violation>
+</file>
+<file name="com\groupc\Runner.java">
+<violation beginline="26" endline="26" begincolumn="35" endcolumn="40" rule="AssignmentToNonFinalStatic" ruleset="Design" package="com.groupc" class="Runner" variable="player" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#AssignmentToNonFinalStatic" priority="3">
+Possible unsafe assignment to a non-final static field in a constructor.
+</violation>
+</file>
+<file name="com\groupc\Tester.java">
+<violation beginline="19" endline="19" begincolumn="33" endcolumn="45" rule="UseVarargs" ruleset="Design" package="com.groupc" class="Tester" method="main" variable="args" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#UseVarargs" priority="4">
+Consider using varargs for methods or constructors which take an array the last parameter.
+</violation>
+</file>
+<file name="com\groupc\TextDrawer.java">
+<violation beginline="27" endline="27" begincolumn="24" endcolumn="67" rule="FieldDeclarationsShouldBeAtStartOfClass" ruleset="Design" package="com.groupc" class="TextDrawer" variable="characters" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#FieldDeclarationsShouldBeAtStartOfClass" priority="3">
+Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+</violation>
+<violation beginline="28" endline="28" begincolumn="24" endcolumn="36" rule="FieldDeclarationsShouldBeAtStartOfClass" ruleset="Design" package="com.groupc" class="TextDrawer" variable="text" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#FieldDeclarationsShouldBeAtStartOfClass" priority="3">
+Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+</violation>
+</file>
+<file name="com\groupc\game1\Game1Assets.java">
+<violation beginline="22" endline="22" begincolumn="32" endcolumn="36" rule="AssignmentToNonFinalStatic" ruleset="Design" package="com.groupc.game1" class="Game1Assets" variable="sheet" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#AssignmentToNonFinalStatic" priority="3">
+Possible unsafe assignment to a non-final static field in a constructor.
+</violation>
+<violation beginline="35" endline="35" begincolumn="17" endcolumn="22" rule="ConstructorCallsOverridableMethod" ruleset="Design" package="com.groupc.game1" class="Game1Assets" method="Game1Assets" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConstructorCallsOverridableMethod" priority="1">
+Overridable method 'load' called during object construction
+</violation>
+</file>
+<file name="com\groupc\game1\JoeyRooster.java">
+<violation beginline="42" endline="45" begincolumn="25" endcolumn="25" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.game1" class="JoeyRooster" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="168" endline="178" begincolumn="17" endcolumn="17" rule="ConfusingTernary" ruleset="Design" package="com.groupc.game1" class="JoeyRooster" method="toggleGlide" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConfusingTernary" priority="3">
+Avoid if (x != y) ..; else ..;
+</violation>
+</file>
+<file name="com\groupc\game1\Options.java">
+<violation beginline="50" endline="50" begincolumn="52" endcolumn="71" rule="PositionLiteralsFirstInComparisons" ruleset="Design" package="com.groupc.game1" class="Options" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#PositionLiteralsFirstInComparisons" priority="3">
+Position literals first in String comparisons
+</violation>
+<violation beginline="76" endline="76" begincolumn="20" endcolumn="39" rule="PositionLiteralsFirstInComparisons" ruleset="Design" package="com.groupc.game1" class="Options" method="present" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#PositionLiteralsFirstInComparisons" priority="3">
+Position literals first in String comparisons
+</violation>
+</file>
+<file name="com\groupc\game1\UpgradeScreen.java">
+<violation beginline="25" endline="25" begincolumn="23" endcolumn="28" rule="ImmutableField" ruleset="Design" package="com.groupc.game1" class="UpgradeScreen" variable="prices" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'prices' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="62" endline="67" begincolumn="49" endcolumn="49" rule="AvoidDeeplyNestedIfStmts" ruleset="Design" package="com.groupc.game1" class="UpgradeScreen" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#AvoidDeeplyNestedIfStmts" priority="3">
+Deeply nested if..then statements are hard to read
+</violation>
+<violation beginline="62" endline="67" begincolumn="49" endcolumn="49" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.game1" class="UpgradeScreen" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="71" endline="76" begincolumn="49" endcolumn="49" rule="AvoidDeeplyNestedIfStmts" ruleset="Design" package="com.groupc.game1" class="UpgradeScreen" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#AvoidDeeplyNestedIfStmts" priority="3">
+Deeply nested if..then statements are hard to read
+</violation>
+<violation beginline="71" endline="76" begincolumn="49" endcolumn="49" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.game1" class="UpgradeScreen" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+</file>
+<file name="com\groupc\game1\World.java">
+<violation beginline="1" endline="451" begincolumn="1" endcolumn="3" rule="GodClass" ruleset="Design" package="com.groupc.game1" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#GodClass" priority="3">
+Possible God class (WMC=88, ATFD=137, TCC=0.12)
+</violation>
+<violation beginline="37" endline="37" begincolumn="24" endcolumn="26" rule="ImmutableField" ruleset="Design" package="com.groupc.game1" class="World" variable="cam" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'cam' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="43" endline="43" begincolumn="24" endcolumn="27" rule="ImmutableField" ruleset="Design" package="com.groupc.game1" class="World" variable="rand" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'rand' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="102" endline="106" begincolumn="33" endcolumn="33" rule="AvoidDeeplyNestedIfStmts" ruleset="Design" package="com.groupc.game1" class="World" method="updateHayStack" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#AvoidDeeplyNestedIfStmts" priority="3">
+Deeply nested if..then statements are hard to read
+</violation>
+<violation beginline="115" endline="134" begincolumn="17" endcolumn="17" rule="SwitchStmtsShouldHaveDefault" ruleset="Design" package="com.groupc.game1" class="World" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SwitchStmtsShouldHaveDefault" priority="3">
+Switch statements should have a default label
+</violation>
+<violation beginline="163" endline="166" begincolumn="41" endcolumn="41" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.game1" class="World" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="173" endline="176" begincolumn="41" endcolumn="41" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.game1" class="World" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="181" endline="184" begincolumn="41" endcolumn="33" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.game1" class="World" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="201" endline="204" begincolumn="41" endcolumn="33" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.game1" class="World" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="230" endline="236" begincolumn="33" endcolumn="33" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.game1" class="World" method="renderPlaying" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="232" endline="235" begincolumn="41" endcolumn="41" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.game1" class="World" method="renderPlaying" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="283" endline="309" begincolumn="17" endcolumn="17" rule="SwitchStmtsShouldHaveDefault" ruleset="Design" package="com.groupc.game1" class="World" method="renderJoey" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SwitchStmtsShouldHaveDefault" priority="3">
+Switch statements should have a default label
+</violation>
+<violation beginline="329" endline="339" begincolumn="17" endcolumn="17" rule="TooFewBranchesForASwitchStatement" ruleset="Design" package="com.groupc.game1" class="World" method="renderCow" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#TooFewBranchesForASwitchStatement" priority="3">
+A switch with less than three branches is inefficient, use a if statement instead.
+</violation>
+<violation beginline="329" endline="339" begincolumn="17" endcolumn="17" rule="SwitchStmtsShouldHaveDefault" ruleset="Design" package="com.groupc.game1" class="World" method="renderCow" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SwitchStmtsShouldHaveDefault" priority="3">
+Switch statements should have a default label
+</violation>
+<violation beginline="410" endline="420" begincolumn="17" endcolumn="17" rule="SwitchStmtsShouldHaveDefault" ruleset="Design" package="com.groupc.game1" class="World" method="present" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SwitchStmtsShouldHaveDefault" priority="3">
+Switch statements should have a default label
+</violation>
+</file>
+<file name="com\groupc\game2\Dirt.java">
+<violation beginline="12" endline="12" begincolumn="25" endcolumn="30" rule="ImmutableField" ruleset="Design" package="com.groupc.game2" class="Dirt" variable="hasGem" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'hasGem' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+</file>
+<file name="com\groupc\game2\MazeWorld.java">
+<violation beginline="1" endline="557" begincolumn="1" endcolumn="3" rule="GodClass" ruleset="Design" package="com.groupc.game2" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#GodClass" priority="3">
+Possible God class (WMC=109, ATFD=113, TCC=0.02217741935483871)
+</violation>
+<violation beginline="62" endline="62" begincolumn="31" endcolumn="40" rule="ConstructorCallsOverridableMethod" ruleset="Design" package="com.groupc.game2" class="MazeWorld" method="MazeWorld" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConstructorCallsOverridableMethod" priority="1">
+Overridable method 'getLevel' called during object construction
+</violation>
+</file>
+<file name="com\groupc\game3\Game3Assets.java">
+<violation beginline="22" endline="22" begincolumn="32" endcolumn="36" rule="AssignmentToNonFinalStatic" ruleset="Design" package="com.groupc.game3" class="Game3Assets" variable="sheet" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#AssignmentToNonFinalStatic" priority="3">
+Possible unsafe assignment to a non-final static field in a constructor.
+</violation>
+<violation beginline="23" endline="23" begincolumn="32" endcolumn="41" rule="AssignmentToNonFinalStatic" ruleset="Design" package="com.groupc.game3" class="Game3Assets" variable="background" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#AssignmentToNonFinalStatic" priority="3">
+Possible unsafe assignment to a non-final static field in a constructor.
+</violation>
+<violation beginline="37" endline="37" begincolumn="17" endcolumn="22" rule="ConstructorCallsOverridableMethod" ruleset="Design" package="com.groupc.game3" class="Game3Assets" method="Game3Assets" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConstructorCallsOverridableMethod" priority="1">
+Overridable method 'load' called during object construction
+</violation>
+</file>
+<file name="com\groupc\game3\GameWorld.java">
+<violation beginline="45" endline="45" begincolumn="24" endcolumn="26" rule="ImmutableField" ruleset="Design" package="com.groupc.game3" class="GameWorld" variable="cam" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'cam' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="46" endline="46" begincolumn="17" endcolumn="28" rule="SingularField" ruleset="Design" package="com.groupc.game3" class="GameWorld" variable="rand" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SingularField" priority="3">
+Perhaps 'rand' could be replaced by a local variable.
+</violation>
+<violation beginline="46" endline="46" begincolumn="24" endcolumn="27" rule="ImmutableField" ruleset="Design" package="com.groupc.game3" class="GameWorld" variable="rand" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'rand' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="60" endline="67" begincolumn="17" endcolumn="17" rule="SwitchStmtsShouldHaveDefault" ruleset="Design" package="com.groupc.game3" class="GameWorld" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SwitchStmtsShouldHaveDefault" priority="3">
+Switch statements should have a default label
+</violation>
+<violation beginline="74" endline="76" begincolumn="9" endcolumn="9" rule="UncommentedEmptyMethod" ruleset="Design" package="com.groupc.game3" class="GameWorld" method="save" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#UncommentedEmptyMethod" priority="3">
+Document empty method
+</violation>
+<violation beginline="83" endline="85" begincolumn="25" endcolumn="25" rule="EmptyIfStmt" ruleset="Empty Code" package="com.groupc.game3" class="GameWorld" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/empty.html#EmptyIfStmt" priority="3">
+Avoid empty if statements
+</violation>
+<violation beginline="90" endline="93" begincolumn="41" endcolumn="33" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.game3" class="GameWorld" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="148" endline="158" begincolumn="17" endcolumn="17" rule="SwitchStmtsShouldHaveDefault" ruleset="Design" package="com.groupc.game3" class="GameWorld" method="present" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SwitchStmtsShouldHaveDefault" priority="3">
+Switch statements should have a default label
+</violation>
+</file>
+<file name="com\groupc\game4\Game4Assets.java">
+<violation beginline="22" endline="22" begincolumn="32" endcolumn="36" rule="AssignmentToNonFinalStatic" ruleset="Design" package="com.groupc.game4" class="Game4Assets" variable="sheet" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#AssignmentToNonFinalStatic" priority="3">
+Possible unsafe assignment to a non-final static field in a constructor.
+</violation>
+<violation beginline="35" endline="35" begincolumn="17" endcolumn="22" rule="ConstructorCallsOverridableMethod" ruleset="Design" package="com.groupc.game4" class="Game4Assets" method="Game4Assets" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConstructorCallsOverridableMethod" priority="1">
+Overridable method 'load' called during object construction
+</violation>
+</file>
+<file name="com\groupc\game4\GameWorld.java">
+<violation beginline="45" endline="45" begincolumn="24" endcolumn="26" rule="ImmutableField" ruleset="Design" package="com.groupc.game4" class="GameWorld" variable="cam" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'cam' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="46" endline="46" begincolumn="17" endcolumn="28" rule="SingularField" ruleset="Design" package="com.groupc.game4" class="GameWorld" variable="rand" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SingularField" priority="3">
+Perhaps 'rand' could be replaced by a local variable.
+</violation>
+<violation beginline="46" endline="46" begincolumn="24" endcolumn="27" rule="ImmutableField" ruleset="Design" package="com.groupc.game4" class="GameWorld" variable="rand" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'rand' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="60" endline="67" begincolumn="17" endcolumn="17" rule="SwitchStmtsShouldHaveDefault" ruleset="Design" package="com.groupc.game4" class="GameWorld" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SwitchStmtsShouldHaveDefault" priority="3">
+Switch statements should have a default label
+</violation>
+<violation beginline="74" endline="76" begincolumn="9" endcolumn="9" rule="UncommentedEmptyMethod" ruleset="Design" package="com.groupc.game4" class="GameWorld" method="save" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#UncommentedEmptyMethod" priority="3">
+Document empty method
+</violation>
+<violation beginline="83" endline="85" begincolumn="25" endcolumn="25" rule="EmptyIfStmt" ruleset="Empty Code" package="com.groupc.game4" class="GameWorld" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/empty.html#EmptyIfStmt" priority="3">
+Avoid empty if statements
+</violation>
+<violation beginline="90" endline="93" begincolumn="41" endcolumn="33" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.game4" class="GameWorld" method="inputHandling" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="150" endline="160" begincolumn="17" endcolumn="17" rule="SwitchStmtsShouldHaveDefault" ruleset="Design" package="com.groupc.game4" class="GameWorld" method="present" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SwitchStmtsShouldHaveDefault" priority="3">
+Switch statements should have a default label
+</violation>
+</file>
+<file name="com\groupc\game\Asset.java">
+<violation beginline="14" endline="14" begincolumn="37" endcolumn="41" rule="AssignmentToNonFinalStatic" ruleset="Design" package="com.groupc.game" class="Asset" variable="props" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#AssignmentToNonFinalStatic" priority="3">
+Possible unsafe assignment to a non-final static field in a constructor.
+</violation>
+</file>
+<file name="com\groupc\junit\AccTest.java">
+<violation beginline="19" endline="19" begincolumn="24" endcolumn="26" rule="ImmutableField" ruleset="Design" package="com.groupc.junit" class="AccTest" variable="run" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'run' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="20" endline="20" begincolumn="39" endcolumn="41" rule="ImmutableField" ruleset="Design" package="com.groupc.junit" class="AccTest" variable="acc" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'acc' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="76" endline="76" begincolumn="30" endcolumn="61" rule="LogicInversion" ruleset="Design" package="com.groupc.junit" class="AccTest" method="setPatientDoctorTest" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#LogicInversion" priority="3">
+Use opposite operator instead of the logic complement operator.
+</violation>
+</file>
+<file name="com\groupc\junit\ResizeTest.java">
+<violation beginline="13" endline="13" begincolumn="24" endcolumn="26" rule="ImmutableField" ruleset="Design" package="com.groupc.junit" class="ResizeTest" variable="run" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'run' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="14" endline="14" begincolumn="24" endcolumn="29" rule="ImmutableField" ruleset="Design" package="com.groupc.junit" class="ResizeTest" variable="resize" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'resize' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+</file>
+<file name="com\groupc\math\Resize.java">
+<violation beginline="22" endline="22" begincolumn="39" endcolumn="58" rule="UselessParentheses" ruleset="Unnecessary" package="com.groupc.math" class="Resize" method="locationX" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+</file>
+<file name="com\groupc\math\Vector.java">
+<violation beginline="21" endline="24" begincolumn="16" endcolumn="9" rule="UncommentedEmptyConstructor" ruleset="Design" package="com.groupc.math" class="Vector" method="Vector" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#UncommentedEmptyConstructor" priority="3">
+Document empty constructor
+</violation>
+</file>
+<file name="com\groupc\screens\AccountCreationScreen.java">
+<violation beginline="142" endline="151" begincolumn="17" endcolumn="17" rule="ConfusingTernary" ruleset="Design" package="com.groupc.screens" class="AccountCreationScreen" method="setPatientDoctor" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConfusingTernary" priority="3">
+Avoid if (x != y) ..; else ..;
+</violation>
+</file>
+<file name="com\groupc\screens\DoctorScreen.java">
+<violation beginline="121" endline="130" begincolumn="17" endcolumn="17" rule="ConfusingTernary" ruleset="Design" package="com.groupc.screens" class="DoctorScreen" method="setDoctor" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConfusingTernary" priority="3">
+Avoid if (x != y) ..; else ..;
+</violation>
+<violation beginline="236" endline="239" begincolumn="9" endcolumn="9" rule="UncommentedEmptyMethod" ruleset="Design" package="com.groupc.screens" class="DoctorScreen" method="present" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#UncommentedEmptyMethod" priority="3">
+Document empty method
+</violation>
+</file>
+<file name="com\groupc\screens\GameHubScreen.java">
+<violation beginline="32" endline="32" begincolumn="25" endcolumn="30" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="played" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'played' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="33" endline="33" begincolumn="25" endcolumn="30" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="resize" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'resize' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="38" endline="38" begincolumn="33" endcolumn="38" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="navBar" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'navBar' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="40" endline="40" begincolumn="41" endcolumn="51" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="game1Button" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'game1Button' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="41" endline="41" begincolumn="41" endcolumn="51" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="game2Button" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'game2Button' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="42" endline="42" begincolumn="41" endcolumn="51" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="game3Button" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'game3Button' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="43" endline="43" begincolumn="41" endcolumn="51" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="game4Button" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'game4Button' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="44" endline="44" begincolumn="41" endcolumn="57" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="LeaderBoardButton" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'LeaderBoardButton' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="45" endline="45" begincolumn="41" endcolumn="53" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="accountButton" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'accountButton' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="47" endline="47" begincolumn="41" endcolumn="50" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="game1Label" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'game1Label' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="48" endline="48" begincolumn="41" endcolumn="50" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="game2Label" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'game2Label' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="49" endline="49" begincolumn="41" endcolumn="50" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="game3Label" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'game3Label' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="50" endline="50" begincolumn="41" endcolumn="50" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="game4Label" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'game4Label' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="52" endline="52" begincolumn="41" endcolumn="49" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="game1Icon" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'game1Icon' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="53" endline="53" begincolumn="41" endcolumn="49" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="game2Icon" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'game2Icon' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="54" endline="54" begincolumn="41" endcolumn="49" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="game3Icon" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'game3Icon' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="55" endline="55" begincolumn="41" endcolumn="49" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="game4Icon" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'game4Icon' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="56" endline="56" begincolumn="41" endcolumn="51" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="GameHubScreen" variable="accountIcon" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'accountIcon' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+</file>
+<file name="com\groupc\screens\LoginScreen.java">
+<violation beginline="81" endline="81" begincolumn="33" endcolumn="47" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="LoginScreen" variable="backgroundImage" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'backgroundImage' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="82" endline="82" begincolumn="33" endcolumn="43" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="LoginScreen" variable="muteOffIcon" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'muteOffIcon' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="83" endline="83" begincolumn="33" endcolumn="42" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="LoginScreen" variable="muteOnIcon" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'muteOnIcon' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="253" endline="256" begincolumn="33" endcolumn="33" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.screens" class="LoginScreen" method="hasNotTakenReadings" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="322" endline="329" begincolumn="25" endcolumn="25" rule="ConfusingTernary" ruleset="Design" package="com.groupc.screens" class="LoginScreen" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConfusingTernary" priority="3">
+Avoid if (x != y) ..; else ..;
+</violation>
+<violation beginline="336" endline="339" begincolumn="9" endcolumn="9" rule="UncommentedEmptyMethod" ruleset="Design" package="com.groupc.screens" class="LoginScreen" method="present" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#UncommentedEmptyMethod" priority="3">
+Document empty method
+</violation>
+</file>
+<file name="com\groupc\screens\NavigationBar.java">
+<violation beginline="34" endline="34" begincolumn="24" endcolumn="26" rule="ImmutableField" ruleset="Design" package="com.groupc.screens" class="NavigationBar" variable="run" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ImmutableField" priority="3">
+Private field 'run' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="57" endline="57" begincolumn="30" endcolumn="34" rule="SimplifyBooleanExpressions" ruleset="Design" package="com.groupc.screens" class="NavigationBar" method="NavigationBar" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SimplifyBooleanExpressions" priority="3">
+Avoid unnecessary comparisons in boolean expressions
+</violation>
+<violation beginline="61" endline="61" begincolumn="40" endcolumn="44" rule="SimplifyBooleanExpressions" ruleset="Design" package="com.groupc.screens" class="NavigationBar" method="NavigationBar" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SimplifyBooleanExpressions" priority="3">
+Avoid unnecessary comparisons in boolean expressions
+</violation>
+<violation beginline="175" endline="182" begincolumn="25" endcolumn="25" rule="ConfusingTernary" ruleset="Design" package="com.groupc.screens" class="NavigationBar" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConfusingTernary" priority="3">
+Avoid if (x != y) ..; else ..;
+</violation>
+</file>
+<file name="com\groupc\screens\ParentControlsScreen.java">
+<violation beginline="326" endline="328" begincolumn="9" endcolumn="9" rule="UncommentedEmptyMethod" ruleset="Design" package="com.groupc.screens" class="ParentControlsScreen" method="saveInfo" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#UncommentedEmptyMethod" priority="3">
+Document empty method
+</violation>
+</file>
+<file name="com\groupc\screens\RecordingScreen.java">
+<violation beginline="118" endline="127" begincolumn="17" endcolumn="17" rule="ConfusingTernary" ruleset="Design" package="com.groupc.screens" class="RecordingScreen" method="setPatient" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConfusingTernary" priority="3">
+Avoid if (x != y) ..; else ..;
+</violation>
+<violation beginline="230" endline="233" begincolumn="25" endcolumn="25" rule="CollapsibleIfStatements" ruleset="Basic" package="com.groupc.screens" class="RecordingScreen" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+</file>
+<file name="com\groupc\screens\TutorialScreen.java">
+<violation beginline="199" endline="208" begincolumn="17" endcolumn="17" rule="ConfusingTernary" ruleset="Design" package="com.groupc.screens" class="TutorialScreen" method="setPatient" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#ConfusingTernary" priority="3">
+Avoid if (x != y) ..; else ..;
+</violation>
+<violation beginline="274" endline="274" begincolumn="70" endcolumn="73" rule="SimplifyBooleanExpressions" ruleset="Design" package="com.groupc.screens" class="TutorialScreen" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SimplifyBooleanExpressions" priority="3">
+Avoid unnecessary comparisons in boolean expressions
+</violation>
+<violation beginline="285" endline="308" begincolumn="17" endcolumn="17" rule="SwitchStmtsShouldHaveDefault" ruleset="Design" package="com.groupc.screens" class="TutorialScreen" method="update" externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/design.html#SwitchStmtsShouldHaveDefault" priority="3">
+Switch statements should have a default label
+</violation>
+</file>
+</pmd>

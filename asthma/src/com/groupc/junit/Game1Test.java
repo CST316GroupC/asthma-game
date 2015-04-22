@@ -1,29 +1,34 @@
 package com.groupc.junit;
 
+import java.io.File;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 
+import com.groupc.TextDrawer;
 import com.groupc.game1.Game1Assets;
 import com.groupc.game1.World;
 
 public class Game1Test 
 {
-	Game1Assets assets = new Game1Assets();
-	World world = new World(assets);	
+	Game1Assets assets;
+	World world;	
 	
 	@Before
 	public void setUp()
 	{
 		try {
 			Display.create();
+			TextDrawer.prepare();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		assets = new Game1Assets();
 		world = new World(assets);
 		world.update(0);
 		world.present(0);

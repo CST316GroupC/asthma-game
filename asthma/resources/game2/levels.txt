@@ -1,60 +1,240 @@
 WWWWWWWWWWWWWWW
+W   W  E W    W   //This is a level for testing purposes
+W   W    W    W
+W   W    W    W
+W   W    W    W
+W   WDDDDW    W
+WWWWW    W    W
+WS       W    W
+WWWWWWWWWWWWWWW
 W             W
 W             W
 W             W
 W             W
 W             W
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+W             W   //Level 1, meant to teach movement
+W             W
+W             W
+W             W
+WWWWWWWWWWWWWWW
 W             W
 WS           EW
 W             W
-W             W
+WWWWWWWWWWWWWWW
 W             W
 W             W
 W             W
 W             W
 WWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWW
-W      S      W
+W             W   //Level 2, meant to teach about Gems
 W             W
-WPPPPP        W
 W             W
-W        PPPPPW
 W             W
-WPPPPP        W
+WWWWWWWWWWWWWWW
+WG            W
+WE  GGGGGGG  SW
+WG            W
+WWWWWWWWWWWWWWW
 W             W
-W        PPPPPW
 W             W
-WPPPPP        W
 W             W
+W             W
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+W             W   //Level 3, meant to teach about pits
+W             W
+W             W
+W             W
+WWWWWWWWWWWWWWW
+W   P  G  PE  W
+WS  P  P  PPPGW
+W   G  P  G   W
+WWWWWWWWWWWWWWW
+W             W
+W             W
+W             W
+W             W
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+W             W   //Level 4, meant to teach enemies
+W             W
+W             W
+W             W
+WWWWWWWWWWWWWWW
+W          S  W
+W             W
+WGG          1W
+W             W
+W1          GGW
+W             W
+WGG          1W
 W      E      W
 WWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWW
-W   P  S  P E W
-W   P     P   W
-WPPPP     P   W
-W         P   W
-W         P   W
-W         P   W
-WPPP      P   W
-W    PPPPPP   W
-W    P        W
+WGGGG DED GGGGW   //Level 5, meant to teach about Dirt. Player should be stuck here at first playthrough
+W     DDD     W
 W             W
-WPPPPP        W
+WPPD      1DPPW
+W             W
+W      D      W
+W      2      W
+WPPD1      DPPW
+W             W
+W      D      W
+W             W
+WPPD       DPPW
+W      S      W
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+W      SW    EW   //Level 6, meant to be slightly difficult
+W       W PPPPW
+W  PPPPPW     W
+W       WPPPP W
+W       W     W
+WPPPPP  W PPPPW
+W       W     W
+W       WPPPP W
+W  PPPPPW     W
+W       W PPPPW
+W       W     W
+WPPPPP  WPPPP W
+WGGGGG        W
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+W            SW   //Level 7, First level to introduce dirt keeping the player away from gems. Player will have to decide whether to spend the gems
+W             W
+W             W
+W             W
+W      WWWWWWWW
+W       2     W
+W        2    W
+W         2   W
+W          2  W
+W            EW
+WWWWWWWDWWWWWWW
+WGGGGGGGGGGGGGW
+WGGGGGGGGGGGGGW
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+WGGGG2 E 2GGGGW   //Level 8, Things should be getting harder at this point                            
+W             W
+W             W
+W             W
+W    W   W    W
+W             W
+WWWWWWWWWWWW  W
+W         1   W
+W    PPPPPPPPPW
+W            SW
+WPPPPPPPPPPPPPW
 W             W
 W             W
 WWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWW
-W   P  E  P S W
-W   P     P   W
-WPPPP     P   W
-W   W     P   W
-W      W  P   W
-W         P   W
-WPPP      P   W
-W    PPPPPP   W
-W    P    P   W
-W         P   W
-WPPPPP    P   W
-WWWWW     P   W
-W   W         W
+W      S      W   //Level 9, This level should be about dodging enemies
+W1            W   //This level seems diffcult but I found an easy pattern
+W           1 W   //I placed a gem in the location the player needs to reach and wait at for a split second
+W   1         W   //hopefully the hint gets picked up
+W        1    W
+W     1       W
+W       1     W
+W   1         W
+W          1  W
+W 1          GW
+W            1W
+W1            W
+W      E      W
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+WGGGGGGGGGGGGGW   //Level 10, Another level where you need to have an axe stored
+WGW 1       WGW
+WG           GW
+W             W
+W             W
+W            2W
+W             W
+W             W
+W             W
+W             W
+W             W
+W           DDW
+W2     S    DEW
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+WGGG 2       EW   //Level 11, This level will have an easy path and a hard one
+WGGGP       W W   //I was able to beat the hard path
+WPPPP       W W
+W           W W
+W    WWWWWWWW W
+W        1  W W
+W  PPPGPPP  W W
+W   1   1   W W
+W  PPPGPPP  W W
+W          1W W
+W  PPPGPPP  W W
+W1          WDW
+W            SW
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+W            SW   //Level 12, Bonus!!!!
+W  GGGGGGGGG  W
+W  GGGGGGGGG  W
+W  GGGGGGGGG  W
+W  GGGGGGGGG  W
+W  GGGGGGGGG  W
+W  GGGGGGGGG  W
+W      E      W
+W             W
+W             W
+W             W
+W             W
+W             W
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+WGGGGGGGGGGGGGW   //Level 13, Spiral
+WPPPPPPPPPPPDPW
+WP           PW
+WP PPPPPPPPP PW
+WP P       P PW
+WP P       P PW
+WP P  WWW  P PW
+WP P  WSW  P PW
+WP P  W W  P PW
+WP P    P  P PW
+WP PPPPPP  P PW
+WP         P PW
+WPPPPPPPPPPPEPW
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+W          2  W   //Level 14, Hardest level so far
+W          2  W
+W1        W2  W
+W         W2  W
+W  1  1   W2  W
+W         W2  W
+W 1  1  1 W2  W
+W         W2  W
+W1  1  1 1W2  W
+W         W2  W
+W         W2  W
+W111111111W2  W
+W         EWS W
+WWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWW
+W             W   //Level 15, Last Level for now
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
+W             W
+W          S  W
 WWWWWWWWWWWWWWW

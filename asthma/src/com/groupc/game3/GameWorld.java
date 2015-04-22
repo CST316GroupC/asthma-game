@@ -17,6 +17,7 @@ import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
 import com.groupc.game1.Cow;
+import com.groupc.game1.Game1Assets;
 import com.groupc.game3.PaperMan;
 import com.groupc.game3.Rain;
 import com.groupc.game3.HealthGlobe;
@@ -25,60 +26,71 @@ import com.groupc.math.Rectangle;
 
 public class GameWorld extends GameScreen
 {
-	public static final float FRUSTUM_WIDTH = 10;
-	public static final float FRUSTUM_HEIGHT = 10;
-	public static final float WORLD_WIDTH = 500;
-	public static final float WORLD_HEIGHT = 500;
+	public static final float 	FRUSTUM_WIDTH 		= 10;
+	public static final float 	FRUSTUM_HEIGHT 		= 10;
 	
-	public static final int WORLD_STATE_PAUSED = 0;
-	public static final int WORLD_STATE_PLAYING = 1;
-	public static final int WORLD_STATE_OVER = 2;
+	public static final int 	WORLD_STATE_PAUSED 	= 0;
+	public static final int 	WORLD_STATE_PLAYING = 1;
+	public static final int 	WORLD_STATE_OVER 	= 2;
 	
-	public static final float TEXT_SIZE = .3f;
-	public static final int MAX_SCORE_DIGITS = 8; //99999999 max score
-	public static final int MAX_DISTANCE = 4; //9999 max distance
+	public static final float 	TEXT_SIZE 			= .3f;
+
+	public int 		state;
 	
-	public static final int GRAVITY = -10;
+	private int		healthGlobeAmount;
+	private int		chestAmount;
+	private int 	gameScore;
+	private int 	hitCounter;
 	
-	public int state;
-	private int score;
-	private int hitCounter;
+	public float 	time;
 	
-	private Camera cam;
-	public final PaperMan paper;
-	public final Rain rainHit;
-	public final Rain[] rain;
-	public final HealthGlobe[] healthGlobe;
-	public final Treasure[] treasure;
-	private Random rand;
+	private Camera 				cam;
+	private Random 				rand;
+	
+	public final PaperMan 		paper;
+	public final Rain 			rainHit;
+	public final Rain[] 		rain;
+	public final HealthGlobe[] 	healthGlobe;
+	public final Treasure[] 	treasure;
 	
 	//TODO: change assets for paperMan and change rain positiong (from array to random objects?)
 	public GameWorld(Asset assets)
 	{        
 		super(assets);
 		assets.reload();
-		rand = new Random();
 		
-		hitCounter = 0;
+		hitCounter = 	0;
+		time = 			0;
 		
-		cam = new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+		rand = 			new Random();
 		
-		this.paper = new PaperMan(0.75f, .75f, Integer.parseInt(assets.getProps().getProperty("paperHealth")));
+		cam = 			new Camera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+		
+		this.paper = 	new PaperMan(0.75f, .75f, Integer.parseInt(assets.getProps().getProperty("game3PaperHealth")));
 
-		this.rainHit = new Rain(0, 0);
+		this.rainHit = 	new Rain(0, 0);
 		
-		this.state = WORLD_STATE_PLAYING;
+		this.state = 	WORLD_STATE_PLAYING;
+	
+		gameScore = Integer.parseInt(assets.getProps().getProperty("game3Score"));
 		
-		this.rain = new Rain[6];
-		rain[0] = new Rain(cam.position.x, cam.position.y);
-		rain[1] = new Rain(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y);
+		// Rain droplets initializations
+		this.rain = 	new Rain[6];
+		rain[0] = new Rain(cam.position.x + FRUSTUM_WIDTH, cam.position.y);
+		rain[1] = new Rain(cam.position.x + FRUSTUM_WIDTH/2 + 0.3f, cam.position.y);
 		rain[2] = new Rain(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y + 2);
-		rain[3] = new Rain(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y - 3);
+		rain[3] = new Rain(cam.position.x + FRUSTUM_WIDTH/2 + 0.2f, cam.position.y - 3);
 		
-		this.healthGlobe = new HealthGlobe[1];
+		// Health globe initialization
+		healthGlobeAmount = Integer.parseInt(assets.getProps().getProperty("game3HealthGlobe"));
+				
+		this.healthGlobe = new HealthGlobe[healthGlobeAmount];
 		healthGlobe[0] = new HealthGlobe(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y);
 		
-		this.treasure = new Treasure[1];
+		// Treasure initialization
+		chestAmount = Integer.parseInt(assets.getProps().getProperty("game3Chest"));
+		
+		this.treasure = new Treasure[chestAmount];
 		treasure[0] = new Treasure(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y);
 	}
 	
@@ -177,10 +189,9 @@ public class GameWorld extends GameScreen
 				if(paper.getState() == PaperMan.STATE_GONE)
 				{
 					state = WORLD_STATE_OVER;
-					//TODO: Implement scoring based on total time played
-					//score += distance/10;
 					save();				
 				}
+				time += deltaTime;
 				break;
 				
 			case WORLD_STATE_OVER:
@@ -195,7 +206,16 @@ public class GameWorld extends GameScreen
 	 */
 	private void save()
 	{
-		//TODO: Implement save feature (requires scoring first and checking proper assets current Assets.java saves to joey)
+		System.out.println(gameScore);
+		assets.getProps().setProperty("game3Score", ""+gameScore);
+		
+		//set new max score
+		if( Float.parseFloat(assets.getProps().getProperty("game3MaxScore")) < gameScore)
+		{
+			assets.getProps().setProperty("game3MaxScore", ""+gameScore);
+		}
+		
+		assets.save();
 	}
 	
 	public void inputHandling()
@@ -332,6 +352,8 @@ public class GameWorld extends GameScreen
 		if(paper != null)
 		{
 			TextDrawer.drawString("Health", cam.position.x - FRUSTUM_WIDTH/2 + 0.1f, cam.position.y + FRUSTUM_HEIGHT/2 - 0.70f, 0.2f, 0.6f);
+			gameScore = (int) time;
+			TextDrawer.drawString("Seconds survived  " + gameScore , cam.position.x - FRUSTUM_WIDTH/2 + 6.7f, cam.position.y + FRUSTUM_HEIGHT/2 - 0.70f, 0.15f, 0.6f);
 			
 			for(float i=0; i<paper.getCurrentHealth(); i++)		
 			{
@@ -344,6 +366,7 @@ public class GameWorld extends GameScreen
 	public void renderOver()
 	{
 		TextDrawer.drawString("Press q to quit", cam.position.x - FRUSTUM_WIDTH/2 + 0.5f, cam.position.y + FRUSTUM_HEIGHT/2 - 2.5f, TEXT_SIZE * 2, TEXT_SIZE * 2);	
+		TextDrawer.drawString("Score " + gameScore, cam.position.x - FRUSTUM_WIDTH/2 + 0.5f, cam.position.y + FRUSTUM_HEIGHT/2 - 4, TEXT_SIZE * 2, TEXT_SIZE * 2);				
 	}
 	
 	public void renderPaused()
@@ -409,6 +432,15 @@ public class GameWorld extends GameScreen
 					treasure[i].position.set(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
 					treasure[i].update();
 					rainHit.speedDecrease();
+					
+					// TODO: Implement + Score when health is full. -Vincent
+					/*
+					if(paper.getCurrentHealth() >= 10)
+					{
+						System.out.println("X");
+						gameScore++;
+					}
+					*/
 				}
 			}
 		}
