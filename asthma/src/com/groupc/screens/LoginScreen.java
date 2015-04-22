@@ -423,12 +423,22 @@ public class LoginScreen extends Screen
 				run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
 			}
 			newProperties();
-			run.setScreen(new TutorialScreen(run));
+			if(hasNotTakenReadings(run.getUserName()))
+			{
+				TutorialScreen ts = new TutorialScreen(run);
+				run.setScreen(ts);
+			} 
+			else 
+			{
+				GameHubScreen ghs = new GameHubScreen(run);
+				run.setScreen(ghs);
+			}
 			
 		}
-
+		else
+		{
 			String line = null;
-			char[][] passWords = new char[20][30];  //need to make dynamic otherwise only 20 patients allowed!!
+			char[][] passWords = new char[80][30];  //need to make dynamic otherwise only 20 patients allowed!!
 			int counter = 0;
 			String tempString;
 			char tempChar;
@@ -463,7 +473,6 @@ public class LoginScreen extends Screen
 			
 			for(int i = 0; i < emails.size(); ++i)
 			{
-
 				tempString = new String(passWords[i]);
 				tempString = tempString.trim();
 				passWords[i] = tempString.toCharArray();
@@ -474,40 +483,47 @@ public class LoginScreen extends Screen
 					//Doctors
 					if(types.elementAt(i).equals("0"))
 					{
-						run.setUserName(userNameTF.getText());
+						if(userNameTF.getText().indexOf(".com") == -1)
+	
+						{
+							run.setUserName(userNameTF.getText());
+						}
+						else
+						{
+							run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
+						}
+						DoctorScreen ds = new DoctorScreen(run);
+						ds.getPatients();
+						run.setScreen(ds);
 					}
 					else
-					{
-						run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
-					}
-					DoctorScreen ds = new DoctorScreen(run);
-					ds.getPatients();
-					run.setScreen(ds);
-				}else
-				//Patients
-				if(types.elementAt(i).equals("1"))
-				{
-					
-					if(userNameTF.getText().indexOf(".com") == -1)
-
-					{
-						newProperties();
-						run.setUserName(userNameTF.getText());
-
-					}
-					else
-					{
-						run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
-					}
-					newProperties();
-					if(hasNotTakenReadings(userNameTF.getText()))
-					{
-						TutorialScreen ts = new TutorialScreen(run);
-						run.setScreen(ts);
-					} else 
-					{
-						GameHubScreen ghs = new GameHubScreen(run);
-						run.setScreen(ghs);
+					{//Patients
+						if(types.elementAt(i).equals("1"))
+						{
+						
+							if(userNameTF.getText().indexOf(".com") == -1)
+	
+							{
+								newProperties();
+								run.setUserName(userNameTF.getText());
+	
+							}
+							else
+							{
+								run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
+							}
+							newProperties();
+							if(hasNotTakenReadings(run.getUserName()))
+							{
+								TutorialScreen ts = new TutorialScreen(run);
+								run.setScreen(ts);
+							} 
+							else 
+							{
+								GameHubScreen ghs = new GameHubScreen(run);
+								run.setScreen(ghs);
+							}
+						}
 					}
 				}
 				if(!loginErrorDrawn)
@@ -517,6 +533,6 @@ public class LoginScreen extends Screen
 					loginErrorDrawn = true;
 				}
 			}
-		
+		}
 	}
 }

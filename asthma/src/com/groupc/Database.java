@@ -403,12 +403,12 @@ public class Database {
 			    	 System.out.println("valid score");
 			         //Retrieve by column name
 			         String id  = rs.getString("gm_1");
-			         int aInt = Integer.parseInt(id);
-			         int bInt = Integer.parseInt(score);
+			         Float aInt = Float.parseFloat(id);
+			         Float bInt = Float.parseFloat(score);
 			         
 			         if (bInt>aInt){
 			        	 String sql2;
-					     sql2 = "update patients set gm_1="+score+"where pat_email = '"+patient_email+"';";
+					     sql2 = "update patients set gm_1 = "+score+" where pat_email = '"+patient_email+"';";
 					     stmt.executeUpdate(sql2);
 			         }
 			         //Display values

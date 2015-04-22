@@ -50,7 +50,7 @@ public class DoctorScreen extends Screen
 	Resize  resize     	= new Resize(run);
 	int     butPressed 	= 0; //0 is none, 1 is add patient, 2 is back and logout for now
 	
-	String doctor = run.getUserName();
+	String doctor = run.getUserName()+".com";
 	
 	//Patient information
 	Vector<String> patientFirstNames 	= new Vector<String>();
