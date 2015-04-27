@@ -36,14 +36,26 @@ public class InstructionScreen extends GameScreen
 	@Override
 	public void update(float deltaTime)
 	{
-		if(Mouse.isButtonDown(0))
-		{
-			mouseClick.set(Mouse.getX(), Mouse.getY());
-			cam.click(mouseClick);
-			if(CollisionChecker.PointToRect(mouseClick, back))
-			{
-				this.dispose();
-			}			
+		while (Mouse.next()){
+		    if (Mouse.getEventButtonState())
+		    {
+		        if (Mouse.getEventButton() == 0) 
+		        {
+		            System.out.println("Left button pressed");
+		        }
+		    }
+		    else
+		    {
+		    	if (Mouse.getEventButton() == 0) 
+		    	{
+		    		mouseClick.set(Mouse.getX(), Mouse.getY());
+		    		cam.click(mouseClick);
+		    		if(CollisionChecker.PointToRect(mouseClick, back))
+		    		{
+		    			this.dispose();
+		    		}			
+		    	}
+		    }
 		}
 	}
 

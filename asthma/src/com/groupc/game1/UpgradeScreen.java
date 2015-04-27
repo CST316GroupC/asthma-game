@@ -48,16 +48,21 @@ public class UpgradeScreen extends GameScreen
 	public void update(float deltaTime) 
 	{
 		while (Mouse.next()){
-		    if (Mouse.getEventButtonState()) {
-		        if (Mouse.getEventButton() == 0) {
+		    if (Mouse.getEventButtonState())
+		    {
+		        if (Mouse.getEventButton() == 0) 
+		        {
 		            System.out.println("Left button pressed");
 		        }
-		    }else {
-		        if (Mouse.getEventButton() == 0) {
-		            System.out.println("Left button released");
-		            mouseClick.set(Mouse.getX(), Mouse.getY());
-		            cam.click(mouseClick);
-					if(CollisionChecker.PointToRect(mouseClick, upgradeSpeed))
+		    }
+		    else
+		    {
+		    	if (Mouse.getEventButton() == 0) 
+		    	{
+		    		System.out.println("Left button released");
+		    		mouseClick.set(Mouse.getX(), Mouse.getY());
+		    		cam.click(mouseClick);
+		    		if(CollisionChecker.PointToRect(mouseClick, upgradeSpeed))
 					{
 						if(seeds > prices[speedMult])
 						{
