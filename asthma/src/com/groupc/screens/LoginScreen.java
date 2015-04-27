@@ -264,10 +264,13 @@ public class LoginScreen extends Screen
 	
 	private void newProperties()
 	{
+
 		try
 		{
-			FileInputStream in = new FileInputStream("resources/interface/parent_controls/" + userNameTF.getText() + ".properties");
+			FileInputStream in = new FileInputStream("resources/interface/parent_controls/" + run.getUserName() + ".properties");
 			in.close();
+				
+			
 		}catch(Exception e)
 		{
 			Properties properties = new Properties();
@@ -279,16 +282,18 @@ public class LoginScreen extends Screen
 			properties.setProperty("Game_4", "true");
 			properties.setProperty("Email_Alerts", "false");
 			properties.setProperty("Email", userNameTF.getText());
+			System.out.println("failed to read file");
 			
 			try
 			{
-				FileWriter write = new FileWriter("resources/interface/parent_controls/" + userNameTF.getText() + ".properties");
+				FileWriter write = new FileWriter("resources/interface/parent_controls/" + run.getUserName() + ".properties");
 				properties.store(write, "User:" + userNameTF.getText());
 				write.close();
 			}catch(Exception ex)
 			{
 				System.out.println("Failed new properties");
 			}
+			
 		}
 	}
 
@@ -417,11 +422,23 @@ public class LoginScreen extends Screen
 			{
 				run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
 			}
-			run.setScreen(new TutorialScreen(run));
+			newProperties();
+			if(hasNotTakenReadings(run.getUserName()))
+			{
+				TutorialScreen ts = new TutorialScreen(run);
+				run.setScreen(ts);
+			} 
+			else 
+			{
+				GameHubScreen ghs = new GameHubScreen(run);
+				run.setScreen(ghs);
+			}
+			
 		}
-
+		else
+		{
 			String line = null;
-			char[][] passWords = new char[20][30];  //need to make dynamic otherwise only 20 patients allowed!!
+			char[][] passWords = new char[80][30];  //need to make dynamic otherwise only 20 patients allowed!!
 			int counter = 0;
 			String tempString;
 			char tempChar;
@@ -456,7 +473,6 @@ public class LoginScreen extends Screen
 			
 			for(int i = 0; i < emails.size(); ++i)
 			{
-
 				tempString = new String(passWords[i]);
 				tempString = tempString.trim();
 				passWords[i] = tempString.toCharArray();
@@ -467,25 +483,46 @@ public class LoginScreen extends Screen
 					//Doctors
 					if(types.elementAt(i).equals("0"))
 					{
-						run.setUserName(userNameTF.getText());
+						if(userNameTF.getText().indexOf(".com") == -1)
+	
+						{
+							run.setUserName(userNameTF.getText());
+						}
+						else
+						{
+							run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
+						}
 						DoctorScreen ds = new DoctorScreen(run);
 						ds.getPatients();
 						run.setScreen(ds);
-					}else
-					//Patients
-					if(types.elementAt(i).equals("1"))
-					{
-						newProperties();
-						run.setUserName(userNameTF.getText());
-						if(hasNotTakenReadings(userNameTF.getText()))
+					}
+					else
+					{//Patients
+						if(types.elementAt(i).equals("1"))
 						{
-							
-							TutorialScreen ts = new TutorialScreen(run);
-							run.setScreen(ts);
-						} else 
-						{
-							GameHubScreen ghs = new GameHubScreen(run);
-							run.setScreen(ghs);
+						
+							if(userNameTF.getText().indexOf(".com") == -1)
+	
+							{
+								newProperties();
+								run.setUserName(userNameTF.getText());
+	
+							}
+							else
+							{
+								run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
+							}
+							newProperties();
+							if(hasNotTakenReadings(run.getUserName()))
+							{
+								TutorialScreen ts = new TutorialScreen(run);
+								run.setScreen(ts);
+							} 
+							else 
+							{
+								GameHubScreen ghs = new GameHubScreen(run);
+								run.setScreen(ghs);
+							}
 						}
 					}
 				}
@@ -496,6 +533,6 @@ public class LoginScreen extends Screen
 					loginErrorDrawn = true;
 				}
 			}
-		
+		}
 	}
 }

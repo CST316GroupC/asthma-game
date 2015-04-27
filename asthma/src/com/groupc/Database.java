@@ -387,6 +387,8 @@ public class Database {
 
 			      //STEP 3: Open a connection
 			      System.out.println("Connecting to database...");
+			      System.out.println("email: "+patient_email);
+			      System.out.println("input score: "+score);
 			      conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
 			      //STEP 4: Execute a query
@@ -398,15 +400,15 @@ public class Database {
 			      
 			      //STEP 5: Extract data from result set
 			      while(rs.next()){
-			    	 System.out.println("valid");
+			    	 System.out.println("valid score");
 			         //Retrieve by column name
 			         String id  = rs.getString("gm_1");
-			         int aInt = Integer.parseInt(id);
-			         int bInt = Integer.parseInt(score);
+			         Float aInt = Float.parseFloat(id);
+			         Float bInt = Float.parseFloat(score);
 			         
 			         if (bInt>aInt){
 			        	 String sql2;
-					     sql2 = "update patients set gm_1="+score+"where pat_email = '"+patient_email+"';";
+					     sql2 = "update patients set gm_1 = "+score+" where pat_email = '"+patient_email+"';";
 					     stmt.executeUpdate(sql2);
 			         }
 			         //Display values
@@ -439,7 +441,7 @@ public class Database {
 			         se.printStackTrace();
 			      }//end finally try
 			   }//end try
-		   System.out.println("Invalid login");
+		   System.out.println("Invalid score");
 		   return false;
 	   }
 }
