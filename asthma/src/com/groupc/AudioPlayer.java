@@ -21,12 +21,12 @@ public class AudioPlayer
 	
 	public AudioPlayer() 
 	{
-		try {
+		/*try {
 			AL.create();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		sounds = new ArrayList<Audio>();
 	}
 	
