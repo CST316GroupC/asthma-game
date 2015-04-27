@@ -395,7 +395,11 @@ public class MazeWorld extends GameScreen
 					}
 					if(Keyboard.getEventKey() == Keyboard.KEY_V && player.getState() == Player.STATE_STILL)
 					{
-						playerDig = player.dig();
+						if(getAxes() > 0)
+						{
+							playerDig = player.dig();
+							setAxes(getAxes() - 1);
+						}
 					}
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_P)
