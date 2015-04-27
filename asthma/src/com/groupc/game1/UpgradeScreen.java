@@ -98,7 +98,6 @@ public class UpgradeScreen extends GameScreen
 		//draw arrows
 		assets.getImage("upgrade").draw(upgradeSpeed);
 		assets.getImage("upgrade").draw(upgradeFlaps);
-		assets.getImage("back").draw(back);
 		
 		TextDrawer.drawString("Seeds", 25, 350, 40, 40);
 		TextDrawer.drawInt(seeds, 250, 350, 20, 40, 5);
@@ -109,8 +108,7 @@ public class UpgradeScreen extends GameScreen
 		TextDrawer.drawString("Flaps", 50, 250, 20, 20);
 		TextDrawer.drawInt(prices[flaps], 225, 250, 10, 20, 5);
 		
-		
-		
+		TextDrawer.drawStringinRect("Back", back, true);
 	}
 
 	@Override

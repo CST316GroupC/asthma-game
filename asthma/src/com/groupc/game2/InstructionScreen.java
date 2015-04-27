@@ -6,7 +6,7 @@ import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
-import com.groupc.game1.MainMenu;
+import com.groupc.game2.MainMenu;
 import com.groupc.math.CollisionChecker;
 import com.groupc.math.Rectangle;
 import com.groupc.math.Vector;
@@ -26,10 +26,10 @@ public class InstructionScreen extends GameScreen
 		super(assets);
 		cam = new Camera(400, 400);
 		cam.setCamera();
-		back = new Rectangle(350, 50, 50, 50);
-		lblMoving = new Rectangle(50, 300, 150, 50);
-		lblAxe = new Rectangle(50, 200, 150, 50);
-		lblPosition = new Rectangle(50, 100, 150, 50);
+		back = new Rectangle(175, 0, 75, 75);
+		lblMoving = new Rectangle(50, 300, 300, 75);
+		lblAxe = new Rectangle(50, 200, 300, 75);
+		lblPosition = new Rectangle(50, 100, 300, 75);
 		mouseClick = new Vector();
 	}
 
@@ -55,6 +55,7 @@ public class InstructionScreen extends GameScreen
 		TextDrawer.drawStringinRect("Press Arrow Keys or WASD to move", lblMoving);
 		TextDrawer.drawStringinRect("Press v to use Axes if you have one", lblAxe);
 		TextDrawer.drawStringinRect("Pressing space will help", lblPosition);
+		TextDrawer.drawStringinRect("Back", back, true);
 	}
 
 	@Override

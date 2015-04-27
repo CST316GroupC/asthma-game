@@ -15,7 +15,7 @@ public class MainMenu extends GameScreen
 	private final Camera cam;
 	private final Rectangle title;
 	private final Rectangle play;
-	private final Rectangle options;
+	//private final Rectangle options;
 	private final Rectangle upgrade;
 	private final Rectangle instruct;
 	private final Vector mouseClick;
@@ -27,10 +27,10 @@ public class MainMenu extends GameScreen
 		cam = new Camera(400, 400);
 		cam.setCamera();
 		title = new Rectangle(50, 300, 300, 100);
-		play = new Rectangle(25, 200, 150, 75);
-		options = new Rectangle(200, 200, 150, 75);
-		upgrade = new Rectangle(25, 100, 150, 75);
-		instruct = new Rectangle(200, 100, 150, 75);
+		play = new Rectangle(125, 200, 150, 75);
+		//options = new Rectangle(200, 200, 150, 75);
+		upgrade = new Rectangle(125, 125, 150, 75);
+		instruct = new Rectangle(125, 50, 150, 75);
 		mouseClick = new Vector();
 	}
 
@@ -45,12 +45,11 @@ public class MainMenu extends GameScreen
 				this.dispose();
 				next = 1;
 			}
-			if(CollisionChecker.PointToRect(mouseClick, options))
-			{
-				this.dispose();
-				next = 2;
-				
-			}
+			//if(CollisionChecker.PointToRect(mouseClick, options))
+			//{
+			//	this.dispose();
+			//	next = 2;	
+			//}
 			if(CollisionChecker.PointToRect(mouseClick, upgrade))
 			{
 				this.dispose();
@@ -73,7 +72,7 @@ public class MainMenu extends GameScreen
 		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		assets.getImage("title").draw(title);
 		TextDrawer.drawStringinRect("Start", play, true);
-		TextDrawer.drawStringinRect("Options", options, true);
+		//TextDrawer.drawStringinRect("Options", options, true);
 		TextDrawer.drawStringinRect("Upgrade", upgrade, true);
 		TextDrawer.drawStringinRect("Instructions", instruct, true);
 		//Assets.getImage("playBut").draw(play);
@@ -106,10 +105,6 @@ public class MainMenu extends GameScreen
 		if(next == 1)
 		{
 			return new World(assets);
-		}
-		if(next == 2)
-		{
-			return new Options(assets, this.cam);
 		}
 		if(next == 3)
 		{
