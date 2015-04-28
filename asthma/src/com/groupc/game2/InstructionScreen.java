@@ -1,4 +1,4 @@
-package com.groupc.game1;
+package com.groupc.game2;
 
 import org.lwjgl.input.Mouse;
 
@@ -6,30 +6,37 @@ import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
 import com.groupc.game.Camera;
 import com.groupc.game.GameScreen;
+import com.groupc.game2.MainMenu;
 import com.groupc.math.CollisionChecker;
 import com.groupc.math.Rectangle;
 import com.groupc.math.Vector;
 
-public class Instructions extends GameScreen
+public class InstructionScreen extends GameScreen
 {
+
 	private final Camera cam;
 	private final Rectangle back;
+	private final Rectangle lblMoving;
+	private final Rectangle lblAxe;
+	private final Rectangle lblPosition;
 	private final Vector mouseClick;
 	
-	public Instructions(Asset assets)
+	public InstructionScreen(Asset assets)
 	{
 		super(assets);
-		cam = new Camera(300, 100);
+		cam = new Camera(400, 400);
 		cam.setCamera();
-		back = new Rectangle(250, 0, 50, 30);
+		back = new Rectangle(175, 0, 75, 75);
+		lblMoving = new Rectangle(50, 300, 300, 75);
+		lblAxe = new Rectangle(50, 200, 300, 75);
+		lblPosition = new Rectangle(50, 100, 300, 75);
 		mouseClick = new Vector();
 	}
 
 	@Override
 	public void update(float deltaTime)
 	{
-		while (Mouse.next())
-		{
+		while (Mouse.next()){
 		    if (Mouse.getEventButtonState())
 		    {
 		        if (Mouse.getEventButton() == 0) 
@@ -56,11 +63,11 @@ public class Instructions extends GameScreen
 	public void present(float deltaTime)
 	{
 		cam.setCamera();
-		assets.getImage("grass").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
-		assets.getImage("back").draw(back);
-		TextDrawer.drawString("Press w or up to flap wings", 20, 40, 10, 10);
-		TextDrawer.drawString("Press s or down to glide", 20, 55, 10, 10);
-		TextDrawer.drawString("Press p to pause", 20, 70, 10, 10);
+		assets.getImage("background").draw(new Rectangle(0, 0, 400, 400));
+		TextDrawer.drawStringinRect("Press Arrow Keys or WASD to move", lblMoving);
+		TextDrawer.drawStringinRect("Press v to use Axes if you have one", lblAxe);
+		TextDrawer.drawStringinRect("Pressing space will help", lblPosition);
+		TextDrawer.drawStringinRect("Back", back, true);
 	}
 
 	@Override
@@ -86,5 +93,4 @@ public class Instructions extends GameScreen
 	{
 		return new MainMenu(assets);
 	}
-
 }

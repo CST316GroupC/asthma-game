@@ -200,7 +200,7 @@ public class World extends GameScreen
 				
 				if(Keyboard.getEventKey() == Keyboard.KEY_S || Keyboard.getEventKey() == Keyboard.KEY_DOWN)
 				{
-					if(state == WORLD_STATE_PLAYING)
+					if(state == WORLD_STATE_PLAYING && joey.getState() != JoeyRooster.STATE_SB)
 		        	{
 						joey.toggleGlide();
 		        	}

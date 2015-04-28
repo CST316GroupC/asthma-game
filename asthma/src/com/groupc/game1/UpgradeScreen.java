@@ -48,16 +48,21 @@ public class UpgradeScreen extends GameScreen
 	public void update(float deltaTime) 
 	{
 		while (Mouse.next()){
-		    if (Mouse.getEventButtonState()) {
-		        if (Mouse.getEventButton() == 0) {
+		    if (Mouse.getEventButtonState())
+		    {
+		        if (Mouse.getEventButton() == 0) 
+		        {
 		            System.out.println("Left button pressed");
 		        }
-		    }else {
-		        if (Mouse.getEventButton() == 0) {
-		            System.out.println("Left button released");
-		            mouseClick.set(Mouse.getX(), Mouse.getY());
-		            cam.click(mouseClick);
-					if(CollisionChecker.PointToRect(mouseClick, upgradeSpeed))
+		    }
+		    else
+		    {
+		    	if (Mouse.getEventButton() == 0) 
+		    	{
+		    		System.out.println("Left button released");
+		    		mouseClick.set(Mouse.getX(), Mouse.getY());
+		    		cam.click(mouseClick);
+		    		if(CollisionChecker.PointToRect(mouseClick, upgradeSpeed))
 					{
 						if(seeds > prices[speedMult])
 						{
@@ -98,7 +103,6 @@ public class UpgradeScreen extends GameScreen
 		//draw arrows
 		assets.getImage("upgrade").draw(upgradeSpeed);
 		assets.getImage("upgrade").draw(upgradeFlaps);
-		assets.getImage("back").draw(back);
 		
 		TextDrawer.drawString("Seeds", 25, 350, 40, 40);
 		TextDrawer.drawInt(seeds, 250, 350, 20, 40, 5);
@@ -109,8 +113,7 @@ public class UpgradeScreen extends GameScreen
 		TextDrawer.drawString("Flaps", 50, 250, 20, 20);
 		TextDrawer.drawInt(prices[flaps], 225, 250, 10, 20, 5);
 		
-		
-		
+		TextDrawer.drawStringinRect("Back", back, true);
 	}
 
 	@Override

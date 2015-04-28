@@ -15,7 +15,7 @@ public class MainMenu extends GameScreen
 	private final Camera cam;
 	private final Rectangle title;
 	private final Rectangle play;
-	private final Rectangle options;
+	//private final Rectangle options;
 	private final Rectangle upgrade;
 	private final Rectangle instruct;
 	private final Vector mouseClick;
@@ -27,42 +27,53 @@ public class MainMenu extends GameScreen
 		cam = new Camera(400, 400);
 		cam.setCamera();
 		title = new Rectangle(50, 300, 300, 100);
-		play = new Rectangle(25, 200, 150, 75);
-		options = new Rectangle(200, 200, 150, 75);
-		upgrade = new Rectangle(25, 100, 150, 75);
-		instruct = new Rectangle(200, 100, 150, 75);
+		play = new Rectangle(105, 210, 170, 75);
+		//options = new Rectangle(200, 200, 150, 75);
+		upgrade = new Rectangle(105, 125, 170, 75);
+		instruct = new Rectangle(105, 40, 170, 75);
 		mouseClick = new Vector();
 	}
 
 	@Override
 	public void update(float deltaTime) 
 	{	
-		if(Mouse.isButtonDown(0))
-		{
-			mouseClick.set(Mouse.getX(), Mouse.getY());
-			cam.click(mouseClick);
-			if(CollisionChecker.PointToRect(mouseClick, play))
-			{
-				this.dispose();
-				next = 1;
-			}
-			if(CollisionChecker.PointToRect(mouseClick, options))
-			{
-				this.dispose();
-			//	next = 2;
-			}
-			if(CollisionChecker.PointToRect(mouseClick, upgrade))
-			{
-				this.dispose();
-				next = 3;
-			}
-			if(CollisionChecker.PointToRect(mouseClick, instruct))
-			{
-				this.dispose();
-			//	next = 4;
+		while (Mouse.next()){
+		    if (Mouse.getEventButtonState())
+		    {
+		        if (Mouse.getEventButton() == 0) 
+		        {
+		            System.out.println("Left button pressed");
+		        }
+		    }
+		    else
+		    {
+		    	if (Mouse.getEventButton() == 0) 
+		    	{
+		    		mouseClick.set(Mouse.getX(), Mouse.getY());
+		    		cam.click(mouseClick);
+		    		if(CollisionChecker.PointToRect(mouseClick, play))
+		    		{
+		    			this.dispose();
+		    			next = 1;
+		    		}
+					//if(CollisionChecker.PointToRect(mouseClick, options))
+					//{
+					//	this.dispose();
+					//	next = 2;
+					//}
+					if(CollisionChecker.PointToRect(mouseClick, upgrade))
+					{
+						this.dispose();
+						next = 2;
+					}
+					if(CollisionChecker.PointToRect(mouseClick, instruct))
+					{
+						this.dispose();
+						next = 3;
+					}
+				}				
 			}
 		}
-		
 	}
 
 	@Override
@@ -74,8 +85,8 @@ public class MainMenu extends GameScreen
 		TextDrawer.drawStringinRect("Maze Game", title, false);
 		TextDrawer.drawStringinRect("Play", play, true);
 		TextDrawer.drawStringinRect("upgrade", upgrade, true);
+		TextDrawer.drawStringinRect("Instructions", instruct, true);
 	}
-
 	
 	@Override
 	public void pause() {
@@ -102,9 +113,13 @@ public class MainMenu extends GameScreen
 		{
 			return new MazeWorld(assets);
 		}
-		else
+		else if(next == 2)
 		{
 			return new UpgradeScreen(assets);
+		}
+		else
+		{
+			return new InstructionScreen(assets);
 		}
 	}
 }

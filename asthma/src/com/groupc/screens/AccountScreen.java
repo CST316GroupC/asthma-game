@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -24,7 +27,10 @@ public class AccountScreen extends Screen
 	boolean redraw			= true;
 	int		butPressed		= 0;
 	Resize  resize     		= new Resize(run);
-	NavigationBar navBar    = new NavigationBar(run,true,false,"Account Settings");
+	String 	user 			= run.getUserName();
+	NavigationBar 	navBar  = new NavigationBar(run,true,false,"Account Settings");
+	Properties 		props 	= new Properties();
+	
 	
 	//Display Elements
 	JPanel		accountBox    	= new JPanel();
@@ -82,6 +88,16 @@ public class AccountScreen extends Screen
 		this.setBackground(Color.WHITE);
 		accountBox.setBackground(Color.LIGHT_GRAY);
 		
+		//setFont
+		Font boldFont = highScoresGame1Label.getFont().deriveFont(Font.BOLD);
+		highScoresGame1Label.setFont(boldFont);
+		highScoresGame2Label.setFont(boldFont);
+		highScoresGame3Label.setFont(boldFont);
+		highScoresGame4Label.setFont(boldFont);
+		
+		//Get Player Highscores Scores
+		loadHighScores();
+		
 		//Button Presses
 		changePasswordButton.addActionListener(new ActionListener()
 		{
@@ -134,6 +150,32 @@ public class AccountScreen extends Screen
 		this.setLayout(null);
 		run.setContentPane(this);
 		run.setVisible(true);
+	}
+	
+	private void loadHighScores()
+	{
+		try 
+		{
+			FileInputStream in = new FileInputStream("resources/interface/parent_controls/"+user+".properties");
+			props.load(in);
+			in.close();
+			/*String temp = props.getProperty("tokenfirstTime", "true");
+			if("true".equals(temp))
+			{
+				props.setProperty("tokens", ""+tokenTotal);
+				props.setProperty("tokenfirstTime", "false");
+			}*/
+			highScoresGame1OutPut.setText(props.getProperty("game1MaxScore", "0"));
+			highScoresGame2OutPut.setText(props.getProperty("game2MaxScore", "0"));
+			highScoresGame3OutPut.setText(props.getProperty("game3MaxScore", "0"));
+			highScoresGame4OutPut.setText(props.getProperty("game4MaxScore", "0"));
+			
+			//tokenTotal = Integer.parseInt(props.getProperty("tokens", "0"));
+		} 
+		catch (IOException e1) 
+		{
+			e1.printStackTrace();
+		} 
 	}
 
 	@Override

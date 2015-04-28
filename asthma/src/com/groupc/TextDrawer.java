@@ -113,7 +113,7 @@ public final class TextDrawer
 			characters.put("char ", new TextureRegion(text, 0, 0, 1, 1));
 			
 			//border
-			characters.put("border", new TextureRegion(text, 470, 512-312, 32, 32));
+			characters.put("border", new TextureRegion(text, 469, 512-312, 34, 32));
 			
 		} 
 		catch (IOException e) 
@@ -189,7 +189,7 @@ public final class TextDrawer
 		}
 		if(border)
 		{
-			characters.get("border").draw(rect);
+			characters.get("border").draw(new Rectangle(rect.lowerLeft.x - 4, rect.lowerLeft.y - 4, rect.width+8, rect.height+8));
 		}
 	}
 	

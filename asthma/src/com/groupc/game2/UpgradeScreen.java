@@ -44,7 +44,7 @@ public class UpgradeScreen extends GameScreen
 		lblLives = new Rectangle(50, 200, 200, 50);
 		buyGems = new Rectangle(300, 150, 50, 50);
 		lblGems = new Rectangle(50, 150, 200, 50);
-		back = new Rectangle(350, 0, 50, 50);
+		back = new Rectangle(325, 0, 75, 75);
 		displayGems = new Rectangle(0, 350, 100, 50);
 		displayTokens = new Rectangle(200, 350, 100, 50);
 		displayLives = new Rectangle(0, 300, 100, 50);
@@ -127,6 +127,7 @@ public class UpgradeScreen extends GameScreen
 		TextDrawer.drawStringinRect("Gems " + gems, displayGems);
 		TextDrawer.drawStringinRect("Axes " + axes, displayAxes);
 		TextDrawer.drawStringinRect("Lives " + lives, displayLives);
+		TextDrawer.drawStringinRect("Back", back, true);
 	}
 
 	@Override
