@@ -43,26 +43,40 @@ public class GameWorld extends GameScreen
 	private int 	gameScore;
 	private int 	hitCounter;
 	private int		updatedScore;
+	private int		rainCount;
+	private int		treasureCount;
+	private int 	healthGlobeCount;
+	private int		currentGameScore;
 	
-	public float 	time;
+	private boolean rain30Sec;
+	private boolean rain60Sec;
+	
+	private float 	time;
+	private float	gameScoreHud;
 	
 	private Camera 				cam;
 	private Random 				rand;
 	
 	public final PaperMan 		paper;
 	public final Rain 			rainHit;
-	public final Rain[] 		rain;
-	public final HealthGlobe[] 	healthGlobe;
-	public final Treasure[] 	treasure;
+	public 		 Rain[] 		rain;
+	public 		 HealthGlobe[] 	healthGlobe;
+	public 		 Treasure[] 	treasure;
 	
-	//TODO: change assets for paperMan and change rain positiong (from array to random objects?)
 	public GameWorld(Asset assets)
 	{        
 		super(assets);
 		assets.reload();
 		
-		hitCounter = 	0;
-		time = 			0;
+		rain30Sec 			= false;
+		rain60Sec			= false;
+		
+		rainCount			=	4;
+		treasureCount		=	1;
+		healthGlobeCount	=	1;
+		hitCounter 			= 	0;
+		time 				= 	0;
+		currentGameScore	=	0;
 		
 		rand = 			new Random();
 		
@@ -76,10 +90,10 @@ public class GameWorld extends GameScreen
 	
 		previousGameScore = Integer.parseInt(assets.getProps().getProperty("game3Score"));
 		
-		gameScore = previousGameScore;
+		//gameScore = previousGameScore;
 		
 		// Rain droplets initializations
-		this.rain = 	new Rain[6];
+		this.rain = 	new Rain[rainCount];
 		rain[0] = new Rain(cam.position.x + FRUSTUM_WIDTH, cam.position.y);
 		rain[1] = new Rain(cam.position.x + FRUSTUM_WIDTH/2 + 0.3f, cam.position.y);
 		rain[2] = new Rain(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y + 2);
@@ -95,11 +109,39 @@ public class GameWorld extends GameScreen
 		chestAmount = Integer.parseInt(assets.getProps().getProperty("game3Chest"));
 		
 		this.treasure = new Treasure[chestAmount];
-		treasure[0] = new Treasure(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y);
+		treasure[0] = new Treasure(cam.position.x - FRUSTUM_WIDTH/2 + 5, cam.position.y);
 	}
 	
 	public void updateRain()
 	{
+		if((int)time >=30 && rain30Sec == false )
+		{
+			rainCount = 6;
+			this.rain = new Rain[rainCount];
+
+			rain[0] = new Rain(cam.position.x + FRUSTUM_WIDTH, cam.position.y);
+			rain[1] = new Rain(cam.position.x + FRUSTUM_WIDTH/2 + 0.3f, cam.position.y);
+			rain[2] = new Rain(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y + 2);
+			rain[3] = new Rain(cam.position.x + FRUSTUM_WIDTH/2 + 0.2f, cam.position.y - 3);
+			
+			rain30Sec = true;
+		}
+		else if((int)time >=60 && rain60Sec == false )
+		{
+			rainCount = 10;
+			this.rain = new Rain[rainCount];
+
+			rain[0] = new Rain(cam.position.x + FRUSTUM_WIDTH, cam.position.y);
+			rain[1] = new Rain(cam.position.x + FRUSTUM_WIDTH/2 + 0.3f, cam.position.y);
+			rain[2] = new Rain(cam.position.x + FRUSTUM_WIDTH/2, cam.position.y + 2);
+			rain[3] = new Rain(cam.position.x + FRUSTUM_WIDTH/2 + 0.2f, cam.position.y - 3);
+			rain[4] = new Rain(cam.position.x + FRUSTUM_WIDTH/2 + 0.4f, cam.position.y - 2);
+			rain[5] = new Rain(cam.position.x + FRUSTUM_WIDTH/2 + 0.7f, cam.position.y - 1);
+			rain[6] = new Rain(cam.position.x + FRUSTUM_WIDTH/2 + 0.1f, cam.position.y + 1);
+			
+			rain60Sec = true;
+		}
+		
 		for(int i = 0; i < rain.length; i++)
 		{
 			if(rain[i] != null)
@@ -108,16 +150,16 @@ public class GameWorld extends GameScreen
 				
 				if(rain[i].position.y <= cam.position.y - FRUSTUM_HEIGHT /2)
 				{
-					rain[i].position.set(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
-				}
+					rain[i].position.set(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), rand.nextFloat() + cam.position.y + FRUSTUM_HEIGHT/2);
+				}				
 			}
 			else
-			{
+			{	
 				int chance = rand.nextInt(10);
 				
 				if(chance < 5)
 				{
-					rain[i] = new Rain(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), cam.position.y + FRUSTUM_HEIGHT/2);
+					rain[i] = new Rain(rand.nextFloat() * (cam.position.x + FRUSTUM_WIDTH/2), rand.nextFloat() + cam.position.y + FRUSTUM_HEIGHT/2);
 				}
 			}
 		}		
@@ -211,13 +253,13 @@ public class GameWorld extends GameScreen
 	 */
 	private void save()
 	{
-		updatedScore = gameScore + previousGameScore;
+		updatedScore = currentGameScore + previousGameScore;
 		assets.getProps().setProperty("game3Score", ""+updatedScore);
 		
 		//set new max score
-		if( Float.parseFloat(assets.getProps().getProperty("game3MaxScore")) < updatedScore)
+		if( Float.parseFloat(assets.getProps().getProperty("game3MaxScore")) < currentGameScore)
 		{
-			assets.getProps().setProperty("game3MaxScore", ""+updatedScore);
+			assets.getProps().setProperty("game3MaxScore", ""+currentGameScore);
 		}
 		
 		assets.save();
@@ -299,7 +341,6 @@ public class GameWorld extends GameScreen
 			break;
 			
 		case PaperMan.STATE_HIT:
-			//TODO: make flicker or give invincibility image. 
 			assets.getImage("paperMan").draw(rect);
 			break;
 			
@@ -349,7 +390,7 @@ public class GameWorld extends GameScreen
 		
 	}
 	
-	//TODO: update renderers to properly reflect score for game 3
+	//TODO: Scoring -Vincent
 	public void renderHud()
 	{
 		//hud
@@ -357,27 +398,41 @@ public class GameWorld extends GameScreen
 		if(paper != null)
 		{
 			TextDrawer.drawString("Health", cam.position.x - FRUSTUM_WIDTH/2 + 0.1f, cam.position.y + FRUSTUM_HEIGHT/2 - 0.70f, 0.2f, 0.6f);
-			gameScore = (int) time;
-			TextDrawer.drawString("Seconds survived  " + gameScore , cam.position.x - FRUSTUM_WIDTH/2 + 6.7f, cam.position.y + FRUSTUM_HEIGHT/2 - 0.70f, 0.15f, 0.6f);
+			currentGameScore = (int) time;
+			//currentGameScore = currentGameScore + gameScore;
+			TextDrawer.drawString("Seconds survived  " + (int) time , cam.position.x - FRUSTUM_WIDTH/2 + 6.7f, cam.position.y + FRUSTUM_HEIGHT/2 - 0.70f, 0.15f, 0.6f);
+			TextDrawer.drawString("Score  " + currentGameScore , cam.position.x - FRUSTUM_WIDTH/2 + 7, cam.position.y + FRUSTUM_HEIGHT/2 - 1.2f, 0.15f, 0.6f);
+			
 			
 			for(float i=0; i<paper.getCurrentHealth(); i++)		
 			{
 				Rectangle healthRect = new Rectangle(cam.position.x - FRUSTUM_WIDTH/2 + 1.5f + i/2, cam.position.y + FRUSTUM_HEIGHT/2 - 1.0f, 0.6f, 1.0f);
 				assets.getImage("healthBar").draw(healthRect);
 			}
+			
+			if((int)time == 30 || (int)time == 60){
+				renderMoreDropletsText();
+			}
 		}
+		
+		
 	}
 	
 	public void renderOver()
 	{
 		TextDrawer.drawString("Press q to quit", cam.position.x - FRUSTUM_WIDTH/2 + 0.5f, cam.position.y + FRUSTUM_HEIGHT/2 - 2.5f, TEXT_SIZE * 2, TEXT_SIZE * 2);	
-		TextDrawer.drawString("Score " + gameScore, cam.position.x - FRUSTUM_WIDTH/2 + 0.5f, cam.position.y + FRUSTUM_HEIGHT/2 - 4, TEXT_SIZE * 2, TEXT_SIZE * 2);				
+		//TextDrawer.drawString("Score " + currentGameScore, cam.position.x - FRUSTUM_WIDTH/2 + 0.5f, cam.position.y + FRUSTUM_HEIGHT/2 - 4, TEXT_SIZE * 2, TEXT_SIZE * 2);				
 	}
 	
 	public void renderPaused()
 	{
 		TextDrawer.drawString("Paused", cam.position.x-2.5f, cam.position.y, TEXT_SIZE * 3, TEXT_SIZE * 3);
 		TextDrawer.drawString("Press q to quit", cam.position.x - FRUSTUM_WIDTH/2 + 0.5f, cam.position.y + FRUSTUM_HEIGHT/2 - 2.5f, TEXT_SIZE * 2, TEXT_SIZE * 2);
+	}
+	
+	public void renderMoreDropletsText()
+	{
+		TextDrawer.drawString("More Droplets", cam.position.x - FRUSTUM_WIDTH/2 + 1, cam.position.y + FRUSTUM_HEIGHT/2 - 4, TEXT_SIZE * 2, TEXT_SIZE * 2);
 	}
 	
 	public void collision()
@@ -399,11 +454,12 @@ public class GameWorld extends GameScreen
 					rain[i].update();
 					paper.hit();
 					hitCounter += 1;
+					currentGameScore -= 1;
 				}
 			}
 		}
 		
-		if( hitCounter >= 5)
+		if( hitCounter >= 3)
 		{
 			rainHit.speedIncrease();
 			hitCounter = 0;
@@ -438,14 +494,11 @@ public class GameWorld extends GameScreen
 					treasure[i].update();
 					rainHit.speedDecrease();
 					
-					// TODO: Implement + Score when health is full. -Vincent
-					/*
-					if(paper.getCurrentHealth() >= 10)
+					if(paper.getCurrentHealth() >= 10 )
 					{
-						System.out.println("X");
-						gameScore++;
+						currentGameScore = currentGameScore + 2;
 					}
-					*/
+					
 				}
 			}
 		}
@@ -476,7 +529,8 @@ public class GameWorld extends GameScreen
 	}
 
 	@Override
-	public void resume() {
+	public void resume() 
+	{
 		// TODO Auto-generated method stub
 		
 	}

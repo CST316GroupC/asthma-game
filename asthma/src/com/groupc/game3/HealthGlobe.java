@@ -6,7 +6,7 @@ public class HealthGlobe extends GameObject
 {
 	public static final float WIDTH = 1f;
 	public static final float HEIGHT = 1f;
-	public static final float speed = 0.07f;
+	public static final float speed = 0.09f;
 	private boolean hit;
 	
 	public HealthGlobe(float x, float y)

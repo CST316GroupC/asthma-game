@@ -12,17 +12,23 @@ import com.groupc.math.Vector;
 
 public class Upgrades extends GameScreen
 {
+	public static final int		HEALTHGLOBE_COUNT_MAX	= 3;
+	public static final int		TREASURE_COUNT_MAX		= 3;
+	
 	private final Camera cam;
 	private final Vector mouseClick;
 	private final Rectangle increaseChest;
 	private final Rectangle increaseHealthGlobe;
 	private final Rectangle back;
+	private final Rectangle convertTokens;
 	
 	private int score;
 	private int chestAmount;
 	private int healthGlobeAmount;
+	private int tokens;
 	
-	private int[] prices = {10, 20, 40, 70, 110, 160, 220, 290, 370, 500};
+	private int[] chestPrice = {0, 250, 500, 1000};
+	private int[] healthPrice = {0, 300, 600, 1200};
 	
 	public Upgrades(Asset assets)
 	{
@@ -32,6 +38,7 @@ public class Upgrades extends GameScreen
 		cam.setCamera();
 		increaseChest = new Rectangle(310, 270, 50, 50);
 		increaseHealthGlobe = new Rectangle(310, 210, 50, 50);
+		convertTokens = new Rectangle(310, 150, 50, 50);
 
 		back = new Rectangle(300, 0, 100, 100);
 		
@@ -41,6 +48,7 @@ public class Upgrades extends GameScreen
 		score = Integer.parseInt(assets.getProps().getProperty("game3Score"));
 		chestAmount = Integer.parseInt(assets.getProps().getProperty("game3Chest"));
 		healthGlobeAmount= Integer.parseInt(assets.getProps().getProperty("game3HealthGlobe"));
+		tokens = Integer.parseInt(assets.getProps().getProperty("tokens"));
 	}
 
 	
@@ -66,11 +74,11 @@ public class Upgrades extends GameScreen
 		            
 					if(CollisionChecker.PointToRect(mouseClick, increaseChest))
 					{
-						if(score > prices[chestAmount])
+						if(score > chestPrice[chestAmount])
 						{	
-							if(chestAmount < 4)
+							if(chestAmount <= TREASURE_COUNT_MAX)
 							{
-								score -= prices[chestAmount];	
+								score -= chestPrice[chestAmount];	
 								chestAmount++;;
 							}
 							assets.getProps().setProperty("game3Chest", "" + chestAmount);
@@ -79,20 +87,32 @@ public class Upgrades extends GameScreen
 					
 					if(CollisionChecker.PointToRect(mouseClick, increaseHealthGlobe))
 					{
-						if(score > prices[healthGlobeAmount])
+						if(score > healthPrice[healthGlobeAmount])
 						{
-							score -= prices[healthGlobeAmount];
-							healthGlobeAmount++;
+							if(healthGlobeAmount <= HEALTHGLOBE_COUNT_MAX)
+							{
+								score -= healthPrice[healthGlobeAmount];
+								healthGlobeAmount++;
+							}
 							assets.getProps().setProperty("game3HealthGlobe", "" + healthGlobeAmount);
 						}
 					}
+					if(CollisionChecker.PointToRect(mouseClick, convertTokens))
+					{
+						if(tokens >= 1)
+						{
+							tokens -= 1;
+							score+= 50;
+						}
+					}
+
+					assets.getProps().setProperty("game3Score", "" +score);
 					
 					if(CollisionChecker.PointToRect(mouseClick, back))
 					{
 						dispose();
 					}
 					
-					assets.getProps().setProperty("game3Score", "" +score);
 		        }
 		    }
 		}
@@ -111,15 +131,20 @@ public class Upgrades extends GameScreen
 		assets.getImage("upgrade").draw(increaseChest);
 		assets.getImage("upgrade").draw(increaseHealthGlobe);
 		assets.getImage("back").draw(back);
+		assets.getImage("upgrade").draw(convertTokens);
 		
 		TextDrawer.drawString("Score", 25, 350, 40, 40);
 		TextDrawer.drawInt(score, 250, 350, 20, 40, 5);
 		
 		TextDrawer.drawString("Chest Amount", 50, 290, 15, 20);
-		TextDrawer.drawInt(prices[chestAmount], 250, 290, 10, 20, 4);
+		TextDrawer.drawInt(chestPrice[chestAmount], 250, 290, 10, 20, 4);
 		
 		TextDrawer.drawString("Health Globe", 50, 230, 15, 20);
-		TextDrawer.drawInt(prices[healthGlobeAmount], 250, 230, 10, 20, 4);
+		TextDrawer.drawInt(healthPrice[healthGlobeAmount], 250, 230, 10, 20, 4);
+		
+		TextDrawer.drawString("Convert 1 token", 50, 170, 12, 15);
+		TextDrawer.drawString("into 50 points", 50, 155, 12, 15);
+		TextDrawer.drawInt(1, 250, 170, 15, 15, 2);
 	}
 
 	@Override
