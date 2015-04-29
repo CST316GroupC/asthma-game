@@ -12,6 +12,7 @@ import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
+import com.groupc.Database;
 import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
 import com.groupc.game.Camera;
@@ -241,6 +242,7 @@ public class GameWorld extends GameScreen
 				if(paper.getState() == PaperMan.STATE_GONE)
 				{
 					state = WORLD_STATE_OVER;
+					Database.updateg3(assets.getProps().getProperty("Email"), assets.getProps().getProperty("game3MaxScore"));
 					save();				
 				}
 				time += deltaTime;

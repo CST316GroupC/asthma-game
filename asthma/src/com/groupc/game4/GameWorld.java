@@ -13,6 +13,7 @@ import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
+import com.groupc.Database;
 import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
 import com.groupc.game.Camera;
@@ -94,6 +95,7 @@ public class GameWorld extends GameScreen
                 if(timeLeft <= 0)
                 {
                     state = WORLD_STATE_OVER;
+                    Database.updateg4(assets.getProps().getProperty("Email"), assets.getProps().getProperty("game4Score"));
                     save();                
                 }
                 break;

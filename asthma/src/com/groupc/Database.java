@@ -444,6 +444,210 @@ public class Database {
 		   System.out.println("Invalid score");
 		   return false;
 	   }
+	   
+	   public static boolean updateg2(String patient_email, String score){
+		   Connection conn = null;
+		   Statement stmt = null;	
+		   
+		   try{
+			      //STEP 2: Register JDBC driver
+			      Class.forName(JDBC_DRIVER);
+
+			      //STEP 3: Open a connection
+			      System.out.println("Connecting to database...");
+			      System.out.println("email: "+patient_email);
+			      System.out.println("input score: "+score);
+			      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+			      //STEP 4: Execute a query
+			      stmt = conn.createStatement();
+			      String sql;
+			      sql = "select gm_2 from patients where pat_email = '" + patient_email + "';";
+			   
+			      ResultSet rs = stmt.executeQuery(sql);
+			      
+			      //STEP 5: Extract data from result set
+			      while(rs.next()){
+			    	 System.out.println("valid score");
+			         //Retrieve by column name
+			         String id  = rs.getString("gm_2");
+			         Float aInt = Float.parseFloat(id);
+			         Float bInt = Float.parseFloat(score);
+			         
+			         if (bInt>aInt){
+			        	 String sql2;
+					     sql2 = "update patients set gm_2 = "+score+" where pat_email = '"+patient_email+"';";
+					     stmt.executeUpdate(sql2);
+			         }
+			         //Display values
+			         System.out.println("Old score: " + id);
+			         return true;
+			         
+			      }
+			      
+			      //STEP 6: Clean-up environment
+			      rs.close();
+			      stmt.close();
+			      conn.close();
+			   }catch(SQLException se){
+			      //Handle errors for JDBC
+			      se.printStackTrace();
+			   }catch(Exception e){
+			      //Handle errors for Class.forName
+			      e.printStackTrace();
+			   }finally{
+			      //finally block used to close resources
+			      try{
+			         if(stmt!=null)
+			            stmt.close();
+			      }catch(SQLException se2){
+			      }// nothing we can do
+			      try{
+			         if(conn!=null)
+			            conn.close();
+			      }catch(SQLException se){
+			         se.printStackTrace();
+			      }//end finally try
+			   }//end try
+		   System.out.println("Invalid score");
+		   return false;
+	   }
+	   
+	   public static boolean updateg3(String patient_email, String score){
+		   Connection conn = null;
+		   Statement stmt = null;	
+		   
+		   try{
+			      //STEP 2: Register JDBC driver
+			      Class.forName(JDBC_DRIVER);
+
+			      //STEP 3: Open a connection
+			      System.out.println("Connecting to database...");
+			      System.out.println("email: "+patient_email);
+			      System.out.println("input score: "+score);
+			      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+			      //STEP 4: Execute a query
+			      stmt = conn.createStatement();
+			      String sql;
+			      sql = "select gm_3 from patients where pat_email = '" + patient_email + "';";
+			   
+			      ResultSet rs = stmt.executeQuery(sql);
+			      
+			      //STEP 5: Extract data from result set
+			      while(rs.next()){
+			    	 System.out.println("valid score");
+			         //Retrieve by column name
+			         String id  = rs.getString("gm_3");
+			         Float aInt = Float.parseFloat(id);
+			         Float bInt = Float.parseFloat(score);
+			         
+			         if (bInt>aInt){
+			        	 String sql2;
+					     sql2 = "update patients set gm_3 = "+score+" where pat_email = '"+patient_email+"';";
+					     stmt.executeUpdate(sql2);
+			         }
+			         //Display values
+			         System.out.println("Old score: " + id);
+			         return true;
+			         
+			      }
+			      
+			      //STEP 6: Clean-up environment
+			      rs.close();
+			      stmt.close();
+			      conn.close();
+			   }catch(SQLException se){
+			      //Handle errors for JDBC
+			      se.printStackTrace();
+			   }catch(Exception e){
+			      //Handle errors for Class.forName
+			      e.printStackTrace();
+			   }finally{
+			      //finally block used to close resources
+			      try{
+			         if(stmt!=null)
+			            stmt.close();
+			      }catch(SQLException se2){
+			      }// nothing we can do
+			      try{
+			         if(conn!=null)
+			            conn.close();
+			      }catch(SQLException se){
+			         se.printStackTrace();
+			      }//end finally try
+			   }//end try
+		   System.out.println("Invalid score");
+		   return false;
+	   }
+	   
+	   public static boolean updateg4(String patient_email, String score){
+		   Connection conn = null;
+		   Statement stmt = null;	
+		   
+		   try{
+			      //STEP 2: Register JDBC driver
+			      Class.forName(JDBC_DRIVER);
+
+			      //STEP 3: Open a connection
+			      System.out.println("Connecting to database...");
+			      System.out.println("email: "+patient_email);
+			      System.out.println("input score: "+score);
+			      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+			      //STEP 4: Execute a query
+			      stmt = conn.createStatement();
+			      String sql;
+			      sql = "select gm_4 from patients where pat_email = '" + patient_email + "';";
+			   
+			      ResultSet rs = stmt.executeQuery(sql);
+			      
+			      //STEP 5: Extract data from result set
+			      while(rs.next()){
+			    	 System.out.println("valid score");
+			         //Retrieve by column name
+			         String id  = rs.getString("gm_4");
+			         Float aInt = Float.parseFloat(id);
+			         Float bInt = Float.parseFloat(score);
+			         
+			         if (bInt>aInt){
+			        	 String sql2;
+					     sql2 = "update patients set gm_4 = "+score+" where pat_email = '"+patient_email+"';";
+					     stmt.executeUpdate(sql2);
+			         }
+			         //Display values
+			         System.out.println("Old score: " + id);
+			         return true;
+			         
+			      }
+			      
+			      //STEP 6: Clean-up environment
+			      rs.close();
+			      stmt.close();
+			      conn.close();
+			   }catch(SQLException se){
+			      //Handle errors for JDBC
+			      se.printStackTrace();
+			   }catch(Exception e){
+			      //Handle errors for Class.forName
+			      e.printStackTrace();
+			   }finally{
+			      //finally block used to close resources
+			      try{
+			         if(stmt!=null)
+			            stmt.close();
+			      }catch(SQLException se2){
+			      }// nothing we can do
+			      try{
+			         if(conn!=null)
+			            conn.close();
+			      }catch(SQLException se){
+			         se.printStackTrace();
+			      }//end finally try
+			   }//end try
+		   System.out.println("Invalid score");
+		   return false;
+	   }
 }
 	   /*
 	   public static void main(String[] args) {

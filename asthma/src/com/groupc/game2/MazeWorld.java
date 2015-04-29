@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
 
+import com.groupc.Database;
 import com.groupc.TextDrawer;
 import com.groupc.game.Asset;
 import com.groupc.game.Camera;
@@ -187,6 +188,7 @@ public class MazeWorld extends GameScreen
 				level = 1;
 				setLives(Integer.parseInt(assets.getProps().getProperty("mazeMaxLives")));
 				setAxes(Integer.parseInt(assets.getProps().getProperty("mazeMaxAxes")));
+				Database.updateg2(assets.getProps().getProperty("Email"), assets.getProps().getProperty("score"));
 			}
 			else
 			{
