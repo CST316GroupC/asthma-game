@@ -251,17 +251,17 @@ public class GameWorld extends GameScreen
 	{
 		//hud
 		
-		TextDrawer.drawStringinRect("score", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE));
+		TextDrawer.drawStringinRect("score", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE*2, TEXT_SIZE * 5, TEXT_SIZE*2));
         if(score <= 0){
         	score = 0;
         }
-		TextDrawer.drawStringinRect(score +"", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE, TEXT_SIZE, TEXT_SIZE));
-		TextDrawer.drawStringinRect("time", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - 2 * TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE));
+		TextDrawer.drawStringinRect(score +"   points", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - TEXT_SIZE*2, TEXT_SIZE * 5, TEXT_SIZE*2));
+		TextDrawer.drawStringinRect("time", new Rectangle(cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - 4 * TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE*2));
         if(timeLeft <= 0){
         	timeLeft = 0;
         }
         int time = (int) timeLeft;
-		TextDrawer.drawStringinRect(time +"  seconds", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - 2 * TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE));
+		TextDrawer.drawStringinRect(time +"  seconds", new Rectangle(cam.position.x - 3f, cam.position.y + FRUSTUM_HEIGHT/2 - 4 * TEXT_SIZE, TEXT_SIZE * 5, TEXT_SIZE*2));
 	}
 	
 	public void renderOver()

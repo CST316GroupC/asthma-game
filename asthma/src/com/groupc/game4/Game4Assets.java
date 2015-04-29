@@ -46,10 +46,10 @@ public class Game4Assets extends Asset
 		sprites.put("title", new TextureRegion(sheet, 0, 226, 235, 30));
 		sprites.put("back", new TextureRegion(texture, 128, 512 - 64, 32, 32));
 		sprites.put("upgrade", new TextureRegion(texture, 160, 512 - 64, 32, 32));
-		sprites.put("table", new TextureRegion(background, 400, 400, 80, 60));
+		sprites.put("table", new TextureRegion(background, 0, 0, 512, 512));
 		
-		sprites.put("broccoli", new TextureRegion(g4texture, 0, 256 - 1*68, 75, 75));
-		sprites.put("orange", new TextureRegion(g4texture, 75, 256 - 1*68, 75, 75));
+		sprites.put("broccoli", new TextureRegion(g4texture, 0, 256 - 1*68, 70, 70));
+		sprites.put("orange", new TextureRegion(g4texture, 75, 256 - 1*68, 70, 70));
 		sprites.put("cake", new TextureRegion(g4texture, 0, 256 - 2*68, 73, 70));
 		sprites.put("cookie", new TextureRegion(g4texture, 75, 256 - 2*68, 70, 70));
 	
