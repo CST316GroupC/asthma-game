@@ -266,8 +266,8 @@ public class GameWorld extends GameScreen
 	
 	public void renderOver()
 	{
-		TextDrawer.drawString("Game Over", cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - 4 * TEXT_SIZE, TEXT_SIZE * 2, TEXT_SIZE * 2);
-        TextDrawer.drawString("Press q to quit", cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - 6 * TEXT_SIZE, TEXT_SIZE * 2, TEXT_SIZE * 2);
+		TextDrawer.drawString("Game Over", cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - 14 * TEXT_SIZE, TEXT_SIZE * 2, TEXT_SIZE * 2);
+        TextDrawer.drawString("Press q to quit", cam.position.x - FRUSTUM_WIDTH/2, cam.position.y + FRUSTUM_HEIGHT/2 - 16 * TEXT_SIZE, TEXT_SIZE * 2, TEXT_SIZE * 2);
 
 	}
 	
