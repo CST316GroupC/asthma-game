@@ -32,19 +32,19 @@ public class Rain extends GameObject
 		hit = bool;
 	}
 	
-	public void speedDecrease()
+	public void speedDecrease(float speedAmount)
 	{
 		if(speed > 0.03)
 		{
-			speed -= 0.01;
+			speed -= speedAmount;
 		}
 	}
 	
-	public void speedIncrease()
+	public void speedIncrease(float speedAmount)
 	{
 		if(speed < 0.1)
 		{
-			speed += 0.01;
+			speed += speedAmount;
 		}
 		
 	}
