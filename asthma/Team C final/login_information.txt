@@ -1,0 +1,2 @@
+bob@bob.com | bob | L | 12 | blh | 0 | null | nkk | knk | kkn | 1 | kn
+d@goog.com | Derek | Hoffman | 10/20/70 | pass | 1 | bob@bob.com | 3003 200

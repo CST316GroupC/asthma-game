@@ -59,7 +59,7 @@ public class MazeWorld extends GameScreen
 		player = new Player(0, 0); //place holders
 		buttonPresses = 0;
 		setLevel(Integer.parseInt(assets.getProps().getProperty("mazeLevel")));
-		setLives(Integer.parseInt(assets.getProps().getProperty("mazelives")));
+		setLives(Integer.parseInt(assets.getProps().getProperty("mazeLives")));
 		setGems(Integer.parseInt(assets.getProps().getProperty("mazeGems")));
 		setAxes(Integer.parseInt(assets.getProps().getProperty("mazeAxes")));
 		walls = new ArrayList<Wall>();
@@ -199,7 +199,7 @@ public class MazeWorld extends GameScreen
 			}
 
 			assets.getProps().setProperty("level", level+"");
-			assets.setProps("mazelives", lives+"");
+			assets.setProps("mazeLives", lives+"");
 			assets.setProps("mazeAxes", axes+"");
 			assets.save();
 		}
