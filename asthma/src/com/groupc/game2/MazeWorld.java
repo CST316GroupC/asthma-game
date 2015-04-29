@@ -31,6 +31,8 @@ public class MazeWorld extends GameScreen
 	public static final int WORLD_STATE_READY = 3;
 	public static final int WORLD_STATE_OVER = 4;
 	
+	public static final int LAST_LEVEL = 16;
+	
 	private final Camera cam;
 	public final Player player;
 	public final ArrayList<Wall> walls;
@@ -429,6 +431,10 @@ public class MazeWorld extends GameScreen
 	public void levelSet()
 	{
 		setLevel(getLevel() + 1);
+		if(level >= LAST_LEVEL)
+		{
+			setLevel(1);
+		}
 		walls.clear();
 		pits.clear();
 		enemies.clear();

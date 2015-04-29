@@ -24,7 +24,7 @@ public class UpgradeScreen extends GameScreen
 	private final Rectangle lblAxes;
 	private final Rectangle lblLives;
 	private final Rectangle lblGems;
-	private final Rectangle lblWarning;
+	//private final Rectangle lblWarning;
 	private final Rectangle back;
 	
 	//upgrades
@@ -50,7 +50,7 @@ public class UpgradeScreen extends GameScreen
 		displayTokens = new Rectangle(200, 350, 100, 50);
 		displayLives = new Rectangle(0, 300, 100, 50);
 		displayAxes = new Rectangle(200, 300, 100, 50);
-		lblWarning = new Rectangle(0, 0, 300, 50);
+		//lblWarning = new Rectangle(0, 0, 300, 50);
 		
 		axes = Integer.parseInt(assets.getProps().getProperty("mazeMaxAxes"));
 		lives = Integer.parseInt(assets.getProps().getProperty("mazeMaxLives"));
@@ -83,6 +83,7 @@ public class UpgradeScreen extends GameScreen
 						{
 							gems -= 10;
 							axes++;
+							assets.setProps("mazeAxes", (Integer.parseInt(assets.getProps().getProperty("mazeAxes"))+1)+"");
 						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, back))
@@ -95,6 +96,7 @@ public class UpgradeScreen extends GameScreen
 						{
 							gems -= 25;
 							lives++;
+							assets.setProps("mazelives", (Integer.parseInt(assets.getProps().getProperty("mazelives"))+1)+"");
 						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, buyGems))
@@ -130,7 +132,7 @@ public class UpgradeScreen extends GameScreen
 		TextDrawer.drawStringinRect("Axes " + axes, displayAxes);
 		TextDrawer.drawStringinRect("Lives " + lives, displayLives);
 		TextDrawer.drawStringinRect("Back", back, true);
-		TextDrawer.drawStringinRect("Upgrades apply at Game Over", lblWarning);
+		//TextDrawer.drawStringinRect("Upgrades apply at Game Over", lblWarning);
 	}
 
 	@Override
