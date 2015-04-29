@@ -207,9 +207,13 @@ public class LoginScreen extends Screen
 		String line = null;
 		String tempString = date.toString();
 		String currentDay = null;
+		String currentMonth = null;
+		String currentYear = null;
 		
 		Vector<String> emails = new Vector<String>();
 		Vector<String> days = new Vector<String>();
+		Vector<String> months = new Vector<String>();
+		Vector<String> years = new Vector<String>();
 		StringTokenizer st;
 		
 		try
@@ -225,11 +229,11 @@ public class LoginScreen extends Screen
 				st.nextToken(); //volume
 				st.nextToken(); //force
 				st.nextToken(); //day of week
-				st.nextToken(); //month
+				months.add(st.nextToken()); //month
 				days.add(st.nextToken()); //day 
 				st.nextToken(); //time
 				st.nextToken(); //timezone
-				st.nextToken(); //year
+				years.add(st.nextToken()); //year
 				
 				
 			}
@@ -243,17 +247,18 @@ public class LoginScreen extends Screen
 		while(st.hasMoreElements())
 		{
 			st.nextToken(); // day of week
-			st.nextToken(); // month
+			currentMonth = st.nextToken(); // month
 			currentDay = st.nextToken(); // day
 			st.nextToken(); // time
 			st.nextToken(); // timezone
-			st.nextToken(); // year
+			currentYear = st.nextToken(); // year
 		}
 		for(int i = 0; i < emails.size(); i++)
 		{
 			if(emails.elementAt(i).equals(run.getUserName()))
 			{		
-				if(days.elementAt(i).equals(currentDay))
+				if(days.elementAt(i).equals(currentDay) && months.elementAt(i).equals(currentMonth) 
+						&& years.elementAt(i).equals(currentYear))
 				{
 					return false;
 				}
@@ -297,6 +302,19 @@ public class LoginScreen extends Screen
 		}
 	}
 
+	private void userNameLogic() 
+	{
+		if(userNameTF.getText().indexOf(".com") == -1)
+			
+		{
+			run.setUserName(userNameTF.getText());
+		}
+		else
+		{
+			run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
+		}
+	}
+
 	@Override
 	public void update(float deltaTime)
 	{
@@ -330,6 +348,7 @@ public class LoginScreen extends Screen
 			//Password
 			passwordLabel.setBounds(resize.locationX(170), resize.locationY(260), resize.width(160), resize.height(20));
 			passwordLabel.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
+			
 			passwordTF.setBounds(resize.locationX(170), resize.locationY(280), resize.width(160), resize.height(20));
 			passwordTF.setFont(new Font(loginButton.getFont().getFontName(),loginButton.getFont().getStyle(), resize.font(12)));
 			
@@ -483,15 +502,7 @@ public class LoginScreen extends Screen
 					//Doctors
 					if(types.elementAt(i).equals("0"))
 					{
-						if(userNameTF.getText().indexOf(".com") == -1)
-	
-						{
-							run.setUserName(userNameTF.getText());
-						}
-						else
-						{
-							run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
-						}
+						userNameLogic();
 						DoctorScreen ds = new DoctorScreen(run);
 						ds.getPatients();
 						run.setScreen(ds);
@@ -500,18 +511,7 @@ public class LoginScreen extends Screen
 					{//Patients
 						if(types.elementAt(i).equals("1"))
 						{
-						
-							if(userNameTF.getText().indexOf(".com") == -1)
-	
-							{
-								newProperties();
-								run.setUserName(userNameTF.getText());
-	
-							}
-							else
-							{
-								run.setUserName(userNameTF.getText().substring(0, userNameTF.getText().indexOf(".com")));
-							}
+							userNameLogic();
 							newProperties();
 							if(hasNotTakenReadings(run.getUserName()))
 							{
