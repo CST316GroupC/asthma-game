@@ -165,8 +165,8 @@ public class AccountScreen extends Screen
 				props.setProperty("tokens", ""+tokenTotal);
 				props.setProperty("tokenfirstTime", "false");
 			}*/
-			highScoresGame1OutPut.setText(props.getProperty("game1MaxScore", "0"));
-			highScoresGame2OutPut.setText(props.getProperty("game2MaxScore", "0"));
+			highScoresGame1OutPut.setText(props.getProperty("joeyscore", "0"));
+			highScoresGame2OutPut.setText(props.getProperty("mazeScore", "0"));
 			highScoresGame3OutPut.setText(props.getProperty("game3MaxScore", "0"));
 			highScoresGame4OutPut.setText(props.getProperty("game4MaxScore", "0"));
 			
