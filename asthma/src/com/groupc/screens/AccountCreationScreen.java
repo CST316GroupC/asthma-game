@@ -267,7 +267,7 @@ public class AccountCreationScreen extends Screen
 				BufferedWriter bWriter = new BufferedWriter(fWriter);
 				bWriter.write(emailTF.getText() + " | " + firstNameTF.getText() + " | " + lastNameTF.getText() + " | " + 
 							  monthTF.getText() + "/" + dayTF.getText() + "/" + yearTF.getText() + " | " + passwordTF.getText() 
-							  + " | " + type + " | " + newPatientDoctor + " | " + infoTA.getText() +"\n"); 
+							  + " | " + type + " | " + newPatientDoctor + ".com" + " | " + infoTA.getText() +"\n"); 
 								//all patients created from doctor screen will be type 0
 				bWriter.close();
 			} 
