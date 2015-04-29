@@ -549,6 +549,8 @@ public class MazeWorld extends GameScreen
 		TextDrawer.drawStringinRect("Score "+ score, new Rectangle(7, 16, 5, 1));
 		TextDrawer.drawStringinRect("Gems "+ collectedGems, new Rectangle(0, 15, 5, 1));
 		TextDrawer.drawStringinRect("Axes "+ axes, new Rectangle(7, 15, 5, 1));		
+		TextDrawer.drawStringinRect("Level", new Rectangle(13, 16, 2, 1));
+		TextDrawer.drawStringinRect(getLevel()+"", new Rectangle(13, 15, 2, 1));
 	}
 	
 	public void renderGoal()

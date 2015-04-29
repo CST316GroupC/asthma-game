@@ -24,6 +24,7 @@ public class UpgradeScreen extends GameScreen
 	private final Rectangle lblAxes;
 	private final Rectangle lblLives;
 	private final Rectangle lblGems;
+	private final Rectangle lblWarning;
 	private final Rectangle back;
 	
 	//upgrades
@@ -44,14 +45,15 @@ public class UpgradeScreen extends GameScreen
 		lblLives = new Rectangle(50, 200, 200, 50);
 		buyGems = new Rectangle(300, 150, 50, 50);
 		lblGems = new Rectangle(50, 150, 200, 50);
-		back = new Rectangle(325, 0, 75, 75);
+		back = new Rectangle(325, 5, 75, 75);
 		displayGems = new Rectangle(0, 350, 100, 50);
 		displayTokens = new Rectangle(200, 350, 100, 50);
 		displayLives = new Rectangle(0, 300, 100, 50);
 		displayAxes = new Rectangle(200, 300, 100, 50);
+		lblWarning = new Rectangle(0, 0, 300, 50);
 		
-		axes = Integer.parseInt(assets.getProps().getProperty("mazeAxes"));
-		lives = Integer.parseInt(assets.getProps().getProperty("mazeLives"));
+		axes = Integer.parseInt(assets.getProps().getProperty("mazeMaxAxes"));
+		lives = Integer.parseInt(assets.getProps().getProperty("mazeMaxLives"));
 		tokens = Integer.parseInt(assets.getProps().getProperty("tokens"));
 		gems = Integer.parseInt(assets.getProps().getProperty("mazeGems"));
 	}
@@ -86,7 +88,6 @@ public class UpgradeScreen extends GameScreen
 					if(CollisionChecker.PointToRect(mouseClick, back))
 					{
 						dispose();
-						assets.save();
 					}
 					if(CollisionChecker.PointToRect(mouseClick, upgradeLives))
 					{
@@ -128,6 +129,7 @@ public class UpgradeScreen extends GameScreen
 		TextDrawer.drawStringinRect("Axes " + axes, displayAxes);
 		TextDrawer.drawStringinRect("Lives " + lives, displayLives);
 		TextDrawer.drawStringinRect("Back", back, true);
+		TextDrawer.drawStringinRect("Upgrades apply at Game Over", lblWarning);
 	}
 
 	@Override
@@ -141,12 +143,21 @@ public class UpgradeScreen extends GameScreen
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void saveUpgrades()
+	{
+		assets.setProps("mazeGems", gems+"");
+		assets.setProps("mazeMaxAxes", axes+"");
+		assets.setProps("mazeMaxLives", lives+"");
+		assets.setProps("tokens", tokens+"");
+		assets.save();
+	}
 
 	@Override
 	public void dispose() 
 	{
+		saveUpgrades();
 		isClosing = true;
-		assets.save();
 	}
 
 	@Override
