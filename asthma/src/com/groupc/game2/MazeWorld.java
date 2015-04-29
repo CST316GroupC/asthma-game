@@ -56,7 +56,7 @@ public class MazeWorld extends GameScreen
 		player = new Player(0, 0); //place holders
 		buttonPresses = 0;
 		setLevel(Integer.parseInt(assets.getProps().getProperty("mazeLevel")));
-		setLives(Integer.parseInt(assets.getProps().getProperty("mazeLives")));
+		setLives(Integer.parseInt(assets.getProps().getProperty("mazelives")));
 		setGems(Integer.parseInt(assets.getProps().getProperty("mazeGems")));
 		setAxes(Integer.parseInt(assets.getProps().getProperty("mazeAxes")));
 		walls = new ArrayList<Wall>();
@@ -177,25 +177,27 @@ public class MazeWorld extends GameScreen
 		}	
 		if(state == WORLD_STATE_DEAD)
 		{
-			assets.setProps("mazeGems", collectedGems+"");
-			assets.setProps("mazelives", lives+"");
-			assets.setProps("mazeAxes", axes+"");
-			assets.save();
+			lives--;
+			level--;
+			assets.setProps("mazeGems", collectedGems+"");			
+			
 			if(lives <= 0)
 			{
 				state = WORLD_STATE_OVER;
 				level = 1;
 				setLives(Integer.parseInt(assets.getProps().getProperty("mazeMaxLives")));
 				setAxes(Integer.parseInt(assets.getProps().getProperty("mazeMaxAxes")));
-				
 			}
 			else
 			{
-				lives--;
-				level--;
 				levelSet();
 				state = WORLD_STATE_READY;
 			}
+
+			assets.getProps().setProperty("level", level+"");
+			assets.setProps("mazelives", lives+"");
+			assets.setProps("mazeAxes", axes+"");
+			assets.save();
 		}
 	}
 	
