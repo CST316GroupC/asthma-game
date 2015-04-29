@@ -251,7 +251,7 @@ public class LoginScreen extends Screen
 		}
 		for(int i = 0; i < emails.size(); i++)
 		{
-			if(emails.elementAt(i).equals(userNameTF.getText()))
+			if(emails.elementAt(i).equals(run.getUserName()))
 			{		
 				if(days.elementAt(i).equals(currentDay))
 				{
