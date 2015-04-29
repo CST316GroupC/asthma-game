@@ -17,10 +17,12 @@ public class UpgradeScreen extends GameScreen
 	private final Rectangle upgradeSpeed;
 	private final Rectangle upgradeFlaps;
 	private final Rectangle back;
+	private final Rectangle convertTokens;
 	
 	private int seeds;
 	private int speedMult;
 	private int flaps;
+	private int tokens;
 	
 	private int[] prices = {10, 25, 50, 100, 200, 500, 1000, 2500, 5000, 10000};
 	
@@ -30,8 +32,9 @@ public class UpgradeScreen extends GameScreen
 		assets.reload();
 		cam = new Camera(400, 400);
 		cam.setCamera();
-		upgradeSpeed = new Rectangle(300, 300, 50, 50);
-		upgradeFlaps = new Rectangle(300, 250, 50, 50);
+		upgradeSpeed = new Rectangle(300, 250-20, 50, 50);
+		upgradeFlaps = new Rectangle(300, 200-20, 50, 50);
+		convertTokens = new Rectangle(300, 150-20, 50, 50);
 
 		back = new Rectangle(300, 0, 100, 100);
 		
@@ -41,6 +44,7 @@ public class UpgradeScreen extends GameScreen
 		seeds = Integer.parseInt(assets.getProps().getProperty("joeyseeds"));
 		speedMult = Integer.parseInt(assets.getProps().getProperty("joeyspeedMult"));
 		flaps = Integer.parseInt(assets.getProps().getProperty("joeystatima"));
+		tokens = Integer.parseInt(assets.getProps().getProperty("tokens"));
 	}
 
 	
@@ -66,19 +70,34 @@ public class UpgradeScreen extends GameScreen
 					{
 						if(seeds > prices[speedMult])
 						{
-							seeds -= prices[speedMult];
-							speedMult++;
-							assets.getProps().setProperty("joeyspeedMult", "" + speedMult);
+							if(speedMult < prices.length - 1)
+							{
+								seeds -= prices[speedMult];
+								speedMult++;
+								assets.getProps().setProperty("joeyspeedMult", "" + speedMult);
+							}
 						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, upgradeFlaps))
 					{
 						if(seeds > prices[flaps])
 						{
+							if(speedMult < prices.length - 1)
+							{
 							seeds -= prices[flaps];
 							flaps++;
 							assets.getProps().setProperty("joeystatima", "" + flaps);
+							}
 						}
+					}
+					if(CollisionChecker.PointToRect(mouseClick, convertTokens))
+					{
+						if(tokens >= 1)
+						{
+							tokens -= 1;
+							seeds+= 50;
+						}
+						assets.getProps().setProperty("tokens", "" + tokens);
 					}
 					if(CollisionChecker.PointToRect(mouseClick, back))
 					{
@@ -86,7 +105,9 @@ public class UpgradeScreen extends GameScreen
 					}
 					
 					assets.getProps().setProperty("joeyseeds", "" + seeds);
+					assets.save();
 		        }
+
 		    }
 		}
 	}
@@ -103,15 +124,22 @@ public class UpgradeScreen extends GameScreen
 		//draw arrows
 		assets.getImage("upgrade").draw(upgradeSpeed);
 		assets.getImage("upgrade").draw(upgradeFlaps);
+		assets.getImage("upgrade").draw(convertTokens);
 		
 		TextDrawer.drawString("Seeds", 25, 350, 40, 40);
 		TextDrawer.drawInt(seeds, 250, 350, 20, 40, 5);
 		
-		TextDrawer.drawString("Speed", 50, 300, 20, 20);
-		TextDrawer.drawInt(prices[speedMult], 225, 300, 10, 20, 5);
+		TextDrawer.drawString("Tokens", 25, 300, 40, 40);
+		TextDrawer.drawInt(tokens, 250, 300, 20, 40, 5);
 		
-		TextDrawer.drawString("Flaps", 50, 250, 20, 20);
-		TextDrawer.drawInt(prices[flaps], 225, 250, 10, 20, 5);
+		TextDrawer.drawString("Speed", 50, 250, 20, 20);
+		TextDrawer.drawInt(prices[speedMult], 225, 250, 10, 20, 5);
+		
+		TextDrawer.drawString("Flaps", 50, 200, 20, 20);
+		TextDrawer.drawInt(prices[flaps], 225, 200, 10, 20, 5);
+		
+		TextDrawer.drawString("Convert 1 token into 50 seeds", 50, 150, 6, 20);
+		TextDrawer.drawInt(1, 225, 150, 10, 20, 5);
 		
 		TextDrawer.drawStringinRect("Back", back, true);
 	}

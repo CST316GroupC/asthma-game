@@ -133,8 +133,10 @@ public class Upgrades extends GameScreen
 							tokens -= 1;
 							score+= 50;
 						}
+						assets.getProps().setProperty("tokens", "" + tokens);
 					}
 					assets.getProps().setProperty("game4Score", "" +score);
+					assets.save();
 					if(CollisionChecker.PointToRect(mouseClick, back))
 					{
 						dispose();
@@ -169,13 +171,22 @@ public class Upgrades extends GameScreen
 		TextDrawer.drawInt(tokens, 250, 320, 20, 20, 5);
 		
 		TextDrawer.drawString("Extra time", 50, 290, 15, 20);
-		TextDrawer.drawInt(prices[timer], 250, 290, 10, 20, 4);
+		if(timer < prices.length - 1)
+			TextDrawer.drawInt(prices[timer], 250, 290, 10, 20, 4);
+		else
+			TextDrawer.drawString("MAX", 250, 290, 10, 20);
 		
 		TextDrawer.drawString("Bonus score for healthy food", 50, 230, 6, 20);
-		TextDrawer.drawInt(prices[foodBonus], 250, 230, 10, 20, 4);
+		if(foodBonus < prices.length - 1)
+			TextDrawer.drawInt(prices[foodBonus], 250, 230, 10, 20, 4);
+		else
+			TextDrawer.drawString("MAX", 250, 230, 10, 20);
 		
 		TextDrawer.drawString("Extra time for healthy food", 50, 230-60, 6, 20);
-		TextDrawer.drawInt(prices[foodTime], 250, 230-60, 10, 20, 4);
+		if(foodTime < prices.length - 1)
+			TextDrawer.drawInt(prices[foodTime], 250, 230-60, 10, 20, 4);
+		else
+			TextDrawer.drawString("MAX", 250, 230-60, 10, 20);
 		
 		TextDrawer.drawString("Convert 1 token into 50 points", 50, 230-60*2, 6, 20);
 		TextDrawer.drawInt(1, 250, 230-60 * 2, 10, 20, 4);

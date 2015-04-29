@@ -36,9 +36,9 @@ public class Upgrades extends GameScreen
 		assets.reload();
 		cam = new Camera(400, 400);
 		cam.setCamera();
-		increaseChest = new Rectangle(310, 270, 50, 50);
-		increaseHealthGlobe = new Rectangle(310, 210, 50, 50);
-		convertTokens = new Rectangle(310, 150, 50, 50);
+		increaseChest = new Rectangle(310, 240-20, 50, 50);
+		increaseHealthGlobe = new Rectangle(310, 180-20, 50, 50);
+		convertTokens = new Rectangle(310, 130-20, 50, 50);
 
 		back = new Rectangle(300, 0, 100, 100);
 		
@@ -76,7 +76,7 @@ public class Upgrades extends GameScreen
 					{
 						if(score > chestPrice[chestAmount])
 						{	
-							if(chestAmount <= TREASURE_COUNT_MAX)
+							if(chestAmount < TREASURE_COUNT_MAX)
 							{
 								score -= chestPrice[chestAmount];	
 								chestAmount++;;
@@ -89,7 +89,7 @@ public class Upgrades extends GameScreen
 					{
 						if(score > healthPrice[healthGlobeAmount])
 						{
-							if(healthGlobeAmount <= HEALTHGLOBE_COUNT_MAX)
+							if(healthGlobeAmount < HEALTHGLOBE_COUNT_MAX)
 							{
 								score -= healthPrice[healthGlobeAmount];
 								healthGlobeAmount++;
@@ -104,9 +104,12 @@ public class Upgrades extends GameScreen
 							tokens -= 1;
 							score+= 50;
 						}
+						assets.getProps().setProperty("tokens", "" + tokens);
 					}
 
 					assets.getProps().setProperty("game3Score", "" +score);
+					assets.save();
+				
 					
 					if(CollisionChecker.PointToRect(mouseClick, back))
 					{
@@ -136,15 +139,24 @@ public class Upgrades extends GameScreen
 		TextDrawer.drawString("Score", 25, 350, 40, 40);
 		TextDrawer.drawInt(score, 250, 350, 20, 40, 5);
 		
-		TextDrawer.drawString("Chest Amount", 50, 290, 15, 20);
-		TextDrawer.drawInt(chestPrice[chestAmount], 250, 290, 10, 20, 4);
+		TextDrawer.drawString("Tokens", 25, 300, 40, 40);
+		TextDrawer.drawInt(tokens, 250, 300, 20, 40, 5);
 		
-		TextDrawer.drawString("Health Globe", 50, 230, 15, 20);
-		TextDrawer.drawInt(healthPrice[healthGlobeAmount], 250, 230, 10, 20, 4);
+		TextDrawer.drawString("Chest Amount", 50, 240, 15, 20);
+		if(chestAmount < TREASURE_COUNT_MAX)
+			TextDrawer.drawInt(chestPrice[chestAmount], 250, 240, 10, 20, 4);
+		else
+			TextDrawer.drawString("MAX", 250, 240, 10, 20);
 		
-		TextDrawer.drawString("Convert 1 token", 50, 170, 12, 15);
-		TextDrawer.drawString("into 50 points", 50, 155, 12, 15);
-		TextDrawer.drawInt(1, 250, 170, 15, 15, 2);
+		TextDrawer.drawString("Health Globe", 50, 180, 15, 20);
+		if(healthGlobeAmount < HEALTHGLOBE_COUNT_MAX)
+			TextDrawer.drawInt(healthPrice[healthGlobeAmount], 250, 180, 10, 20, 4);
+		else
+			TextDrawer.drawString("MAX", 250, 180, 10, 20);
+		
+		TextDrawer.drawString("Convert 1 token", 50, 130, 12, 15);
+		TextDrawer.drawString("into 50 points", 50, 115, 12, 15);
+		TextDrawer.drawInt(1, 250, 130, 15, 15, 2);
 	}
 
 	@Override
