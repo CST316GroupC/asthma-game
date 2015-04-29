@@ -66,24 +66,18 @@ public class UpgradeScreen extends GameScreen
 					{
 						if(seeds > prices[speedMult])
 						{
-							if( speedMult < prices.length - 1)
-							{
-								seeds -= prices[speedMult];
-								speedMult++;
-								assets.getProps().setProperty("joeyspeedMult", "" + speedMult);
-							}
+							seeds -= prices[speedMult];
+							speedMult++;
+							assets.getProps().setProperty("joeyspeedMult", "" + speedMult);
 						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, upgradeFlaps))
 					{
 						if(seeds > prices[flaps])
 						{
-							if( flaps < prices.length - 1)
-							{
-								seeds -= prices[flaps];
-								flaps++;
-								assets.getProps().setProperty("joeystatima", "" + flaps);
-							}
+							seeds -= prices[flaps];
+							flaps++;
+							assets.getProps().setProperty("joeystatima", "" + flaps);
 						}
 					}
 					if(CollisionChecker.PointToRect(mouseClick, back))

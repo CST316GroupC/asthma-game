@@ -76,7 +76,7 @@ public class Upgrades extends GameScreen
 					{
 						if(score > chestPrice[chestAmount])
 						{	
-							if(chestAmount < TREASURE_COUNT_MAX)
+							if(chestAmount <= TREASURE_COUNT_MAX)
 							{
 								score -= chestPrice[chestAmount];	
 								chestAmount++;;
@@ -89,7 +89,7 @@ public class Upgrades extends GameScreen
 					{
 						if(score > healthPrice[healthGlobeAmount])
 						{
-							if(healthGlobeAmount < HEALTHGLOBE_COUNT_MAX)
+							if(healthGlobeAmount <= HEALTHGLOBE_COUNT_MAX)
 							{
 								score -= healthPrice[healthGlobeAmount];
 								healthGlobeAmount++;
