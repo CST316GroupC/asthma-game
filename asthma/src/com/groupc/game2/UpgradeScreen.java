@@ -105,6 +105,7 @@ public class UpgradeScreen extends GameScreen
 							gems+= 5;
 						}
 					}
+					saveUpgrades();
 		        }
 		    }
 		    
@@ -119,7 +120,7 @@ public class UpgradeScreen extends GameScreen
 		assets.getTexture().bind();
 		assets.getImage("background").draw(new Rectangle(0, 0, cam.frustumWidth, cam.frustumHeight));
 		TextDrawer.drawStringinRect("Buy an Axe for 10 Gems", lblAxes);
-		TextDrawer.drawStringinRect("Buy a Live for 25 Gems", lblLives);
+		TextDrawer.drawStringinRect("Buy a Life for 25 Gems", lblLives);
 		TextDrawer.drawStringinRect("Buy 5 Gems for 1 token", lblGems);
 		TextDrawer.drawStringinRect("Buy", upgradeAxes);
 		TextDrawer.drawStringinRect("Buy", upgradeLives);
