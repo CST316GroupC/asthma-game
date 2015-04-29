@@ -190,7 +190,7 @@ public class MazeWorld extends GameScreen
 				level = 1;
 				setLives(Integer.parseInt(assets.getProps().getProperty("mazeMaxLives")));
 				setAxes(Integer.parseInt(assets.getProps().getProperty("mazeMaxAxes")));
-				Database.updateg2(assets.getProps().getProperty("Email"), assets.getProps().getProperty("score"));
+				Database.updateg2(assets.getProps().getProperty("Email"), assets.getProps().getProperty("mazeScore"));
 			}
 			else
 			{
