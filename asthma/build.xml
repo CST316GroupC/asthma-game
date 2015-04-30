@@ -30,19 +30,30 @@
   </path>
 	
  
-  <target name="compile">
+  <target name="compile" depends = "clean">
     <mkdir dir="${build}"/>
     <javac srcdir="${src}" destdir="${build}" classpathref="my_cp" includeAntRuntime="false" >
   	</javac>
   </target>
 	
-	<target name="jar">
-		<jar destfile="app.jar" basedir="${build}">
+	<target name="jar" depends = "compile">
+		<mkdir dir="TeamCAsthmaGame"/>
+		<jar destfile="TeamCAsthmaGame/app.jar" basedir="${build}">
 			<manifest>
 				<attribute name="Main-Class" value="com.groupc.Tester"/>
 				<attribute name="Class-Path" value="lib/mysql-connector-java-5.1.34-bin.jar lib/jacocoant.jar lib/junit.jar lib/org.hamcrest.core_1.3.0.v201303031735.jar lib/jogg-0.0.7.jar lib/jorbis-0.0.15.jar lib/lwjgl_util.jar lib/lwjgl.jar lib/slick-util.jar"/>
 			</manifest>
 		</jar>
+		 <copy todir="TeamCAsthmaGame/lib">
+		 	<fileset dir="lib/"/>
+		</copy>
+		 <copy todir="TeamCAsthmaGame/natives">
+		 	<fileset dir="natives/"/>
+		</copy>
+	 	 <copy todir="TeamCAsthmaGame/resources">
+		 	<fileset dir="resources/"/>
+		</copy>
+		<copy file="login_information.txt" todir="TeamCAsthmaGame"/>
 	</target>
 
   <target name="clean">
@@ -51,6 +62,7 @@
   	<delete dir="${jun-r}"/>
   	<delete dir="fb-report"/>
   	<delete dir="pmd-report"/>
+  	<delete dir="TeamCAsthmaGame"/>
   </target>
 
   <target name="run">
