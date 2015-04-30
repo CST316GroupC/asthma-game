@@ -454,7 +454,11 @@ public class GameWorld extends GameScreen
 					rain[i].update();
 					paper.hit();
 					hitCounter += 1;
-					time -= 2;
+					
+					if(!(time <= 0))
+					{
+						time -= 2;
+					}
 				}
 			}
 		}
