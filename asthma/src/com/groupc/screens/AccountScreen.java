@@ -6,9 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.StringTokenizer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -92,6 +96,10 @@ public class AccountScreen extends Screen
 		passwordErrorLabel.setForeground(Color.RED);
 		pinErrorLabel.setForeground(Color.RED);
 		
+		//disable messages
+		passwordErrorLabel.setVisible(false);
+		pinErrorLabel.setVisible(false);
+		
 		//setFont
 		Font boldFont = highScoresGame1Label.getFont().deriveFont(Font.BOLD);
 		highScoresGame1Label.setFont(boldFont);
@@ -156,6 +164,113 @@ public class AccountScreen extends Screen
 		this.setLayout(null);
 		run.setContentPane(this);
 		run.setVisible(true);
+	}
+	
+	private void updateProperties()
+	{
+		try
+		{
+			FileWriter write = new FileWriter("resources/interface/parent_controls/" + user + ".properties");
+			props.store(write, "update");
+			write.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println("failed to save");
+		}
+	}
+	
+	private void setPin()
+	{
+		if(checkPin())
+		{
+			String temp = pinNewPF.getText();
+			props.setProperty("PIN", temp);
+			updateProperties();
+			pinErrorLabel.setVisible(false);
+		}
+	}
+	
+	private boolean checkPin()
+	{
+		if(!pinOldPF.getText().equals(props.getProperty("PIN")))
+		{
+			pinErrorLabel.setVisible(true);
+			pinOldPF.setText("");
+			return false;
+		}
+		if(!pinNewPF.getText().equals(pinRetypePF.getText()))
+		{
+			pinErrorLabel.setVisible(true);
+			pinNewPF.setText("");
+			pinRetypePF.setText("");
+			return false;
+		}
+		
+		return true;
+		
+	}
+	
+	private void setPassword()
+	{
+		if(checkPassword())
+		{	
+			passwordErrorLabel.setVisible(false);
+		}
+	}
+	
+	private boolean checkPassword()
+	{
+		String line = null;
+		String tempEmail = null;
+		String tempPass = null;
+		String userPass = null;
+		try
+		{
+			FileReader fr = new FileReader("login_information.txt");
+			BufferedReader br = new BufferedReader(fr);
+			StringTokenizer st;
+			
+			
+			while((line = br.readLine()) != null)
+			{
+				st = new StringTokenizer(line, " | ");
+				tempEmail = st.nextToken(); //email
+				st.nextToken(); //fname
+				st.nextToken();  //last name
+				st.nextToken();  //dob
+				tempPass = st.nextToken();  //password
+				st.nextToken(); //type
+				st.nextToken(); //doctor for patient
+				
+				if(tempEmail.equals(user + ".com") || tempEmail.equals(user))
+				{
+					userPass = tempPass;
+				}
+				
+				
+			}
+			br.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println("failed to find login information");
+		}
+		
+		if(!passwordOldPF.getText().equals(userPass))
+		{
+			passwordErrorLabel.setVisible(true);
+			passwordOldPF.setText("");
+			return false;
+		}
+		if(!passwordNewPF.getText().equals(passwordRetypePF.getText()))
+		{
+			passwordErrorLabel.setVisible(true);
+			passwordNewPF.setText("");
+			passwordRetypePF.setText("");
+			return false;
+		}
+		return true;
 	}
 	
 	private void loadHighScores()
@@ -274,10 +389,12 @@ public class AccountScreen extends Screen
 		}
 		else if(butPressed == 1) //Change password button
 		{
+			setPassword();
 			Database.updatepass(run.getUserName(), passwordOldPF.getText(), passwordNewPF.getText());
 		}
 		else if(butPressed == 2) //Change pin button
 		{
+			setPin();
 			Database.updatepin(run.getUserName(), pinOldPF.getText(), pinNewPF.getText());
 		}
 		
