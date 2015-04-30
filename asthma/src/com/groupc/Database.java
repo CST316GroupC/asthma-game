@@ -8,11 +8,11 @@ import java.sql.Statement;
 public class Database {
 	   // JDBC driver name and database URL
 	   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	   static final String DB_URL = "jdbc:mysql://localhost/teamc";
+	   static final String DB_URL = "jdbc:mysql://sql5.freemysqlhosting.net:3306/sql575688";
 
 	   //  Database credentials
-	   static final String USER = "root";
-	   static final String PASS = "teamc";
+	   static final String USER = "sql575688";
+	   static final String PASS = "iP2%bU1*";
 	   
 	   public static boolean getDoctor(String doctor_email, String doctor_password){
 		   Connection conn = null;

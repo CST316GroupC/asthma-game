@@ -454,8 +454,6 @@ public class LoginScreen extends Screen
 			}
 			
 		}
-		else
-		{
 			String line = null;
 			char[][] passWords = new char[80][30];  //need to make dynamic otherwise only 20 patients allowed!!
 			int counter = 0;
@@ -534,5 +532,5 @@ public class LoginScreen extends Screen
 				}
 			}
 		}
-	}
+	
 }

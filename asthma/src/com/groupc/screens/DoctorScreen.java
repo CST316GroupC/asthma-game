@@ -156,8 +156,6 @@ public class DoctorScreen extends Screen
 			
 			
 			counter += 1;
-			
-			
 		}
 		br.close();
 		
