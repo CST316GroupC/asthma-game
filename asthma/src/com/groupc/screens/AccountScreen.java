@@ -48,6 +48,8 @@ public class AccountScreen extends Screen
 	JLabel 		highScoresGame2Label 	= new JLabel("Game 2:",SwingConstants.CENTER);
 	JLabel 		highScoresGame3Label 	= new JLabel("Game 3:",SwingConstants.CENTER);
 	JLabel 		highScoresGame4Label 	= new JLabel("Game 4:",SwingConstants.CENTER);
+	JLabel 		passwordErrorLabel 		= new JLabel("Password Error",SwingConstants.CENTER);
+	JLabel 		pinErrorLabel 			= new JLabel("Pin Error",SwingConstants.CENTER);
 	
 	JLabel 		highScoresGame1OutPut 	= new JLabel("0",SwingConstants.CENTER);
 	JLabel 		highScoresGame2OutPut 	= new JLabel("0",SwingConstants.CENTER);
@@ -87,6 +89,8 @@ public class AccountScreen extends Screen
 		//Set colors
 		this.setBackground(Color.WHITE);
 		accountBox.setBackground(Color.LIGHT_GRAY);
+		passwordErrorLabel.setForeground(Color.RED);
+		pinErrorLabel.setForeground(Color.RED);
 		
 		//setFont
 		Font boldFont = highScoresGame1Label.getFont().deriveFont(Font.BOLD);
@@ -140,6 +144,8 @@ public class AccountScreen extends Screen
 		this.add(pinOldPF);
 		this.add(pinNewPF);
 		this.add(pinRetypePF);
+		this.add(passwordErrorLabel);
+		this.add(pinErrorLabel);
 		this.add(passwordChangeSep);
 		this.add(pinChangeSep);
 		this.add(changePasswordButton);
@@ -209,6 +215,9 @@ public class AccountScreen extends Screen
 			passwordRetypePF.setBounds(resize.locationX(150), resize.locationY(355), resize.width(95), resize.height(20));
 			passwordRetypePF.setFont(new Font(passwordChangeLabel.getFont().getFontName(),passwordChangeLabel.getFont().getStyle(), resize.font(12)));
 			
+			passwordErrorLabel.setBounds(resize.locationX(50), resize.locationY(375), resize.width(200), resize.height(20));
+			passwordErrorLabel.setFont(new Font(passwordChangeLabel.getFont().getFontName(),passwordChangeLabel.getFont().getStyle(), resize.font(12)));
+			
 			//Pin Change
 			pinChangeLabel.setBounds(resize.locationX(250), resize.locationY(275), resize.width(200), resize.height(20));
 			pinChangeLabel.setFont(new Font(pinChangeLabel.getFont().getFontName(),pinChangeLabel.getFont().getStyle(), resize.font(12)));
@@ -228,6 +237,9 @@ public class AccountScreen extends Screen
 			pinNewPF.setFont(new Font(pinChangeLabel.getFont().getFontName(),pinChangeLabel.getFont().getStyle(), resize.font(12)));
 			pinRetypePF.setBounds(resize.locationX(350), resize.locationY(355), resize.width(95), resize.height(20));
 			pinRetypePF.setFont(new Font(pinChangeLabel.getFont().getFontName(),pinChangeLabel.getFont().getStyle(), resize.font(12)));
+			
+			pinErrorLabel.setBounds(resize.locationX(250), resize.locationY(375), resize.width(200), resize.height(20));
+			pinErrorLabel.setFont(new Font(pinChangeLabel.getFont().getFontName(),pinChangeLabel.getFont().getStyle(), resize.font(12)));
 			
 			//HighScores
 			highScoresLabel.setBounds(resize.locationX(50), resize.locationY(100), resize.width(400), resize.height(20));
