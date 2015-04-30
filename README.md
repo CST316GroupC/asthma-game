@@ -19,9 +19,12 @@ Look for the folder TeamCAsthmaGame.
 
 3. Running!
 There should be a folder called TeamCAsthmaGame. Inside is the jar called app.jar and all the resources needed to run.
-PS you can move that folder anywhere on your computer, you need the folder and all its contents to run the program
-Double click app.jar and enjoy!
-
+(PS you can move that folder anywhere on your computer, you need the folder and all its contents to run the program)
+Double click app.jar and use the following information to log in.
+username: grader@teamc.com
+password: teamc
+This will log you in as a doctor. Use your doctor status to create a patient and then you are able to login using
+the patient information you used.
 
 TroubleShooting:
 If double clicking doesn't work
